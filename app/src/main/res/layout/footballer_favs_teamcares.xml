@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Foootballer.UIFootballerFavsTeamCares">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/activity_base"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:layout_marginHorizontal="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@+id/TextViewFavCareTeam"
+                        android:padding="3dp"
+                        android:layout_gravity="center"
+                        android:text="@string/favCareTeam_textView" />
+
+                    <Spinner
+                        android:id="@+id/spinnerFavCareTeams"
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_footballer"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@+id/TextViewDataFavCareTeam"
+                        android:layout_gravity="center"
+                        android:padding="3dp"
+                        android:text="@string/favCareTeamDatatextView"
+                        android:textStyle="bold" />
+                </TableRow>
+            </TableLayout>
+
+
+            <TableLayout
+                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_footballer"
+                android:stretchColumns="*">
+            <TextView
+                android:id="@+id/TextViewFavCareTeamName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:padding="3dp"
+                android:text="@string/favCareTeamName_textView"
+                android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/favCareTeamName"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent" />
+
+                    <TextView
+                        android:id="@+id/TextViewFavCareTeamStatus"
+                        android:padding="3dp"
+                        android:text="@string/favCareTeamStatus_textView"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/favCareTeamStatus"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent" />
+
+                    <TextView
+                        android:id="@+id/TextViewFavCareTeamTelecom"
+                        android:padding="3dp"
+                        android:text="@string/favCareTeamTelecom_textView"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/favCareTeamTelecom"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent" />
+
+                    <TextView
+                        android:id="@+id/TextViewFavCareTeamNote"
+                        android:padding="3dp"
+                        android:text="@string/favCareTeamNote_textView"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/favCareTeamNote"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent" />
+            </TableLayout>
+
+
+
+            <TableLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@+id/TextViewNewFavCareTeam"
+                        android:padding="3dp"
+                        android:layout_gravity="center"
+                        android:text="@string/newFavCareTeam_textView" />
+
+                    <Spinner
+                        android:id="@+id/spinnerNewFavCareTeams"
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_footballer"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@+id/TextViewDataNewFavCareTeam"
+                        android:layout_gravity="center"
+                        android:padding="3dp"
+                        android:text="@string/newFavCareTeamDatatextView"
+                        android:textStyle="bold" />
+                </TableRow>
+            </TableLayout>
+
+
+            <TableLayout
+                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_footballer"
+                android:stretchColumns="*">
+                <TextView
+                    android:id="@+id/TextViewNewFavCareTeamName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:padding="3dp"
+                    android:text="@string/careTeamName_textView"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/newFavCareTeamName"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent" />
+
+                <TextView
+                    android:id="@+id/TextViewNewFavCareTeamStatus"
+                    android:padding="3dp"
+                    android:text="@string/newFavCareTeamStatus_textView"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/newFavCareTeamStatus"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent" />
+
+                <TextView
+                    android:id="@+id/TextViewNewFavCareTeamTelecom"
+                    android:padding="3dp"
+                    android:text="@string/newFavCareTeamTelecom_textView"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/newFavCareTeamTelecom"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent" />
+
+                <TextView
+                    android:id="@+id/TextViewNewFavCareTeamNote"
+                    android:padding="3dp"
+                    android:text="@string/newFavCareTeamNote_textView"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/newFavCareTeamNote"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent" />
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <Button
+                    android:id="@+id/buttonAddNewFavCareTeam"
+                    android:layout_width="187dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buttonAddNewFavCareTeam" />
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

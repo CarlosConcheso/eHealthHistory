@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainRoles">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/activity_base"/>
+
+    <LinearLayout
+        android:id="@+id/global_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="55dp"
+        android:layout_marginHorizontal="100dp">
+
+        <Button
+            android:id="@+id/buttonFutbolista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/futbolista" />
+        <Button
+            android:id="@+id/buttonMedico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/medico" />
+
+        <Button
+            android:id="@+id/buttonClub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/club" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Foootballer.MainFootballer">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/activity_base"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:layout_marginHorizontal="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_footballer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/TextViewfootballerName"
+                        android:padding="3dp"
+                        android:text="@string/footballerName_textView" />
+
+                    <TextView
+                        android:id="@+id/footballerName"
+                        android:gravity="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/TextViewfootballerBirthday"
+                        android:padding="3dp"
+                        android:text="@string/footballerBirthday_textView" />
+
+                    <TextView
+                        android:id="@+id/footballerBirthday"
+                        android:gravity="center" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/TextViewfootballerTelecom"
+                        android:padding="3dp"
+                        android:text="@string/footballerTelcom_textView" />
+
+                    <TextView
+                        android:id="@+id/footballerTelcom"
+                        android:gravity="center" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <Button
+                        android:id="@+id/buttonfootballerContact"
+                        android:gravity="center"
+                        android:text="@string/ButtonfootballerVerDatos" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/textViewHistoryHealthCareService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/historial_cuidados_footballer" />
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/TableHealthCareService"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_footballer"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@+id/TextViewTableClub"
+                        android:padding="3dp"
+                        android:layout_gravity="center"
+                        android:text="@string/TextViewTableActivo" />
+
+                    <TextView
+                        android:id="@+id/TextViewTableCategory"
+                        android:padding="3dp"
+                        android:layout_gravity="center"
+                        android:text="@string/TextViewTableCategory" />
+
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <Button
+                        android:id="@+id/buttonfootballerHealthCareDetails"
+                        android:gravity="center"
+                        android:text="@string/buttonfootballerHealthCareDetails" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <Button
+                        android:id="@+id/buttonfootballerTeamCares"
+                        android:gravity="center"
+                        android:text="@string/buttonfootballerTeamCares" />
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

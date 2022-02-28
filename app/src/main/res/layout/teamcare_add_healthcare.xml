@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.HealthCareService.MainHealthCareService">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/activity_base"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:layout_marginHorizontal="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+                    <TextView
+                        android:id="@+id/TextViewSelectfootballer"
+                        android:padding="3dp"
+                        android:text="@string/selectFootballer_textView" />
+
+                    <Spinner
+                        android:id="@+id/spinnerHealthCareFootballers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_footballer"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxActivo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tratamientoActual" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxAllDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radioButton_AllDay" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+                    <TextView
+                        android:id="@+id/TextViewHealthCareCategory"
+                        android:padding="3dp"
+                        android:text="@string/healthCareCategory_textView" />
+
+                    <Spinner
+                        android:id="@+id/spinnerHealthCareCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+                    <TextView
+                        android:id="@+id/TextViewHealthCareName"
+                        android:padding="3dp"
+                        android:text="@string/healthCareName_textView" />
+
+                    <EditText
+                        android:id="@+id/editTextHealthCareName"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="" />
+
+                </TableRow>
+            </TableLayout>
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_footballer"
+                android:layout_gravity="center"
+                android:stretchColumns="0">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@+id/TextViewHealthCareDuracion"
+                        android:padding="3dp"
+                        android:layout_gravity="center"
+                        android:text="@string/healthCareDuracion_textView"
+                        android:textStyle="bold" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_footballer"
+                android:stretchColumns="*">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+                    <TextView
+                        android:id="@+id/TextViewHealthCareHoraInicio"
+                        android:padding="3dp"
+                        android:text="@string/healthCareHoraInicio_textView" />
+                    <TextView
+                        android:id="@+id/TextViewHealthCareHoraFin"
+                        android:padding="3dp"
+                        android:text="@string/healthCareHoraFin_textView" />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+                    <Spinner
+                        android:id="@+id/spinnerTeamCareHoraInicio"
+                        android:layout_width="match_parent"
+                        android:entries="@array/horas"
+                        android:layout_height="wrap_content" />
+                    <Spinner
+                        android:id="@+id/spinnerTeamCareHoraFin"
+                        android:layout_width="match_parent"
+                        android:entries="@array/horas"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@+id/TextViewHealthCareDías"
+                        android:padding="3dp"
+                        android:text="@string/healthCareDias_textView"
+                        android:textStyle="bold" />
+
+                </TableRow>
+            <TableLayout
+                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxLunes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/checkBox_Lunes" />
+                    <CheckBox
+                        android:id="@+id/checkBoxMartes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/checkBox_Martes" />
+                    <CheckBox
+                        android:id="@+id/checkBoxMiercoles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/checkBox_Miercoles" />
+                    <CheckBox
+                        android:id="@+id/checkBoxJueves"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/checkBox_Jueves" />
+                    <CheckBox
+                        android:id="@+id/checkBoxViernes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/checkBox_Viernes" />
+                    <CheckBox
+                        android:id="@+id/checkBoxSabado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/checkBox_Sabado" />
+                    <CheckBox
+                        android:id="@+id/checkBoxDomingo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/checkBox_Domingo" />
+                </TableRow>
+            </TableLayout>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:id="@+id/TextViewHealthCareCommentary"
+                        android:padding="3dp"
+                        android:text="@string/healthCareCommentary_textView" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <EditText
+                        android:id="@+id/editTextTextMultiLineHealthCareCommentary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:gravity="start|top"
+                        android:inputType="textMultiLine"
+                        android:autofillHints=""
+                        tools:ignore="LabelFor" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+                <Button
+                    android:id="@+id/buttonAddHealthCare"
+                    android:layout_width="187dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buttonAddHealthCare"
+                    app:layout_constraintBottom_toBottomOf="@+id/include"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </TableLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
