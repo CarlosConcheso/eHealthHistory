@@ -53,14 +53,16 @@ public class MainHealthCareService extends BaseActivity {
 
         final Spinner healthCareHoraInicio = (Spinner) findViewById(R.id.spinnerTeamCareHoraInicio);
         final Spinner healthCareHoraFin = (Spinner) findViewById(R.id.spinnerTeamCareHoraFin);
+        final Spinner healthCareMinsInicio = (Spinner) findViewById(R.id.spinnerTeamCareMinsInicio);
+        final Spinner healthCareMinsFin = (Spinner) findViewById(R.id.spinnerTeamCareMinsFin);
 
-        final CheckBox checkBoxLunes = (CheckBox) findViewById(R.id.checkBoxLunes);
-        final CheckBox checkBoxMartes = (CheckBox) findViewById(R.id.checkBoxMartes);
-        final CheckBox checkBoxMiercoles = (CheckBox) findViewById(R.id.checkBoxMiercoles);
-        final CheckBox checkBoxJueves = (CheckBox) findViewById(R.id.checkBoxJueves);
-        final CheckBox checkBoxViernes = (CheckBox) findViewById(R.id.checkBoxViernes);
-        final CheckBox checkBoxSabado = (CheckBox) findViewById(R.id.checkBoxSabado);
-        final CheckBox checkBoxDomingo = (CheckBox) findViewById(R.id.checkBoxDomingo);
+        final CheckBox checkBoxL = (CheckBox) findViewById(R.id.checkBoxLunes);
+        final CheckBox checkBoxM = (CheckBox) findViewById(R.id.checkBoxMartes);
+        final CheckBox checkBoxX = (CheckBox) findViewById(R.id.checkBoxMiercoles);
+        final CheckBox checkBoxJ = (CheckBox) findViewById(R.id.checkBoxJueves);
+        final CheckBox checkBoxV = (CheckBox) findViewById(R.id.checkBoxViernes);
+        final CheckBox checkBoxS = (CheckBox) findViewById(R.id.checkBoxSabado);
+        final CheckBox checkBoxD = (CheckBox) findViewById(R.id.checkBoxDomingo);
 
         final EditText multiLineHealthCareCommentary = (EditText) findViewById(R.id.editTextTextMultiLineHealthCareCommentary);
         final Button botonAddHealthCare = (Button) findViewById(R.id.buttonAddHealthCare);
@@ -79,10 +81,10 @@ public class MainHealthCareService extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if ( ((CheckBox)v).isChecked() ) {
-                    anularSpinnersHora(healthCareHoraInicio,healthCareHoraFin);
+                    anularSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
                 }
                 else
-                    activarSpinnersHora(healthCareHoraInicio,healthCareHoraFin);
+                    activarSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
             }
         });
 
@@ -91,16 +93,19 @@ public class MainHealthCareService extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(checkCompleted(healthCareName,multiLineHealthCareCommentary))
-                    if(checkHours(checkBoxAllDay, healthCareHoraInicio, healthCareHoraFin))
-                        changeTo(v.getContext(), MainCareTeam.class);
-                    else
+                    if(!checkHours(checkBoxAllDay, healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin))
                         Snackbar.make(findViewById(R.id.buttonAddHealthCare),
                                 R.string.error_usuario_horas, Snackbar.LENGTH_SHORT).show();
+                    else
+                        if(checkDays(checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD))
+                            changeTo(v.getContext(), MainCareTeam.class);
+                        else
+                            Snackbar.make(findViewById(R.id.buttonAddHealthCare),
+                                    R.string.error_usuario_sindias, Snackbar.LENGTH_SHORT).show();
                 else
                     Snackbar.make(findViewById(R.id.buttonAddHealthCare),
                             R.string.error_usuario_camposvacios, Snackbar.LENGTH_SHORT).show();
             }
-
         }));
     }
 
@@ -112,27 +117,38 @@ public class MainHealthCareService extends BaseActivity {
             return false;
     }
 
-    private boolean checkHours(CheckBox checkBoxAllDay, Spinner healthCareHoraInicio, Spinner healthCareHoraFin)
+    private boolean checkHours(CheckBox checkBoxAllDay, Spinner healthCareHoraInicio, Spinner healthCareHoraFin,
+                               Spinner healthCareMinsInicio, Spinner healthCareMinsFin)
     {
         if(checkBoxAllDay.isChecked())
             return true;
         else
         {
-            if(checkSpinnerHours(healthCareHoraInicio, healthCareHoraFin))
+            if(checkSpinnerHours(healthCareHoraInicio, healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin))
                     return true;
             return false;
         }
     }
 
-    private boolean checkSpinnerHours(Spinner healthCareHoraInicio, Spinner healthCareHoraFin)
+    private boolean checkDays(CheckBox... checks)
     {
-        String[] horaInicio = healthCareHoraInicio.getSelectedItem().toString().split(":");
-        String[] horaFin = healthCareHoraFin.getSelectedItem().toString().split(":");
+        boolean selected = false;
+        for(CheckBox c: checks)
+            if(c.isChecked())
+            {
+                selected=true;
+            }
+        return selected;
+    }
 
-        int horaI = Integer.parseInt(horaInicio[0]);
-        int horaF = Integer.parseInt(horaFin[0]);
-        int minsI = Integer.parseInt(horaInicio[0]);
-        int minsF = Integer.parseInt(horaFin[0]);
+    private boolean checkSpinnerHours(Spinner healthCareHoraInicio, Spinner healthCareHoraFin,
+                                      Spinner healthCareMinsInicio, Spinner healthCareMinsFin)
+    {
+
+        int horaI = Integer.parseInt(healthCareHoraInicio.getSelectedItem().toString());
+        int horaF = Integer.parseInt(healthCareHoraFin.getSelectedItem().toString());
+        int minsI = Integer.parseInt(healthCareMinsInicio.getSelectedItem().toString());
+        int minsF = Integer.parseInt(healthCareMinsFin.getSelectedItem().toString());
 
         if(horaI > horaF)
             return false;
@@ -149,16 +165,20 @@ public class MainHealthCareService extends BaseActivity {
 
     //----------------------------------------------------------------------------------------------
     // Metodos para modififcar los spinners de las horass
-    private void anularSpinnersHora(Spinner horaInicio, Spinner horaFin)
+    private void anularSpinnersHora(Spinner horaInicio, Spinner horaFin, Spinner minsInicio, Spinner minsFin)
     {
         horaInicio.setEnabled(false);
         horaFin.setEnabled(false);
+        minsInicio.setEnabled(false);
+        minsFin.setEnabled(false);
     }
 
-    private void activarSpinnersHora(Spinner horaInicio, Spinner horaFin)
+    private void activarSpinnersHora(Spinner horaInicio, Spinner horaFin, Spinner minsInicio, Spinner minsFin)
     {
         horaInicio.setEnabled(true);
         horaFin.setEnabled(true);
+        minsInicio.setEnabled(true);
+        minsFin.setEnabled(true);
     }
 
     // Metodos para inicializar spinners y convertir en arrays
