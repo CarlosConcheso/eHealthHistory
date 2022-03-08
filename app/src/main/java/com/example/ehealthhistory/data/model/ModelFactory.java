@@ -27,6 +27,7 @@ public class ModelFactory {
         inicializarDatos();
     }
 
+
     private void inicializarDatos()
     {
         footballerComunication = new FootballerComunication("Español", true);
@@ -53,95 +54,95 @@ public class ModelFactory {
 
         contact = new FootballerContact("Borja",887662553,"Oviedo", club);
 
-        footballer = new Footballer(1, true, "joanfemenias@realoviedo.es","Joan Femenias",
+        footballer = new Footballer(true, "joanfemenias@realoviedo.es","Joan Femenias",
                 615998876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(2, true, "tomeunadal@realoviedo.es","Tomeu Nadal",
+        footballer = new Footballer(true, "tomeunadal@realoviedo.es","Tomeu Nadal",
                 615998876, Footballer.genders.MALE, "15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(3, true, "carlosisaac@realoviedo.es","Carlos Isaac",
+        footballer = new Footballer(true, "carlosisaac@realoviedo.es","Carlos Isaac",
                 615998876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(4, true, "lucasahijado@realoviedo.es","Lucas Ahijado",
+        footballer = new Footballer(true, "lucasahijado@realoviedo.es","Lucas Ahijado",
                 615998876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(5, true, "davidcostas@realoviedo.es","David Costas",
+        footballer = new Footballer(true, "davidcostas@realoviedo.es","David Costas",
                 615998876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(6, true, "danicalvo@realoviedo.es","Dani Calvo",
+        footballer = new Footballer(true, "danicalvo@realoviedo.es","Dani Calvo",
                 615998876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(7, true, "rodritarin@realoviedo.es","Rodri Tarín",
+        footballer = new Footballer(true, "rodritarin@realoviedo.es","Rodri Tarín",
                 615998876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(8, true, "christianfernandez@realoviedo.es","Bolaño",
+        footballer = new Footballer(true, "christianfernandez@realoviedo.es","Bolaño",
                 615998876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(9, true, "mosaa@realoviedo.es","Mossa",
+        footballer = new Footballer(true, "mosaa@realoviedo.es","Mossa",
                 615998876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(10, false, "pierrecornud@realoviedo.es","Pierre Cornud",
+        footballer = new Footballer(false, "pierrecornud@realoviedo.es","Pierre Cornud",
                 615118876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(11, false, "jimmy@realoviedo.es","Jimmy Suarez",
+        footballer = new Footballer(false, "jimmy@realoviedo.es","Jimmy Suarez",
                 615118876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(12, false, "brugman@realoviedo.es","Gastón Brugman",
+        footballer = new Footballer(false, "brugman@realoviedo.es","Gastón Brugman",
                 615118876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(13, false, "luismi@realoviedo.es","Luismi",
+        footballer = new Footballer(false, "luismi@realoviedo.es","Luismi",
                 615118876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(14, false, "jonimontiel@realoviedo.es","Joni Montiel",
+        footballer = new Footballer(false, "jonimontiel@realoviedo.es","Joni Montiel",
                 615888876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(15, false, "hugorama@realoviedo.es","Hugo Rama",
+        footballer = new Footballer(false, "hugorama@realoviedo.es","Hugo Rama",
                 615888876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(16, true, "vitirozada@realoviedo.es","Viti Rozada",
+        footballer = new Footballer(true, "vitirozada@realoviedo.es","Viti Rozada",
                 615118876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(17, true, "sangalli@realoviedo.es","Marco Sangalli",
+        footballer = new Footballer(true, "sangalli@realoviedo.es","Marco Sangalli",
                 615118876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(18, true, "jirka@realoviedo.es","Erik Jirka",
+        footballer = new Footballer(true, "jirka@realoviedo.es","Erik Jirka",
                 615118876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(19, true, "pombo@realoviedo.es","Jorge Pombo",
+        footballer = new Footballer(true, "pombo@realoviedo.es","Jorge Pombo",
                 615118876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(20, true, "borjasanchez@realoviedo.es","Borja Sánchez",
+        footballer = new Footballer(true, "borjasanchez@realoviedo.es","Borja Sánchez",
                 615658876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(21, true, "samuelobeng@realoviedo.es","Samuel Obeng",
+        footballer = new Footballer(true, "samuelobeng@realoviedo.es","Samuel Obeng",
                 611658876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(22, true, "matheus@realoviedo.es","Matheus Aias",
+        footballer = new Footballer(true, "matheus@realoviedo.es","Matheus Aias",
                 611658876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 
-        footballer = new Footballer(23, true, "borjabaston@realoviedo.es","Borja Bastón",
+        footballer = new Footballer(true, "borjabaston@realoviedo.es","Borja Bastón",
                 611658876, Footballer.genders.MALE,"15/6/1997", contact, footballerComunication);
         footballers.add(footballer);
 

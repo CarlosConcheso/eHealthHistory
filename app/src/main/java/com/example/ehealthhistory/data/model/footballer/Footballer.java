@@ -17,9 +17,8 @@ public class Footballer implements Serializable {
 
     public enum genders {MALE, FEMALE, OTHER, UNKNOW}
 
-    private int id;
-    private boolean active;
     private String username;
+    private boolean active;
     private String name;
     private int telecom;
     private genders gender;
@@ -33,10 +32,9 @@ public class Footballer implements Serializable {
 
     public Footballer(){}
 
-    public Footballer(int id, boolean active, String username, String name, int telecom, genders gender, String birthdate,
+    public Footballer(boolean active, String username, String name, int telecom, genders gender, String birthdate,
                       FootballerContact footballerContact, FootballerComunication footballerComunication)
     {
-        this.id=id;
         this.active=active;
         this.username=username;
         this.name=name;
@@ -45,10 +43,6 @@ public class Footballer implements Serializable {
         this.birthdate=birthdate;
         this.footballerContact=footballerContact;
         this.footballerComunication=footballerComunication;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public boolean getActive()
