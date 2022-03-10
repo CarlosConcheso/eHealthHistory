@@ -10,6 +10,9 @@ public class Rol {
         this.name = name;
     }
 
+    public Rol() {
+    }
+
     public String getUsername() {
         return username;
     }

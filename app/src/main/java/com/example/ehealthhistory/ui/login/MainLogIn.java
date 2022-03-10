@@ -5,29 +5,20 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.checks.CheckPassword;
 import com.example.ehealthhistory.checks.CheckUsername;
-import com.example.ehealthhistory.database.SQLiteHelper;
-import com.example.ehealthhistory.ui.CareTeam.MainCareTeam;
-import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
-import com.example.ehealthhistory.ui.Club.MainClub;
 import com.example.ehealthhistory.ui.MainRoles;
 import com.google.android.material.snackbar.Snackbar;
 
 
 public class MainLogIn extends AppCompatActivity {
-
-    SQLiteHelper datebase;
-    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +28,6 @@ public class MainLogIn extends AppCompatActivity {
 
         ImageView medico = findViewById(R.id.app_image);
         medico.setImageResource(R.drawable.app_image_trans_small);
-
-        datebase = new SQLiteHelper(MainLogIn.this);
-        db = datebase.getWritableDatabase();
 
         final EditText username = (EditText) findViewById(R.id.usernameLogIn);
         final EditText password = findViewById(R.id.passwordLogIn);
