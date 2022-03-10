@@ -2,9 +2,7 @@ package com.example.ehealthhistory.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,29 +27,25 @@ public class MainLogIn extends AppCompatActivity {
         ImageView medico = findViewById(R.id.app_image);
         medico.setImageResource(R.drawable.app_image_trans_small);
 
-        final EditText username = (EditText) findViewById(R.id.usernameLogIn);
+        final EditText username = findViewById(R.id.usernameLogIn);
         final EditText password = findViewById(R.id.passwordLogIn);
         final Button loginButton = findViewById(R.id.loginButton);
 
 
-        loginButton.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        loginButton.setOnClickListener((v -> {
 
-                String usuario = username.getText().toString();
+            String usuario = username.getText().toString();
 
-                if(CheckUsername.check(username) && CheckPassword.check(password)) {
-                    changeTo(v.getContext(), MainRoles.class, usuario);
-                }
-                else
-                    Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
+            if(CheckUsername.check(username) && CheckPassword.check(password)) {
+                changeTo(v.getContext(), usuario);
             }
-
+            else
+                Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
         }));
     }
 
-    private static void changeTo(Context mContext, Class clase, String username) {
-        Intent intent = new Intent(mContext, clase);
+    private static void changeTo(Context mContext, String username) {
+        Intent intent = new Intent(mContext, MainRoles.class);
         intent.putExtra("username", username);
         mContext.startActivity(intent);
     }
