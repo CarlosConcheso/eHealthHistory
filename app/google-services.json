@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "23859150873",
+    "project_id": "ehealthhistory",
+    "storage_bucket": "ehealthhistory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23859150873:android:16eb7dd5170a32ed12ea88",
+        "android_client_info": {
+          "package_name": "com.example.ehealthhistory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23859150873-cjibgjl0gvq2tti6ga81cdedaqi300ov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn1mFH4QDtiZZ-MDfEHJ-2tvhrFpy2qgk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23859150873-cjibgjl0gvq2tti6ga81cdedaqi300ov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
