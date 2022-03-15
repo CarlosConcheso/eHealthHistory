@@ -75,7 +75,7 @@ public class UIAddNewCareTeam extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(careTeamName.getText().toString() != spinnerCareTeams.getSelectedItem().toString()) {
-                    changeTo(v.getContext(), MainClub.class);
+                    finish();
                 }
                 else
                     Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.error_usuario_NewActualCareTeam, Snackbar.LENGTH_SHORT).show();
@@ -126,10 +126,5 @@ public class UIAddNewCareTeam extends BaseActivity {
         }
 
         return mStringArray;
-    }
-
-    private static void changeTo(Context mContext, Class clase) {
-        Intent intent = new Intent(mContext, clase);
-        mContext.startActivity(intent);
     }
 }

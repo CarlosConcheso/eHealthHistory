@@ -83,7 +83,8 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(spinnerNewFavCareTeam.getSelectedItem().toString() != spinnerFavCareTeam.getSelectedItem().toString())
-                    changeTo(v.getContext(), MainFootballer.class);
+                    //changeTo(v.getContext(), MainFootballer.class);
+                    finish();
                 else
                     Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.error_usuario_newfavteamcare, Snackbar.LENGTH_SHORT).show();
             }
@@ -133,11 +134,5 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         }
 
         return mStringArray;
-    }
-
-
-    private static void changeTo(Context mContext, Class clase) {
-        Intent intent = new Intent(mContext, clase);
-        mContext.startActivity(intent);
     }
 }

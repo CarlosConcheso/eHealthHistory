@@ -98,7 +98,7 @@ public class MainHealthCareService extends BaseActivity {
                                 R.string.error_usuario_horas, Snackbar.LENGTH_SHORT).show();
                     else
                         if(checkDays(checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD))
-                            changeTo(v.getContext(), MainCareTeam.class);
+                            finish();
                         else
                             Snackbar.make(findViewById(R.id.buttonAddHealthCare),
                                     R.string.error_usuario_sindias, Snackbar.LENGTH_SHORT).show();
@@ -222,11 +222,5 @@ public class MainHealthCareService extends BaseActivity {
         }
 
         return mStringArray;
-    }
-    //----------------------------------------------------------------------------------------------
-
-    private static void changeTo(Context mContext, Class clase) {
-        Intent intent = new Intent(mContext, clase);
-        mContext.startActivity(intent);
     }
 }
