@@ -56,8 +56,7 @@ public class MainLogIn extends AppCompatActivity {
                         });
             }
             else
-                Snackbar.make(findViewById(R.id.loginButton), "campos a 0", Snackbar.LENGTH_SHORT).show();
-
+                Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
         }));
     }
 
