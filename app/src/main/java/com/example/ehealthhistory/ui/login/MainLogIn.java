@@ -7,13 +7,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ehealthhistory.R;
-import com.example.ehealthhistory.checks.CheckPassword;
-import com.example.ehealthhistory.checks.CheckUsername;
+import com.example.ehealthhistory.database.FireBase;
 import com.example.ehealthhistory.ui.MainRoles;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainLogIn extends AppCompatActivity {
@@ -31,16 +36,28 @@ public class MainLogIn extends AppCompatActivity {
         final EditText password = findViewById(R.id.passwordLogIn);
         final Button loginButton = findViewById(R.id.loginButton);
 
-
         loginButton.setOnClickListener((v -> {
 
             String usuario = username.getText().toString();
+            String pass = password.getText().toString();
 
-            if(CheckUsername.check(username) && CheckPassword.check(password)) {
-                changeTo(v.getContext(), usuario);
+            if(usuario.length()>0 && pass.length()>0) {
+
+                FirebaseAuth.getInstance()
+                        .signInWithEmailAndPassword(usuario, pass)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    changeTo(v.getContext(), usuario);
+                                } else
+                                    Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
+                            }
+                        });
             }
             else
-                Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.loginButton), "campos a 0", Snackbar.LENGTH_SHORT).show();
+
         }));
     }
 
