@@ -2,6 +2,7 @@ package com.example.ehealthhistory.ui.Foootballer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -18,11 +19,18 @@ import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.data.model.footballer.FootballerComunication;
 import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
+import com.example.ehealthhistory.database.FireBase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainFootballer extends BaseActivity {
 
     private ModelFactory mf = new ModelFactory();
+    FireBase fb = new FireBase();
+    private String username;
+    private HashMap<String,String> footballerData = new HashMap<>();
+    private HashMap<String,String> footballerHealthCares = new HashMap<>();
 
     private FootballerComunication footballerComunication = mf.getFootballerComunication();
     private CareTeam careTeamROV = mf.getCareTeamROV();
@@ -34,8 +42,8 @@ public class MainFootballer extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_footballer);
-        Bundle bundle = new Bundle();
-        bundle.putString("Footballer", "Footballer's Menu");
+        username = getIntent().getStringExtra("username");
+        footballerData = fb.getFootballerData(username);
 
         addHealthCareRows();
 
@@ -51,9 +59,9 @@ public class MainFootballer extends BaseActivity {
 
         nameActivityBase.setText("eHealthHistory");
 
-        footballerName.setText(footballer.getName());
-        footballerBirthDay.setText(footballer.getBirthDate());
-        footballerTelcom.setText(String.valueOf(footballer.getTelecom()));
+        footballerName.setText(footballerData.get("name"));
+        footballerBirthDay.setText(footballerData.get("birthday"));
+        footballerTelcom.setText(footballerData.get("telecom"));
 
         // Ver datos de contacto en profundidad
         buttonfootballerContact.setOnClickListener((new View.OnClickListener() {

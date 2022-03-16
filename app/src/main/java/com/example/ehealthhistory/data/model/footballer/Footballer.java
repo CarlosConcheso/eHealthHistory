@@ -90,6 +90,11 @@ public class Footballer implements Serializable {
         this.username = username;
     }
 
+    public void setActive(boolean active)
+    {
+        this.active= active;
+    }
+
     public ArrayList<HealthCareService> getHealthcares() {
         return healthcares;
     }

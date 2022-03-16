@@ -1,5 +1,6 @@
 package com.example.ehealthhistory.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +10,17 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
+import com.example.ehealthhistory.database.FireBase;
 import com.example.ehealthhistory.ui.CareTeam.MainCareTeam;
 import com.example.ehealthhistory.ui.Club.MainClub;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
 import com.example.ehealthhistory.ui.HealthCareService.MainHealthCareService;
 
+import java.util.ArrayList;
+
 public class MainRoles extends BaseActivity {
 
+    private FireBase fb = new FireBase();
     private String username;
 
     @Override
@@ -26,19 +31,17 @@ public class MainRoles extends BaseActivity {
 
         username = getIntent().getStringExtra("username");
 
-        Bundle bundle = new Bundle();
-        bundle.putString("Rol de usuario", "Rol de usuario");
-
         final Button botonFutbolista = (Button) findViewById(R.id.buttonFutbolista);
         final Button botonMedico = (Button) findViewById(R.id.buttonMedico);
         final Button botonClub = (Button) findViewById(R.id.buttonClub);
 
         final TextView textoBanner = (TextView) findViewById(R.id.nameActivityBase);
-        textoBanner.setText("Bienvenido " + username);
+        textoBanner.setText("Bienvenido " + fb.getName(username));
 
-        //botonFutbolista.setVisibility(View.GONE);
-        //botonMedico.setVisibility(View.GONE);
-        //botonClub.setVisibility(View.GONE);
+        botonClub.setVisibility(View.VISIBLE);
+        botonFutbolista.setVisibility(View.VISIBLE);
+        botonMedico.setVisibility(View.VISIBLE);
+        //habilitarBotonesRoles(botonFutbolista, botonMedico, botonClub);
 
         botonFutbolista.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -56,6 +59,22 @@ public class MainRoles extends BaseActivity {
                 changeTo(v.getContext(), MainClub.class, username);
             }
         }));
+    }
+
+    private void habilitarBotonesRoles(Button botonFutbolista, Button botonMedico, Button botonClub)
+    {
+        ArrayList<String> roles = fb.getRolesOfUsername(username);
+
+        for(String rol : roles) {
+            if (rol == "club")
+                botonClub.setVisibility(View.VISIBLE);
+
+            else if (rol == "footballer")
+                botonFutbolista.setVisibility(View.VISIBLE);
+
+            else if (rol == "careteam")
+                botonMedico.setVisibility(View.VISIBLE);
+        }
     }
 
     private static void changeTo(Context mContext, Class clase, String username) {
