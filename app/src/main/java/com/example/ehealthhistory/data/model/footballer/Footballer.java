@@ -15,13 +15,13 @@ import java.util.ArrayList;
  */
 public class Footballer implements Serializable {
 
-    public enum genders {MALE, FEMALE, OTHER, UNKNOW}
+    //public enum genders {MALE, FEMALE, OTHER, UNKNOW}
 
     private String username;
     private boolean active;
     private String name;
     private int telecom;
-    private genders gender;
+    private String gender;
     private String birthdate;
 
     private FootballerContact footballerContact;
@@ -32,7 +32,7 @@ public class Footballer implements Serializable {
 
     public Footballer(){}
 
-    public Footballer(boolean active, String username, String name, int telecom, genders gender, String birthdate,
+    public Footballer(boolean active, String username, String name, int telecom, String gender, String birthdate,
                       FootballerContact footballerContact, FootballerComunication footballerComunication)
     {
         this.active=active;
@@ -45,37 +45,68 @@ public class Footballer implements Serializable {
         this.footballerComunication=footballerComunication;
     }
 
-    public boolean getActive()
-    {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean isActive() {
         return active;
     }
 
-    public String getUsername() {
-        return username;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getTelecom() {
         return telecom;
     }
 
-    public genders getGender() {
+    public void setTelecom(int telecom) {
+        this.telecom = telecom;
+    }
+
+    public String getGender() {
         return gender;
     }
 
-    public String getBirthDate() {
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthdate() {
         return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
     public FootballerContact getFootballerContact() {
         return footballerContact;
     }
 
+    public void setFootballerContact(FootballerContact footballerContact) {
+        this.footballerContact = footballerContact;
+    }
+
     public FootballerComunication getFootballerComunication() {
         return footballerComunication;
+    }
+
+    public void setFootballerComunication(FootballerComunication footballerComunication) {
+        this.footballerComunication = footballerComunication;
     }
 
     public ArrayList<CareTeam> getFavsCareTeams() {
@@ -84,15 +115,6 @@ public class Footballer implements Serializable {
 
     public void setFavsCareTeams(ArrayList<CareTeam> favsCareTeams) {
         this.favsCareTeams = favsCareTeams;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setActive(boolean active)
-    {
-        this.active= active;
     }
 
     public ArrayList<HealthCareService> getHealthcares() {

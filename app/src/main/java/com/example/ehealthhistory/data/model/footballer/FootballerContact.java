@@ -19,6 +19,9 @@ public class FootballerContact {
         this.club = club;
     }
 
+    public FootballerContact() {
+    }
+
     public String getName() {
         return name;
     }

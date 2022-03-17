@@ -78,7 +78,7 @@ public class MainCareTeam extends BaseActivity {
 
             TextView col2 = new TextView(this);
             col2.setId(400 + i);
-            if(mf.getFootballers().get(i).getActive())
+            if(mf.getFootballers().get(i).isActive())
                 col2.setText("Si");
             else
                 col2.setText("No");

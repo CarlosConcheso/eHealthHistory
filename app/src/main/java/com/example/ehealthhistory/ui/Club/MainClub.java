@@ -86,7 +86,7 @@ public class MainClub extends BaseActivity {
 
             TextView col2 = new TextView(this);
             col2.setId(400 + i);
-            if(footballers.get(i).getActive())
+            if(footballers.get(i).isActive())
                 col2.setText("Si");
             else
                 col2.setText("No");

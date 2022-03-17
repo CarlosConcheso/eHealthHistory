@@ -14,6 +14,10 @@ public class FootballerComunication {
         this.prefered=prefered;
     }
 
+    public FootballerComunication()
+    {
+    }
+
     public String getLenguage() {
         return lenguage;
     }

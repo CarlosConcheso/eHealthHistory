@@ -29,7 +29,9 @@ public class MainFootballer extends BaseActivity {
     private ModelFactory mf = new ModelFactory();
     FireBase fb = new FireBase();
     private String username;
-    private HashMap<String,String> footballerData = new HashMap<>();
+
+    private Footballer futbolista;
+
     private HashMap<String,String> footballerHealthCares = new HashMap<>();
 
     private FootballerComunication footballerComunication = mf.getFootballerComunication();
@@ -43,7 +45,7 @@ public class MainFootballer extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_footballer);
         username = getIntent().getStringExtra("username");
-        footballerData = fb.getFootballerData(username);
+        futbolista = fb.getFootballer(username);
 
         addHealthCareRows();
 
@@ -59,9 +61,9 @@ public class MainFootballer extends BaseActivity {
 
         nameActivityBase.setText("eHealthHistory");
 
-        footballerName.setText(footballerData.get("name"));
-        footballerBirthDay.setText(footballerData.get("birthday"));
-        footballerTelcom.setText(footballerData.get("telecom"));
+        footballerName.setText(futbolista.getName());
+        footballerBirthDay.setText(futbolista.getBirthdate());
+        footballerTelcom.setText(Integer.toString(futbolista.getTelecom()));
 
         // Ver datos de contacto en profundidad
         buttonfootballerContact.setOnClickListener((new View.OnClickListener() {
