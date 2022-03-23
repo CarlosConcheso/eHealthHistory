@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class Club {
 
-    private int id;
+    private String username;
     private boolean active;
     private String name;
-    private String presidente;
+    private String president;
     private String alias;
     private String contactName;
     private CareTeam clubCareTeam;
@@ -25,15 +25,23 @@ public class Club {
 
     public Club(){}
 
-    public Club(int id, boolean active, String name, String presidente, String alias, String contactName,
+    public Club(String username, boolean active, String name, String president, String alias, String contactName,
                 CareTeam clubCareTeam) {
-        this.id = id;
+        this.username = username;
         this.active = active;
         this.name = name;
-        this.presidente=presidente;
+        this.president=president;
         this.alias = alias;
         this.contactName = contactName;
         this.clubCareTeam=clubCareTeam;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public boolean isActive() {
@@ -53,11 +61,11 @@ public class Club {
     }
 
     public String getPresidente() {
-        return presidente;
+        return president;
     }
 
-    public void setPresidente(String presidente) {
-        this.presidente = presidente;
+    public void setPresidente(String president) {
+        this.president = president;
     }
 
     public String getAlias() {

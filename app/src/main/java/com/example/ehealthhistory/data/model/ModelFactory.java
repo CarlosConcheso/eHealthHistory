@@ -32,118 +32,118 @@ public class ModelFactory {
     {
         footballerComunication = new FootballerComunication("Español", true);
 
-        careTeam = new CareTeam(1, CareTeam.CareTeamStatus.active, "Equipo Medico 1",
+        careTeam = new CareTeam(1, "active", "Equipo Medico 1",
             676889974, "Clínica Asturias");
         careTeams.add(careTeam);
 
-        careTeam = new CareTeam(2, CareTeam.CareTeamStatus.inactive, "Rodas",
+        careTeam = new CareTeam(2, "inactive", "Rodas",
                 676889974, "De lo mejor");
         careTeams.add(careTeam);
 
-        careTeam = new CareTeam(3, CareTeam.CareTeamStatus.suspended, "Equipo Medico 3",
+        careTeam = new CareTeam(3, "suspended", "Equipo Medico 3",
                 676889974, "Clinica privada");
         careTeams.add(careTeam);
 
-        careTeam = new CareTeam(4, CareTeam.CareTeamStatus.active, "Real Oviedo",
+        careTeam = new CareTeam(4, "active", "Real Oviedo",
                 676889974, "Los mejores medicos del club");
         careTeams.add(careTeam);
 
-        club = new Club(1, true, "Real Oviedo", "Jorge Menéndez",
+        club = new Club("admin@realoviedo.es", true, "Real Oviedo", "Jorge Menéndez",
                 "Equipo carbayón","Laura Manjoya", careTeam);
 
 
         contact = new FootballerContact("Borja",887662553,"Oviedo", club);
 
         footballer = new Footballer(true, "joanfemenias@realoviedo.es","Joan Femenias",
-                615998876, "MALE","15/6/1997", contact, footballerComunication);
+                615998876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "tomeunadal@realoviedo.es","Tomeu Nadal",
-                615998876, "MALE", "15/6/1997", contact, footballerComunication);
+                615998876, "MALE", "15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "carlosisaac@realoviedo.es","Carlos Isaac",
-                615998876, "MALE","15/6/1997", contact, footballerComunication);
+                615998876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "lucasahijado@realoviedo.es","Lucas Ahijado",
-                615998876, "MALE","15/6/1997", contact, footballerComunication);
+                615998876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "davidcostas@realoviedo.es","David Costas",
-                615998876, "MALE","15/6/1997", contact, footballerComunication);
+                615998876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "danicalvo@realoviedo.es","Dani Calvo",
-                615998876, "MALE","15/6/1997", contact, footballerComunication);
+                615998876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "rodritarin@realoviedo.es","Rodri Tarín",
-                615998876, "MALE","15/6/1997", contact, footballerComunication);
+                615998876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "christianfernandez@realoviedo.es","Bolaño",
-                615998876, "MALE","15/6/1997", contact, footballerComunication);
+                615998876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "mosaa@realoviedo.es","Mossa",
-                615998876, "MALE","15/6/1997", contact, footballerComunication);
+                615998876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(false, "pierrecornud@realoviedo.es","Pierre Cornud",
-                615118876, "MALE","15/6/1997", contact, footballerComunication);
+                615118876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(false, "jimmy@realoviedo.es","Jimmy Suarez",
-                615118876, "MALE","15/6/1997", contact, footballerComunication);
+                615118876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(false, "brugman@realoviedo.es","Gastón Brugman",
-                615118876, "MALE","15/6/1997", contact, footballerComunication);
+                615118876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(false, "luismi@realoviedo.es","Luismi",
-                615118876, "MALE","15/6/1997", contact, footballerComunication);
+                615118876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(false, "jonimontiel@realoviedo.es","Joni Montiel",
-                615888876, "MALE","15/6/1997", contact, footballerComunication);
+                615888876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(false, "hugorama@realoviedo.es","Hugo Rama",
-                615888876, "MALE","15/6/1997", contact, footballerComunication);
+                615888876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "vitirozada@realoviedo.es","Viti Rozada",
-                615118876, "MALE","15/6/1997", contact, footballerComunication);
+                615118876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "sangalli@realoviedo.es","Marco Sangalli",
-                615118876, "MALE","15/6/1997", contact, footballerComunication);
+                615118876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "jirka@realoviedo.es","Erik Jirka",
-                615118876, "MALE","15/6/1997", contact, footballerComunication);
+                615118876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "pombo@realoviedo.es","Jorge Pombo",
-                615118876, "MALE","15/6/1997", contact, footballerComunication);
+                615118876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "borjasanchez@realoviedo.es","Borja Sánchez",
-                615658876, "MALE","15/6/1997", contact, footballerComunication);
+                615658876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "samuelobeng@realoviedo.es","Samuel Obeng",
-                611658876, "MALE","15/6/1997", contact, footballerComunication);
+                611658876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "matheus@realoviedo.es","Matheus Aias",
-                611658876, "MALE","15/6/1997", contact, footballerComunication);
+                611658876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         footballer = new Footballer(true, "borjabaston@realoviedo.es","Borja Bastón",
-                611658876, "MALE","15/6/1997", contact, footballerComunication);
+                611658876, "MALE","15/6/1997", club, contact, footballerComunication);
         footballers.add(footballer);
 
         establecerCuidados(footballer);
@@ -154,21 +154,22 @@ public class ModelFactory {
     {
 
         // Establecemos cuidados del futbolista
-        ArrayList<HealthCareAvalibleTime.daysOfWeek> diasTratamiento = new ArrayList<HealthCareAvalibleTime.daysOfWeek>();
-        diasTratamiento.add(HealthCareAvalibleTime.daysOfWeek.MON);
-        diasTratamiento.add(HealthCareAvalibleTime.daysOfWeek.THU);
+        ArrayList<String> diasTratamiento = new ArrayList<String>();
+        diasTratamiento.add("MON");
+        diasTratamiento.add("THU");
+        diasTratamiento.add("FRI");
 
 
-        HealthCareService h1 = new HealthCareService(false, footballer, "Mantenimiento",
+        HealthCareService h1 = new HealthCareService("joanfemenias@realoviedo.es", false, "Mantenimiento",
                 "Fisioterapia", "Medicamentos: 1,1,2,2,3,4,22,8 y 100",
                 new HealthCareAvalibleTime(diasTratamiento,true,"0","0"));
-        HealthCareService h2 = new HealthCareService(false,footballer, "Recuperacion",
+        HealthCareService h2 = new HealthCareService("joanfemenias@realoviedo.es",false,"Recuperacion",
                 "Rehabilitación", "Medicamentos: 1 y 4",
                 new HealthCareAvalibleTime(diasTratamiento,false,"10:00","12:00"));
-        HealthCareService h3 = new HealthCareService(false,footballer, "Estiramientos postpartido",
+        HealthCareService h3 = new HealthCareService("joanfemenias@realoviedo.es",false, "Estiramientos postpartido",
                 "Estiramientos", "Medicamentos: 1,1,2,2,3,4 y 11",
                 new HealthCareAvalibleTime(diasTratamiento,true,"0","0"));
-        HealthCareService h4 = new HealthCareService(true, footballer, "Mantenimiento",
+        HealthCareService h4 = new HealthCareService("joanfemenias@realoviedo.es",true, "Mantenimiento",
                 "Reposo", "Medicamentos: 1,1,222,8 y 100",
                 new HealthCareAvalibleTime(diasTratamiento,false,"20:00","21:00"));
 

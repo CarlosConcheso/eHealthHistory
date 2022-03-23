@@ -1,6 +1,7 @@
 package com.example.ehealthhistory.data.model.footballer;
 
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
+import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public class Footballer implements Serializable {
     private int telecom;
     private String gender;
     private String birthdate;
+    private Club club;
 
     private FootballerContact footballerContact;
     private FootballerComunication footballerComunication;
@@ -33,6 +35,7 @@ public class Footballer implements Serializable {
     public Footballer(){}
 
     public Footballer(boolean active, String username, String name, int telecom, String gender, String birthdate,
+                      Club club,
                       FootballerContact footballerContact, FootballerComunication footballerComunication)
     {
         this.active=active;
@@ -41,6 +44,7 @@ public class Footballer implements Serializable {
         this.telecom=telecom;
         this.gender=gender;
         this.birthdate=birthdate;
+        this.club=club;
         this.footballerContact=footballerContact;
         this.footballerComunication=footballerComunication;
     }
@@ -91,6 +95,14 @@ public class Footballer implements Serializable {
 
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
     }
 
     public FootballerContact getFootballerContact() {

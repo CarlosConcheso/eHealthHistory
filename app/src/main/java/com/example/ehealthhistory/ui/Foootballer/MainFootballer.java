@@ -31,8 +31,10 @@ public class MainFootballer extends BaseActivity {
     private String username;
 
     private Footballer futbolista;
+    private ArrayList<HealthCareService> footballerHealthCares;
 
-    private HashMap<String,String> footballerHealthCares = new HashMap<>();
+    //-----------------------------------------------------------------------------------------
+    //private HashMap<String,String> footballerHealthCares = new HashMap<>();
 
     private FootballerComunication footballerComunication = mf.getFootballerComunication();
     private CareTeam careTeamROV = mf.getCareTeamROV();
@@ -46,8 +48,9 @@ public class MainFootballer extends BaseActivity {
         setContentView(R.layout.main_footballer);
         username = getIntent().getStringExtra("username");
         futbolista = fb.getFootballer(username);
+        footballerHealthCares = fb.getFotballerHealthCares(username);
 
-        addHealthCareRows();
+        addHealthCareRows(footballerHealthCares);
 
         // Informacion y campos de la pantalla
         final TextView nameActivityBase = (TextView) findViewById(R.id.nameActivityBase);
@@ -69,7 +72,7 @@ public class MainFootballer extends BaseActivity {
         buttonfootballerContact.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeTo(v.getContext(), UIFootballerContact.class);
+                changeTo(v.getContext(), UIFootballerContact.class, username);
             }
 
         }));
@@ -78,7 +81,7 @@ public class MainFootballer extends BaseActivity {
         buttonfootballerHealthCareDetails.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeTo(v.getContext(), UIFootballerHealthCares.class);
+                changeTo(v.getContext(), UIFootballerHealthCares.class, username);
             }
 
         }));
@@ -87,25 +90,22 @@ public class MainFootballer extends BaseActivity {
         buttonfootballerTeamCares.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeTo(v.getContext(), UIFootballerFavsTeamCares.class);
+                changeTo(v.getContext(), UIFootballerFavsTeamCares.class, username);
             }
 
         }));
     }
 
-    private void addHealthCareRows() {
+    private void addHealthCareRows(ArrayList<HealthCareService> healthCares) {
         TableLayout tabla;
-        int fila, colu = 1;
         tabla = (TableLayout) findViewById(R.id.TableHealthCareService);
 
-        ArrayList<HealthCareService> healthCares = mf.getFootballer().getHealthcares();
+        //ArrayList<HealthCareService> healthCares = mf.getFootballer().getHealthcares();
 
         for (int i = 0; i < healthCares.size(); i++) {
             TableRow f = new TableRow(this);
-            f.setId(i + 100);
 
             TextView col1 = new TextView(this);
-            col1.setId(300 + i);
             if(healthCares.get(i).isActive())
                 col1.setText("Si");
             else
@@ -113,19 +113,18 @@ public class MainFootballer extends BaseActivity {
             col1.setGravity(Gravity.CENTER);
 
             TextView col2 = new TextView(this);
-            col2.setId(400 + i);
             col2.setText(mf.getHealthcares().get(i).getCategory());
 
             f.addView(col1);
             f.addView(col2);
 
             tabla.addView(f);
-            colu = colu + 2;
         }
     }
 
-    private static void changeTo(Context mContext, Class clase) {
+    private static void changeTo(Context mContext, Class clase, String footballer) {
         Intent intent = new Intent(mContext, clase);
+        intent.putExtra("username", footballer);
         mContext.startActivity(intent);
     }
 }

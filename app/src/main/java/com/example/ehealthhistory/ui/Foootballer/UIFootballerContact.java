@@ -5,9 +5,12 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
+import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
+import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.data.model.footballer.FootballerContact;
+import com.example.ehealthhistory.database.FireBase;
 
 public class UIFootballerContact extends BaseActivity {
 
@@ -15,14 +18,17 @@ public class UIFootballerContact extends BaseActivity {
     ModelFactory mf = new ModelFactory();
     private Footballer footballer = mf.getFootballer();
 
+    FireBase fb;
+    private Footballer futbolista;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.footballer_contact);
-
-
-        Bundle bundle = new Bundle();
-        bundle.putString("Footballer's Contact", "Footballer's Contact");
+        
+        fb = new FireBase();
+        futbolista = new Footballer();
+        futbolista.setUsername(getIntent().getStringExtra("username"));
 
         final TextView nameActivityBase = (TextView) findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Datos de contacto");
@@ -43,22 +49,21 @@ public class UIFootballerContact extends BaseActivity {
         final TextView footballerClubTeamCareTelecom = (TextView) findViewById(R.id.footballerClubTeamCareTelecom);
         final TextView footballerClubTeamCareNote = (TextView) findViewById(R.id.footballerClubTeamCareNote);
 
-
         // Rellenando campos
-        footballerContactName.setText(footballer.getFootballerContact().getName());
-        footballerContactTelf.setText(String.valueOf(footballer.getFootballerContact().getTelecom()));
-        footballerContactLenguaje.setText(footballer.getFootballerComunication().getLenguage());
-        footballerContactAdress.setText(footballer.getFootballerContact().getAdress());
+        futbolista = fb.getFootballer(futbolista.getUsername());
+        footballerContactName.setText(futbolista.getFootballerContact().getName());
+        footballerContactTelf.setText(String.valueOf(futbolista.getFootballerContact().getTelecom()));
+        footballerContactLenguaje.setText(futbolista.getFootballerComunication().getLenguage());
+        footballerContactAdress.setText(futbolista.getFootballerContact().getAdress());
 
-        footballerClubName.setText(footballer.getFootballerContact().getClub().getName());
-        footballerClubAlias.setText(footballer.getFootballerContact().getClub().getAlias());
-        footballerClubContactName.setText(footballer.getFootballerContact().getClub().getContactName());
+        futbolista.setClub(fb.getFootballerClub(futbolista.getUsername()));
+        footballerClubName.setText(futbolista.getClub().getName());
+        footballerClubAlias.setText(futbolista.getClub().getAlias());
+        footballerClubContactName.setText(futbolista.getClub().getContactName());
 
-        footballerClubTeamCareName.setText(footballer.getFootballerContact().getClub().getClubCareTeam().getName());
-        footballerClubTeamCareTelecom.setText(String.valueOf(footballer.getFootballerContact().getClub().getClubCareTeam().getTelcom()));
-        footballerClubTeamCareNote.setText(footballer.getFootballerContact().getClub().getClubCareTeam().getNote());
-
-
-
+        futbolista.getClub().setClubCareTeam(fb.getClubCareTeam(futbolista.getClub().getName()));
+        footballerClubTeamCareName.setText(futbolista.getClub().getClubCareTeam().getName());
+        footballerClubTeamCareTelecom.setText(String.valueOf(futbolista.getClub().getClubCareTeam().getTelcom()));
+        footballerClubTeamCareNote.setText(futbolista.getClub().getClubCareTeam().getNote());
     }
 }

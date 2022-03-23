@@ -12,9 +12,8 @@ import com.example.ehealthhistory.data.model.footballer.Footballer;
  */
 public class HealthCareService {
 
-    int id;
+    private String username;
     private boolean active;
-    private Footballer footballer;
     private String category;
     private String name;
     private String extraDetails;
@@ -22,14 +21,22 @@ public class HealthCareService {
 
     public HealthCareService(){}
 
-    public HealthCareService(boolean active, Footballer footballer, String category, String name, String extraDetails,
+    public HealthCareService(String username,boolean active, String category, String name, String extraDetails,
                              HealthCareAvalibleTime avalibleTime) {
+        this.username = username;
         this.active = active;
-        this.footballer = footballer;
         this.category = category;
         this.name = name;
         this.extraDetails = extraDetails;
         this.avalibleTime=avalibleTime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public boolean isActive() {
@@ -64,17 +71,12 @@ public class HealthCareService {
         this.extraDetails = extraDetails;
     }
 
-    public Footballer getFootballer() {
-        return footballer;
-    }
-
-    public void setClub(Footballer footballer) {
-        this.footballer = footballer;
-    }
-
     public HealthCareAvalibleTime getAvalibleTime()
     {
         return avalibleTime;
     }
 
+    public void setAvalibleTime(HealthCareAvalibleTime avalibleTime) {
+        this.avalibleTime = avalibleTime;
+    }
 }

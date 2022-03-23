@@ -8,16 +8,16 @@ import java.util.ArrayList;
 public class HealthCareAvalibleTime {
 
 
-    public enum daysOfWeek { MON, TUE, WED, THU, FRI, SAT, SUN}
+    //public enum daysOfWeek { MON, TUE, WED, THU, FRI, SAT, SUN}
 
-    ArrayList<daysOfWeek> daysOfHealthCare;
+    ArrayList<String> daysOfHealthCare;
     private boolean allDay;
     private String avalibleStartTime;
     private String avalibleEndTime;
 
     public HealthCareAvalibleTime(){}
 
-    public HealthCareAvalibleTime(ArrayList<daysOfWeek> daysOfHealthCare, boolean allDay,
+    public HealthCareAvalibleTime(ArrayList<String> daysOfHealthCare, boolean allDay,
                                   String avalibleStartTime, String avalibleEndTime)
     {
         this.daysOfHealthCare = daysOfHealthCare;
@@ -48,5 +48,13 @@ public class HealthCareAvalibleTime {
 
     public void setAvalibleEndTime(String avalibleEndTime) {
         this.avalibleEndTime = avalibleEndTime;
+    }
+
+    public ArrayList<String> getDaysOfHealthCare() {
+        return daysOfHealthCare;
+    }
+
+    public void setDaysOfHealthCare(ArrayList<String> daysOfHealthCare) {
+        this.daysOfHealthCare = daysOfHealthCare;
     }
 }

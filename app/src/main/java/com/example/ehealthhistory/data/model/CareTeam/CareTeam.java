@@ -18,10 +18,10 @@ import java.util.ArrayList;
  */
 public class CareTeam {
 
-    public enum CareTeamStatus { active , suspended, inactive, entered_in_error}
+    //public enum CareTeamStatus { active , suspended, inactive, entered_in_error}
 
     private int id;
-    private CareTeamStatus status;
+    private String status;
     private String name;
     private int telcom;
     private String note;
@@ -31,7 +31,7 @@ public class CareTeam {
 
     }
 
-    public CareTeam(int id, CareTeamStatus status, String name,
+    public CareTeam(int id, String status, String name,
                     int telcom, String note) {
         this.id=id;
         this.status = status;
@@ -40,11 +40,11 @@ public class CareTeam {
         this.note = note;
     }
 
-    public CareTeamStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(CareTeamStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -60,7 +60,7 @@ public class CareTeam {
         return telcom;
     }
 
-    public void setTelcom(int telcom) {
+    public void setTelecom(int telcom) {
         this.telcom = telcom;
     }
 
