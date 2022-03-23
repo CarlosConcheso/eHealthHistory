@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class MainFootballer extends BaseActivity {
 
-    private final ModelFactory mf = new ModelFactory();
     FireBase fb = new FireBase();
     private String username;
 
@@ -71,7 +70,7 @@ public class MainFootballer extends BaseActivity {
             col1.setGravity(Gravity.CENTER);
 
             TextView col2 = new TextView(this);
-            col2.setText(mf.getHealthcares().get(i).getCategory());
+            col2.setText(healthCares.get(i).getCategory());
             col2.setGravity(Gravity.CENTER);
 
             f.addView(col1);
