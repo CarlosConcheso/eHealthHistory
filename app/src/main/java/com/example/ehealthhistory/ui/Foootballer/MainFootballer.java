@@ -1,10 +1,9 @@
 package com.example.ehealthhistory.ui.Foootballer;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -12,12 +11,7 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
-import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
-import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.data.model.ModelFactory;
-import com.example.ehealthhistory.data.model.footballer.Footballer;
-import com.example.ehealthhistory.data.model.footballer.FootballerComunication;
-import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.database.FireBase;
 
@@ -26,19 +20,11 @@ import java.util.HashMap;
 
 public class MainFootballer extends BaseActivity {
 
-    private ModelFactory mf = new ModelFactory();
+    private final ModelFactory mf = new ModelFactory();
     FireBase fb = new FireBase();
     private String username;
 
-    //-----------------------------------------------------------------------------------------
-    //private HashMap<String,String> footballerHealthCares = new HashMap<>();
-
-    private FootballerComunication footballerComunication = mf.getFootballerComunication();
-    private CareTeam careTeamROV = mf.getCareTeamROV();
-    private Club club = mf.getClub();
-    private FootballerContact contact = mf.getFootballerContact();
-    private Footballer footballer = mf.getFootballer();
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +32,14 @@ public class MainFootballer extends BaseActivity {
         username = getIntent().getStringExtra("username");
 
         // Informacion y campos de la pantalla
-        final TextView nameActivityBase = (TextView) findViewById(R.id.nameActivityBase);
-        final TextView footballerName = (TextView) findViewById(R.id.footballerName);
-        final TextView footballerBirthDay = (TextView) findViewById(R.id.footballerBirthday);
-        final TextView footballerTelcom = (TextView) findViewById(R.id.footballerTelcom);
+        final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
+        final TextView footballerName = findViewById(R.id.footballerName);
+        final TextView footballerBirthDay = findViewById(R.id.footballerBirthday);
+        final TextView footballerTelcom = findViewById(R.id.footballerTelcom);
 
-        final Button buttonfootballerContact = (Button) findViewById(R.id.buttonfootballerContact);
-        final Button buttonfootballerHealthCareDetails = (Button) findViewById(R.id.buttonfootballerHealthCareDetails);
-        final Button buttonfootballerTeamCares = (Button) findViewById(R.id.buttonfootballerTeamCares);
+        final Button buttonfootballerContact = findViewById(R.id.buttonfootballerContact);
+        final Button buttonfootballerHealthCareDetails = findViewById(R.id.buttonfootballerHealthCareDetails);
+        final Button buttonfootballerTeamCares = findViewById(R.id.buttonfootballerTeamCares);
 
         // Datos representados con Firebase
         nameActivityBase.setText("eHealthHistory");
@@ -61,35 +47,19 @@ public class MainFootballer extends BaseActivity {
         fb.representFootballerBasicData(username, footballerName, footballerBirthDay,footballerTelcom);
 
         // Ver datos de contacto en profundidad
-        buttonfootballerContact.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeTo(v.getContext(), UIFootballerContact.class, username);
-            }
-        }));
+        buttonfootballerContact.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerContact.class, username)));
 
         // Ver historial médico en profundidad
-        buttonfootballerHealthCareDetails.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeTo(v.getContext(), UIFootballerHealthCares.class, username);
-            }
-
-        }));
+        buttonfootballerHealthCareDetails.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerHealthCares.class, username)));
 
         // Ver médicos de confianza del futbolista: personales y del club.
-        buttonfootballerTeamCares.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeTo(v.getContext(), UIFootballerFavsTeamCares.class, username);
-            }
-
-        }));
+        buttonfootballerTeamCares.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerFavsTeamCares.class, username)));
     }
 
+    @SuppressLint("SetTextI18n")
     public void addHealthCareRows(ArrayList<HealthCareService> healthCares) {
         TableLayout tabla;
-        tabla = (TableLayout) findViewById(R.id.TableHealthCareService);
+        tabla = findViewById(R.id.TableHealthCareService);
 
         for (int i = 0; i < healthCares.size(); i++) {
             TableRow f = new TableRow(this);
