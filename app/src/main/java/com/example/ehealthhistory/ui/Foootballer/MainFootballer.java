@@ -30,9 +30,6 @@ public class MainFootballer extends BaseActivity {
     FireBase fb = new FireBase();
     private String username;
 
-    private Footballer futbolista;
-    private ArrayList<HealthCareService> footballerHealthCares;
-
     //-----------------------------------------------------------------------------------------
     //private HashMap<String,String> footballerHealthCares = new HashMap<>();
 
@@ -47,10 +44,6 @@ public class MainFootballer extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_footballer);
         username = getIntent().getStringExtra("username");
-        futbolista = fb.getFootballer(username);
-        footballerHealthCares = fb.getFotballerHealthCares(username);
-
-        addHealthCareRows(footballerHealthCares);
 
         // Informacion y campos de la pantalla
         final TextView nameActivityBase = (TextView) findViewById(R.id.nameActivityBase);
@@ -62,11 +55,10 @@ public class MainFootballer extends BaseActivity {
         final Button buttonfootballerHealthCareDetails = (Button) findViewById(R.id.buttonfootballerHealthCareDetails);
         final Button buttonfootballerTeamCares = (Button) findViewById(R.id.buttonfootballerTeamCares);
 
+        // Datos representados con Firebase
         nameActivityBase.setText("eHealthHistory");
-
-        footballerName.setText(futbolista.getName());
-        footballerBirthDay.setText(futbolista.getBirthdate());
-        footballerTelcom.setText(Integer.toString(futbolista.getTelecom()));
+        fb.representBasicFotballerHealthCares(username, this);
+        fb.representFootballerBasicData(username, footballerName, footballerBirthDay,footballerTelcom);
 
         // Ver datos de contacto en profundidad
         buttonfootballerContact.setOnClickListener((new View.OnClickListener() {
@@ -74,7 +66,6 @@ public class MainFootballer extends BaseActivity {
             public void onClick(View v) {
                 changeTo(v.getContext(), UIFootballerContact.class, username);
             }
-
         }));
 
         // Ver historial médico en profundidad
@@ -96,11 +87,9 @@ public class MainFootballer extends BaseActivity {
         }));
     }
 
-    private void addHealthCareRows(ArrayList<HealthCareService> healthCares) {
+    public void addHealthCareRows(ArrayList<HealthCareService> healthCares) {
         TableLayout tabla;
         tabla = (TableLayout) findViewById(R.id.TableHealthCareService);
-
-        //ArrayList<HealthCareService> healthCares = mf.getFootballer().getHealthcares();
 
         for (int i = 0; i < healthCares.size(); i++) {
             TableRow f = new TableRow(this);
@@ -114,6 +103,7 @@ public class MainFootballer extends BaseActivity {
 
             TextView col2 = new TextView(this);
             col2.setText(mf.getHealthcares().get(i).getCategory());
+            col2.setGravity(Gravity.CENTER);
 
             f.addView(col1);
             f.addView(col2);

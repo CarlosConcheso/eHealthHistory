@@ -21,12 +21,12 @@ public class HealthCareService {
 
     public HealthCareService(){}
 
-    public HealthCareService(String username,boolean active, String category, String name, String extraDetails,
+    public HealthCareService(String username,boolean active, String name, String category, String extraDetails,
                              HealthCareAvalibleTime avalibleTime) {
         this.username = username;
         this.active = active;
-        this.category = category;
         this.name = name;
+        this.category = category;
         this.extraDetails = extraDetails;
         this.avalibleTime=avalibleTime;
     }
@@ -47,20 +47,20 @@ public class HealthCareService {
         this.active = active;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getExtraDetails() {

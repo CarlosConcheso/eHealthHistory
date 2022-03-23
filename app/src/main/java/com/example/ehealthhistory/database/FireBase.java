@@ -12,6 +12,7 @@ import com.example.ehealthhistory.data.model.footballer.FootballerComunication;
 import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
+import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -57,8 +58,6 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-
-                            System.out.println("Roles: " + document.get("rol"));
                             rolesFinales.add(document.get("rol").toString());
                         }
 
@@ -112,39 +111,54 @@ public class FireBase {
         return footballer;
     }
 
-    public ArrayList<HealthCareService> getFotballerHealthCares(String username)
-    {
-        ArrayList<HealthCareService> healthcares = new ArrayList<>();
+    public void representFootballerBasicData(String username,
+                                             TextView footballerName,
+                                             TextView footballerBirthDay,
+                                             TextView footballerTelcom) {
 
-        db.collection("healthcare")
+        db.collection("footballer")
                 .whereEqualTo("username", username)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
 
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            HealthCareService hc = new HealthCareService();
-                            HealthCareAvalibleTime hcat = new HealthCareAvalibleTime();
-                            ArrayList<String> daysOfHealthCare = new ArrayList<>();
 
-                            hc.setUsername(document.get("username").toString());
-                            hc.setActive(Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("active")).toString()));
-                            hc.setCategory(document.get("category").toString());
-                            hc.setName(document.get("name").toString());
-                            hc.setExtraDetails(document.get("extraDetails").toString());
-
-                            hcat.setAllDay(Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("avalibleTime_allDay")).toString()));
-                            hcat.setAvalibleStartTime(document.get("avalibleTime_startTime").toString());
-                            hcat.setAvalibleEndTime(document.get("avalibleTime_endTime").toString());
-
-                            daysOfHealthCare.addAll(Collections.singleton(document.get("avalibleTime_daysOfHealthCare").toString()));
-                            hcat.setDaysOfHealthCare(daysOfHealthCare);
-                            hc.setAvalibleTime(hcat);
+                            footballerName.setText(document.getString("name"));
+                            footballerBirthDay.setText(document.getString("birthday"));
+                            footballerTelcom.setText(document.getString("telecom"));
                         }
                     }
                 });
+    }
 
-        return healthcares;
+    public void representBasicFotballerHealthCares(String username, MainFootballer mainFootballer)
+    {
+        MainFootballer mf = mainFootballer;
+
+        db.collection("healthcare")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+
+                    ArrayList<HealthCareService> healthcares = new ArrayList<>();
+
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            HealthCareService hc = new HealthCareService();
+
+                            hc.setActive(Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("active")).toString()));
+                            hc.setCategory(document.get("category").toString());
+                            healthcares.add(hc);
+
+                            System.out.println("HEALTH: CATEGORY -> " + hc.getCategory());
+                        }
+                        System.out.println("HEALTH -> Vamonos a dibujar");
+
+                        mf.addHealthCareRows(healthcares);
+
+                    }
+                });
     }
 
     public Club getFootballerClub(String username) {
