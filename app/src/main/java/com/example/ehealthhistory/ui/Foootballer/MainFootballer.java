@@ -16,7 +16,6 @@ import com.example.ehealthhistory.data.model.healthCareService.HealthCareService
 import com.example.ehealthhistory.database.FireBase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainFootballer extends BaseActivity {
 

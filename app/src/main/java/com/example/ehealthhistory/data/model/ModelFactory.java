@@ -32,19 +32,19 @@ public class ModelFactory {
     {
         footballerComunication = new FootballerComunication("Español", true);
 
-        careTeam = new CareTeam(1, "active", "Equipo Medico 1",
+        careTeam = new CareTeam("equipomedico1@oviedo.es", "active", "Equipo Medico 1",
             676889974, "Clínica Asturias");
         careTeams.add(careTeam);
 
-        careTeam = new CareTeam(2, "inactive", "Rodas",
+        careTeam = new CareTeam("rodas@rodas.es", "inactive", "Rodas",
                 676889974, "De lo mejor");
         careTeams.add(careTeam);
 
-        careTeam = new CareTeam(3, "suspended", "Equipo Medico 3",
+        careTeam = new CareTeam("equipomedico3@oviedo.es", "suspended", "Equipo Medico 3",
                 676889974, "Clinica privada");
         careTeams.add(careTeam);
 
-        careTeam = new CareTeam(4, "active", "Real Oviedo",
+        careTeam = new CareTeam("equipomedicorealoviedo@realoviedo.es", "active", "Real Oviedo",
                 676889974, "Los mejores medicos del club");
         careTeams.add(careTeam);
 
