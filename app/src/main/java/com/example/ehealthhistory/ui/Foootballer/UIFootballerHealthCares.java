@@ -26,8 +26,6 @@ public class UIFootballerHealthCares extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.footballer_view_healthcareservices);
-        Bundle bundle = new Bundle();
-        bundle.putString("Footballer's Health Cares", "Footballer's Health Cares");
 
         final TextView nameActivityBase = (TextView) findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Datos Médicos");

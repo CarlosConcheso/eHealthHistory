@@ -151,6 +151,7 @@ public class FireBase {
     public void representFootballerClubContact(String username, TextView footballerClubName,
                                                TextView footballerClubAlias, TextView footballerClubContactName,
                                                UIFootballerContact footballerContact) {
+
         Club club = new Club();
 
         db.collection("footballer")
@@ -160,14 +161,14 @@ public class FireBase {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
-                            String nameOfClub = document.getString("club");
+                            club.setName(document.getString("club"));
 
                             db.collection("club")
-                                    .whereEqualTo("name", nameOfClub)
+                                    .whereEqualTo("name", club.getName())
                                     .get()
                                     .addOnCompleteListener(task2 -> {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task.getResult())) {
+                                        if (task2.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
                                                 club.setUsername(document2.getString("username"));
                                                 club.setName(document2.getString("name"));
@@ -177,49 +178,72 @@ public class FireBase {
                                                 footballerClubName.setText(club.getName());
                                                 footballerClubAlias.setText(club.getAlias());
                                                 footballerClubContactName.setText(club.getContactName());
-
-                                                footballerContact.setClubUsername(club.getUsername());
                                             }
                                         }
                                     });
+
                         }
                     }
                 });
     }
 
-    public void representFootballerClubCareTeamContact(String clubUsername,
+    public void representFootballerClubCareTeamContact(String username,
                                                            TextView footballerClubTeamCareName, TextView footballerClubTeamCareTelecom,
                                                            TextView footballerClubTeamCareNote) {
         CareTeam ct = new CareTeam();
 
-        db.collection("club_careteam")
-                .whereEqualTo("username_club", clubUsername)
+        db.collection("footballer")
+                .whereEqualTo("username", username)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
-                            String careTeamUsername = document.getString("careteam_username");
+                            String clubname = document.getString("club");
+                            System.out.println("nombre club: " + clubname);
 
-                            db.collection("careteam")
-                                    .whereEqualTo("username", careTeamUsername)
+                            db.collection("club")
+                                    .whereEqualTo("name", clubname)
                                     .get()
                                     .addOnCompleteListener(task2 -> {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task.getResult())) {
-                                                ct.setName(document2.getString("name"));
-                                                ct.setNote(document2.getString("note"));
-                                                ct.setStatus(document2.getString("status"));
-                                                ct.setTelecom(Integer.parseInt(Objects.requireNonNull(document2.getData().get("telecom")).toString()));
+                                        if (task2.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
-                                                footballerClubTeamCareName.setText(ct.getName());
-                                                footballerClubTeamCareTelecom.setText(ct.getTelcom());
-                                                footballerClubTeamCareNote.setText(ct.getNote());
+                                                String usernamecareteam = document2.getString("username_careteam");
+                                                System.out.println("usernamecareteam: " + usernamecareteam);
+
+                                                db.collection("careteam")
+                                                        .whereEqualTo("username", usernamecareteam)
+                                                        .get()
+                                                        .addOnCompleteListener(task3 -> {
+                                                            if (task3.isSuccessful()) {
+                                                                for (QueryDocumentSnapshot document3 : Objects.requireNonNull(task3.getResult())) {
+
+                                                                    ct.setName(document3.getString("name"));
+                                                                    ct.setNote(document3.getString("note"));
+                                                                    ct.setStatus(document3.getString("status"));
+                                                                    ct.setTelecom(Integer.parseInt(document3.getString("telecom")));
+
+                                                                    footballerClubTeamCareName.setText(ct.getName());
+                                                                    footballerClubTeamCareTelecom.setText(String.valueOf(ct.getTelcom()));
+                                                                    footballerClubTeamCareNote.setText(ct.getNote());
+
+                                                                    System.out.println("nombre medico: " + ct.getName());
+                                                                }
+                                                            }
+                                                        });
+
                                             }
                                         }
                                     });
+
                         }
                     }
                 });
     }
+
+    //Métodos ver datos de parte futbolista
+
+    // Métodos añadir médico fav futbolista
+
 }

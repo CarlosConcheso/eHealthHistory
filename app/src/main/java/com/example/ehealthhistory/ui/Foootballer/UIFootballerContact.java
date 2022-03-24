@@ -14,10 +14,8 @@ public class UIFootballerContact extends BaseActivity {
 
 
     ModelFactory mf = new ModelFactory();
-    private final Footballer footballer = mf.getFootballer();
 
     FireBase fb;
-    private String clubUsername;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -50,10 +48,6 @@ public class UIFootballerContact extends BaseActivity {
         // Rellenando campos desde FireBase
         fb.representFootballerContact(username, footballerContactName, footballerContactTelf, footballerContactLenguaje, footballerContactAdress);
         fb.representFootballerClubContact(username, footballerClubName, footballerClubAlias, footballerClubContactName, this);
-        fb.representFootballerClubCareTeamContact(clubUsername, footballerClubTeamCareName, footballerClubTeamCareTelecom, footballerClubTeamCareNote);
-    }
-
-    public void setClubUsername(String clubUsername) {
-        this.clubUsername = clubUsername;
+        fb.representFootballerClubCareTeamContact(username, footballerClubTeamCareName, footballerClubTeamCareTelecom, footballerClubTeamCareNote);
     }
 }
