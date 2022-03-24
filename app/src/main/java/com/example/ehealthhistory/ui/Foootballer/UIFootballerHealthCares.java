@@ -1,18 +1,14 @@
 package com.example.ehealthhistory.ui.Foootballer;
 
-import android.graphics.ColorSpace;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
-import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.database.FireBase;
 
@@ -23,8 +19,8 @@ public class UIFootballerHealthCares extends BaseActivity {
     ArrayList<HealthCareService> healthCares = new ArrayList<>();
 
     FireBase fb = new FireBase();
-    private String username;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +29,7 @@ public class UIFootballerHealthCares extends BaseActivity {
         final TextView nameActivityBase = (TextView) findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Datos Médicos");
 
-        username = getIntent().getStringExtra("username");
+        String username = getIntent().getStringExtra("username");
 
         final Spinner spinnerHealthCare = (Spinner)findViewById(R.id.spinnerHealthCare);
 
@@ -46,20 +42,24 @@ public class UIFootballerHealthCares extends BaseActivity {
         final TextView healthCareNote = (TextView) findViewById(R.id.healthCareNote);
 
         // Rellena spinner con los HealthCares por FireBase
-        fb.rellenarSpinnerHealthcareFootballer(username, spinnerHealthCare, this);
+        fb.rellenarSpinnerHealthcareFootballer(username, spinnerHealthCare, this,
+                healthCareCategory, healthCareName, healthCareCommentary,
+                      healthCareAllDay, healthCareHoraInicio, healthCareHoraFin,healthCareNote);
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerHealthCare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //establecerDatos(spinnerHealthCare, healthCareCategory, healthCareName, healthCareCommentary,
-                  //      healthCareAllDay, healthCareHoraInicio, healthCareHoraFin,healthCareNote);
+                establecerDatos(spinnerHealthCare, healthCareCategory, healthCareName, healthCareCommentary,
+                        healthCareAllDay, healthCareHoraInicio, healthCareHoraFin,healthCareNote);
             }
-            public void onNothingSelected(AdapterView<?> adapterView) { return; } });
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            } });
     }
 
+    @SuppressLint("SetTextI18n")
     public void establecerDatos(Spinner spinnerHealthCare, TextView healthCareCategory, TextView healthCareName,
-                                  TextView healthCareCommentary,TextView healthCareAllDay, TextView healthCareHoraInicio,
-                                  TextView healthCareHoraFin, TextView healthCareNote)
+                                TextView healthCareCommentary, TextView healthCareAllDay, TextView healthCareHoraInicio,
+                                TextView healthCareHoraFin, TextView healthCareNote)
     {
         HealthCareService healthCareSelected = buscarHealthCare(spinnerHealthCare);
 
@@ -85,7 +85,7 @@ public class UIFootballerHealthCares extends BaseActivity {
         String nombreHealthCare = spinnerHealthCare.getSelectedItem().toString();
 
         for(HealthCareService hc : healthCares)
-            if(nombreHealthCare == hc.getName()) {
+            if(nombreHealthCare.equals(hc.getName())) {
                 return hc;
             }
         return null;

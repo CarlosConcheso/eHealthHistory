@@ -47,7 +47,7 @@ public class UIFootballerContact extends BaseActivity {
 
         // Rellenando campos desde FireBase
         fb.representFootballerContact(username, footballerContactName, footballerContactTelf, footballerContactLenguaje, footballerContactAdress);
-        fb.representFootballerClubContact(username, footballerClubName, footballerClubAlias, footballerClubContactName, this);
+        fb.representFootballerClubContact(username, footballerClubName, footballerClubAlias, footballerClubContactName);
         fb.representFootballerClubCareTeamContact(username, footballerClubTeamCareName, footballerClubTeamCareTelecom, footballerClubTeamCareNote);
     }
 }

@@ -15,7 +15,6 @@ import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
-import com.example.ehealthhistory.ui.Foootballer.UIFootballerContact;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerHealthCares;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -153,8 +152,7 @@ public class FireBase {
 
 
     public void representFootballerClubContact(String username, TextView footballerClubName,
-                                               TextView footballerClubAlias, TextView footballerClubContactName,
-                                               UIFootballerContact footballerContact) {
+                                               TextView footballerClubAlias, TextView footballerClubContactName) {
 
         Club club = new Club();
 
@@ -245,7 +243,11 @@ public class FireBase {
 
     //Métodos ver datos de parte futbolista
     public void rellenarSpinnerHealthcareFootballer(String username, Spinner spinner,
-                                                    UIFootballerHealthCares uiFootballerHealthCares)
+                                                    UIFootballerHealthCares uiFootballerHealthCares,
+                                                    TextView healthCareCategory, TextView healthCareName,
+                                                    TextView healthCareCommentary,TextView healthCareAllDay,
+                                                    TextView healthCareHoraInicio, TextView healthCareHoraFin,
+                                                    TextView healthCareNote)
     {
         ArrayList<HealthCareService> lista = new ArrayList<>();
 
@@ -280,7 +282,7 @@ public class FireBase {
                         for(int i=0; i<lista.size(); i++)
                             System.out.println("NOMBRE BUCLE FUERA: " + lista.get(i).getName());
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                 uiFootballerHealthCares,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 uiFootballerHealthCares.convert2ArrayHealthCares(lista));
@@ -288,10 +290,41 @@ public class FireBase {
                         spinner.setAdapter(adapter);
                         uiFootballerHealthCares.setHealthCares(lista);
 
-                        //representarValorSpinnerInicial();
+                        representarValorSpinnerInicial(uiFootballerHealthCares,
+                                healthCareCategory, healthCareName,
+                                healthCareCommentary,healthCareAllDay,
+                                healthCareHoraInicio, healthCareHoraFin,
+                                healthCareNote);
                     }
                 });
+    }
 
+    @SuppressLint("SetTextI18n")
+    private void representarValorSpinnerInicial(UIFootballerHealthCares uiFootballerHealthCares,
+                                                TextView healthCareCategory, TextView healthCareName,
+                                                TextView healthCareCommentary, TextView healthCareAllDay,
+                                                TextView healthCareHoraInicio, TextView healthCareHoraFin,
+                                                TextView healthCareNote)
+    {
+        ArrayList<HealthCareService> healthcares = uiFootballerHealthCares.getHealthCares();
+
+        HealthCareService hc1 = healthcares.get(0);
+
+        healthCareCategory.setText(hc1.getCategory());
+        healthCareName.setText(hc1.getName());
+        healthCareCommentary.setText(hc1.getName());
+        if(hc1.getAvalibleTime().isAllDay())
+        {
+            healthCareAllDay.setText("Si");
+            healthCareHoraInicio.setText("");
+            healthCareHoraFin.setText("");
+        }
+        else {
+            healthCareAllDay.setText("No");
+            healthCareHoraInicio.setText(hc1.getAvalibleTime().getAvalibleStartTime());
+            healthCareHoraFin.setText(hc1.getAvalibleTime().getAvalibleEndTime());
+        }
+        healthCareNote.setText(hc1.getExtraDetails());
     }
 
     // Métodos añadir médico fav futbolista
