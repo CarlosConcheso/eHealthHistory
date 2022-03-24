@@ -248,9 +248,6 @@ public class FireBase {
                                                     UIFootballerHealthCares uiFootballerHealthCares)
     {
         ArrayList<HealthCareService> lista = new ArrayList<>();
-        HealthCareService hc = new HealthCareService();
-        HealthCareAvalibleTime hcat = new HealthCareAvalibleTime();
-        ArrayList<String> daysOfHealthCare = new ArrayList<>();
 
         db.collection("healthcare")
                 .whereEqualTo("username", username)
@@ -258,6 +255,10 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+
+                            HealthCareService hc = new HealthCareService();
+                            HealthCareAvalibleTime hcat = new HealthCareAvalibleTime();
+                            ArrayList<String> daysOfHealthCare = new ArrayList<>();
 
                             hc.setUsername(document.getString("username"));
                             hc.setName(document.getString("name"));
@@ -274,11 +275,7 @@ public class FireBase {
                             hc.setAvalibleTime(hcat);
 
                             lista.add(hc);
-
-                            System.out.println("DENTRO: " + hc.getName());
                         }
-
-                        System.out.println("FUERA: " + hc.getName());
 
                         for(int i=0; i<lista.size(); i++)
                             System.out.println("NOMBRE BUCLE FUERA: " + lista.get(i).getName());
