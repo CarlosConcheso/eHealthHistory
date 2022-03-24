@@ -3,16 +3,20 @@ package com.example.ehealthhistory.database;
 
 import android.annotation.SuppressLint;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.data.model.footballer.FootballerComunication;
 import com.example.ehealthhistory.data.model.footballer.FootballerContact;
+import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerContact;
+import com.example.ehealthhistory.ui.Foootballer.UIFootballerHealthCares;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -210,7 +214,6 @@ public class FireBase {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
                                                 String usernamecareteam = document2.getString("username_careteam");
-                                                System.out.println("usernamecareteam: " + usernamecareteam);
 
                                                 db.collection("careteam")
                                                         .whereEqualTo("username", usernamecareteam)
@@ -227,8 +230,6 @@ public class FireBase {
                                                                     footballerClubTeamCareName.setText(ct.getName());
                                                                     footballerClubTeamCareTelecom.setText(String.valueOf(ct.getTelcom()));
                                                                     footballerClubTeamCareNote.setText(ct.getNote());
-
-                                                                    System.out.println("nombre medico: " + ct.getName());
                                                                 }
                                                             }
                                                         });
@@ -243,6 +244,58 @@ public class FireBase {
     }
 
     //Métodos ver datos de parte futbolista
+    public void rellenarSpinnerHealthcareFootballer(String username, Spinner spinner,
+                                                    UIFootballerHealthCares uiFootballerHealthCares)
+    {
+        ArrayList<HealthCareService> lista = new ArrayList<>();
+        HealthCareService hc = new HealthCareService();
+        HealthCareAvalibleTime hcat = new HealthCareAvalibleTime();
+        ArrayList<String> daysOfHealthCare = new ArrayList<>();
+
+        db.collection("healthcare")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+
+                            hc.setUsername(document.getString("username"));
+                            hc.setName(document.getString("name"));
+                            hc.setCategory(document.getString("category"));
+                            hc.setActive((Boolean) document.getData().get("active"));
+                            hc.setExtraDetails(document.getString("extraDetails"));
+
+                            hcat.setAvalibleStartTime(document.getString("avalibleTime_startTime"));
+                            hcat.setAvalibleEndTime(document.getString("avalibleTime_endTime"));
+                            hcat.setAllDay((Boolean) document.getData().get("avalibleTime_allDay"));
+
+                            daysOfHealthCare.add(document.get("avalibleTime_daysOfHealthCare").toString());
+                            hcat.setDaysOfHealthCare(daysOfHealthCare);
+                            hc.setAvalibleTime(hcat);
+
+                            lista.add(hc);
+
+                            System.out.println("DENTRO: " + hc.getName());
+                        }
+
+                        System.out.println("FUERA: " + hc.getName());
+
+                        for(int i=0; i<lista.size(); i++)
+                            System.out.println("NOMBRE BUCLE FUERA: " + lista.get(i).getName());
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                                uiFootballerHealthCares,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                uiFootballerHealthCares.convert2ArrayHealthCares(lista));
+
+                        spinner.setAdapter(adapter);
+                        uiFootballerHealthCares.setHealthCares(lista);
+
+                        //representarValorSpinnerInicial();
+                    }
+                });
+
+    }
 
     // Métodos añadir médico fav futbolista
 
