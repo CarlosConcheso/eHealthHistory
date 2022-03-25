@@ -19,6 +19,8 @@ public class UIFootballerHealthCares extends BaseActivity {
     ArrayList<HealthCareService> healthCares = new ArrayList<>();
     FireBase fb = new FireBase();
 
+    private boolean consulta=false;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,10 @@ public class UIFootballerHealthCares extends BaseActivity {
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerHealthCare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                establecerDatos(spinnerHealthCare, healthCareCategory, healthCareName, healthCareCommentary,
-                        healthCareAllDay, healthCareHoraInicio, healthCareHoraFin,healthCareNote);
+                if(isConsulta()) {
+                    establecerDatos(spinnerHealthCare, healthCareCategory, healthCareName, healthCareCommentary,
+                            healthCareAllDay, healthCareHoraInicio, healthCareHoraFin, healthCareNote);
+                }
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
             } });
@@ -81,10 +85,10 @@ public class UIFootballerHealthCares extends BaseActivity {
 
     private HealthCareService buscarHealthCare(Spinner spinnerHealthCare)
     {
-        String nombreSelectedItem = spinnerHealthCare.getSelectedItem().toString();
+        String idSelectedItem = spinnerHealthCare.getSelectedItem().toString().split(". ")[0];
 
         for(HealthCareService hc : healthCares)
-            if(nombreSelectedItem.equals(hc.getName())) return hc;
+            if(idSelectedItem.equals(String.valueOf(hc.getId()))) return hc;
         return null;
     }
 
@@ -93,7 +97,7 @@ public class UIFootballerHealthCares extends BaseActivity {
         String[] mStringArray = new String[lista.size()];
 
         for (int i = 0; i < lista.size(); i++) {
-            mStringArray[i] = lista.get(i).getName();
+            mStringArray[i] = lista.get(i).getId() + ". "+ lista.get(i).getName();
         }
 
         return mStringArray;
@@ -130,5 +134,13 @@ public class UIFootballerHealthCares extends BaseActivity {
             healthCareHoraFin.setText(hc1.getAvalibleTime().getAvalibleEndTime());
         }
         healthCareNote.setText(hc1.getExtraDetails());
+    }
+
+    public boolean isConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(boolean consulta) {
+        this.consulta = consulta;
     }
 }

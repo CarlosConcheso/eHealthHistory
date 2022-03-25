@@ -284,7 +284,6 @@ public class FireBase {
                             hc.setAvalibleTime(hcat);
 
                             lista.add(hc);
-
                             i++;
                         }
 
@@ -301,6 +300,8 @@ public class FireBase {
                                 healthCareCommentary, healthCareAllDay,
                                 healthCareHoraInicio, healthCareHoraFin,
                                 healthCareNote);
+
+                        uiFootballerHealthCares.setConsulta(true);
                     }
                 });
     }
