@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
-import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.database.FireBase;
 
@@ -80,6 +79,7 @@ public class MainFootballer extends BaseActivity {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private static void changeTo(Context mContext, Class clase, String footballer) {
         Intent intent = new Intent(mContext, clase);
         intent.putExtra("username", footballer);

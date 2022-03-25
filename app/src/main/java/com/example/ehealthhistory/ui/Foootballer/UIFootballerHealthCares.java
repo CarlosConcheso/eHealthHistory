@@ -26,20 +26,20 @@ public class UIFootballerHealthCares extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.footballer_view_healthcareservices);
 
-        final TextView nameActivityBase = (TextView) findViewById(R.id.nameActivityBase);
+        final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Datos Médicos");
 
         String username = getIntent().getStringExtra("username");
 
-        final Spinner spinnerHealthCare = (Spinner)findViewById(R.id.spinnerHealthCare);
+        final Spinner spinnerHealthCare = findViewById(R.id.spinnerHealthCare);
 
-        final TextView healthCareCategory = (TextView) findViewById(R.id.healthCareCategory);
-        final TextView healthCareName = (TextView) findViewById(R.id.healthCareName);
-        final TextView healthCareCommentary = (TextView) findViewById(R.id.healthCareCommentary);
-        final TextView healthCareAllDay = (TextView) findViewById(R.id.healthCareAllDay);
-        final TextView healthCareHoraInicio = (TextView) findViewById(R.id.healthCareHoraInicio);
-        final TextView healthCareHoraFin = (TextView) findViewById(R.id.healthCareHoraFin);
-        final TextView healthCareNote = (TextView) findViewById(R.id.healthCareNote);
+        final TextView healthCareCategory = findViewById(R.id.healthCareCategory);
+        final TextView healthCareName = findViewById(R.id.healthCareName);
+        final TextView healthCareCommentary = findViewById(R.id.healthCareCommentary);
+        final TextView healthCareAllDay = findViewById(R.id.healthCareAllDay);
+        final TextView healthCareHoraInicio = findViewById(R.id.healthCareHoraInicio);
+        final TextView healthCareHoraFin = findViewById(R.id.healthCareHoraFin);
+        final TextView healthCareNote = findViewById(R.id.healthCareNote);
 
         // Rellena spinner con los HealthCares por FireBase
         fb.rellenarSpinnerHealthcareFootballer(username, spinnerHealthCare, this,
@@ -63,6 +63,7 @@ public class UIFootballerHealthCares extends BaseActivity {
     {
         HealthCareService healthCareSelected = buscarHealthCare(spinnerHealthCare);
 
+        assert healthCareSelected != null;
         healthCareCategory.setText(healthCareSelected.getCategory());
         healthCareName.setText(healthCareSelected.getName());
         healthCareCommentary.setText(healthCareSelected.getName());
@@ -108,5 +109,33 @@ public class UIFootballerHealthCares extends BaseActivity {
 
     public void setHealthCares(ArrayList<HealthCareService> healthCares) {
         this.healthCares = healthCares;
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void representarValorSpinnerInicial(UIFootballerHealthCares uiFootballerHealthCares,
+                                                TextView healthCareCategory, TextView healthCareName,
+                                                TextView healthCareCommentary, TextView healthCareAllDay,
+                                                TextView healthCareHoraInicio, TextView healthCareHoraFin,
+                                                TextView healthCareNote)
+    {
+        ArrayList<HealthCareService> healthcares = uiFootballerHealthCares.getHealthCares();
+
+        HealthCareService hc1 = healthcares.get(0);
+
+        healthCareCategory.setText(hc1.getCategory());
+        healthCareName.setText(hc1.getName());
+        healthCareCommentary.setText(hc1.getName());
+        if(hc1.getAvalibleTime().isAllDay())
+        {
+            healthCareAllDay.setText("Si");
+            healthCareHoraInicio.setText("");
+            healthCareHoraFin.setText("");
+        }
+        else {
+            healthCareAllDay.setText("No");
+            healthCareHoraInicio.setText(hc1.getAvalibleTime().getAvalibleStartTime());
+            healthCareHoraFin.setText(hc1.getAvalibleTime().getAvalibleEndTime());
+        }
+        healthCareNote.setText(hc1.getExtraDetails());
     }
 }

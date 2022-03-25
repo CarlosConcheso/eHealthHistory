@@ -7,19 +7,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ehealthhistory.R;
-import com.example.ehealthhistory.database.FireBase;
 import com.example.ehealthhistory.ui.MainRoles;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 
 public class MainLogIn extends AppCompatActivity {
@@ -28,7 +23,7 @@ public class MainLogIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_login);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         ImageView medico = findViewById(R.id.app_image);
         medico.setImageResource(R.drawable.app_image_trans_small);
@@ -42,20 +37,14 @@ public class MainLogIn extends AppCompatActivity {
             String usuario = username.getText().toString();
             String pass = password.getText().toString();
 
-            if(usuario.length()>0 && pass.length()>0) {
-
-                FirebaseAuth.getInstance()
-                        .signInWithEmailAndPassword(usuario, pass)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    changeTo(v.getContext(), usuario);
-                                } else
-                                    Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
-                            }
-                        });
-            }
+            if(usuario.length()>0 && pass.length()>0) FirebaseAuth.getInstance()
+                    .signInWithEmailAndPassword(usuario, pass)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            changeTo(v.getContext(), usuario);
+                        } else
+                            Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
+                    });
             else
                 Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
         }));

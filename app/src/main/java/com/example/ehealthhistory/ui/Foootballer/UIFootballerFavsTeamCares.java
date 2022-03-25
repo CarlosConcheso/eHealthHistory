@@ -1,5 +1,6 @@
 package com.example.ehealthhistory.ui.Foootballer;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,11 +23,13 @@ import java.util.ArrayList;
 public class UIFootballerFavsTeamCares extends BaseActivity {
 
 
+
     private ModelFactory mf = new ModelFactory();
     private CareTeam actualCareTeam = mf.getCareTeams().get(0);
 
     private ArrayList<CareTeam> careTeams = mf.getCareTeams();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,31 +37,31 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putString("Footballer's Favs Team Cares", "Footballer's Favs Team Cares");
 
-        final TextView nameActivityBase = (TextView) findViewById(R.id.nameActivityBase);
+        final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Equipos Médicos de confianza");
 
-        final Spinner spinnerFavCareTeam = (Spinner) findViewById(R.id.spinnerFavCareTeams);
+        final Spinner spinnerFavCareTeam = findViewById(R.id.spinnerFavCareTeams);
 
-        final TextView favCareTeamName = (TextView) findViewById(R.id.favCareTeamName);
-        final TextView favCareTeamStatus = (TextView) findViewById(R.id.favCareTeamStatus);
-        final TextView favCareTeamTelecom = (TextView) findViewById(R.id.favCareTeamTelecom);
-        final TextView favCareTeamNote = (TextView) findViewById(R.id.favCareTeamNote);
+        final TextView favCareTeamName = findViewById(R.id.favCareTeamName);
+        final TextView favCareTeamStatus = findViewById(R.id.favCareTeamStatus);
+        final TextView favCareTeamTelecom = findViewById(R.id.favCareTeamTelecom);
+        final TextView favCareTeamNote = findViewById(R.id.favCareTeamNote);
 
-        final Spinner spinnerNewFavCareTeam = (Spinner) findViewById(R.id.spinnerNewFavCareTeams);
+        final Spinner spinnerNewFavCareTeam = findViewById(R.id.spinnerNewFavCareTeams);
 
-        final TextView newFavCareTeamName = (TextView) findViewById(R.id.newFavCareTeamName);
-        final TextView newFavCareTeamStatus = (TextView) findViewById(R.id.newFavCareTeamStatus);
-        final TextView newFavCareTeamTelecom = (TextView) findViewById(R.id.newFavCareTeamTelecom);
-        final TextView newFavCareTeamNote = (TextView) findViewById(R.id.newFavCareTeamNote);
+        final TextView newFavCareTeamName = findViewById(R.id.newFavCareTeamName);
+        final TextView newFavCareTeamStatus = findViewById(R.id.newFavCareTeamStatus);
+        final TextView newFavCareTeamTelecom = findViewById(R.id.newFavCareTeamTelecom);
+        final TextView newFavCareTeamNote = findViewById(R.id.newFavCareTeamNote);
 
-        final Button buttonAddNewFavCareTeam = (Button) findViewById(R.id.buttonAddNewFavCareTeam);
+        final Button buttonAddNewFavCareTeam = findViewById(R.id.buttonAddNewFavCareTeam);
 
         establecerNewTeamCares(spinnerFavCareTeam);
         establecerNewTeamCares(spinnerNewFavCareTeam);
 
         // Establecer valores
         favCareTeamName.setText(actualCareTeam.getName());
-        favCareTeamStatus.setText(actualCareTeam.getStatus().toString());
+        favCareTeamStatus.setText(actualCareTeam.getStatus());
         favCareTeamTelecom.setText(String.valueOf(actualCareTeam.getTelcom()));
         favCareTeamNote.setText(actualCareTeam.getNote());
 
@@ -68,7 +71,8 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
                 addTeamCareData(spinnerFavCareTeam.getSelectedItem().toString(), favCareTeamName, favCareTeamStatus,
                         favCareTeamTelecom, favCareTeamNote);
             }
-            public void onNothingSelected(AdapterView<?> adapterView) { return; } });
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            } });
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerNewFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -76,19 +80,15 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
                 addTeamCareData(spinnerNewFavCareTeam.getSelectedItem().toString(), newFavCareTeamName, newFavCareTeamStatus,
                         newFavCareTeamTelecom, newFavCareTeamNote);
             }
-            public void onNothingSelected(AdapterView<?> adapterView) { return; } });
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            } });
 
-        //Comprobar que no coinciden, añadir e irse.
-        buttonAddNewFavCareTeam.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(spinnerNewFavCareTeam.getSelectedItem().toString() != spinnerFavCareTeam.getSelectedItem().toString())
-                    //changeTo(v.getContext(), MainFootballer.class);
-                    finish();
-                else
-                    Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.error_usuario_newfavteamcare, Snackbar.LENGTH_SHORT).show();
-            }
-
+        /* Comprobar que no coinciden, añadir e irse. */
+        buttonAddNewFavCareTeam.setOnClickListener((v -> {
+            if(spinnerNewFavCareTeam.getSelectedItem().toString().equals(spinnerFavCareTeam.getSelectedItem().toString()))
+                finish();
+            else
+                Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.error_usuario_newfavteamcare, Snackbar.LENGTH_SHORT).show();
         }));
     }
 
@@ -97,7 +97,7 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
     {
         CareTeam careTeamSelected = findCareTeam(nameSelectedCareTeam);
         newCareTeamName.setText(careTeamSelected.getName());
-        newCareTeamStatus.setText(careTeamSelected.getStatus().toString());
+        newCareTeamStatus.setText(careTeamSelected.getStatus());
         newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelcom()));
         newCareTeamNote.setText(careTeamSelected.getNote());
     }
@@ -107,7 +107,7 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
     {
         CareTeam careTeamSelected = null;
         for(CareTeam c : careTeams) {
-            if (c.getName() == name) {
+            if (c.getName().equals(name)) {
                 careTeamSelected = c;
             }
         }
@@ -117,7 +117,7 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
 
     // Establecer valor spinner Team Cares
     private void establecerNewTeamCares(Spinner spinnerCareTeams) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_dropdown_item,
                 convert2Array(careTeams));

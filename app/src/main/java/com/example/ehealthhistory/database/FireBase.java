@@ -59,7 +59,7 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            rolesFinales.add(document.get("rol").toString());
+                            rolesFinales.add(Objects.requireNonNull(document.get("rol")).toString());
                         }
 
                         for(int i=0; i<rolesFinales.size(); i++) {
@@ -111,7 +111,7 @@ public class FireBase {
                             HealthCareService hc = new HealthCareService();
 
                             hc.setActive(Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("active")).toString()));
-                            hc.setCategory(document.get("category").toString());
+                            hc.setCategory(Objects.requireNonNull(document.get("category")).toString());
                             healthcares.add(hc);
                         }
 
@@ -223,7 +223,7 @@ public class FireBase {
                                                                     ct.setName(document3.getString("name"));
                                                                     ct.setNote(document3.getString("note"));
                                                                     ct.setStatus(document3.getString("status"));
-                                                                    ct.setTelecom(Integer.parseInt(document3.getString("telecom")));
+                                                                    ct.setTelecom(Integer.parseInt(Objects.requireNonNull(document3.getString("telecom"))));
 
                                                                     footballerClubTeamCareName.setText(ct.getName());
                                                                     footballerClubTeamCareTelecom.setText(String.valueOf(ct.getTelcom()));
@@ -247,8 +247,7 @@ public class FireBase {
                                                     TextView healthCareCategory, TextView healthCareName,
                                                     TextView healthCareCommentary,TextView healthCareAllDay,
                                                     TextView healthCareHoraInicio, TextView healthCareHoraFin,
-                                                    TextView healthCareNote)
-    {
+                                                    TextView healthCareNote) {
         ArrayList<HealthCareService> lista = new ArrayList<>();
 
         db.collection("healthcare")
@@ -265,21 +264,22 @@ public class FireBase {
                             hc.setUsername(document.getString("username"));
                             hc.setName(document.getString("name"));
                             hc.setCategory(document.getString("category"));
-                            hc.setActive((Boolean) document.getData().get("active"));
+                            hc.setActive(Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("active")).toString()));
                             hc.setExtraDetails(document.getString("extraDetails"));
 
                             hcat.setAvalibleStartTime(document.getString("avalibleTime_startTime"));
                             hcat.setAvalibleEndTime(document.getString("avalibleTime_endTime"));
+                            //noinspection ConstantConditions
                             hcat.setAllDay((Boolean) document.getData().get("avalibleTime_allDay"));
 
-                            daysOfHealthCare.add(document.get("avalibleTime_daysOfHealthCare").toString());
+                            daysOfHealthCare.add(Objects.requireNonNull(document.get("avalibleTime_daysOfHealthCare")).toString());
                             hcat.setDaysOfHealthCare(daysOfHealthCare);
                             hc.setAvalibleTime(hcat);
 
                             lista.add(hc);
                         }
 
-                        for(int i=0; i<lista.size(); i++)
+                        for (int i = 0; i < lista.size(); i++)
                             System.out.println("NOMBRE BUCLE FUERA: " + lista.get(i).getName());
 
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -290,43 +290,24 @@ public class FireBase {
                         spinner.setAdapter(adapter);
                         uiFootballerHealthCares.setHealthCares(lista);
 
-                        representarValorSpinnerInicial(uiFootballerHealthCares,
+                        uiFootballerHealthCares.representarValorSpinnerInicial(uiFootballerHealthCares,
                                 healthCareCategory, healthCareName,
-                                healthCareCommentary,healthCareAllDay,
+                                healthCareCommentary, healthCareAllDay,
                                 healthCareHoraInicio, healthCareHoraFin,
                                 healthCareNote);
                     }
                 });
     }
 
-    @SuppressLint("SetTextI18n")
-    private void representarValorSpinnerInicial(UIFootballerHealthCares uiFootballerHealthCares,
-                                                TextView healthCareCategory, TextView healthCareName,
-                                                TextView healthCareCommentary, TextView healthCareAllDay,
-                                                TextView healthCareHoraInicio, TextView healthCareHoraFin,
-                                                TextView healthCareNote)
+    // Métodos añadir médico fav futbolista
+    public void representarFootballerCareTeamsNoFav()
     {
-        ArrayList<HealthCareService> healthcares = uiFootballerHealthCares.getHealthCares();
 
-        HealthCareService hc1 = healthcares.get(0);
-
-        healthCareCategory.setText(hc1.getCategory());
-        healthCareName.setText(hc1.getName());
-        healthCareCommentary.setText(hc1.getName());
-        if(hc1.getAvalibleTime().isAllDay())
-        {
-            healthCareAllDay.setText("Si");
-            healthCareHoraInicio.setText("");
-            healthCareHoraFin.setText("");
-        }
-        else {
-            healthCareAllDay.setText("No");
-            healthCareHoraInicio.setText(hc1.getAvalibleTime().getAvalibleStartTime());
-            healthCareHoraFin.setText(hc1.getAvalibleTime().getAvalibleEndTime());
-        }
-        healthCareNote.setText(hc1.getExtraDetails());
     }
 
-    // Métodos añadir médico fav futbolista
+    public void representarFootballerFavsCareTeams()
+    {
+
+    }
 
 }
