@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class UIFootballerHealthCares extends BaseActivity {
 
     ArrayList<HealthCareService> healthCares = new ArrayList<>();
-
     FireBase fb = new FireBase();
 
     @SuppressLint("SetTextI18n")
@@ -28,7 +27,6 @@ public class UIFootballerHealthCares extends BaseActivity {
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Datos Médicos");
-
         String username = getIntent().getStringExtra("username");
 
         final Spinner spinnerHealthCare = findViewById(R.id.spinnerHealthCare);
@@ -83,12 +81,10 @@ public class UIFootballerHealthCares extends BaseActivity {
 
     private HealthCareService buscarHealthCare(Spinner spinnerHealthCare)
     {
-        String nombreHealthCare = spinnerHealthCare.getSelectedItem().toString();
+        String nombreSelectedItem = spinnerHealthCare.getSelectedItem().toString();
 
         for(HealthCareService hc : healthCares)
-            if(nombreHealthCare.equals(hc.getName())) {
-                return hc;
-            }
+            if(nombreSelectedItem.equals(hc.getName())) return hc;
         return null;
     }
 
@@ -112,15 +108,12 @@ public class UIFootballerHealthCares extends BaseActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void representarValorSpinnerInicial(UIFootballerHealthCares uiFootballerHealthCares,
-                                                TextView healthCareCategory, TextView healthCareName,
+    public void representarValorSpinnerInicial(TextView healthCareCategory, TextView healthCareName,
                                                 TextView healthCareCommentary, TextView healthCareAllDay,
                                                 TextView healthCareHoraInicio, TextView healthCareHoraFin,
                                                 TextView healthCareNote)
     {
-        ArrayList<HealthCareService> healthcares = uiFootballerHealthCares.getHealthCares();
-
-        HealthCareService hc1 = healthcares.get(0);
+        HealthCareService hc1 = getHealthCares().get(0);
 
         healthCareCategory.setText(hc1.getCategory());
         healthCareName.setText(hc1.getName());

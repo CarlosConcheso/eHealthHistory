@@ -18,9 +18,9 @@ public class ModelFactory {
     private Club club;
     private FootballerContact contact;
     private Footballer footballer;
-    ArrayList<HealthCareService> healthcares = new ArrayList<HealthCareService>();
-    private ArrayList<Footballer> footballers = new ArrayList<Footballer>();
-    private ArrayList<CareTeam> careTeams = new ArrayList<CareTeam>();
+    ArrayList<HealthCareService> healthcares = new ArrayList<>();
+    private ArrayList<Footballer> footballers = new ArrayList<>();
+    private ArrayList<CareTeam> careTeams = new ArrayList<>();
 
     public ModelFactory()
     {
@@ -154,22 +154,22 @@ public class ModelFactory {
     {
 
         // Establecemos cuidados del futbolista
-        ArrayList<String> diasTratamiento = new ArrayList<String>();
+        ArrayList<String> diasTratamiento = new ArrayList<>();
         diasTratamiento.add("MON");
         diasTratamiento.add("THU");
         diasTratamiento.add("FRI");
 
 
-        HealthCareService h1 = new HealthCareService("joanfemenias@realoviedo.es", false, "Mantenimiento",
+        HealthCareService h1 = new HealthCareService(1,"joanfemenias@realoviedo.es", false, "Mantenimiento",
                 "Fisioterapia", "Medicamentos: 1,1,2,2,3,4,22,8 y 100",
                 new HealthCareAvalibleTime(diasTratamiento,true,"0","0"));
-        HealthCareService h2 = new HealthCareService("joanfemenias@realoviedo.es",false,"Recuperacion",
+        HealthCareService h2 = new HealthCareService(2,"joanfemenias@realoviedo.es",false,"Recuperacion",
                 "Rehabilitación", "Medicamentos: 1 y 4",
                 new HealthCareAvalibleTime(diasTratamiento,false,"10:00","12:00"));
-        HealthCareService h3 = new HealthCareService("joanfemenias@realoviedo.es",false, "Estiramientos postpartido",
+        HealthCareService h3 = new HealthCareService(3,"joanfemenias@realoviedo.es",false, "Estiramientos postpartido",
                 "Estiramientos", "Medicamentos: 1,1,2,2,3,4 y 11",
                 new HealthCareAvalibleTime(diasTratamiento,true,"0","0"));
-        HealthCareService h4 = new HealthCareService("joanfemenias@realoviedo.es",true, "Mantenimiento",
+        HealthCareService h4 = new HealthCareService(4,"joanfemenias@realoviedo.es",true, "Mantenimiento",
                 "Reposo", "Medicamentos: 1,1,222,8 y 100",
                 new HealthCareAvalibleTime(diasTratamiento,false,"20:00","21:00"));
 

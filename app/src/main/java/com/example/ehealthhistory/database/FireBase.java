@@ -15,11 +15,13 @@ import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
+import com.example.ehealthhistory.ui.Foootballer.UIFootballerFavsTeamCares;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerHealthCares;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -248,6 +250,7 @@ public class FireBase {
                                                     TextView healthCareCommentary,TextView healthCareAllDay,
                                                     TextView healthCareHoraInicio, TextView healthCareHoraFin,
                                                     TextView healthCareNote) {
+
         ArrayList<HealthCareService> lista = new ArrayList<>();
 
         db.collection("healthcare")
@@ -255,12 +258,16 @@ public class FireBase {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+
+                        int i=1;
+
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
                             HealthCareService hc = new HealthCareService();
                             HealthCareAvalibleTime hcat = new HealthCareAvalibleTime();
                             ArrayList<String> daysOfHealthCare = new ArrayList<>();
 
+                            hc.setId(i);
                             hc.setUsername(document.getString("username"));
                             hc.setName(document.getString("name"));
                             hc.setCategory(document.getString("category"));
@@ -277,10 +284,9 @@ public class FireBase {
                             hc.setAvalibleTime(hcat);
 
                             lista.add(hc);
-                        }
 
-                        for (int i = 0; i < lista.size(); i++)
-                            System.out.println("NOMBRE BUCLE FUERA: " + lista.get(i).getName());
+                            i++;
+                        }
 
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                 uiFootballerHealthCares,
@@ -290,7 +296,7 @@ public class FireBase {
                         spinner.setAdapter(adapter);
                         uiFootballerHealthCares.setHealthCares(lista);
 
-                        uiFootballerHealthCares.representarValorSpinnerInicial(uiFootballerHealthCares,
+                        uiFootballerHealthCares.representarValorSpinnerInicial(
                                 healthCareCategory, healthCareName,
                                 healthCareCommentary, healthCareAllDay,
                                 healthCareHoraInicio, healthCareHoraFin,
@@ -305,9 +311,64 @@ public class FireBase {
 
     }
 
-    public void representarFootballerFavsCareTeams()
+    public void representarFootballerFavsCareTeams(String username, Spinner spinnerFavCareTeam, TextView favCareTeamName,
+                                                   TextView favCareTeamStatus,TextView favCareTeamTelecom,
+                                                   TextView favCareTeamNote, UIFootballerFavsTeamCares uiFootballerFavsTeamCares)
     {
+        ArrayList<CareTeam> lista = new ArrayList<>();
 
+        System.out.println("ENTRA EN FIREBASE");
+
+        db.collection("footballer_careteam")
+                .whereEqualTo("username_footballer", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+
+                            final ArrayList<String> careteams = new ArrayList<>();
+                            careteams.add(Objects.requireNonNull(document.get("username_careteam")).toString());
+
+                            System.out.println("CARETEAM: " + careteams);
+
+                            db.collection("careteam")
+                                    .whereArrayContains("username", Objects.requireNonNull(careteams))
+                                    .get()
+                                    .addOnCompleteListener(task2 -> {
+                                        if (task2.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+
+                                                System.out.println("HA PASAUUUUUU!!!");
+
+
+                                                CareTeam ct = new CareTeam();
+
+                                                ct.setUsername(document2.getString("username"));
+                                                ct.setName(document2.getString("name"));
+                                                ct.setTelcom(Integer.parseInt(Objects.requireNonNull(document2.getString("telecom"))));
+                                                ct.setStatus(document2.getString("status"));
+                                                ct.setNote(document2.getString("note"));
+
+                                                favCareTeamName.setText(ct.getName());
+                                                favCareTeamStatus.setText(ct.getStatus());
+                                                favCareTeamTelecom.setText(String.valueOf(ct.getTelcom()));
+                                                favCareTeamNote.setText(ct.getNote());
+
+                                                lista.add(ct);
+                                            }
+                                        }
+                                    });
+                        }
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                uiFootballerFavsTeamCares,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                uiFootballerFavsTeamCares.convert2Array(lista));
+
+                        spinnerFavCareTeam.setAdapter(adapter);
+                        uiFootballerFavsTeamCares.setFavsCareTeams(lista);
+                    }
+                });
     }
 
 }

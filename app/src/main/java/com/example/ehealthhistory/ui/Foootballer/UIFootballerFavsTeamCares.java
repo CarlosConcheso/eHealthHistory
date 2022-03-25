@@ -1,8 +1,6 @@
 package com.example.ehealthhistory.ui.Foootballer;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,30 +13,30 @@ import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.ModelFactory;
-import com.example.ehealthhistory.ui.HealthCareService.MainHealthCareService;
+import com.example.ehealthhistory.database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 public class UIFootballerFavsTeamCares extends BaseActivity {
 
+    private final FireBase fb = new FireBase();
+    private ArrayList<CareTeam> favsCareTeams = new ArrayList<>();
+    private ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
 
-
-    private ModelFactory mf = new ModelFactory();
-    private CareTeam actualCareTeam = mf.getCareTeams().get(0);
-
-    private ArrayList<CareTeam> careTeams = mf.getCareTeams();
+    private final ModelFactory mf = new ModelFactory();
+    private final ArrayList<CareTeam> careTeams = mf.getCareTeams();
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.footballer_favs_teamcares);
-        Bundle bundle = new Bundle();
-        bundle.putString("Footballer's Favs Team Cares", "Footballer's Favs Team Cares");
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Equipos Médicos de confianza");
+
+        String username = getIntent().getStringExtra("username");
 
         final Spinner spinnerFavCareTeam = findViewById(R.id.spinnerFavCareTeams);
 
@@ -60,10 +58,9 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         establecerNewTeamCares(spinnerNewFavCareTeam);
 
         // Establecer valores
-        favCareTeamName.setText(actualCareTeam.getName());
-        favCareTeamStatus.setText(actualCareTeam.getStatus());
-        favCareTeamTelecom.setText(String.valueOf(actualCareTeam.getTelcom()));
-        favCareTeamNote.setText(actualCareTeam.getNote());
+        System.out.println("ESTABLEZCAMOS VALORES");
+        fb.representarFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
+                favCareTeamTelecom, favCareTeamNote, this);
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -115,6 +112,22 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
 
     }
 
+    public ArrayList<CareTeam> getFavsCareTeams() {
+        return favsCareTeams;
+    }
+
+    public void setFavsCareTeams(ArrayList<CareTeam> favsCareTeams) {
+        this.favsCareTeams = favsCareTeams;
+    }
+
+    public ArrayList<CareTeam> getNoFavsCareTeams() {
+        return noFavsCareTeams;
+    }
+
+    public void setNoFavsCareTeams(ArrayList<CareTeam> noFavsCareTeams) {
+        this.noFavsCareTeams = noFavsCareTeams;
+    }
+
     // Establecer valor spinner Team Cares
     private void establecerNewTeamCares(Spinner spinnerCareTeams) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -125,7 +138,7 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         spinnerCareTeams.setAdapter(adapter);
     }
 
-    private String[] convert2Array(ArrayList<CareTeam> lista)
+    public String[] convert2Array(ArrayList<CareTeam> lista)
     {
         String[] mStringArray = new String[lista.size()];
 
