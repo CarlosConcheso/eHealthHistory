@@ -272,6 +272,7 @@ public class FireBase {
                             hc.setName(document.getString("name"));
                             hc.setCategory(document.getString("category"));
                             hc.setActive(Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("active")).toString()));
+                            hc.setCommentary(document.getString("commentary"));
                             hc.setExtraDetails(document.getString("extraDetails"));
 
                             hcat.setAvalibleStartTime(document.getString("avalibleTime_startTime"));

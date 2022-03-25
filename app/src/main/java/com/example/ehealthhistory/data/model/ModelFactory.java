@@ -161,16 +161,16 @@ public class ModelFactory {
 
 
         HealthCareService h1 = new HealthCareService(1,"joanfemenias@realoviedo.es", false, "Mantenimiento",
-                "Fisioterapia", "Medicamentos: 1,1,2,2,3,4,22,8 y 100",
+                "Fisioterapia", "Miau", "Medicamentos: 1,1,2,2,3,4,22,8 y 100",
                 new HealthCareAvalibleTime(diasTratamiento,true,"0","0"));
         HealthCareService h2 = new HealthCareService(2,"joanfemenias@realoviedo.es",false,"Recuperacion",
-                "Rehabilitación", "Medicamentos: 1 y 4",
+                "Rehabilitación", "Miau","Medicamentos: 1 y 4",
                 new HealthCareAvalibleTime(diasTratamiento,false,"10:00","12:00"));
         HealthCareService h3 = new HealthCareService(3,"joanfemenias@realoviedo.es",false, "Estiramientos postpartido",
-                "Estiramientos", "Medicamentos: 1,1,2,2,3,4 y 11",
+                "Estiramientos", "Miau", "Medicamentos: 1,1,2,2,3,4 y 11",
                 new HealthCareAvalibleTime(diasTratamiento,true,"0","0"));
         HealthCareService h4 = new HealthCareService(4,"joanfemenias@realoviedo.es",true, "Mantenimiento",
-                "Reposo", "Medicamentos: 1,1,222,8 y 100",
+                "Reposo", "Miau", "Medicamentos: 1,1,222,8 y 100",
                 new HealthCareAvalibleTime(diasTratamiento,false,"20:00","21:00"));
 
         healthcares.add(h1);

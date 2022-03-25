@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class UIFootballerFavsTeamCares extends BaseActivity {
 
     private final FireBase fb = new FireBase();
+
     private ArrayList<CareTeam> favsCareTeams = new ArrayList<>();
     private ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
 

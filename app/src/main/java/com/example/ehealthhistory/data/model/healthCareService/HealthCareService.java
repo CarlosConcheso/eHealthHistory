@@ -17,18 +17,20 @@ public class HealthCareService {
     private boolean active;
     private String category;
     private String name;
+    private String commentary;
     private String extraDetails;
     private HealthCareAvalibleTime avalibleTime;
 
     public HealthCareService(){}
 
-    public HealthCareService(int id, String username,boolean active, String name, String category, String extraDetails,
-                             HealthCareAvalibleTime avalibleTime) {
+    public HealthCareService(int id, String username,boolean active, String name, String category, String commentary,
+                             String extraDetails,HealthCareAvalibleTime avalibleTime) {
         this.id=id;
         this.username = username;
         this.active = active;
         this.name = name;
         this.category = category;
+        this.category=category;
         this.extraDetails = extraDetails;
         this.avalibleTime=avalibleTime;
     }
@@ -71,6 +73,14 @@ public class HealthCareService {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getCommentary() {
+        return commentary;
+    }
+
+    public void setCommentary(String commentary) {
+        this.commentary = commentary;
     }
 
     public String getExtraDetails() {

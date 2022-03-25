@@ -68,7 +68,7 @@ public class UIFootballerHealthCares extends BaseActivity {
         assert healthCareSelected != null;
         healthCareCategory.setText(healthCareSelected.getCategory());
         healthCareName.setText(healthCareSelected.getName());
-        healthCareCommentary.setText(healthCareSelected.getName());
+        healthCareCommentary.setText(healthCareSelected.getCommentary());
         if(healthCareSelected.getAvalibleTime().isAllDay())
         {
             healthCareAllDay.setText("Si");
@@ -121,7 +121,7 @@ public class UIFootballerHealthCares extends BaseActivity {
 
         healthCareCategory.setText(hc1.getCategory());
         healthCareName.setText(hc1.getName());
-        healthCareCommentary.setText(hc1.getName());
+        healthCareCommentary.setText(hc1.getCommentary());
         if(hc1.getAvalibleTime().isAllDay())
         {
             healthCareAllDay.setText("Si");
