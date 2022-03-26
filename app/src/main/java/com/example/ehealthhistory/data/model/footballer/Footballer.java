@@ -23,7 +23,7 @@ public class Footballer implements Serializable {
     private String name;
     private int telecom;
     private String gender;
-    private String birthdate;
+    private String birthday;
     private Club club;
 
     private FootballerContact footballerContact;
@@ -34,7 +34,7 @@ public class Footballer implements Serializable {
 
     public Footballer(){}
 
-    public Footballer(boolean active, String username, String name, int telecom, String gender, String birthdate,
+    public Footballer(boolean active, String username, String name, int telecom, String gender, String birthday,
                       Club club,
                       FootballerContact footballerContact, FootballerComunication footballerComunication)
     {
@@ -43,7 +43,7 @@ public class Footballer implements Serializable {
         this.name=name;
         this.telecom=telecom;
         this.gender=gender;
-        this.birthdate=birthdate;
+        this.birthday = birthday;
         this.club=club;
         this.footballerContact=footballerContact;
         this.footballerComunication=footballerComunication;
@@ -89,12 +89,12 @@ public class Footballer implements Serializable {
         this.gender = gender;
     }
 
-    public String getBirthdate() {
-        return birthdate;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public Club getClub() {

@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.Club.Club;
-import com.example.ehealthhistory.data.model.User.User;
+import com.example.ehealthhistory.database.dto.FootballerDTO;
+import com.example.ehealthhistory.database.dto.UserDTO;
+import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.data.model.footballer.FootballerComunication;
 import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
@@ -44,8 +46,9 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            String name = document.getString("name");
-                            tv.setText("Bienvenido " + name);
+                            UserDTO userDTO = document.toObject(UserDTO.class);
+
+                            tv.setText("Bienvenido " + userDTO.getName());
                         }
                     }
                 });
@@ -61,16 +64,12 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            User user = document.toObject(User.class);
+                            UserDTO userDTO = document.toObject(UserDTO.class);
 
-                            System.out.println("EL ROL EN SI: " + user.getRol());
-                            rolesFinales.addAll(user.getRol());
+                            rolesFinales.addAll(userDTO.getRol());
                         }
 
                         for(int i=0; i<rolesFinales.size(); i++) {
-
-                            System.out.println("ROL: " + rolesFinales.get(i));
-
                             if (rolesFinales.get(i).equals("club"))
                                 botonClub.setVisibility(View.VISIBLE);
 
@@ -96,10 +95,11 @@ public class FireBase {
                     if (task.isSuccessful()) {
 
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            FootballerDTO footballer = document.toObject(FootballerDTO.class);
 
-                            footballerName.setText(document.getString("name"));
-                            footballerBirthDay.setText(document.getString("birthday"));
-                            footballerTelcom.setText(document.getString("telecom"));
+                            footballerName.setText(footballer.getName());
+                            footballerBirthDay.setText(footballer.getBirthday());
+                            footballerTelcom.setText(footballer.getTelecom());
                         }
                     }
                 });

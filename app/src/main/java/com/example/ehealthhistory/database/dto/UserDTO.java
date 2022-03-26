@@ -1,17 +1,17 @@
-package com.example.ehealthhistory.data.model.User;
+package com.example.ehealthhistory.database.dto;
 
 import java.util.ArrayList;
 
-public class User {
+public class UserDTO {
 
     private String username;
     private String name;
     private ArrayList<String> rol;
 
-    public User(){
+    public UserDTO(){
     }
 
-    public User(String username, String name, ArrayList<String> rol) {
+    public UserDTO(String username, String name, ArrayList<String> rol) {
         this.username = username;
         this.name = name;
         this.rol = rol;
