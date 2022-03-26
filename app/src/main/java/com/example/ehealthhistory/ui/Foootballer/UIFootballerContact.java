@@ -41,8 +41,9 @@ public class UIFootballerContact extends BaseActivity {
         final TextView footballerClubTeamCareNote = findViewById(R.id.footballerClubTeamCareNote);
 
         // Rellenando campos desde FireBase
-        fb.representFootballerContact(username, footballerContactName, footballerContactTelf, footballerContactLenguaje, footballerContactAdress);
-        fb.representFootballerClubContact(username, footballerClubName, footballerClubAlias, footballerClubContactName);
-        fb.representFootballerClubCareTeamContact(username, footballerClubTeamCareName, footballerClubTeamCareTelecom, footballerClubTeamCareNote);
+        fb.representAllFootballerContact(username,
+                footballerContactName, footballerContactTelf, footballerContactLenguaje, footballerContactAdress,
+                footballerClubName, footballerClubAlias, footballerClubContactName,
+                footballerClubTeamCareName, footballerClubTeamCareTelecom, footballerClubTeamCareNote);
     }
 }
