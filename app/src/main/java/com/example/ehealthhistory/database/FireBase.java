@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.database.dto.FootballerDTO;
+import com.example.ehealthhistory.database.dto.HealthCareServiceDTO;
 import com.example.ehealthhistory.database.dto.UserDTO;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.data.model.footballer.FootballerComunication;
@@ -116,10 +117,12 @@ public class FireBase {
 
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            HealthCareServiceDTO healthCareServiceDTO = document.toObject(HealthCareServiceDTO.class);
                             HealthCareService hc = new HealthCareService();
 
-                            hc.setActive(Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("active")).toString()));
-                            hc.setCategory(Objects.requireNonNull(document.get("category")).toString());
+                            hc.setActive(healthCareServiceDTO.isActive());
+                            hc.setCategory(healthCareServiceDTO.getCategory());
+
                             healthcares.add(hc);
                         }
 
