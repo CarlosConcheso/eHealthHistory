@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.Club.Club;
+import com.example.ehealthhistory.data.model.User.User;
 import com.example.ehealthhistory.data.model.footballer.FootballerComunication;
 import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
@@ -21,7 +22,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -61,17 +61,23 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            rolesFinales.add(Objects.requireNonNull(document.get("rol")).toString());
+                            User user = document.toObject(User.class);
+
+                            System.out.println("EL ROL EN SI: " + user.getRol());
+                            rolesFinales.addAll(user.getRol());
                         }
 
                         for(int i=0; i<rolesFinales.size(); i++) {
-                            if (rolesFinales.get(i).contains("club"))
+
+                            System.out.println("ROL: " + rolesFinales.get(i));
+
+                            if (rolesFinales.get(i).equals("club"))
                                 botonClub.setVisibility(View.VISIBLE);
 
-                            if (rolesFinales.get(i).contains("footballer"))
+                            if (rolesFinales.get(i).equals("footballer"))
                                 botonFutbolista.setVisibility(View.VISIBLE);
 
-                            if (rolesFinales.get(i).contains("careteam"))
+                            if (rolesFinales.get(i).equals("careteam"))
                                 botonMedico.setVisibility(View.VISIBLE);
                         }
                     }

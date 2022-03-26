@@ -1,16 +1,20 @@
 package com.example.ehealthhistory.data.model.User;
 
+import java.util.ArrayList;
+
 public class User {
 
     private String username;
-    private String pass;
+    private String name;
+    private ArrayList<String> rol;
 
-    public User() {
+    public User(){
     }
 
-    public User(String username, String pass) {
+    public User(String username, String name, ArrayList<String> rol) {
         this.username = username;
-        this.pass = pass;
+        this.name = name;
+        this.rol = rol;
     }
 
     public String getUsername() {
@@ -21,11 +25,19 @@ public class User {
         this.username = username;
     }
 
-    public String getPass() {
-        return pass;
+    public String getName() {
+        return name;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<String> getRol() {
+        return rol;
+    }
+
+    public void setRol(ArrayList<String> rol) {
+        this.rol = rol;
     }
 }
