@@ -59,7 +59,6 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         establecerNewTeamCares(spinnerNewFavCareTeam);
 
         // Establecer valores
-        System.out.println("ESTABLEZCAMOS VALORES");
         fb.representarFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
                 favCareTeamTelecom, favCareTeamNote, this);
 

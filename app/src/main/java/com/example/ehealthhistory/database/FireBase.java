@@ -9,15 +9,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
-import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.database.dto.CareTeamDTO;
 import com.example.ehealthhistory.database.dto.ClubDTO;
 import com.example.ehealthhistory.database.dto.FootballerDTO;
 import com.example.ehealthhistory.database.dto.HealthCareServiceDTO;
 import com.example.ehealthhistory.database.dto.UserDTO;
-import com.example.ehealthhistory.data.model.footballer.Footballer;
-import com.example.ehealthhistory.data.model.footballer.FootballerComunication;
-import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
@@ -58,8 +54,6 @@ public class FireBase {
     }
 
     public void getRolesOfUsername(String username, Button botonFutbolista, Button botonMedico, Button botonClub) {
-
-        final ArrayList<String> rolesFinales = new ArrayList<>();
 
         db.collection("user")
                 .whereEqualTo("username", username)
@@ -207,25 +201,24 @@ public class FireBase {
 
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
+                            HealthCareServiceDTO healthCareServiceDTO = document.toObject(HealthCareServiceDTO.class);
+
                             HealthCareService hc = new HealthCareService();
                             HealthCareAvalibleTime hcat = new HealthCareAvalibleTime();
-                            ArrayList<String> daysOfHealthCare = new ArrayList<>();
 
                             hc.setId(i);
-                            hc.setUsername(document.getString("username"));
-                            hc.setName(document.getString("name"));
-                            hc.setCategory(document.getString("category"));
-                            hc.setActive(Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("active")).toString()));
-                            hc.setCommentary(document.getString("commentary"));
-                            hc.setExtraDetails(document.getString("extraDetails"));
+                            hc.setUsername(healthCareServiceDTO.getUsername());
+                            hc.setName(healthCareServiceDTO.getName());
+                            hc.setCategory(healthCareServiceDTO.getCategory());
+                            hc.setActive(healthCareServiceDTO.isActive());
+                            hc.setCommentary(healthCareServiceDTO.getCommentary());
+                            hc.setExtraDetails(healthCareServiceDTO.getExtraDetails());
 
-                            hcat.setAvalibleStartTime(document.getString("avalibleTime_startTime"));
-                            hcat.setAvalibleEndTime(document.getString("avalibleTime_endTime"));
-                            //noinspection ConstantConditions
-                            hcat.setAllDay((Boolean) document.getData().get("avalibleTime_allDay"));
+                            hcat.setAvalibleStartTime(healthCareServiceDTO.getAvalibleTime_startTime());
+                            hcat.setAvalibleEndTime(healthCareServiceDTO.getAvalibleTime_endTime());
+                            hcat.setAllDay(healthCareServiceDTO.isAvalibleTime_allDay());
 
-                            daysOfHealthCare.add(Objects.requireNonNull(document.get("avalibleTime_daysOfHealthCare")).toString());
-                            hcat.setDaysOfHealthCare(daysOfHealthCare);
+                            hcat.setDaysOfHealthCare(healthCareServiceDTO.getAvalibleTime_daysOfHealthCare());
                             hc.setAvalibleTime(hcat);
 
                             lista.add(hc);
