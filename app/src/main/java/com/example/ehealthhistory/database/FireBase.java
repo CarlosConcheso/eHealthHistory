@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.database.dto.CareTeamDTO;
 import com.example.ehealthhistory.database.dto.ClubDTO;
+import com.example.ehealthhistory.database.dto.FootballerCareteamDTO;
 import com.example.ehealthhistory.database.dto.FootballerDTO;
 import com.example.ehealthhistory.database.dto.HealthCareServiceDTO;
 import com.example.ehealthhistory.database.dto.UserDTO;
@@ -256,8 +257,6 @@ public class FireBase {
     {
         ArrayList<CareTeam> lista = new ArrayList<>();
 
-        System.out.println("ENTRA EN FIREBASE");
-
         db.collection("footballer_careteam")
                 .whereEqualTo("username_footballer", username)
                 .get()
@@ -265,28 +264,25 @@ public class FireBase {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
-                            final ArrayList<String> careteams = new ArrayList<>();
-                            careteams.add(Objects.requireNonNull(document.get("username_careteam")).toString());
-
-                            System.out.println("CARETEAM: " + careteams);
+                            FootballerCareteamDTO footballerCareteamDTO = document.toObject(FootballerCareteamDTO.class);
 
                             db.collection("careteam")
-                                    .whereArrayContains("username", Objects.requireNonNull(careteams))
+                                    .whereArrayContainsAny("username", footballerCareteamDTO.getUsername_careteam())
                                     .get()
                                     .addOnCompleteListener(task2 -> {
                                         if (task2.isSuccessful()) {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
-                                                System.out.println("HA PASAUUUUUU!!!");
-
-
+                                                CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
                                                 CareTeam ct = new CareTeam();
 
-                                                ct.setUsername(document2.getString("username"));
-                                                ct.setName(document2.getString("name"));
-                                                ct.setTelcom(Integer.parseInt(Objects.requireNonNull(document2.getString("telecom"))));
-                                                ct.setStatus(document2.getString("status"));
-                                                ct.setNote(document2.getString("note"));
+                                                System.out.println("HA PASAUUUUUU!!!");
+
+                                                ct.setUsername(careTeamDTO.getUsername());
+                                                ct.setName(careTeamDTO.getName());
+                                                ct.setTelcom(careTeamDTO.getTelecom());
+                                                ct.setStatus(careTeamDTO.getStatus());
+                                                ct.setNote(careTeamDTO.getNote());
 
                                                 favCareTeamName.setText(ct.getName());
                                                 favCareTeamStatus.setText(ct.getStatus());
