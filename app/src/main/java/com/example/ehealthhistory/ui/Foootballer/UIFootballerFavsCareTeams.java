@@ -18,7 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class UIFootballerFavsTeamCares extends BaseActivity {
+public class UIFootballerFavsCareTeams extends BaseActivity {
 
     private final FireBase fb = new FireBase();
 
@@ -63,6 +63,8 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         // Establecer valores
         fb.representFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
                 favCareTeamTelecom, favCareTeamNote, this);
+        fb.representFootballerNoFavsCareTeams(username, spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
+                newFavCareTeamTelecom, newFavCareTeamNote, this);
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -99,6 +101,7 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
                                     TextView newCareTeamTelecom, TextView newCareTeamNote)
     {
         CareTeam careTeamSelected = findCareTeam(nameSelectedCareTeam);
+
         newCareTeamName.setText(careTeamSelected.getName());
         newCareTeamStatus.setText(careTeamSelected.getStatus());
         newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
@@ -134,6 +137,11 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
 
     public void setFavsCareTeams(ArrayList<CareTeam> favsCareTeams) {
         this.favsCareTeams = favsCareTeams;
+    }
+
+    public void addNoFavsCareTeams(CareTeam ct)
+    {
+        noFavsCareTeams.add(ct);
     }
 
     public ArrayList<CareTeam> getNoFavsCareTeams() {

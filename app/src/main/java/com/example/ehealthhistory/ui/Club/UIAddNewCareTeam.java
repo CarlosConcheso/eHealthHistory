@@ -68,13 +68,8 @@ public class UIAddNewCareTeam extends BaseActivity {
 
         //Añadir el nuevo equipo médico
         buttonAddNewCareTeam.setOnClickListener((v -> {
-            if(careTeamName.getText().toString().equals(spinnerCareTeams.getSelectedItem().toString())) {
-                fb.addNeTeamCare2Club(spinnerCareTeams.getSelectedItem().toString());
+                fb.addNewCareTeam2Club(spinnerCareTeams.getSelectedItem().toString());
                 finish();
-            }
-            else
-                Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.error_usuario_NewActualCareTeam, Snackbar.LENGTH_SHORT).show();
-
         }));
     }
 
@@ -106,6 +101,11 @@ public class UIAddNewCareTeam extends BaseActivity {
 
     public void setRestOfCareTeams(ArrayList<CareTeam> careTeams) {
         this.restOfCareTeams = careTeams;
+    }
+
+    public void addNewCareTeam(CareTeam ct)
+    {
+        getRestOfCareTeams().add(ct);
     }
 
     public boolean isConsulta() {

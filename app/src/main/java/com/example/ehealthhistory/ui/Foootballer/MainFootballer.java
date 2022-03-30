@@ -50,7 +50,7 @@ public class MainFootballer extends BaseActivity {
         buttonfootballerHealthCareDetails.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerHealthCares.class, username)));
 
         // Ver médicos de confianza del futbolista: personales y del club.
-        buttonfootballerTeamCares.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerFavsTeamCares.class, username)));
+        buttonfootballerTeamCares.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerFavsCareTeams.class, username)));
     }
 
     @SuppressLint("SetTextI18n")

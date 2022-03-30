@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.dto.CareTeamDTO;
@@ -23,7 +21,7 @@ import com.example.ehealthhistory.data.model.healthCareService.HealthCareService
 import com.example.ehealthhistory.ui.Club.MainClub;
 import com.example.ehealthhistory.ui.Club.UIAddNewCareTeam;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
-import com.example.ehealthhistory.ui.Foootballer.UIFootballerFavsTeamCares;
+import com.example.ehealthhistory.ui.Foootballer.UIFootballerFavsCareTeams;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerHealthCares;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -35,7 +33,6 @@ import java.util.Objects;
 public class FireBase {
 
     private final FirebaseFirestore db;
-    private boolean consultaInterna=false;
 
     public FireBase()
     {
@@ -255,9 +252,8 @@ public class FireBase {
 
     public void representFootballerFavsCareTeams(String username, Spinner spinnerFavCareTeam, TextView favCareTeamName,
                                                  TextView favCareTeamStatus, TextView favCareTeamTelecom,
-                                                 TextView favCareTeamNote, UIFootballerFavsTeamCares uiFootballerFavsTeamCares)
+                                                 TextView favCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
-        setConsultaInterna(false);
         ArrayList<CareTeam> lista = new ArrayList<>();
 
         db.collection("footballer_careteam")
@@ -293,31 +289,87 @@ public class FireBase {
                                                     favCareTeamNote.setText(ct.getNote());
 
                                                     lista.add(ct);
+
+                                                    uiFootballerFavsCareTeams.addToFavCareTeam(ct);
                                                 }
+
+                                                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                                        uiFootballerFavsCareTeams,
+                                                        android.R.layout.simple_spinner_dropdown_item,
+                                                        uiFootballerFavsCareTeams.convert2Array(uiFootballerFavsCareTeams.getFavsCareTeams()));
+                                                spinnerFavCareTeam.setAdapter(adapter);
+
+                                                uiFootballerFavsCareTeams.representInitialSpinnerData(favCareTeamName,
+                                                        favCareTeamStatus, favCareTeamTelecom,
+                                                        favCareTeamNote);
                                             }
-                                            setConsultaInterna(true);
                                         });
                             }
-                            if(isConsultaInterna()) {
-                                uiFootballerFavsTeamCares.setFavsCareTeams(lista);
-                                ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                                        uiFootballerFavsTeamCares,
-                                        android.R.layout.simple_spinner_dropdown_item,
-                                        uiFootballerFavsTeamCares.convert2Array(uiFootballerFavsTeamCares.getFavsCareTeams()));
-                                spinnerFavCareTeam.setAdapter(adapter);
-
-                                uiFootballerFavsTeamCares.representInitialSpinnerData(favCareTeamName,
-                                        favCareTeamStatus, favCareTeamTelecom,
-                                        favCareTeamNote);
-                            }
+                            uiFootballerFavsCareTeams.setFlagFavsCT(true);
                         }
                     }
                 });
     }
     
-    public void addNewFavCareTeam()
+    public void representFootballerNoFavsCareTeams(String username, Spinner spinnerNewFavCareTeam, TextView newFavCareTeamName,
+                                  TextView newFavCareTeamStatus, TextView newFavCareTeamTelecom,
+                                  TextView newFavCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
+        ArrayList<CareTeam> lista = new ArrayList<>();
 
+        db.collection("footballer_careteam")
+                .whereEqualTo("username_footballer", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+
+                            FootballerCareteamDTO footballerCareteamDTO = document.toObject(FootballerCareteamDTO.class);
+
+                            for(int i=0; i<footballerCareteamDTO.getUsername_careteam().size(); i++) {
+
+                                db.collection("careteam")
+                                        .whereNotEqualTo("username", footballerCareteamDTO.getUsername_careteam().get(i))
+                                        .get()
+                                        .addOnCompleteListener(task2 -> {
+                                            if (task2.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+
+                                                    CareTeam ct = new CareTeam();
+                                                    CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
+
+                                                    ct.setUsername(careTeamDTO.getUsername());
+                                                    ct.setName(careTeamDTO.getName());
+                                                    ct.setTelcom(careTeamDTO.getTelecom());
+                                                    ct.setStatus(careTeamDTO.getStatus());
+                                                    ct.setNote(careTeamDTO.getNote());
+
+                                                    newFavCareTeamName.setText(ct.getName());
+                                                    newFavCareTeamStatus.setText(ct.getStatus());
+                                                    newFavCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
+                                                    newFavCareTeamNote.setText(ct.getNote());
+
+                                                    lista.add(ct);
+
+                                                    uiFootballerFavsCareTeams.addNoFavsCareTeams(ct);
+                                                }
+
+                                                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                                        uiFootballerFavsCareTeams,
+                                                        android.R.layout.simple_spinner_dropdown_item,
+                                                        uiFootballerFavsCareTeams.convert2Array(uiFootballerFavsCareTeams.getNoFavsCareTeams()));
+                                                spinnerNewFavCareTeam.setAdapter(adapter);
+
+                                                uiFootballerFavsCareTeams.representInitialSpinnerData(newFavCareTeamName,
+                                                        newFavCareTeamStatus, newFavCareTeamTelecom,
+                                                        newFavCareTeamNote);
+                                            }
+                                        });
+                            }
+                            uiFootballerFavsCareTeams.setFlagNoFavsCT(true);
+                        }
+                    }
+                });
     }
 
     public void representBasicDataAndClubsFootballer(String username, TextView nameActivityBase, TextView clubName,
@@ -422,8 +474,6 @@ public class FireBase {
                                            TextView newCareTeamNote,
                                            UIAddNewCareTeam uiAddNewCareTeam) {
 
-        setConsultaInterna(false);
-
         ArrayList<CareTeam> lista = new ArrayList<>();
 
         db.collection("club")
@@ -455,34 +505,33 @@ public class FireBase {
                                                 newCareTeamNote.setText(careTeamDTO.getNote());
 
                                                 lista.add(ct);
+                                                uiAddNewCareTeam.addNewCareTeam(ct);
+
                                             }
+
+                                            uiAddNewCareTeam.setRestOfCareTeams(lista);
+
+                                            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                                    uiAddNewCareTeam,
+                                                    android.R.layout.simple_spinner_dropdown_item,
+                                                    uiAddNewCareTeam.convert2Array(lista));
+
+                                            spinner.setAdapter(adapter);
+
+                                            uiAddNewCareTeam.representInitialSpinnerData(
+                                                    newCareTeamName,
+                                                    newCareTeamStatus, newCareTeamTelecom,
+                                                    newCareTeamNote);
+
+                                            uiAddNewCareTeam.setConsulta(true);
                                         }
-                                        setConsultaInterna(true);
                                     });
-                        }
-
-                        if(isConsultaInterna()) {
-
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                                    uiAddNewCareTeam,
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    uiAddNewCareTeam.convert2Array(lista));
-
-                            spinner.setAdapter(adapter);
-                            uiAddNewCareTeam.setRestOfCareTeams(lista);
-
-                            uiAddNewCareTeam.representInitialSpinnerData(
-                                    newCareTeamName,
-                                    newCareTeamStatus, newCareTeamTelecom,
-                                    newCareTeamNote);
-
-                            uiAddNewCareTeam.setConsulta(true);
                         }
                     }
                 });
     }
 
-    public void addNeTeamCare2Club(String clubName) {
+    public void addNewCareTeam2Club(String clubName) {
         //Actualizar el username del careteam en Club.
         db.collection("club")
                 .whereEqualTo("name", clubName)
@@ -490,23 +539,11 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-
-
-
                         }
                     }
                 });
 
         //Actualizar el username del careteam en el array de Footballer.
     }
-
-    public boolean isConsultaInterna() {
-        return consultaInterna;
-    }
-
-    public void setConsultaInterna(boolean consultaInterna) {
-        this.consultaInterna = consultaInterna;
-    }
-
 
 }

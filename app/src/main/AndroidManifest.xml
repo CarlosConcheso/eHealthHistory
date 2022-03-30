@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ehealthhistory">
 
     <application
@@ -25,7 +24,7 @@
             <activity android:name=".ui.Foootballer.MainFootballer"/>
                     <activity android:name=".ui.Foootballer.UIFootballerContact"/>
                     <activity android:name=".ui.Foootballer.UIFootballerHealthCares"/>
-                    <activity android:name=".ui.Foootballer.UIFootballerFavsTeamCares"/>
+                    <activity android:name=".ui.Foootballer.UIFootballerFavsCareTeams"/>
 
             <activity android:name=".ui.CareTeam.MainCareTeam"/>
                 <activity android:name=".ui.HealthCareService.MainHealthCareService"/>
