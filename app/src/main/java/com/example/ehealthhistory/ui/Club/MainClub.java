@@ -28,7 +28,8 @@ public class MainClub extends BaseActivity {
         setContentView(R.layout.main_club);
         String username = getIntent().getStringExtra("username");
 
-        final Toolbar toolbar = findViewById(R.id.toolbar);
+        final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
+        fb.getNameFromUser(username,nameActivityBase);
 
         // Elementos de la pantalla EQUIPO
         final TextView clubName = findViewById(R.id.clubName);
@@ -38,7 +39,8 @@ public class MainClub extends BaseActivity {
         final TextView clubTeamCare = findViewById(R.id.clubTeamCare);
         final Button buttonNewTeamCare = findViewById(R.id.buttonNewTeamCare);
 
-        fb.representBasicDataAndClubsFootballer(username, toolbar, clubName, clubPresident, clubAlias, clubContact, clubTeamCare, this);
+        fb.representBasicDataAndClubsFootballer(username, nameActivityBase,
+                clubName, clubPresident, clubAlias, clubContact, clubTeamCare, this);
 
         // Acción del botón para ir a añadir nuevo equipo médico del club
         buttonNewTeamCare.setOnClickListener((v -> changeTo(v.getContext(), username)));

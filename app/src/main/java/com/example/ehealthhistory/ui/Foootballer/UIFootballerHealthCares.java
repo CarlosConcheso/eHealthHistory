@@ -18,7 +18,6 @@ public class UIFootballerHealthCares extends BaseActivity {
 
     ArrayList<HealthCareService> healthCares = new ArrayList<>();
     FireBase fb = new FireBase();
-
     private boolean consulta=false;
 
     @SuppressLint("SetTextI18n")

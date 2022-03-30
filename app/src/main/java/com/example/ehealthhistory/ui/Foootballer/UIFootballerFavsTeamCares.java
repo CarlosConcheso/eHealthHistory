@@ -101,7 +101,7 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         CareTeam careTeamSelected = findCareTeam(nameSelectedCareTeam);
         newCareTeamName.setText(careTeamSelected.getName());
         newCareTeamStatus.setText(careTeamSelected.getStatus());
-        newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelcom()));
+        newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
         newCareTeamNote.setText(careTeamSelected.getNote());
     }
 
@@ -118,13 +118,13 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
 
     }
 
-    public void representarValorSpinnerInicial(TextView favCareTeamName,
-                                               TextView favCareTeamStatus, TextView favCareTeamTelecom, TextView favCareTeamNote) {
+    public void representInitialSpinnerData(TextView favCareTeamName,
+                                            TextView favCareTeamStatus, TextView favCareTeamTelecom, TextView favCareTeamNote) {
         CareTeam careTeamSelected = getFavsCareTeams().get(0);
 
         favCareTeamName.setText(careTeamSelected.getName());
         favCareTeamStatus.setText(careTeamSelected.getStatus());
-        favCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelcom()));
+        favCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
         favCareTeamNote.setText(careTeamSelected.getNote());
     }
 

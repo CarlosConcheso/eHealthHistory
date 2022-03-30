@@ -64,7 +64,7 @@ public class CareTeam {
         this.name = name;
     }
 
-    public int getTelcom() {
+    public int getTelecom() {
         return telcom;
     }
 

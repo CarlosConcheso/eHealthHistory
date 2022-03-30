@@ -1,13 +1,11 @@
 package com.example.ehealthhistory.ui.Club;
 
-import android.content.Context;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -16,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
-import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -25,12 +22,10 @@ import java.util.ArrayList;
 public class UIAddNewCareTeam extends BaseActivity {
 
     private final FireBase fb = new FireBase();
+    private ArrayList<CareTeam> restOfCareTeams = new ArrayList<>();
+    private boolean consulta = false;
 
-    private ModelFactory mf = new ModelFactory();
-    private CareTeam actualCareTeam = mf.getCareTeamROV();
-
-    private ArrayList<CareTeam> careTeams = mf.getCareTeams();
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +33,8 @@ public class UIAddNewCareTeam extends BaseActivity {
         String username = getIntent().getStringExtra("username");
 
 
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Establecer equipo médico");
+        final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
+        nameActivityBase.setText("Establecer nuevo Médico");
 
         // Encontramos todos los valores de la pantalla
         final TextView careTeamName = findViewById(R.id.careTeamName);
@@ -58,11 +53,13 @@ public class UIAddNewCareTeam extends BaseActivity {
 
         // Establecer valores
         fb.representClubCareTeamData(username,careTeamName,careTeamStatus,careTeamTelecom,careTeamNote);
-        establecerNewTeamCares(spinnerCareTeams);
+        fb.fillSpinnerNewClubCareTeam(username, spinnerCareTeams, newCareTeamName,
+                newCareTeamStatus, newCareTeamTelecom, newCareTeamNote, this);
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerCareTeams.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(isConsulta())
                 addNewTeamCareData(spinnerCareTeams.getSelectedItem().toString(), newCareTeamName, newCareTeamStatus,
                         newCareTeamTelecom, newCareTeamNote);
             }
@@ -72,6 +69,7 @@ public class UIAddNewCareTeam extends BaseActivity {
         //Añadir el nuevo equipo médico
         buttonAddNewCareTeam.setOnClickListener((v -> {
             if(careTeamName.getText().toString().equals(spinnerCareTeams.getSelectedItem().toString())) {
+                fb.addNeTeamCare2Club(spinnerCareTeams.getSelectedItem().toString());
                 finish();
             }
             else
@@ -86,14 +84,14 @@ public class UIAddNewCareTeam extends BaseActivity {
         CareTeam careTeamSelected = findCareTeam(nameSelectedCareTeam);
         newCareTeamName.setText(careTeamSelected.getName());
         newCareTeamStatus.setText(careTeamSelected.getStatus());
-        newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelcom()));
+        newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
         newCareTeamNote.setText(careTeamSelected.getNote());
     }
 
     private CareTeam findCareTeam(String name)
     {
         CareTeam careTeamSelected = null;
-        for(CareTeam c : careTeams) {
+        for(CareTeam c : restOfCareTeams) {
             if (c.getName().equals(name)) {
                 careTeamSelected = c;
             }
@@ -102,18 +100,23 @@ public class UIAddNewCareTeam extends BaseActivity {
 
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // Establecer valor spinner Team Cares
-    private void establecerNewTeamCares(Spinner spinnerCareTeams) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_dropdown_item,
-                convert2Array(careTeams));
-
-        spinnerCareTeams.setAdapter(adapter);
+    public ArrayList<CareTeam> getRestOfCareTeams() {
+        return restOfCareTeams;
     }
 
-    private String[] convert2Array(ArrayList<CareTeam> lista)
+    public void setRestOfCareTeams(ArrayList<CareTeam> careTeams) {
+        this.restOfCareTeams = careTeams;
+    }
+
+    public boolean isConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(boolean consulta) {
+        this.consulta = consulta;
+    }
+
+    public String[] convert2Array(ArrayList<CareTeam> lista)
     {
         String[] mStringArray = new String[lista.size()];
 
@@ -122,5 +125,17 @@ public class UIAddNewCareTeam extends BaseActivity {
         }
 
         return mStringArray;
+    }
+
+    public void representInitialSpinnerData(TextView newCareTeamName,
+                                            TextView newCareTeamStatus, TextView newCareTeamTelecom,
+                                            TextView newCareTeamNote) {
+        CareTeam ct = getRestOfCareTeams().get(0);
+
+        newCareTeamName.setText(ct.getName());
+        newCareTeamStatus.setText(ct.getStatus());
+        newCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
+        newCareTeamNote.setText(ct.getNote());
+
     }
 }
