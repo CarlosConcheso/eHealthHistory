@@ -128,7 +128,6 @@ public class FireBase {
                 });
     }
 
-    // Métodos datos concretos futbolista
     public void representAllFootballerContact(String username,
                                               TextView footballerContactName, TextView footballerContactTelf,
                                               TextView footballerContactLenguaje, TextView footballerContactAdress,
@@ -186,7 +185,6 @@ public class FireBase {
                 });
     }
 
-    //Métodos ver datos de parte futbolista
     public void fillSpinnerHealthcareFootballer(String username, Spinner spinner,
                                                 UIFootballerHealthCares uiFootballerHealthCares,
                                                 TextView healthCareCategory, TextView healthCareName,
@@ -248,7 +246,6 @@ public class FireBase {
                 });
     }
 
-    // Métodos añadir médico fav futbolista
     public void representFootballerCareTeamsNoFav()
     {
 
@@ -328,7 +325,6 @@ public class FireBase {
 
     }
 
-    // Métodos Club
     public void representBasicDataAndClubsFootballer(String username, Toolbar toolbar, TextView clubName,
                                                      TextView clubPresident, TextView clubAlias, TextView clubContact,
                                                      TextView clubTeamCare, MainClub mainClub)
@@ -391,5 +387,44 @@ public class FireBase {
                 });
     }
 
+
+    public void representClubCareTeamData(String username,
+                                            TextView careTeamName, TextView careTeamStatus,
+                                            TextView careTeamTelecom, TextView careTeamNote)
+    {
+        db.collection("club")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            ClubDTO clubDTO = document.toObject(ClubDTO.class);
+
+                            String careteamusername = clubDTO.getUsername_careteam();
+
+                            db.collection("careteam")
+                                    .whereEqualTo("username", careteamusername)
+                                    .get()
+                                    .addOnCompleteListener(task2 -> {
+                                        if (task2.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+                                                CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
+
+                                                careTeamName.setText(careTeamDTO.getName());
+                                                careTeamStatus.setText(careTeamDTO.getStatus());
+                                                careTeamTelecom.setText(String.valueOf(careTeamDTO.getTelecom()));
+                                                careTeamNote.setText(careTeamDTO.getNote());
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+    public void addNewCareTeam2Club()
+    {
+
+    }
 
 }

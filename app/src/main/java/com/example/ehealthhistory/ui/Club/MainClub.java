@@ -41,7 +41,7 @@ public class MainClub extends BaseActivity {
         fb.representBasicDataAndClubsFootballer(username, toolbar, clubName, clubPresident, clubAlias, clubContact, clubTeamCare, this);
 
         // Acción del botón para ir a añadir nuevo equipo médico del club
-        buttonNewTeamCare.setOnClickListener((v -> changeTo(v.getContext())));
+        buttonNewTeamCare.setOnClickListener((v -> changeTo(v.getContext(), username)));
     }
 
     @SuppressLint("SetTextI18n")
@@ -55,6 +55,7 @@ public class MainClub extends BaseActivity {
 
             TextView col1 = new TextView(this);
             col1.setText(footballers.get(i).getName());
+            col1.setPadding(25,1,1,1);
 
             TextView col2 = new TextView(this);
             if(footballers.get(i).isActive())
@@ -70,8 +71,9 @@ public class MainClub extends BaseActivity {
         }
     }
 
-    private static void changeTo(Context mContext) {
+    private static void changeTo(Context mContext, String username) {
         Intent intent = new Intent(mContext, UIAddNewCareTeam.class);
+        intent.putExtra("username", username);
         mContext.startActivity(intent);
     }
 }
