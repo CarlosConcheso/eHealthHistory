@@ -23,7 +23,9 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
     private final FireBase fb = new FireBase();
 
     private ArrayList<CareTeam> favsCareTeams = new ArrayList<>();
+    private boolean flagFavsCT = false;
     private ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
+    private boolean flagNoFavsCT = false;
 
     private final ModelFactory mf = new ModelFactory();
     private final ArrayList<CareTeam> careTeams = mf.getCareTeams();
@@ -55,18 +57,20 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
 
         final Button buttonAddNewFavCareTeam = findViewById(R.id.buttonAddNewFavCareTeam);
 
-        establecerNewTeamCares(spinnerFavCareTeam);
-        establecerNewTeamCares(spinnerNewFavCareTeam);
+        //establecerNewTeamCares(spinnerFavCareTeam);
+        //establecerNewTeamCares(spinnerNewFavCareTeam);
 
         // Establecer valores
-        fb.representarFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
+        fb.representFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
                 favCareTeamTelecom, favCareTeamNote, this);
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                addTeamCareData(spinnerFavCareTeam.getSelectedItem().toString(), favCareTeamName, favCareTeamStatus,
-                        favCareTeamTelecom, favCareTeamNote);
+                if(isFlagFavsCT()) {
+                    addTeamCareData(spinnerFavCareTeam.getSelectedItem().toString(), favCareTeamName, favCareTeamStatus,
+                            favCareTeamTelecom, favCareTeamNote);
+                }
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
             } });
@@ -74,8 +78,10 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerNewFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                addTeamCareData(spinnerNewFavCareTeam.getSelectedItem().toString(), newFavCareTeamName, newFavCareTeamStatus,
-                        newFavCareTeamTelecom, newFavCareTeamNote);
+                if(isFlagNoFavsCT()) {
+                    addTeamCareData(spinnerNewFavCareTeam.getSelectedItem().toString(), newFavCareTeamName, newFavCareTeamStatus,
+                            newFavCareTeamTelecom, newFavCareTeamNote);
+                }
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
             } });
@@ -112,6 +118,16 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
 
     }
 
+    public void representarValorSpinnerInicial(TextView favCareTeamName,
+                                               TextView favCareTeamStatus, TextView favCareTeamTelecom, TextView favCareTeamNote) {
+        CareTeam careTeamSelected = getFavsCareTeams().get(0);
+
+        favCareTeamName.setText(careTeamSelected.getName());
+        favCareTeamStatus.setText(careTeamSelected.getStatus());
+        favCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelcom()));
+        favCareTeamNote.setText(careTeamSelected.getNote());
+    }
+
     public ArrayList<CareTeam> getFavsCareTeams() {
         return favsCareTeams;
     }
@@ -128,12 +144,34 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
         this.noFavsCareTeams = noFavsCareTeams;
     }
 
+    public boolean isFlagFavsCT() {
+        return flagFavsCT;
+    }
+
+    public void setFlagFavsCT(boolean flagFavsCT) {
+        this.flagFavsCT = flagFavsCT;
+    }
+
+    public boolean isFlagNoFavsCT() {
+        return flagNoFavsCT;
+    }
+
+    public void setFlagNoFavsCT(boolean flagNoFavsCT) {
+        this.flagNoFavsCT = flagNoFavsCT;
+    }
+
+    public void addToFavCareTeam(CareTeam ct)
+    {
+        if(ct!=null)
+            favsCareTeams.add(ct);
+    }
+
     // Establecer valor spinner Team Cares
-    private void establecerNewTeamCares(Spinner spinnerCareTeams) {
+    private void establecerNewTeamCares(Spinner spinnerCareTeams, ArrayList<CareTeam> careteamsPam) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_dropdown_item,
-                convert2Array(careTeams));
+                convert2Array(careteamsPam));
 
         spinnerCareTeams.setAdapter(adapter);
     }
@@ -148,4 +186,6 @@ public class UIFootballerFavsTeamCares extends BaseActivity {
 
         return mStringArray;
     }
+
+
 }

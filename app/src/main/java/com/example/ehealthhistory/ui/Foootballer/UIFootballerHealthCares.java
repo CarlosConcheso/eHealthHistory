@@ -42,7 +42,7 @@ public class UIFootballerHealthCares extends BaseActivity {
         final TextView healthCareNote = findViewById(R.id.healthCareNote);
 
         // Rellena spinner con los HealthCares por FireBase
-        fb.rellenarSpinnerHealthcareFootballer(username, spinnerHealthCare, this,
+        fb.fillSpinnerHealthcareFootballer(username, spinnerHealthCare, this,
                 healthCareCategory, healthCareName, healthCareCommentary,
                       healthCareAllDay, healthCareHoraInicio, healthCareHoraFin,healthCareNote);
 

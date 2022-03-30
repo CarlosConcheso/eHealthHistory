@@ -31,7 +31,7 @@ public class MainRoles extends BaseActivity {
         final Button botonClub = findViewById(R.id.buttonClub);
 
         final TextView textoBanner = findViewById(R.id.nameActivityBase);
-        fb.getName(username, textoBanner);
+        fb.getNameFromUser(username, textoBanner);
         habilitarBotonesRoles(botonFutbolista, botonMedico, botonClub);
 
         botonFutbolista.setOnClickListener((v -> changeTo(v.getContext(), MainFootballer.class, username)));
@@ -43,7 +43,7 @@ public class MainRoles extends BaseActivity {
 
     private void habilitarBotonesRoles(Button botonFutbolista, Button botonMedico, Button botonClub)
     {
-        fb.getRolesOfUsername(username,botonFutbolista,botonMedico,botonClub);
+        fb.getRolesFromUsername(username,botonFutbolista,botonMedico,botonClub);
 
     }
 

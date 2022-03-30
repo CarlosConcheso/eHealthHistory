@@ -8,7 +8,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
+import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.dto.CareTeamDTO;
 import com.example.ehealthhistory.database.dto.ClubDTO;
 import com.example.ehealthhistory.database.dto.FootballerCareteamDTO;
@@ -17,6 +20,7 @@ import com.example.ehealthhistory.database.dto.HealthCareServiceDTO;
 import com.example.ehealthhistory.database.dto.UserDTO;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
+import com.example.ehealthhistory.ui.Club.MainClub;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerFavsTeamCares;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerHealthCares;
@@ -38,7 +42,7 @@ public class FireBase {
 
     // ---------- Meodos pantalla inicial roles
     @SuppressLint("SetTextI18n")
-    public void getName(String username, TextView tv) {
+    public void getNameFromUser(String username, TextView tv) {
 
         db.collection("user")
                 .whereEqualTo("username", username)
@@ -54,7 +58,7 @@ public class FireBase {
                 });
     }
 
-    public void getRolesOfUsername(String username, Button botonFutbolista, Button botonMedico, Button botonClub) {
+    public void getRolesFromUsername(String username, Button botonFutbolista, Button botonMedico, Button botonClub) {
 
         db.collection("user")
                 .whereEqualTo("username", username)
@@ -183,12 +187,12 @@ public class FireBase {
     }
 
     //Métodos ver datos de parte futbolista
-    public void rellenarSpinnerHealthcareFootballer(String username, Spinner spinner,
-                                                    UIFootballerHealthCares uiFootballerHealthCares,
-                                                    TextView healthCareCategory, TextView healthCareName,
-                                                    TextView healthCareCommentary,TextView healthCareAllDay,
-                                                    TextView healthCareHoraInicio, TextView healthCareHoraFin,
-                                                    TextView healthCareNote) {
+    public void fillSpinnerHealthcareFootballer(String username, Spinner spinner,
+                                                UIFootballerHealthCares uiFootballerHealthCares,
+                                                TextView healthCareCategory, TextView healthCareName,
+                                                TextView healthCareCommentary, TextView healthCareAllDay,
+                                                TextView healthCareHoraInicio, TextView healthCareHoraFin,
+                                                TextView healthCareNote) {
 
         ArrayList<HealthCareService> lista = new ArrayList<>();
 
@@ -199,7 +203,6 @@ public class FireBase {
                     if (task.isSuccessful()) {
 
                         int i=1;
-
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
                             HealthCareServiceDTO healthCareServiceDTO = document.toObject(HealthCareServiceDTO.class);
@@ -246,15 +249,16 @@ public class FireBase {
     }
 
     // Métodos añadir médico fav futbolista
-    public void representarFootballerCareTeamsNoFav()
+    public void representFootballerCareTeamsNoFav()
     {
 
     }
 
-    public void representarFootballerFavsCareTeams(String username, Spinner spinnerFavCareTeam, TextView favCareTeamName,
-                                                   TextView favCareTeamStatus,TextView favCareTeamTelecom,
-                                                   TextView favCareTeamNote, UIFootballerFavsTeamCares uiFootballerFavsTeamCares)
+    public void representFootballerFavsCareTeams(String username, Spinner spinnerFavCareTeam, TextView favCareTeamName,
+                                                 TextView favCareTeamStatus, TextView favCareTeamTelecom,
+                                                 TextView favCareTeamNote, UIFootballerFavsTeamCares uiFootballerFavsTeamCares)
     {
+
         ArrayList<CareTeam> lista = new ArrayList<>();
 
         db.collection("footballer_careteam")
@@ -266,44 +270,126 @@ public class FireBase {
 
                             FootballerCareteamDTO footballerCareteamDTO = document.toObject(FootballerCareteamDTO.class);
 
+                            for(int i=0; i<footballerCareteamDTO.getUsername_careteam().size(); i++) {
+
+                                db.collection("careteam")
+                                        .whereEqualTo("username", footballerCareteamDTO.getUsername_careteam().get(i))
+                                        .get()
+                                        .addOnCompleteListener(task2 -> {
+                                            if (task2.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+
+                                                    CareTeam ct = new CareTeam();
+                                                    CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
+
+                                                    System.out.println("---- USERNAME: " + careTeamDTO.getName());
+
+                                                    ct.setUsername(careTeamDTO.getUsername());
+                                                    ct.setName(careTeamDTO.getName());
+                                                    ct.setTelcom(careTeamDTO.getTelecom());
+                                                    ct.setStatus(careTeamDTO.getStatus());
+                                                    ct.setNote(careTeamDTO.getNote());
+
+                                                    favCareTeamName.setText(ct.getName());
+                                                    favCareTeamStatus.setText(ct.getStatus());
+                                                    favCareTeamTelecom.setText(String.valueOf(ct.getTelcom()));
+                                                    favCareTeamNote.setText(ct.getNote());
+
+                                                    lista.add(ct);
+                                                }
+                                            }
+                                            uiFootballerFavsTeamCares.setFavsCareTeams(lista);
+                                            for (int h = 0; h < uiFootballerFavsTeamCares.getFavsCareTeams().size(); h++)
+                                                System.out.println("CON TRUE::::: " + uiFootballerFavsTeamCares.getFavsCareTeams().get(h).getName());
+
+                                            System.out.println("SE PONE A TRUE");
+                                            uiFootballerFavsTeamCares.setFlagFavsCT(true);
+                                        });
+                            }
+                                for (int h = 0; h < uiFootballerFavsTeamCares.getFavsCareTeams().size(); h++)
+                                    System.out.println("FUERA BUCLE LISTA1::::: " + uiFootballerFavsTeamCares.getFavsCareTeams().get(h).getName());
+
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                        uiFootballerFavsTeamCares,
+                                        android.R.layout.simple_spinner_dropdown_item,
+                                        uiFootballerFavsTeamCares.convert2Array(uiFootballerFavsTeamCares.getFavsCareTeams()));
+                                spinnerFavCareTeam.setAdapter(adapter);
+
+                                uiFootballerFavsTeamCares.representarValorSpinnerInicial(favCareTeamName,
+                                        favCareTeamStatus, favCareTeamTelecom,
+                                        favCareTeamNote);
+                        }
+                    }
+                });
+    }
+    
+    public void addNewFavCareTeam()
+    {
+
+    }
+
+    // Métodos Club
+    public void representBasicDataAndClubsFootballer(String username, Toolbar toolbar, TextView clubName,
+                                                     TextView clubPresident, TextView clubAlias, TextView clubContact,
+                                                     TextView clubTeamCare, MainClub mainClub)
+    {
+
+        ArrayList<Footballer> footballers = new ArrayList<>();
+
+        db.collection("club")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+
+                            ClubDTO club = document.toObject(ClubDTO.class);
+
+                            toolbar.setTitle(club.getName());
+                            clubName.setText(club.getName());
+                            clubPresident.setText(club.getPresident());
+                            clubAlias.setText(club.getAlias());
+                            clubContact.setText(club.getContactname());
+
+                            //Sacar nombre del equipo médico
                             db.collection("careteam")
-                                    .whereArrayContainsAny("username", footballerCareteamDTO.getUsername_careteam())
+                                    .whereEqualTo("username", club.getUsername_careteam())
                                     .get()
                                     .addOnCompleteListener(task2 -> {
                                         if (task2.isSuccessful()) {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
                                                 CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
-                                                CareTeam ct = new CareTeam();
 
-                                                System.out.println("HA PASAUUUUUU!!!");
-
-                                                ct.setUsername(careTeamDTO.getUsername());
-                                                ct.setName(careTeamDTO.getName());
-                                                ct.setTelcom(careTeamDTO.getTelecom());
-                                                ct.setStatus(careTeamDTO.getStatus());
-                                                ct.setNote(careTeamDTO.getNote());
-
-                                                favCareTeamName.setText(ct.getName());
-                                                favCareTeamStatus.setText(ct.getStatus());
-                                                favCareTeamTelecom.setText(String.valueOf(ct.getTelcom()));
-                                                favCareTeamNote.setText(ct.getNote());
-
-                                                lista.add(ct);
+                                                clubTeamCare.setText(careTeamDTO.getName());
                                             }
                                         }
                                     });
+
+                            db.collection("footballer")
+                                    .whereEqualTo("club", club.getName())
+                                    .get()
+                                    .addOnCompleteListener(task2 -> {
+                                        if (task2.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+
+                                                Footballer fotballer = new Footballer();
+                                                FootballerDTO footballerDTO = document2.toObject(FootballerDTO.class);
+
+                                                fotballer.setName(footballerDTO.getName());
+                                                fotballer.setActive(footballerDTO.isActive());
+
+                                                footballers.add(fotballer);
+                                            }
+
+                                            mainClub.addFootballersRows(footballers);
+
+                                        }
+                                    });
                         }
-
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                                uiFootballerFavsTeamCares,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                uiFootballerFavsTeamCares.convert2Array(lista));
-
-                        spinnerFavCareTeam.setAdapter(adapter);
-                        uiFootballerFavsTeamCares.setFavsCareTeams(lista);
                     }
                 });
     }
+
 
 }
