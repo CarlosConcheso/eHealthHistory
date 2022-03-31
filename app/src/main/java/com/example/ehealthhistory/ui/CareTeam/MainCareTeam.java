@@ -16,23 +16,28 @@ import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.ModelFactory;
+import com.example.ehealthhistory.data.model.footballer.Footballer;
+import com.example.ehealthhistory.database.FireBase;
 import com.example.ehealthhistory.ui.HealthCareService.MainHealthCareService;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MainCareTeam extends BaseActivity {
 
-    private ModelFactory mf = new ModelFactory();
-    private CareTeam ct = mf.getCareTeamROV();
+    private final FireBase fb = new FireBase();
+    ArrayList<Footballer> footballers = new ArrayList<>();
+    public boolean consulta = false;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_careteam);
+        String username = getIntent().getStringExtra("username");
 
-        Bundle bundle = new Bundle();
-        bundle.putString("Care Team", "CareTeam's Menu");
-
-        final Toolbar toolbar = findViewById(R.id.toolbar);
         final TextView nameActivityBase =findViewById(R.id.nameActivityBase);
+        nameActivityBase.setText("Equipo Médico");
 
         //Encontrar todoslo elementos de pantalla
         final TextView careTeamName = findViewById(R.id.careTeamName);
@@ -43,37 +48,34 @@ public class MainCareTeam extends BaseActivity {
         final Button addHealthCare2Footboller = findViewById(R.id.buttonAddHealthCareService);
 
         // Establecer elementos en pantalla
-        careTeamName.setText(ct.getName());
-        careTeamStatus.setText(ct.getStatus());
-        careTeamTelcom.setText(String.valueOf(ct.getTelecom()));
-        careTeamNote.setText(ct.getNote());
-
-        addFootballersRows();
+        fb.representBasicDataAndCareTeamFootballer(username, nameActivityBase,
+                careTeamName, careTeamStatus, careTeamTelcom, careTeamNote, this);
 
         // Ir a otra ventana donde añadir un cuidado personalizado al futbolista
         addHealthCare2Footboller.setOnClickListener((v -> changeTo(v.getContext())));
     }
 
     @SuppressLint("SetTextI18n")
-    private void addFootballersRows() {
+    public void addFootballersRows(ArrayList<Footballer> footballers) {
         TableLayout tabla;
         tabla = findViewById(R.id.TableCareTeamsFootballers);
 
-        for (int i = 0; i < mf.getFootballers().size(); i++) {
+        for (int i = 0; i < footballers.size(); i++) {
             TableRow f = new TableRow(this);
 
             TextView col1 = new TextView(this);
-            col1.setText(mf.getFootballers().get(i).getName());
+            col1.setText(footballers.get(i).getName());
+            col1.setPadding(25,1,1,1);
 
             TextView col2 = new TextView(this);
-            if(mf.getFootballers().get(i).isActive())
+            if(footballers.get(i).isActive())
                 col2.setText("Si");
             else
                 col2.setText("No");
             col2.setGravity(Gravity.CENTER);
 
             TextView col3 = new TextView(this);
-            col3.setText(String.valueOf(mf.getFootballers().get(i).getFootballerContact().getTelecom()));
+            col3.setText(String.valueOf(footballers.get(i).getFootballerContact().getTelecom()));
             col3.setGravity(Gravity.CENTER);
 
             f.addView(col1);
@@ -82,6 +84,27 @@ public class MainCareTeam extends BaseActivity {
 
             tabla.addView(f);
         }
+    }
+
+    public ArrayList<Footballer> getFootballers() {
+        return footballers;
+    }
+
+    public void setFootballers(ArrayList<Footballer> footballers) {
+        this.footballers = footballers;
+    }
+
+    public void addFootballer(Footballer footballer)
+    {
+        getFootballers().add(footballer);
+    }
+
+    public boolean isConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(boolean consulta) {
+        this.consulta = consulta;
     }
 
     private static void changeTo(Context mContext) {

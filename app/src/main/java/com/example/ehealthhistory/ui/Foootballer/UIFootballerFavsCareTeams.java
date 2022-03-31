@@ -57,9 +57,6 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
 
         final Button buttonAddNewFavCareTeam = findViewById(R.id.buttonAddNewFavCareTeam);
 
-        //establecerNewTeamCares(spinnerFavCareTeam);
-        //establecerNewTeamCares(spinnerNewFavCareTeam);
-
         // Establecer valores
         fb.representFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
                 favCareTeamTelecom, favCareTeamNote, this);

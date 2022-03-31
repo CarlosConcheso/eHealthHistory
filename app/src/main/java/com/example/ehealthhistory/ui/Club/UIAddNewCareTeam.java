@@ -68,7 +68,7 @@ public class UIAddNewCareTeam extends BaseActivity {
 
         //Añadir el nuevo equipo médico
         buttonAddNewCareTeam.setOnClickListener((v -> {
-                fb.addNewCareTeam2Club(spinnerCareTeams.getSelectedItem().toString());
+                fb.addNewCareTeam2Club(username, spinnerCareTeams.getSelectedItem().toString());
                 finish();
         }));
     }

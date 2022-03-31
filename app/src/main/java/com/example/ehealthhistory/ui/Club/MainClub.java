@@ -29,7 +29,6 @@ public class MainClub extends BaseActivity {
         String username = getIntent().getStringExtra("username");
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
-        fb.getNameFromUser(username,nameActivityBase);
 
         // Elementos de la pantalla EQUIPO
         final TextView clubName = findViewById(R.id.clubName);

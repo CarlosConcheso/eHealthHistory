@@ -10,14 +10,15 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
+import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.database.dto.CareTeamDTO;
 import com.example.ehealthhistory.database.dto.ClubDTO;
-import com.example.ehealthhistory.database.dto.FootballerCareteamDTO;
 import com.example.ehealthhistory.database.dto.FootballerDTO;
 import com.example.ehealthhistory.database.dto.HealthCareServiceDTO;
 import com.example.ehealthhistory.database.dto.UserDTO;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareAvalibleTime;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
+import com.example.ehealthhistory.ui.CareTeam.MainCareTeam;
 import com.example.ehealthhistory.ui.Club.MainClub;
 import com.example.ehealthhistory.ui.Club.UIAddNewCareTeam;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
@@ -245,30 +246,23 @@ public class FireBase {
                 });
     }
 
-    public void representFootballerCareTeamsNoFav()
-    {
-
-    }
-
     public void representFootballerFavsCareTeams(String username, Spinner spinnerFavCareTeam, TextView favCareTeamName,
                                                  TextView favCareTeamStatus, TextView favCareTeamTelecom,
                                                  TextView favCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
-        ArrayList<CareTeam> lista = new ArrayList<>();
-
-        db.collection("footballer_careteam")
-                .whereEqualTo("username_footballer", username)
+        db.collection("footballer")
+                .whereEqualTo("username", username)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
-                            FootballerCareteamDTO footballerCareteamDTO = document.toObject(FootballerCareteamDTO.class);
+                            FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
 
-                            for(int i=0; i<footballerCareteamDTO.getUsername_careteam().size(); i++) {
+                            for(int i=0; i<footballerDTO.getCareteams().size(); i++) {
 
                                 db.collection("careteam")
-                                        .whereEqualTo("username", footballerCareteamDTO.getUsername_careteam().get(i))
+                                        .whereEqualTo("username", footballerDTO.getCareteams().get(i))
                                         .get()
                                         .addOnCompleteListener(task2 -> {
                                             if (task2.isSuccessful()) {
@@ -288,8 +282,6 @@ public class FireBase {
                                                     favCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
                                                     favCareTeamNote.setText(ct.getNote());
 
-                                                    lista.add(ct);
-
                                                     uiFootballerFavsCareTeams.addToFavCareTeam(ct);
                                                 }
 
@@ -302,10 +294,11 @@ public class FireBase {
                                                 uiFootballerFavsCareTeams.representInitialSpinnerData(favCareTeamName,
                                                         favCareTeamStatus, favCareTeamTelecom,
                                                         favCareTeamNote);
+
+                                                uiFootballerFavsCareTeams.setFlagFavsCT(true);
                                             }
                                         });
                             }
-                            uiFootballerFavsCareTeams.setFlagFavsCT(true);
                         }
                     }
                 });
@@ -315,21 +308,19 @@ public class FireBase {
                                   TextView newFavCareTeamStatus, TextView newFavCareTeamTelecom,
                                   TextView newFavCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
-        ArrayList<CareTeam> lista = new ArrayList<>();
-
-        db.collection("footballer_careteam")
-                .whereEqualTo("username_footballer", username)
+        db.collection("footballer")
+                .whereEqualTo("username", username)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
-                            FootballerCareteamDTO footballerCareteamDTO = document.toObject(FootballerCareteamDTO.class);
+                            FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
 
-                            for(int i=0; i<footballerCareteamDTO.getUsername_careteam().size(); i++) {
+                            for(int i=0; i<footballerDTO.getCareteams().size(); i++) {
 
                                 db.collection("careteam")
-                                        .whereNotEqualTo("username", footballerCareteamDTO.getUsername_careteam().get(i))
+                                        .whereNotEqualTo("username", footballerDTO.getCareteams().get(i))
                                         .get()
                                         .addOnCompleteListener(task2 -> {
                                             if (task2.isSuccessful()) {
@@ -348,8 +339,6 @@ public class FireBase {
                                                     newFavCareTeamStatus.setText(ct.getStatus());
                                                     newFavCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
                                                     newFavCareTeamNote.setText(ct.getNote());
-
-                                                    lista.add(ct);
 
                                                     uiFootballerFavsCareTeams.addNoFavsCareTeams(ct);
                                                 }
@@ -531,19 +520,106 @@ public class FireBase {
                 });
     }
 
-    public void addNewCareTeam2Club(String clubName) {
-        //Actualizar el username del careteam en Club.
-        db.collection("club")
-                .whereEqualTo("name", clubName)
+    public void addNewCareTeam2Club(String usernameclub, String nameCareteam) {
+
+        //buscar username por el nombre del club
+        db.collection("careteam")
+                .whereEqualTo("name", nameCareteam)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            CareTeamDTO careTeamDTO = document.toObject(CareTeamDTO.class);
+
+                            //Actualizar el username del careteam en Club.
+                            db.collection("club")
+                                    .whereEqualTo("username", usernameclub)
+                                    .get()
+                                    .addOnCompleteListener(task2 -> {
+                                        if (task2.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+                                                ClubDTO clubDTO = document.toObject(ClubDTO.class);
+
+                                                //TODO: Donde había el antiguo careteam, meter el nuevo.
+                                            }
+                                        }
+                                    });
+
+                            //Actualizar el username del careteam en el array en Footballer.
+                            db.collection("footballer")
+                                    .whereArrayContains("careteams", careTeamDTO.getUsername())
+                                    .get()
+                                    .addOnCompleteListener(task2 -> {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+                                                FootballerDTO footballerDTO = document2.toObject(FootballerDTO.class);
+
+                                                //TODO: Donde había el antiguo careteam, meter el nuevo en el array.
+
+                                            }
+                                        }
+                                    });
                         }
                     }
                 });
-
-        //Actualizar el username del careteam en el array de Footballer.
     }
+
+    public void representBasicDataAndCareTeamFootballer(String username, TextView nameActivityBase,
+                                                        TextView careTeamName, TextView careTeamStatus,
+                                                        TextView careTeamTelcom, TextView careTeamNote,
+                                                        MainCareTeam mainCareTeam)
+    {
+
+        ArrayList<Footballer> footballers = new ArrayList<>();
+
+
+        db.collection("careteam")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+
+                            CareTeamDTO careteamDTO = document.toObject(CareTeamDTO.class);
+
+                            nameActivityBase.setText(careteamDTO.getName());
+                            careTeamName.setText(careteamDTO.getName());
+                            careTeamStatus.setText(careteamDTO.getStatus());
+                            careTeamTelcom.setText(String.valueOf(careteamDTO.getTelecom()));
+                            careTeamNote.setText(careteamDTO.getNote());
+
+                            // Buscar futbolistas con ese careteam
+                            db.collection("footballer")
+                                    .whereArrayContains("careteams", careteamDTO.getUsername())
+                                    .get()
+                                    .addOnCompleteListener(task2 -> {
+                                        if (task2.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+                                                Footballer footballer = new Footballer();
+                                                FootballerContact fc = new FootballerContact();
+                                                FootballerDTO footballerDTO = document2.toObject(FootballerDTO.class);
+
+                                                footballer.setName(footballerDTO.getName());
+                                                footballer.setActive(footballerDTO.isActive());
+                                                fc.setTelecom(Integer.parseInt(footballerDTO.getContact_telecom()));
+
+                                                footballer.setFootballerContact(fc);
+                                                mainCareTeam.addFootballer(footballer);
+
+                                                System.out.println("Fubtolista: " + footballer.getName());
+                                                footballers.add(footballer);
+                                                mainCareTeam.setConsulta(true);
+                                            }
+                                            mainCareTeam.addFootballersRows(footballers);
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+
+
+
 
 }

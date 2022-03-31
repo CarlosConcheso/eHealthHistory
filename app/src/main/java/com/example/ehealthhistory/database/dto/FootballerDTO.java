@@ -1,9 +1,12 @@
 package com.example.ehealthhistory.database.dto;
 
+import java.util.ArrayList;
+
 public class FootballerDTO {
 
     private boolean active;
     private String birthday;
+    private ArrayList<String> careteams;
     private String club;
     private String comunication_lenguage;
     private boolean comunication_prefered;
@@ -34,6 +37,14 @@ public class FootballerDTO {
         this.birthday = birthday;
     }
 
+    public ArrayList<String> getCareteams() {
+        return careteams;
+    }
+
+    public void setCareteams(ArrayList<String> careteams) {
+        this.careteams = careteams;
+    }
+
     public String getClub() {
         return club;
     }
@@ -50,12 +61,12 @@ public class FootballerDTO {
         this.comunication_lenguage = comunication_lenguage;
     }
 
-    public boolean getComunication_prefered() {
-        return comunication_prefered;
+    public void setComunication_prefered(boolean comunication_prefered) {
+        this.comunication_prefered = comunication_prefered;
     }
 
-    public void setComunication_prefered(Boolean comunication_prefered) {
-        this.comunication_prefered = comunication_prefered;
+    public boolean isComunication_prefered() {
+        return comunication_prefered;
     }
 
     public String getContact_address() {
@@ -113,4 +124,5 @@ public class FootballerDTO {
     public void setUsername(String username) {
         this.username = username;
     }
+
 }
