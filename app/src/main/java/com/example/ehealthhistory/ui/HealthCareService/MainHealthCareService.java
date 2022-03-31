@@ -1,9 +1,7 @@
 package com.example.ehealthhistory.ui.HealthCareService;
 
-import android.content.Context;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,59 +13,51 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
-import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
-import com.example.ehealthhistory.ui.CareTeam.MainCareTeam;
-import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainHealthCareService extends BaseActivity {
 
     private ModelFactory mf = new ModelFactory();
-    private Footballer footballer = mf.getFootballer();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teamcare_add_healthcare);
 
-        Bundle bundle = new Bundle();
-        bundle.putString("Health Care Service", "Add Health Care Service");
-
-        final Toolbar toolbar = findViewById(R.id.toolbar);
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Añadir cuidado");
 
         // Identificar todos los componentes de la pantalla
-        final Spinner healthCareFootballers = (Spinner) findViewById(R.id.spinnerHealthCareFootballers);
+        final Spinner healthCareFootballers = findViewById(R.id.spinnerHealthCareFootballers);
 
-        final CheckBox activo = (CheckBox) findViewById(R.id.checkBoxActivo);
-        final CheckBox checkBoxAllDay = (CheckBox) findViewById(R.id.checkBoxAllDay);
+        final CheckBox activo = findViewById(R.id.checkBoxActivo);
+        final CheckBox checkBoxAllDay = findViewById(R.id.checkBoxAllDay);
 
-        final Spinner healthCareCategory = (Spinner) findViewById(R.id.spinnerHealthCareCategory);
-        final EditText healthCareName = (EditText) findViewById(R.id.editTextHealthCareName);
+        final Spinner healthCareCategory = findViewById(R.id.spinnerHealthCareCategory);
+        final EditText healthCareName = findViewById(R.id.editTextHealthCareName);
 
-        final Spinner healthCareHoraInicio = (Spinner) findViewById(R.id.spinnerTeamCareHoraInicio);
-        final Spinner healthCareHoraFin = (Spinner) findViewById(R.id.spinnerTeamCareHoraFin);
-        final Spinner healthCareMinsInicio = (Spinner) findViewById(R.id.spinnerTeamCareMinsInicio);
-        final Spinner healthCareMinsFin = (Spinner) findViewById(R.id.spinnerTeamCareMinsFin);
+        final Spinner healthCareHoraInicio = findViewById(R.id.spinnerTeamCareHoraInicio);
+        final Spinner healthCareHoraFin = findViewById(R.id.spinnerTeamCareHoraFin);
+        final Spinner healthCareMinsInicio = findViewById(R.id.spinnerTeamCareMinsInicio);
+        final Spinner healthCareMinsFin = findViewById(R.id.spinnerTeamCareMinsFin);
 
-        final CheckBox checkBoxL = (CheckBox) findViewById(R.id.checkBoxLunes);
-        final CheckBox checkBoxM = (CheckBox) findViewById(R.id.checkBoxMartes);
-        final CheckBox checkBoxX = (CheckBox) findViewById(R.id.checkBoxMiercoles);
-        final CheckBox checkBoxJ = (CheckBox) findViewById(R.id.checkBoxJueves);
-        final CheckBox checkBoxV = (CheckBox) findViewById(R.id.checkBoxViernes);
-        final CheckBox checkBoxS = (CheckBox) findViewById(R.id.checkBoxSabado);
-        final CheckBox checkBoxD = (CheckBox) findViewById(R.id.checkBoxDomingo);
+        final CheckBox checkBoxL = findViewById(R.id.checkBoxLunes);
+        final CheckBox checkBoxM = findViewById(R.id.checkBoxMartes);
+        final CheckBox checkBoxX = findViewById(R.id.checkBoxMiercoles);
+        final CheckBox checkBoxJ = findViewById(R.id.checkBoxJueves);
+        final CheckBox checkBoxV = findViewById(R.id.checkBoxViernes);
+        final CheckBox checkBoxS = findViewById(R.id.checkBoxSabado);
+        final CheckBox checkBoxD = findViewById(R.id.checkBoxDomingo);
 
-        final EditText multiLineHealthCareCommentary = (EditText) findViewById(R.id.editTextTextMultiLineHealthCareCommentary);
-        final Button botonAddHealthCare = (Button) findViewById(R.id.buttonAddHealthCare);
+        final EditText multiLineHealthCareCommentary = findViewById(R.id.editTextTextMultiLineHealthCareCommentary);
+        final Button botonAddHealthCare = findViewById(R.id.buttonAddHealthCare);
 
-        ArrayList<String> categorias = new ArrayList<String>();
+        ArrayList<String> categorias = new ArrayList<>();
         categorias.add("Recuperacion");
         categorias.add("Manutención");
         categorias.add("Ingreso");
@@ -77,44 +67,35 @@ public class MainHealthCareService extends BaseActivity {
         inicializarCategorias(healthCareCategory, categorias);
 
         //Se selecciona el cuidado 24 horas
-        checkBoxAllDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ( ((CheckBox)v).isChecked() ) {
-                    anularSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
-                }
-                else
-                    activarSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
+        checkBoxAllDay.setOnClickListener(v -> {
+            if ( ((CheckBox)v).isChecked() ) {
+                anularSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
             }
+            else
+                activarSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
         });
 
         // Boton añadir
-        botonAddHealthCare.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(checkCompleted(healthCareName,multiLineHealthCareCommentary))
-                    if(!checkHours(checkBoxAllDay, healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin))
-                        Snackbar.make(findViewById(R.id.buttonAddHealthCare),
-                                R.string.error_usuario_horas, Snackbar.LENGTH_SHORT).show();
-                    else
-                        if(checkDays(checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD))
-                            finish();
-                        else
-                            Snackbar.make(findViewById(R.id.buttonAddHealthCare),
-                                    R.string.error_usuario_sindias, Snackbar.LENGTH_SHORT).show();
-                else
+        botonAddHealthCare.setOnClickListener((v -> {
+            if(checkCompleted(healthCareName,multiLineHealthCareCommentary))
+                if(!checkHours(checkBoxAllDay, healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin))
                     Snackbar.make(findViewById(R.id.buttonAddHealthCare),
-                            R.string.error_usuario_camposvacios, Snackbar.LENGTH_SHORT).show();
-            }
+                            R.string.error_usuario_horas, Snackbar.LENGTH_SHORT).show();
+                else
+                    if(checkDays(checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD))
+                        finish();
+                    else
+                        Snackbar.make(findViewById(R.id.buttonAddHealthCare),
+                                R.string.error_usuario_sindias, Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.buttonAddHealthCare),
+                        R.string.error_usuario_camposvacios, Snackbar.LENGTH_SHORT).show();
         }));
     }
 
     private boolean checkCompleted(EditText name, EditText commentary)
     {
-        if(name.getText().length()>0 && commentary.getText().length()>0)
-            return true;
-        else
-            return false;
+        return name.getText().length() > 0 && commentary.getText().length() > 0;
     }
 
     private boolean checkHours(CheckBox checkBoxAllDay, Spinner healthCareHoraInicio, Spinner healthCareHoraFin,
@@ -124,9 +105,7 @@ public class MainHealthCareService extends BaseActivity {
             return true;
         else
         {
-            if(checkSpinnerHours(healthCareHoraInicio, healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin))
-                    return true;
-            return false;
+            return checkSpinnerHours(healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin);
         }
     }
 
@@ -157,10 +136,7 @@ public class MainHealthCareService extends BaseActivity {
         else
             if(minsI > minsF)
                 return false;
-            else if(minsI == minsF)
-                return false;
-            else
-                return true;
+            else return minsI != minsF;
     }
 
     //----------------------------------------------------------------------------------------------
@@ -184,7 +160,7 @@ public class MainHealthCareService extends BaseActivity {
     // Metodos para inicializar spinners y convertir en arrays
     private void inicializarFootballers(Spinner spinner, ArrayList<Footballer> lista)
     {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_dropdown_item,
                 convert2ArrayFootballer(lista));
@@ -205,7 +181,7 @@ public class MainHealthCareService extends BaseActivity {
 
     private void inicializarCategorias(Spinner spinner, ArrayList<String> lista)
     {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_dropdown_item,
                 convert2ArrayCategoria(lista));

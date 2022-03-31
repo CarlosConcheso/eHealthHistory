@@ -41,12 +41,15 @@ public class MainLogIn extends AppCompatActivity {
                     .signInWithEmailAndPassword(usuario, pass)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+                            username.setText("");
+                            password.setText("");
                             changeTo(v.getContext(), usuario);
                         } else
-                            Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(findViewById(R.id.app_image), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
                     });
             else
-                Snackbar.make(findViewById(R.id.loginButton), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.app_image), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
+            password.setText("");
         }));
     }
 
