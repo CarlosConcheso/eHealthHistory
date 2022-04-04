@@ -283,7 +283,11 @@ public class FireBase {
                                                     favCareTeamNote.setText(ct.getNote());
 
                                                     uiFootballerFavsCareTeams.addToFavCareTeam(ct);
+
+                                                    System.out.println("CARETEAM DENTRO: " + ct.getName());
                                                 }
+
+                                                System.out.println("CARETEAM 0: " + uiFootballerFavsCareTeams.getFavsCareTeams().get(0).getName());
 
                                                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                                         uiFootballerFavsCareTeams,
@@ -352,10 +356,11 @@ public class FireBase {
                                                 uiFootballerFavsCareTeams.representInitialSpinnerData(newFavCareTeamName,
                                                         newFavCareTeamStatus, newFavCareTeamTelecom,
                                                         newFavCareTeamNote);
+
+                                                uiFootballerFavsCareTeams.setFlagNoFavsCT(true);
                                             }
                                         });
                             }
-                            uiFootballerFavsCareTeams.setFlagNoFavsCT(true);
                         }
                     }
                 });

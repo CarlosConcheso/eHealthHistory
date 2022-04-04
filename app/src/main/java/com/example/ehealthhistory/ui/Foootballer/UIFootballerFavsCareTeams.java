@@ -67,8 +67,8 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         spinnerFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(isFlagFavsCT()) {
-                    addTeamCareData(spinnerFavCareTeam.getSelectedItem().toString(), favCareTeamName, favCareTeamStatus,
-                            favCareTeamTelecom, favCareTeamNote);
+                    //addTeamCareData(spinnerFavCareTeam.getSelectedItem().toString(), favCareTeamName, favCareTeamStatus,
+                    //         favCareTeamTelecom, favCareTeamNote);
                 }
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -78,8 +78,8 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         spinnerNewFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(isFlagNoFavsCT()) {
-                    addTeamCareData(spinnerNewFavCareTeam.getSelectedItem().toString(), newFavCareTeamName, newFavCareTeamStatus,
-                            newFavCareTeamTelecom, newFavCareTeamNote);
+                    //representTeamCareData(spinnerNewFavCareTeam.getSelectedItem().toString(), newFavCareTeamName, newFavCareTeamStatus,
+                    //         newFavCareTeamTelecom, newFavCareTeamNote);
                 }
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -94,8 +94,8 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         }));
     }
 
-    private void addTeamCareData(String nameSelectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
-                                    TextView newCareTeamTelecom, TextView newCareTeamNote)
+    private void representTeamCareData(String nameSelectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
+                                       TextView newCareTeamTelecom, TextView newCareTeamNote)
     {
         CareTeam careTeamSelected = findCareTeam(nameSelectedCareTeam);
 

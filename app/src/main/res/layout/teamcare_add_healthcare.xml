@@ -31,10 +31,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="UselessParent">
+
                     <TextView
                         android:id="@+id/TextViewSelectfootballer"
                         android:padding="3dp"
-                        android:text="@string/selectFootballer_textView" />
+                        android:text="@string/selectFootballer_textView"
+                        android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinnerHealthCareFootballers"
@@ -85,10 +87,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="UselessParent">
+
                     <TextView
                         android:id="@+id/TextViewHealthCareCategory"
                         android:padding="3dp"
-                        android:text="@string/healthCareCategory_textView" />
+                        android:text="@string/healthCareCategory_textView"
+                        android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinnerHealthCareCategory"
@@ -100,15 +104,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="UselessParent">
+
                     <TextView
                         android:id="@+id/TextViewHealthCareName"
                         android:padding="3dp"
-                        android:text="@string/healthCareName_textView" />
+                        android:text="@string/healthCareName_textView"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/editTextHealthCareName"
                         android:layout_height="wrap_content"
-                        android:autofillHints="" />
+                        android:autofillHints=""
+                        android:inputType="text"
+                        tools:ignore="LabelFor" />
 
                 </TableRow>
             </TableLayout>
@@ -203,12 +211,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="UselessParent">
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:ignore="UselessParent">
 
                     <TextView
                         android:id="@+id/TextViewHealthCareDías"
@@ -281,7 +283,8 @@
                     <TextView
                         android:id="@+id/TextViewHealthCareCommentary"
                         android:padding="3dp"
-                        android:text="@string/healthCareCommentary_textView" />
+                        android:text="@string/healthCareCommentary_textView"
+                        android:textStyle="bold" />
                 </TableRow>
 
                 <TableRow

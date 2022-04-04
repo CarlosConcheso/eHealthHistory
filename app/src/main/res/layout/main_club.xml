@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,102 +20,97 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TableLayout
-                android:layout_marginTop="10dp"
-                android:background="@drawable/border_footballer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="*">
+                android:background="@drawable/border_footballer"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:orientation="vertical" >
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewClubName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/clubName_textView"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/TextViewClubName"
-                        android:padding="3dp"
-                        android:text="@string/clubName_textView" />
-
-                    <TextView
-                        android:id="@+id/clubName"
-                        android:gravity="center" />
-                </TableRow>
-
-                <TableRow
+                <TextView
+                    android:id="@+id/clubName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="wrap_content"
+                    android:gravity="start" />
 
-                    <TextView
-                        android:id="@+id/TextViewClubPresident"
-                        android:padding="3dp"
-                        android:text="@string/clubPresident_textView" />
+                <TextView
+                    android:id="@+id/TextViewClubPresident"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/clubPresident_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/clubPresident"
-                        android:gravity="center" />
-                </TableRow>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start" />
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewClubAlias"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewClubAlias"
-                        android:padding="3dp"
-                        android:text="@string/clubAlias_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/clubAlias_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/clubAlias"
-                        android:gravity="center" />
-                </TableRow>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start" />
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewClubContact"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewClubContact"
-                        android:padding="3dp"
-                        android:text="@string/clubContact_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/clubContact_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/clubContact"
-                        android:gravity="center" />
-                </TableRow>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start" />
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewClubTeamCare"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewClubTeamCare"
-                        android:padding="3dp"
-                        android:text="@string/clubTeamCare_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/clubTeamCare_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/clubTeamCare"
-                        android:gravity="center" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start" />
 
-                </TableRow>
-            </TableLayout>
-            <TableLayout
-                android:layout_marginTop="10dp"
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="*">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-
+                android:padding="5dp"
+                android:orientation="vertical" >
                     <Button
                         android:id="@+id/buttonNewTeamCare"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/clubNewTeamCare_textView" />
-                </TableRow>
-            </TableLayout>
+            </LinearLayout>
 
 
             <TableLayout
@@ -128,7 +122,8 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
 
                     <TextView
                         android:id="@+id/TextViewClubFootballers"
@@ -150,7 +145,8 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
 
                     <TextView
                         android:id="@+id/TextViewClubFootballerName"

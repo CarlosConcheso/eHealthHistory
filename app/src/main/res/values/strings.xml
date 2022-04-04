@@ -27,7 +27,7 @@
                     <string name="footballerContactClubTeamCareTelecom_TextView">Teléfono contacto:</string>
                     <string name="footballerContactClubContactTeamCareNote_TextView">Nota:</string>
 
-            <string name="historial_cuidados_footballer">Historial de cuidados médicos:</string>
+            <string name="historial_cuidados_footballer">Historial de cuidados médicos</string>
                     <string name="TextViewTableCategory">Categoría</string>
                     <string name="TextViewTableActivo">Activo</string>
             <string name="buttonfootballerHealthCareDetails">Ver historial médico detallado</string>
@@ -66,7 +66,7 @@
                     <string name="healthCareDuracion_textView">Duración tratamiento</string>
                     <string name="healthCareHoraInicio_textView">Hora Inicio:</string>
                     <string name="healthCareHoraFin_textView">Hora Fin:</string>
-                    <string name="radioButton_AllDay">Servicio 24 horas</string>
+                    <string name="radioButton_AllDay">Tratamiento 24 horas</string>
                     <string name="healthCareDias_textView">Días:</string>
                             <string name="checkBox_Lunes">L</string>
                             <string name="checkBox_Martes">M</string>

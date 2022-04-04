@@ -20,62 +20,59 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TableLayout
-                android:layout_marginTop="10dp"
-                android:background="@drawable/border_footballer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="1">
+                android:background="@drawable/border_footballer"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:orientation="vertical" >
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerName"
-                        android:padding="3dp"
-                        android:text="@string/footballerName_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerName_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/footballerName"
                         android:padding="3dp"
-                        android:layout_marginStart="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="start" />
-                </TableRow>
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerBirthday"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerBirthday"
-                        android:padding="3dp"
-                        android:text="@string/footballerBirthday_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerBirthday_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/footballerBirthday"
                         android:padding="3dp"
-                        android:layout_marginStart="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="start" />
 
-                </TableRow>
-
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerTelecom"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerTelecom"
-                        android:padding="3dp"
-                        android:text="@string/footballerTelcom_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerTelcom_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/footballerTelcom"
                         android:padding="3dp"
-                        android:layout_marginStart="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="start" />
-                </TableRow>
-            </TableLayout>
+            </LinearLayout>
 
             <TableLayout
                 android:layout_marginTop="10dp"
@@ -95,15 +92,29 @@
                 </TableRow>
             </TableLayout>
 
-            <TextView
-                android:id="@+id/textViewHistoryHealthCareService"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/historial_cuidados_footballer" />
-
             <TableLayout
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/border_footballer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/textViewHistoryHealthCareService"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="@string/historial_cuidados_footballer"
+                    android:textStyle="bold" />
+
+            </TableRow>
+            </TableLayout>
+            <TableLayout
                 android:id="@+id/TableHealthCareService"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -118,15 +129,17 @@
 
                     <TextView
                         android:id="@+id/TextViewTableClub"
-                        android:padding="3dp"
                         android:layout_gravity="center"
-                        android:text="@string/TextViewTableActivo" />
+                        android:padding="3dp"
+                        android:text="@string/TextViewTableActivo"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/TextViewTableCategory"
-                        android:padding="3dp"
                         android:layout_gravity="center"
-                        android:text="@string/TextViewTableCategory" />
+                        android:padding="3dp"
+                        android:text="@string/TextViewTableCategory"
+                        android:textStyle="bold" />
 
                 </TableRow>
             </TableLayout>

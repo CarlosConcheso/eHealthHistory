@@ -66,21 +66,21 @@
                 </TableRow>
             </TableLayout>
 
-
-            <TableLayout
-                android:layout_marginTop="0dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/border_footballer"
-                android:stretchColumns="*">
-            <TextView
-                android:id="@+id/TextViewFavCareTeamName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="0dp"
-                android:padding="3dp"
-                android:text="@string/favCareTeamName_textView"
-                android:textStyle="bold" />
+                android:padding="5dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/TextViewFavCareTeamName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:padding="3dp"
+                    android:text="@string/favCareTeamName_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/favCareTeamName"
@@ -125,7 +125,7 @@
                         android:id="@+id/favCareTeamNote"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent" />
-            </TableLayout>
+            </LinearLayout>
 
 
 
@@ -176,12 +176,14 @@
             </TableLayout>
 
 
-            <TableLayout
-                android:layout_marginTop="0dp"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/border_footballer"
-                android:stretchColumns="*">
+                android:padding="5dp"
+                android:orientation="vertical" >
+
                 <TextView
                     android:id="@+id/TextViewNewFavCareTeamName"
                     android:layout_width="match_parent"
@@ -234,7 +236,7 @@
                     android:id="@+id/newFavCareTeamNote"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent" />
-            </TableLayout>
+            </LinearLayout>
 
             <TableLayout
                 android:layout_marginTop="10dp"

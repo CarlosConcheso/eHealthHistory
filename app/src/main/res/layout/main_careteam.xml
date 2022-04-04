@@ -20,70 +20,71 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TableLayout
-                android:layout_marginTop="10dp"
-                android:background="@drawable/border_footballer"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="*">
+                android:background="@drawable/border_footballer"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:orientation="vertical" >
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewCareTeamName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewCareTeamName"
-                        android:padding="3dp"
-                        android:text="@string/careTeamName_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/careTeamName_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/careTeamName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center" />
-                </TableRow>
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewCareTeamStatus"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewCareTeamStatus"
-                        android:padding="3dp"
-                        android:text="@string/careTeamStatus_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/careTeamStatus_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/careTeamStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center" />
-                </TableRow>
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewCareTeamTelecom"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewCareTeamTelecom"
-                        android:padding="3dp"
-                        android:text="@string/careTeamTelecom_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/careTeamTelecom_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/careTeamTelecom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center" />
-                </TableRow>
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewCareTeamNote"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewCareTeamNote"
-                        android:padding="3dp"
-                        android:text="@string/careTeamNote_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/careTeamNote_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/careTeamNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center" />
-
-                </TableRow>
-            </TableLayout>
+            </LinearLayout>
 
             <TableRow
                 android:layout_width="match_parent"

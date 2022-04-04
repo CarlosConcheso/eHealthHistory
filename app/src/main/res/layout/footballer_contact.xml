@@ -20,71 +20,70 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TableLayout
-                android:layout_marginTop="30dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="*">
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:orientation="vertical" >
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerContactName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerContactName"
-                        android:padding="3dp"
-                        android:text="@string/footballerContactName_textView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerContactName_textView"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/footballerContactName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center" />
-                </TableRow>
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerContactTelf"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerContactTelf"
-                        android:padding="3dp"
-                        android:text="@string/TextViewfootballerContactTelf" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/TextViewfootballerContactTelf"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/footballerContactTelf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center" />
 
-                </TableRow>
-
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerLenguaje"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerLenguaje"
-                        android:padding="3dp"
-                        android:text="@string/TextViewfootballerLenguaje" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/TextViewfootballerLenguaje"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/footballerContactLenguaje"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center" />
 
-                </TableRow>
-
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerContactAdress"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerContactAdress"
-                        android:padding="3dp"
-                        android:text="@string/TextViewfootballerContactAdress" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/TextViewfootballerContactAdress"
+                    android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/footballerContactAdress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center" />
-                </TableRow>
-            </TableLayout>
+
+            </LinearLayout>
 
             <TableLayout
                 android:layout_marginTop="10dp"
@@ -108,54 +107,52 @@
                 </TableRow>
             </TableLayout>
 
-            <TableLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/border_footballer"
-                android:stretchColumns="*">
+                android:padding="5dp"
+                android:orientation="vertical" >
 
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerClubName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerClubName"
-                        android:padding="3dp"
-                        android:text="@string/footballerContactClubName_TextView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerContactClubName_TextView"
+                    android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:padding="3dp"/>
 
-                </TableRow>
-
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerClubAlias"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerClubAlias"
-                        android:padding="3dp"
-                        android:text="@string/footballerContactClubAlias_TextView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerContactClubAlias_TextView"
+                    android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubAlias"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:padding="3dp" />
 
-                </TableRow>
-
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerClubContactName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerClubContactName"
-                        android:padding="3dp"
-                        android:text="@string/footballerContactClubContactName_TextView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerContactClubContactName_TextView"
+                    android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubContactName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:padding="3dp" />
-                </TableRow>
-
-            </TableLayout>
+            </LinearLayout>
 
             <TableLayout
                 android:layout_marginTop="10dp"
@@ -180,53 +177,53 @@
                 </TableRow>
             </TableLayout>
 
-            <TableLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/border_footballer"
-                android:stretchColumns="*">
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                android:padding="5dp"
+                android:orientation="vertical" >
 
-                    <TextView
-                        android:id="@+id/TextViewfootballerClubTeamCareName"
-                        android:padding="3dp"
-                        android:text="@string/footballerContactClubTeamCareName_TextView" />
+                <TextView
+                    android:id="@+id/TextViewfootballerClubTeamCareName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerContactClubTeamCareName_TextView"
+                    android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubTeamCareName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:padding="3dp"/>
 
-                </TableRow>
-
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerClubTeamCareTelecom"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerClubTeamCareTelecom"
-                        android:padding="3dp"
-                        android:text="@string/footballerContactClubTeamCareTelecom_TextView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerContactClubTeamCareTelecom_TextView"
+                    android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubTeamCareTelecom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:padding="3dp" />
 
-                </TableRow>
-
-                <TableRow
+                <TextView
+                    android:id="@+id/TextViewfootballerClubTeamCareNote"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/TextViewfootballerClubTeamCareNote"
-                        android:padding="3dp"
-                        android:text="@string/footballerContactClubContactTeamCareNote_TextView" />
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="@string/footballerContactClubContactTeamCareNote_TextView"
+                    android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubTeamCareNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:padding="3dp" />
-                </TableRow>
 
-            </TableLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
