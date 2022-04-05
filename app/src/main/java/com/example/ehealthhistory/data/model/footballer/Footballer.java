@@ -18,6 +18,7 @@ public class Footballer implements Serializable {
 
     //public enum genders {MALE, FEMALE, OTHER, UNKNOW}
 
+    private int id;
     private String username;
     private boolean active;
     private String name;
@@ -47,6 +48,14 @@ public class Footballer implements Serializable {
         this.club=club;
         this.footballerContact=footballerContact;
         this.footballerComunication=footballerComunication;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

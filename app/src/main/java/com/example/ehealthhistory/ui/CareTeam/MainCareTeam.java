@@ -14,13 +14,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
-import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
-import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.FireBase;
 import com.example.ehealthhistory.ui.HealthCareService.MainHealthCareService;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainCareTeam extends BaseActivity {

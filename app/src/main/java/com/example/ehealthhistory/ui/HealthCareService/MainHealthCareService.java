@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
-import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
-import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,7 +22,7 @@ import java.util.Map;
 public class MainHealthCareService extends BaseActivity {
 
     private final FireBase fb = new FireBase();
-    Map<String, String> footballerAndUsername = new HashMap<>();
+    private ArrayList<Footballer> futbolistas = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -154,9 +152,12 @@ public class MainHealthCareService extends BaseActivity {
             else return minsI != minsF;
     }
 
-    public void addToFootballerAndUsername(String username, String footbalerName)
-    {
-        footballerAndUsername.put(username, footbalerName);
+    public ArrayList<Footballer> getFutbolistas() {
+        return futbolistas;
+    }
+
+    public void setFutbolistas(ArrayList<Footballer> futbolistas) {
+        this.futbolistas = futbolistas;
     }
 
     //----------------------------------------------------------------------------------------------
@@ -182,9 +183,14 @@ public class MainHealthCareService extends BaseActivity {
         String[] mStringArray = new String[lista.size()];
 
         for (int i = 0; i < lista.size(); i++) {
-            mStringArray[i] = lista.get(i).getName();
+            mStringArray[i] = lista.get(i).getId() + ". " + lista.get(i).getName();
         }
 
         return mStringArray;
+    }
+
+    public int getIdFromSpinner(String value)
+    {
+        return Integer.parseInt(value.split("\\.")[0]);
     }
 }

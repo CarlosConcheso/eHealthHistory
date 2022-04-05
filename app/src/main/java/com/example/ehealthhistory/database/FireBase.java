@@ -634,19 +634,20 @@ public class FireBase {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        int i = 1;
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             Footballer footballer = new Footballer();
                             FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
 
-                            System.out.println("Nombre: " + footballerDTO.getName());
-
+                            footballer.setId(i);
                             footballer.setName(footballerDTO.getName());
                             footballer.setUsername(footballerDTO.getUsername());
                             lista.add(footballer);
 
-                            mainHealthCareService.addToFootballerAndUsername(footballer.getUsername(), footballer.getName());
+                            i++;
                         }
-                        System.out.println("ADAPTAME ESTA!!!!!!!!!");
+
+                        mainHealthCareService.setFutbolistas(lista);
 
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                 mainHealthCareService,
