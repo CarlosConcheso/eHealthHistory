@@ -32,7 +32,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 public class FireBase {
 
@@ -249,10 +252,12 @@ public class FireBase {
                 });
     }
 
-    public void representFootballerFavsCareTeams(String username, Spinner spinnerFavCareTeam, TextView favCareTeamName,
-                                                 TextView favCareTeamStatus, TextView favCareTeamTelecom,
-                                                 TextView favCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
+    public void getFootballerFavsCareTeams(String username, Spinner spinnerFavCareTeam, TextView favCareTeamName,
+                                           TextView favCareTeamStatus, TextView favCareTeamTelecom,
+                                           TextView favCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
+        ArrayList<CareTeam> careteams = new ArrayList<>();
+
         db.collection("footballer")
                 .whereEqualTo("username", username)
                 .get()
@@ -309,9 +314,9 @@ public class FireBase {
                 });
     }
     
-    public void representFootballerNoFavsCareTeams(String username, Spinner spinnerNewFavCareTeam, TextView newFavCareTeamName,
-                                  TextView newFavCareTeamStatus, TextView newFavCareTeamTelecom,
-                                  TextView newFavCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
+    public void getFootballerNoFavsCareTeams(String username, Spinner spinnerNewFavCareTeam, TextView newFavCareTeamName,
+                                             TextView newFavCareTeamStatus, TextView newFavCareTeamTelecom,
+                                             TextView newFavCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
         db.collection("footballer")
                 .whereEqualTo("username", username)
@@ -575,7 +580,6 @@ public class FireBase {
                                                         TextView careTeamTelcom, TextView careTeamNote,
                                                         MainCareTeam mainCareTeam)
     {
-
         ArrayList<Footballer> footballers = new ArrayList<>();
 
 
@@ -647,7 +651,7 @@ public class FireBase {
                             i++;
                         }
 
-                        mainHealthCareService.setFutbolistas(lista);
+                        mainHealthCareService.setFootballers(lista);
 
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                 mainHealthCareService,
@@ -659,7 +663,7 @@ public class FireBase {
                 });
     }
 
-    public void addHealthCareToFootballer(String footballer,
+    public void addHealthCareToFootballer(Footballer footballer,
                                           CheckBox activo, CheckBox checkBoxAllDay, Spinner healthCareCategory,
                                           EditText healthCareName,
                                           Spinner healthCareHoraInicio, Spinner healthCareHoraFin,
@@ -668,7 +672,67 @@ public class FireBase {
                                           CheckBox checkBoxJ, CheckBox checkBoxV, CheckBox checkBoxS, CheckBox checkBoxD,
                                           EditText multiLineHealthCareCommentary, EditText multiLineHealthCareExtraDetails) {
 
+        Map<String, Object> healthCareService = new HashMap<>();
 
+        db.collection("healthcare")
+                .whereEqualTo("username", footballer.getUsername())
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
 
+                        int numHealhcare = 1;
+
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            numHealhcare++;
+                        }
+
+                        healthCareService.put("active", activo.isChecked());
+                        healthCareService.put("avalibleTime_allDay", checkBoxAllDay.isChecked());
+
+                        // Si spinner habilitado, eso significa que las horas hay que establecerlas,
+                        // si no está activado, poner vacio.
+                        if(healthCareHoraInicio.isEnabled() && healthCareHoraFin.isEnabled() &&
+                                healthCareMinsInicio.isEnabled() && healthCareMinsFin.isEnabled()) {
+                            healthCareService.put("avalibleTime_endTime", healthCareHoraInicio.getSelectedItem().toString() + ":" + healthCareMinsInicio.getSelectedItem().toString());
+                            healthCareService.put("avalibleTime_startTime", healthCareHoraFin.getSelectedItem().toString() + ":" + healthCareMinsFin.getSelectedItem().toString());
+                        }
+                        else
+                        {
+                            healthCareService.put("avalibleTime_endTime", "");
+                            healthCareService.put("avalibleTime_startTime", "");
+                        }
+
+                        healthCareService.put("category", healthCareCategory.getSelectedItem().toString());
+                        healthCareService.put("commentary", multiLineHealthCareCommentary.getText().toString());
+                        healthCareService.put("extraDetails", multiLineHealthCareExtraDetails.getText().toString());
+                        healthCareService.put("name", healthCareName.getText().toString());
+                        healthCareService.put("username", footballer.getUsername());
+
+                        //daysOfWeek : { MON, TUE, WED, THU, FRI, SAT, SUN}
+                        ArrayList<String> avalibleTime_daysOfHealthCare = new ArrayList<>();
+                        if(checkBoxL.isChecked())
+                            avalibleTime_daysOfHealthCare.add("MON");
+                        if(checkBoxM.isChecked())
+                            avalibleTime_daysOfHealthCare.add("TUE");
+                        if(checkBoxX.isChecked())
+                            avalibleTime_daysOfHealthCare.add("WED");
+                        if(checkBoxJ.isChecked())
+                            avalibleTime_daysOfHealthCare.add("THU");
+                        if(checkBoxV.isChecked())
+                            avalibleTime_daysOfHealthCare.add("FRI");
+                        if(checkBoxS.isChecked())
+                            avalibleTime_daysOfHealthCare.add("SAT");
+                        if(checkBoxD.isChecked())
+                            avalibleTime_daysOfHealthCare.add("SUN");
+
+                        healthCareService.put("avalibleTime_daysOfHealthCare", avalibleTime_daysOfHealthCare);
+
+                        String idDocument = healthCareCategory.getSelectedItem().toString() + " " + footballer.getName() + " " + numHealhcare;
+                        System.out.println("ID DOCUMENTO: " + idDocument);
+
+                        db.collection("healthcare").document(idDocument).set(healthCareService);
+
+                    }
+                });
     }
 }

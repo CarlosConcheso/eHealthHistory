@@ -16,13 +16,11 @@ import com.example.ehealthhistory.database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainHealthCareService extends BaseActivity {
 
     private final FireBase fb = new FireBase();
-    private ArrayList<Footballer> futbolistas = new ArrayList<>();
+    private ArrayList<Footballer> footballers = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -89,7 +87,7 @@ public class MainHealthCareService extends BaseActivity {
                 else
                     if(checkDays(checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD)) {
 
-                        fb.addHealthCareToFootballer(spinnerFootballers.getSelectedItem().toString(),
+                        fb.addHealthCareToFootballer(getFotballerById(spinnerFootballers.getSelectedItem().toString()),
                                 activo, checkBoxAllDay, spinnerHealthCareCategory, healthCareName,
                                 healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin,
                                 checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD,
@@ -152,12 +150,8 @@ public class MainHealthCareService extends BaseActivity {
             else return minsI != minsF;
     }
 
-    public ArrayList<Footballer> getFutbolistas() {
-        return futbolistas;
-    }
-
-    public void setFutbolistas(ArrayList<Footballer> futbolistas) {
-        this.futbolistas = futbolistas;
+    public void setFootballers(ArrayList<Footballer> footballers) {
+        this.footballers = footballers;
     }
 
     //----------------------------------------------------------------------------------------------
@@ -189,8 +183,14 @@ public class MainHealthCareService extends BaseActivity {
         return mStringArray;
     }
 
-    public int getIdFromSpinner(String value)
+    public Footballer getFotballerById(String value)
     {
-        return Integer.parseInt(value.split("\\.")[0]);
+        int id = Integer.parseInt(value.split("\\.")[0]);
+
+        for(Footballer f: footballers)
+            if(id == f.getId()) {
+                return f;
+            }
+        return null;
     }
 }

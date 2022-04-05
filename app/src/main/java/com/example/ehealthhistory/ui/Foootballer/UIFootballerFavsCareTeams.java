@@ -58,9 +58,9 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         final Button buttonAddNewFavCareTeam = findViewById(R.id.buttonAddNewFavCareTeam);
 
         // Establecer valores
-        fb.representFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
+        fb.getFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
                 favCareTeamTelecom, favCareTeamNote, this);
-        fb.representFootballerNoFavsCareTeams(username, spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
+        fb.getFootballerNoFavsCareTeams(username, spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
                 newFavCareTeamTelecom, newFavCareTeamNote, this);
 
         // El spinner se actualiza cada vez que cambiamos el valor
