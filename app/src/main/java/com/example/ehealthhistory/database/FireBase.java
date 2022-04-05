@@ -531,11 +531,11 @@ public class FireBase {
                 });
     }
 
-    public void addNewCareTeam2Club(String usernameclub, String nameCareteam) {
+    public void addNewCareTeam2Club(String usernameclub, String oldCareTeam, String nameCareteam) {
 
         //buscar username por el nombre del club
         db.collection("careteam")
-                .whereEqualTo("name", nameCareteam)
+                .whereEqualTo("name", oldCareTeam)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -549,9 +549,24 @@ public class FireBase {
                                     .addOnCompleteListener(task2 -> {
                                         if (task2.isSuccessful()) {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
-                                                ClubDTO clubDTO = document.toObject(ClubDTO.class);
+                                                ClubDTO clubDTO = document2.toObject(ClubDTO.class);
 
-                                                //TODO: Donde había el antiguo careteam, meter el nuevo.
+                                                db.collection("careteam")
+                                                        .whereEqualTo("name", nameCareteam)
+                                                        .get()
+                                                        .addOnCompleteListener(task3 -> {
+                                                            if (task3.isSuccessful()) {
+                                                                for (QueryDocumentSnapshot document3 : Objects.requireNonNull(task3.getResult())) {
+                                                                    CareTeamDTO newCareTeamDTO = document3.toObject(CareTeamDTO.class);
+
+                                                                    Map<String, Object> newCareteams = new HashMap<>();
+                                                                    newCareteams.put("username_careteam", newCareTeamDTO.getUsername());
+
+                                                                    db.collection("club").document(document2.getId()).update(newCareteams);
+
+                                                                }
+                                                            }
+                                                        });
                                             }
                                         }
                                     });

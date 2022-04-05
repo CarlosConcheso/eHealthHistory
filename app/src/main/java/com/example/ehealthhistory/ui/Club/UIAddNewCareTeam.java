@@ -4,18 +4,14 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.database.FireBase;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -31,7 +27,6 @@ public class UIAddNewCareTeam extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.club_add_newcareteam);
         String username = getIntent().getStringExtra("username");
-
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Establecer nuevo Médico");
@@ -68,7 +63,7 @@ public class UIAddNewCareTeam extends BaseActivity {
 
         //Añadir el nuevo equipo médico
         buttonAddNewCareTeam.setOnClickListener((v -> {
-                fb.addNewCareTeam2Club(username, spinnerCareTeams.getSelectedItem().toString());
+                fb.addNewCareTeam2Club(username, careTeamName.getText().toString(),spinnerCareTeams.getSelectedItem().toString());
                 finish();
         }));
     }
@@ -136,6 +131,5 @@ public class UIAddNewCareTeam extends BaseActivity {
         newCareTeamStatus.setText(ct.getStatus());
         newCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
         newCareTeamNote.setText(ct.getNote());
-
     }
 }
