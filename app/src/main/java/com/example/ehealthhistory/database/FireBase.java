@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -284,10 +286,8 @@ public class FireBase {
 
                                                     uiFootballerFavsCareTeams.addToFavCareTeam(ct);
 
-                                                    System.out.println("CARETEAM DENTRO: " + ct.getName());
                                                 }
 
-                                                System.out.println("CARETEAM 0: " + uiFootballerFavsCareTeams.getFavsCareTeams().get(0).getName());
 
                                                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                                         uiFootballerFavsCareTeams,
@@ -611,7 +611,6 @@ public class FireBase {
                                                 footballer.setFootballerContact(fc);
                                                 mainCareTeam.addFootballer(footballer);
 
-                                                System.out.println("Fubtolista: " + footballer.getName());
                                                 footballers.add(footballer);
                                                 mainCareTeam.setConsulta(true);
                                             }
@@ -624,7 +623,20 @@ public class FireBase {
     }
 
 
+    public void representFootballersByCareTeam(String username, Spinner spinnerFootballers) {
+
+    }
+
+    public void addHealthCareToFootballer(String footballer,
+                                          CheckBox activo, CheckBox checkBoxAllDay, Spinner healthCareCategory,
+                                          EditText healthCareName,
+                                          Spinner healthCareHoraInicio, Spinner healthCareHoraFin,
+                                          Spinner healthCareMinsInicio, Spinner healthCareMinsFin,
+                                          CheckBox checkBoxL, CheckBox checkBoxM, CheckBox checkBoxX,
+                                          CheckBox checkBoxJ, CheckBox checkBoxV, CheckBox checkBoxS, CheckBox checkBoxD,
+                                          EditText multiLineHealthCareCommentary, EditText multiLineHealthCareExtraDetails) {
 
 
 
+    }
 }

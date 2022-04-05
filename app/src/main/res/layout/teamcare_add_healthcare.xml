@@ -269,28 +269,20 @@
             </TableLayout>
         </LinearLayout>
 
-            <TableLayout
-                android:layout_marginTop="30dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="*">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:ignore="UselessParent">
+                android:background="@drawable/border_footballer"
+                android:padding="5dp"
+                android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/TextViewHealthCareCommentary"
                         android:padding="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:text="@string/healthCareCommentary_textView"
                         android:textStyle="bold" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:ignore="UselessParent">
 
                     <EditText
                         android:id="@+id/editTextTextMultiLineHealthCareCommentary"
@@ -301,8 +293,26 @@
                         android:inputType="textMultiLine"
                         android:autofillHints=""
                         tools:ignore="LabelFor" />
-                </TableRow>
-            </TableLayout>
+
+                <TextView
+                    android:id="@+id/TextViewHealthCareextraDetails"
+                    android:padding="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/healthCareExtraDetails_textView"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextTextMultiLineHealthCarExtraDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:autofillHints=""
+                    tools:ignore="LabelFor" />
+
+            </LinearLayout>
 
             <TableLayout
                 android:layout_marginTop="30dp"

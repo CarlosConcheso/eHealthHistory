@@ -39,7 +39,7 @@
                         android:id="@+id/footballerContactName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewfootballerContactTelf"
@@ -53,7 +53,7 @@
                         android:id="@+id/footballerContactTelf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewfootballerLenguaje"
@@ -67,7 +67,7 @@
                         android:id="@+id/footballerContactLenguaje"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewfootballerContactAdress"
@@ -81,7 +81,7 @@
                         android:id="@+id/footballerContactAdress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
             </LinearLayout>
 
@@ -181,6 +181,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/border_footballer"
+                android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:orientation="vertical" >
 

@@ -61,7 +61,7 @@
                         android:id="@+id/careTeamName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewCareTeamStatus"
@@ -75,7 +75,7 @@
                         android:id="@+id/careTeamStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewCareTeamTelecom"
@@ -89,7 +89,7 @@
                         android:id="@+id/careTeamTelecom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewCareTeamNote"
@@ -103,7 +103,7 @@
                         android:id="@+id/careTeamNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
             </LinearLayout>
 
             <TableLayout
@@ -174,7 +174,7 @@
                         android:id="@+id/newCareTeamName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewNewCareTeamStatus"
@@ -188,7 +188,7 @@
                         android:id="@+id/newCareTeamStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewNewCareTeamTelecom"
@@ -202,7 +202,7 @@
                         android:id="@+id/newCareTeamTelecom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewNewCareTeamNote"
@@ -216,7 +216,7 @@
                         android:id="@+id/newCareTeamNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="start" />
             </LinearLayout>
 
             <TableLayout

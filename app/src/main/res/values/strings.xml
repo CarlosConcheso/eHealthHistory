@@ -14,7 +14,7 @@
             <string name="footballerTelcom_textView">Teléfono personal:</string>
             <string name="footballerBirthday_textView">Cumpleaños: </string>
             <string name="ButtonfootballerVerDatos">Ver datos de contacto</string>
-                    <string name="footballerContactName_textView">Nombre:</string>
+                    <string name="footballerContactName_textView">Nombre del representante:</string>
                     <string name="TextViewfootballerContactTelf">Teléfono contacto:</string>
                     <string name="TextViewfootballerLenguaje">Idioma:</string>
                     <string name="TextViewfootballerContactAdress">Dirección:</string>
@@ -62,6 +62,7 @@
                     <string name="healthCareCategory_textView">Categoría:</string>
                     <string name="healthCareName_textView">Nombre tratamiento:</string>
                     <string name="healthCareCommentary_textView">Comentarios sobre tratamiento:</string>
+                    <string name="healthCareExtraDetails_textView">Detalles extra:</string>
                     <string name="healthCareAllDay_textView">¿Cuidado 24 horas?</string>
                     <string name="healthCareDuracion_textView">Duración tratamiento</string>
                     <string name="healthCareHoraInicio_textView">Hora Inicio:</string>
@@ -105,6 +106,7 @@
 
         <!-- Pantalla Add TeamCare desde Footballer -->
         <string name="error_usuario_newfavteamcare">Nuevo equipo médico ya existe</string>
+
 
 
 </resources>

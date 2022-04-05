@@ -9,17 +9,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
+import com.example.ehealthhistory.database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 public class MainHealthCareService extends BaseActivity {
+
+    private final FireBase fb = new FireBase();
 
     private ModelFactory mf = new ModelFactory();
 
@@ -28,17 +29,18 @@ public class MainHealthCareService extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teamcare_add_healthcare);
+        String username = getIntent().getStringExtra("username");
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Añadir cuidado");
 
         // Identificar todos los componentes de la pantalla
-        final Spinner healthCareFootballers = findViewById(R.id.spinnerHealthCareFootballers);
+        final Spinner spinnerFootballers = findViewById(R.id.spinnerHealthCareFootballers);
 
         final CheckBox activo = findViewById(R.id.checkBoxActivo);
         final CheckBox checkBoxAllDay = findViewById(R.id.checkBoxAllDay);
 
-        final Spinner healthCareCategory = findViewById(R.id.spinnerHealthCareCategory);
+        final Spinner spinnerHealthCareCategory = findViewById(R.id.spinnerHealthCareCategory);
         final EditText healthCareName = findViewById(R.id.editTextHealthCareName);
 
         final Spinner healthCareHoraInicio = findViewById(R.id.spinnerTeamCareHoraInicio);
@@ -55,16 +57,20 @@ public class MainHealthCareService extends BaseActivity {
         final CheckBox checkBoxD = findViewById(R.id.checkBoxDomingo);
 
         final EditText multiLineHealthCareCommentary = findViewById(R.id.editTextTextMultiLineHealthCareCommentary);
+        final EditText multiLineHealthCareExtraDetails = findViewById(R.id.editTextTextMultiLineHealthCarExtraDetails);
+
         final Button botonAddHealthCare = findViewById(R.id.buttonAddHealthCare);
 
-        ArrayList<String> categorias = new ArrayList<>();
-        categorias.add("Recuperacion");
-        categorias.add("Manutención");
-        categorias.add("Ingreso");
+        // Inicializar Spinner con valores determinados para tratamientos
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.categoryHealthCare,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerHealthCareCategory.setAdapter(adapter);
 
-        // Inicializar Spinners de la app
-        inicializarFootballers(healthCareFootballers, mf.getFootballers());
-        inicializarCategorias(healthCareCategory, categorias);
+        // Inicializar futbolistas
+        fb.representFootballersByCareTeam(username, spinnerFootballers);
+        inicializarFootballers(spinnerFootballers, mf.getFootballers());
 
         //Se selecciona el cuidado 24 horas
         checkBoxAllDay.setOnClickListener(v -> {
@@ -82,8 +88,16 @@ public class MainHealthCareService extends BaseActivity {
                     Snackbar.make(findViewById(R.id.buttonAddHealthCare),
                             R.string.error_usuario_horas, Snackbar.LENGTH_SHORT).show();
                 else
-                    if(checkDays(checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD))
+                    if(checkDays(checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD)) {
+
+                        fb.addHealthCareToFootballer(spinnerFootballers.getSelectedItem().toString(),
+                                activo, checkBoxAllDay, spinnerHealthCareCategory, healthCareName,
+                                healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin,
+                                checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD,
+                                multiLineHealthCareCommentary, multiLineHealthCareExtraDetails);
                         finish();
+
+                    }
                     else
                         Snackbar.make(findViewById(R.id.buttonAddHealthCare),
                                 R.string.error_usuario_sindias, Snackbar.LENGTH_SHORT).show();
@@ -174,27 +188,6 @@ public class MainHealthCareService extends BaseActivity {
 
         for (int i = 0; i < lista.size(); i++) {
             mStringArray[i] = lista.get(i).getName();
-        }
-
-        return mStringArray;
-    }
-
-    private void inicializarCategorias(Spinner spinner, ArrayList<String> lista)
-    {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_dropdown_item,
-                convert2ArrayCategoria(lista));
-
-        spinner.setAdapter(adapter);
-    }
-
-    private String[] convert2ArrayCategoria(ArrayList<String> lista)
-    {
-        String[] mStringArray = new String[lista.size()];
-
-        for (int i = 0; i < lista.size(); i++) {
-            mStringArray[i] = lista.get(i);
         }
 
         return mStringArray;
