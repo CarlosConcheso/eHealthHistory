@@ -11,18 +11,20 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
+import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainHealthCareService extends BaseActivity {
 
     private final FireBase fb = new FireBase();
-
-    private ModelFactory mf = new ModelFactory();
+    Map<String, String> footballerAndUsername = new HashMap<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -69,8 +71,7 @@ public class MainHealthCareService extends BaseActivity {
         spinnerHealthCareCategory.setAdapter(adapter);
 
         // Inicializar futbolistas
-        fb.representFootballersByCareTeam(username, spinnerFootballers);
-        inicializarFootballers(spinnerFootballers, mf.getFootballers());
+        fb.representFootballersByCareTeam(username, spinnerFootballers, this);
 
         //Se selecciona el cuidado 24 horas
         checkBoxAllDay.setOnClickListener(v -> {
@@ -153,6 +154,11 @@ public class MainHealthCareService extends BaseActivity {
             else return minsI != minsF;
     }
 
+    public void addToFootballerAndUsername(String username, String footbalerName)
+    {
+        footballerAndUsername.put(username, footbalerName);
+    }
+
     //----------------------------------------------------------------------------------------------
     // Metodos para modififcar los spinners de las horass
     private void anularSpinnersHora(Spinner horaInicio, Spinner horaFin, Spinner minsInicio, Spinner minsFin)
@@ -171,18 +177,7 @@ public class MainHealthCareService extends BaseActivity {
         minsFin.setEnabled(true);
     }
 
-    // Metodos para inicializar spinners y convertir en arrays
-    private void inicializarFootballers(Spinner spinner, ArrayList<Footballer> lista)
-    {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_dropdown_item,
-                convert2ArrayFootballer(lista));
-
-        spinner.setAdapter(adapter);
-    }
-
-    private String[] convert2ArrayFootballer(ArrayList<Footballer> lista)
+    public String[] convert2Array(ArrayList<Footballer> lista)
     {
         String[] mStringArray = new String[lista.size()];
 

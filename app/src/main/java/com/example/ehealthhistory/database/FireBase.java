@@ -26,6 +26,7 @@ import com.example.ehealthhistory.ui.Club.UIAddNewCareTeam;
 import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerFavsCareTeams;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerHealthCares;
+import com.example.ehealthhistory.ui.HealthCareService.MainHealthCareService;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -623,8 +624,38 @@ public class FireBase {
     }
 
 
-    public void representFootballersByCareTeam(String username, Spinner spinnerFootballers) {
+    public void representFootballersByCareTeam(String username, Spinner spinnerFootballers, MainHealthCareService mainHealthCareService)
+    {
+        ArrayList<Footballer> lista = new ArrayList<>();
 
+        // Buscar futbolistas con ese careteam
+        db.collection("footballer")
+                .whereArrayContains("careteams", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            Footballer footballer = new Footballer();
+                            FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
+
+                            System.out.println("Nombre: " + footballerDTO.getName());
+
+                            footballer.setName(footballerDTO.getName());
+                            footballer.setUsername(footballerDTO.getUsername());
+                            lista.add(footballer);
+
+                            mainHealthCareService.addToFootballerAndUsername(footballer.getUsername(), footballer.getName());
+                        }
+                        System.out.println("ADAPTAME ESTA!!!!!!!!!");
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                mainHealthCareService,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                mainHealthCareService.convert2Array(lista));
+
+                        spinnerFootballers.setAdapter(adapter);
+                    }
+                });
     }
 
     public void addHealthCareToFootballer(String footballer,

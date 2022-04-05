@@ -52,7 +52,7 @@ public class MainCareTeam extends BaseActivity {
                 careTeamName, careTeamStatus, careTeamTelcom, careTeamNote, this);
 
         // Ir a otra ventana donde añadir un cuidado personalizado al futbolista
-        addHealthCare2Footboller.setOnClickListener((v -> changeTo(v.getContext())));
+        addHealthCare2Footboller.setOnClickListener((v -> changeTo(v.getContext(), username)));
     }
 
     @SuppressLint("SetTextI18n")
@@ -107,8 +107,9 @@ public class MainCareTeam extends BaseActivity {
         this.consulta = consulta;
     }
 
-    private static void changeTo(Context mContext) {
+    private static void changeTo(Context mContext, String username) {
         Intent intent = new Intent(mContext, MainHealthCareService.class);
+        intent.putExtra("username", username);
         mContext.startActivity(intent);
     }
 }
