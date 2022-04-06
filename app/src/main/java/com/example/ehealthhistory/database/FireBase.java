@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 
 public class FireBase {
 
@@ -531,7 +530,7 @@ public class FireBase {
                 });
     }
 
-    public void addNewCareTeam2Club(String usernameclub, String oldCareTeam, String nameCareteam) {
+    public void addNewCareTeam2Club(String usernameclub, String oldCareTeam, String newCareteam) {
 
         //buscar username por el nombre del club
         db.collection("careteam")
@@ -549,10 +548,9 @@ public class FireBase {
                                     .addOnCompleteListener(task2 -> {
                                         if (task2.isSuccessful()) {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
-                                                ClubDTO clubDTO = document2.toObject(ClubDTO.class);
 
                                                 db.collection("careteam")
-                                                        .whereEqualTo("name", nameCareteam)
+                                                        .whereEqualTo("name", newCareteam)
                                                         .get()
                                                         .addOnCompleteListener(task3 -> {
                                                             if (task3.isSuccessful()) {
@@ -564,24 +562,60 @@ public class FireBase {
 
                                                                     db.collection("club").document(document2.getId()).update(newCareteams);
 
+                                                                    //Actualizar el username del careteam en el array en Footballer.
+                                                                    db.collection("footballer")
+                                                                            .whereArrayContains("careteams", careTeamDTO.getUsername())
+                                                                            .get()
+                                                                            .addOnCompleteListener(task4 -> {
+                                                                                if (task4.isSuccessful()) {
+                                                                                    for (QueryDocumentSnapshot document4 : Objects.requireNonNull(task4.getResult())) {
+
+                                                                                        FootballerDTO footballerDTO = document4.toObject(FootballerDTO.class);
+
+                                                                                        // Recojo el contenido.
+                                                                                        ArrayList<String> careteamsFootballer = footballerDTO.getCareteams();
+
+                                                                                        // Ahora modifico de forma local los valores y se los paso
+                                                                                        Map<String, Object> newValues = new HashMap<>();
+
+                                                                                        System.out.println("----------------JUGADOR: " + footballerDTO.getName());
+
+                                                                                        System.out.println("CARETEAMS ANTES: ");
+                                                                                        for(int i=0; i<careteamsFootballer.size(); i++)
+                                                                                                System.out.println("CARETEAM: " + careteamsFootballer.get(i));
+
+                                                                                        ArrayList<String> auxFinalCareTeams = new ArrayList<>();
+
+                                                                                        for(int i=0; i<careteamsFootballer.size(); i++) {
+                                                                                            if(!careteamsFootballer.get(i).equals(newCareTeamDTO.getUsername())) {
+                                                                                                if (careteamsFootballer.get(i).equals(careTeamDTO.getUsername())) {
+                                                                                                    auxFinalCareTeams.add(newCareTeamDTO.getUsername());
+                                                                                                }
+                                                                                                else {
+                                                                                                    auxFinalCareTeams.add(careteamsFootballer.get(i));
+                                                                                                }
+                                                                                            }
+
+
+                                                                                        }
+
+                                                                                        System.out.println("CARETEAMS DESPUÉS: ");
+                                                                                        for(int i=0; i<auxFinalCareTeams.size(); i++)
+                                                                                            System.out.println("CARETEAM: " + auxFinalCareTeams.get(i));
+
+
+                                                                                        // Si no existe reemplaza el antiguo por el nuevo.
+                                                                                        // Si existe, no hace nada mas que volver a pasarle los valores antiguos
+                                                                                        newValues.put("careteams", auxFinalCareTeams);
+                                                                                        db.collection("footballer").document(document4.getId()).update(newValues);
+                                                                                    }
+
+                                                                                }
+                                                                            });
+
                                                                 }
                                                             }
                                                         });
-                                            }
-                                        }
-                                    });
-
-                            //Actualizar el username del careteam en el array en Footballer.
-                            db.collection("footballer")
-                                    .whereArrayContains("careteams", careTeamDTO.getUsername())
-                                    .get()
-                                    .addOnCompleteListener(task2 -> {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
-                                                FootballerDTO footballerDTO = document2.toObject(FootballerDTO.class);
-
-                                                //TODO: Donde había el antiguo careteam, meter el nuevo en el array.
-
                                             }
                                         }
                                     });
