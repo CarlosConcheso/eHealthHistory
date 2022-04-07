@@ -232,21 +232,33 @@ public class FireBase {
                             i++;
                         }
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                                uiFootballerHealthCares,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                uiFootballerHealthCares.convert2ArrayHealthCares(lista));
+                        if (lista.size() > 0) {
 
-                        spinner.setAdapter(adapter);
-                        uiFootballerHealthCares.setHealthCares(lista);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                    uiFootballerHealthCares,
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    uiFootballerHealthCares.convert2ArrayHealthCares(lista));
 
-                        uiFootballerHealthCares.representarValorSpinnerInicial(
-                                healthCareCategory, healthCareName,
-                                healthCareCommentary, healthCareAllDay,
-                                healthCareHoraInicio, healthCareHoraFin,
-                                healthCareNote);
+                            spinner.setAdapter(adapter);
+                            uiFootballerHealthCares.setHealthCares(lista);
 
-                        uiFootballerHealthCares.setConsulta(true);
+                            uiFootballerHealthCares.representarValorSpinnerInicial(
+                                    healthCareCategory, healthCareName,
+                                    healthCareCommentary, healthCareAllDay,
+                                    healthCareHoraInicio, healthCareHoraFin,
+                                    healthCareNote);
+
+                            uiFootballerHealthCares.setConsulta(true);
+                        }
+                        else{
+                            String [] noHealthCares = {"No hay cuidados"};
+
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                    uiFootballerHealthCares,
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    noHealthCares);
+                            spinner.setAdapter(adapter);
+                        }
                     }
                 });
     }
@@ -266,18 +278,18 @@ public class FireBase {
 
                             FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
 
-                            for(int i=0; i<footballerDTO.getCareteams().size(); i++) {
-
                                 db.collection("careteam")
-                                        .whereEqualTo("username", footballerDTO.getCareteams().get(i))
+                                        .whereIn("username", footballerDTO.getCareteams())
                                         .get()
                                         .addOnCompleteListener(task2 -> {
                                             if (task2.isSuccessful()) {
+                                                int id = 1;
                                                 for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
                                                     CareTeam ct = new CareTeam();
                                                     CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
 
+                                                    ct.setId(id);
                                                     ct.setUsername(careTeamDTO.getUsername());
                                                     ct.setName(careTeamDTO.getName());
                                                     ct.setTelcom(careTeamDTO.getTelecom());
@@ -290,14 +302,18 @@ public class FireBase {
                                                     favCareTeamNote.setText(ct.getNote());
 
                                                     uiFootballerFavsCareTeams.addToFavCareTeam(ct);
+                                                    careteams.add(ct);
 
+                                                    id++;
                                                 }
 
+                                                for(CareTeam ct : careteams)
+                                                    System.out.println("CARETEAM-> ID: " + ct.getId() + ",Nombre: " + ct.getName());
 
                                                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                                         uiFootballerFavsCareTeams,
                                                         android.R.layout.simple_spinner_dropdown_item,
-                                                        uiFootballerFavsCareTeams.convert2Array(uiFootballerFavsCareTeams.getFavsCareTeams()));
+                                                        uiFootballerFavsCareTeams.convert2Array(careteams));
                                                 spinnerFavCareTeam.setAdapter(adapter);
 
                                                 uiFootballerFavsCareTeams.representInitialSpinnerData(favCareTeamName,
@@ -307,7 +323,6 @@ public class FireBase {
                                                 uiFootballerFavsCareTeams.setFlagFavsCT(true);
                                             }
                                         });
-                            }
                         }
                     }
                 });
@@ -317,6 +332,8 @@ public class FireBase {
                                              TextView newFavCareTeamStatus, TextView newFavCareTeamTelecom,
                                              TextView newFavCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
+        ArrayList<CareTeam> careteams = new ArrayList<>();
+
         db.collection("footballer")
                 .whereEqualTo("username", username)
                 .get()
@@ -326,18 +343,18 @@ public class FireBase {
 
                             FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
 
-                            for(int i=0; i<footballerDTO.getCareteams().size(); i++) {
-
                                 db.collection("careteam")
-                                        .whereNotEqualTo("username", footballerDTO.getCareteams().get(i))
+                                        .whereNotIn("username", footballerDTO.getCareteams())
                                         .get()
                                         .addOnCompleteListener(task2 -> {
                                             if (task2.isSuccessful()) {
+                                                int id = 1;
                                                 for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
 
                                                     CareTeam ct = new CareTeam();
                                                     CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
 
+                                                    ct.setId(id);
                                                     ct.setUsername(careTeamDTO.getUsername());
                                                     ct.setName(careTeamDTO.getName());
                                                     ct.setTelcom(careTeamDTO.getTelecom());
@@ -350,12 +367,14 @@ public class FireBase {
                                                     newFavCareTeamNote.setText(ct.getNote());
 
                                                     uiFootballerFavsCareTeams.addNoFavsCareTeams(ct);
+                                                    careteams.add(ct);
+                                                    id++;
                                                 }
 
                                                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                                         uiFootballerFavsCareTeams,
                                                         android.R.layout.simple_spinner_dropdown_item,
-                                                        uiFootballerFavsCareTeams.convert2Array(uiFootballerFavsCareTeams.getNoFavsCareTeams()));
+                                                        uiFootballerFavsCareTeams.convert2Array(careteams));
                                                 spinnerNewFavCareTeam.setAdapter(adapter);
 
                                                 uiFootballerFavsCareTeams.representInitialSpinnerData(newFavCareTeamName,
@@ -365,7 +384,6 @@ public class FireBase {
                                                 uiFootballerFavsCareTeams.setFlagNoFavsCT(true);
                                             }
                                         });
-                            }
                         }
                     }
                 });
@@ -732,7 +750,10 @@ public class FireBase {
                         int numHealhcare = 1;
 
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+
+                            document.getId();
                             numHealhcare++;
+
                         }
 
                         healthCareService.put("active", activo.isChecked());

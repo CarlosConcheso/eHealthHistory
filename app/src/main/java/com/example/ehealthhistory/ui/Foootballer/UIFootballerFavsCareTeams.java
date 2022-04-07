@@ -67,8 +67,8 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         spinnerFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(isFlagFavsCT()) {
-                    //addTeamCareData(spinnerFavCareTeam.getSelectedItem().toString(), favCareTeamName, favCareTeamStatus,
-                    //         favCareTeamTelecom, favCareTeamNote);
+                    representTeamCareData(spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
+                             favCareTeamTelecom, favCareTeamNote, getFavsCareTeams());
                 }
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -78,8 +78,8 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         spinnerNewFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(isFlagNoFavsCT()) {
-                    //representTeamCareData(spinnerNewFavCareTeam.getSelectedItem().toString(), newFavCareTeamName, newFavCareTeamStatus,
-                    //         newFavCareTeamTelecom, newFavCareTeamNote);
+                    representTeamCareData(spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
+                             newFavCareTeamTelecom, newFavCareTeamNote, getNoFavsCareTeams());
                 }
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -94,10 +94,10 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         }));
     }
 
-    private void representTeamCareData(String nameSelectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
-                                       TextView newCareTeamTelecom, TextView newCareTeamNote)
+    private void representTeamCareData(Spinner selectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
+                                       TextView newCareTeamTelecom, TextView newCareTeamNote, ArrayList<CareTeam> careteams)
     {
-        CareTeam careTeamSelected = findCareTeam(nameSelectedCareTeam);
+        CareTeam careTeamSelected = findCareTeamInList(selectedCareTeam, careteams);
 
         newCareTeamName.setText(careTeamSelected.getName());
         newCareTeamStatus.setText(careTeamSelected.getStatus());
@@ -106,15 +106,13 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
     }
 
 
-    private CareTeam findCareTeam(String name)
+    private CareTeam findCareTeamInList(Spinner selectedCareTeam, ArrayList<CareTeam> careteams)
     {
-        CareTeam careTeamSelected = null;
-        for(CareTeam c : careTeams) {
-            if (c.getName().equals(name)) {
-                careTeamSelected = c;
-            }
-        }
-        return careTeamSelected;
+        String idSelectedItem = selectedCareTeam.getSelectedItem().toString().split(". ")[0];
+
+        for(CareTeam ct : careteams)
+            if(idSelectedItem.equals(String.valueOf(ct.getId()))) return ct;
+        return null;
 
     }
 
@@ -186,7 +184,7 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         String[] mStringArray = new String[lista.size()];
 
         for (int i = 0; i < lista.size(); i++) {
-            mStringArray[i] = lista.get(i).getName();
+            mStringArray[i] = lista.get(i).getId() + ". " +lista.get(i).getName();
         }
 
         return mStringArray;

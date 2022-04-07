@@ -116,23 +116,21 @@ public class UIFootballerHealthCares extends BaseActivity {
                                                 TextView healthCareHoraInicio, TextView healthCareHoraFin,
                                                 TextView healthCareNote)
     {
-        HealthCareService hc1 = getHealthCares().get(0);
+            HealthCareService hc1 = getHealthCares().get(0);
 
-        healthCareCategory.setText(hc1.getCategory());
-        healthCareName.setText(hc1.getName());
-        healthCareCommentary.setText(hc1.getCommentary());
-        if(hc1.getAvalibleTime().isAllDay())
-        {
-            healthCareAllDay.setText("Si");
-            healthCareHoraInicio.setText("");
-            healthCareHoraFin.setText("");
-        }
-        else {
-            healthCareAllDay.setText("No");
-            healthCareHoraInicio.setText(hc1.getAvalibleTime().getAvalibleStartTime());
-            healthCareHoraFin.setText(hc1.getAvalibleTime().getAvalibleEndTime());
-        }
-        healthCareNote.setText(hc1.getExtraDetails());
+            healthCareCategory.setText(hc1.getCategory());
+            healthCareName.setText(hc1.getName());
+            healthCareCommentary.setText(hc1.getCommentary());
+            if (hc1.getAvalibleTime().isAllDay()) {
+                healthCareAllDay.setText("Si");
+                healthCareHoraInicio.setText("");
+                healthCareHoraFin.setText("");
+            } else {
+                healthCareAllDay.setText("No");
+                healthCareHoraInicio.setText(hc1.getAvalibleTime().getAvalibleStartTime());
+                healthCareHoraFin.setText(hc1.getAvalibleTime().getAvalibleEndTime());
+            }
+            healthCareNote.setText(hc1.getExtraDetails());
     }
 
     public boolean isConsulta() {
@@ -142,4 +140,6 @@ public class UIFootballerHealthCares extends BaseActivity {
     public void setConsulta(boolean consulta) {
         this.consulta = consulta;
     }
+
+
 }

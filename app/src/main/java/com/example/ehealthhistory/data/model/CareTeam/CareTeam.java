@@ -20,6 +20,7 @@ public class CareTeam {
 
     //public enum CareTeamStatus { active , suspended, inactive, entered_in_error}
 
+    private int id;
     private String username;
     private String status;
     private String name;
@@ -38,6 +39,14 @@ public class CareTeam {
         this.name = name;
         this.telcom = telcom;
         this.note = note;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
