@@ -33,6 +33,7 @@
             <string name="buttonfootballerHealthCareDetails">Ver historial médico detallado</string>
                     <string name="selectHealthCare_textView">Selecciona cuidado:</string>
                     <string name="healthCareInfo_textView">Información cuidado</string>
+                    <string name="healthCareDays_textView">Días:</string>
                     <string name="healthCareNote_textView">Nota:</string>
             <string name="buttonfootballerTeamCares">Medicos de confianza</string>
                     <string name="favCareTeam_textView">Equipo médico favorito:</string>

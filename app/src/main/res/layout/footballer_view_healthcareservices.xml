@@ -128,6 +128,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
+
+                <TextView
+                    android:id="@+id/TextViewHealthCareDays"
+                    android:padding="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/healthCareDays_textView" />
+
+                <TextView
+                    android:id="@+id/healthCareDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
                     <TextView
                         android:id="@+id/TextViewHealthCareHoraInicio"
                         android:padding="3dp"

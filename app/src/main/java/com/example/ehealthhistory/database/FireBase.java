@@ -195,7 +195,7 @@ public class FireBase {
                                                 TextView healthCareCategory, TextView healthCareName,
                                                 TextView healthCareCommentary, TextView healthCareAllDay,
                                                 TextView healthCareHoraInicio, TextView healthCareHoraFin,
-                                                TextView healthCareNote) {
+                                                TextView healthCareDays, TextView healthCareNote) {
 
         ArrayList<HealthCareService> lista = new ArrayList<>();
 
@@ -244,7 +244,7 @@ public class FireBase {
                                     healthCareCategory, healthCareName,
                                     healthCareCommentary, healthCareAllDay,
                                     healthCareHoraInicio, healthCareHoraFin,
-                                    healthCareNote);
+                                    healthCareDays, healthCareNote);
 
                             uiFootballerHealthCares.setConsulta(true);
                         }
@@ -767,10 +767,8 @@ public class FireBase {
                         int numHealhcare = 1;
 
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-
                             document.getId();
                             numHealhcare++;
-
                         }
 
                         healthCareService.put("active", activo.isChecked());
@@ -822,5 +820,4 @@ public class FireBase {
                     }
                 });
     }
-
 }
