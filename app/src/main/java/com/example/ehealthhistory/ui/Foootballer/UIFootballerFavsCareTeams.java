@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
-import com.example.ehealthhistory.data.model.ModelFactory;
 import com.example.ehealthhistory.database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,13 +20,10 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
 
     private final FireBase fb = new FireBase();
 
-    private ArrayList<CareTeam> favsCareTeams = new ArrayList<>();
+    private final ArrayList<CareTeam> favsCareTeams = new ArrayList<>();
     private boolean flagFavsCT = false;
-    private ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
+    private final ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
     private boolean flagNoFavsCT = false;
-
-    private final ModelFactory mf = new ModelFactory();
-    private final ArrayList<CareTeam> careTeams = mf.getCareTeams();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -87,10 +82,8 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
 
         /* Comprobar que no coinciden, añadir e irse. */
         buttonAddNewFavCareTeam.setOnClickListener((v -> {
-            if(spinnerNewFavCareTeam.getSelectedItem().toString().equals(spinnerFavCareTeam.getSelectedItem().toString()))
+                fb.addNewCareTeam2Footballer(username,findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams()));
                 finish();
-            else
-                Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.error_usuario_newfavteamcare, Snackbar.LENGTH_SHORT).show();
         }));
     }
 
@@ -130,10 +123,6 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         return favsCareTeams;
     }
 
-    public void setFavsCareTeams(ArrayList<CareTeam> favsCareTeams) {
-        this.favsCareTeams = favsCareTeams;
-    }
-
     public void addNoFavsCareTeams(CareTeam ct)
     {
         noFavsCareTeams.add(ct);
@@ -141,10 +130,6 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
 
     public ArrayList<CareTeam> getNoFavsCareTeams() {
         return noFavsCareTeams;
-    }
-
-    public void setNoFavsCareTeams(ArrayList<CareTeam> noFavsCareTeams) {
-        this.noFavsCareTeams = noFavsCareTeams;
     }
 
     public boolean isFlagFavsCT() {
@@ -167,16 +152,6 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
     {
         if(ct!=null)
             favsCareTeams.add(ct);
-    }
-
-    // Establecer valor spinner Team Cares
-    private void establecerNewTeamCares(Spinner spinnerCareTeams, ArrayList<CareTeam> careteamsPam) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_dropdown_item,
-                convert2Array(careteamsPam));
-
-        spinnerCareTeams.setAdapter(adapter);
     }
 
     public String[] convert2Array(ArrayList<CareTeam> lista)
