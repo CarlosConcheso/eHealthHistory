@@ -9,10 +9,10 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
+import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.FireBase;
 
@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class MainClub extends BaseActivity {
 
     private final FireBase fb = new FireBase();
+    private Club club = new Club();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,12 @@ public class MainClub extends BaseActivity {
         final TextView clubPresident = findViewById(R.id.clubPresident);
         final TextView clubAlias = findViewById(R.id.clubAlias);
         final TextView clubContact = findViewById(R.id.clubContact);
+        final TextView clubActive = findViewById(R.id.clubActive);
         final TextView clubTeamCare = findViewById(R.id.clubTeamCare);
         final Button buttonNewTeamCare = findViewById(R.id.buttonNewTeamCare);
 
         fb.representBasicDataAndClubsFootballer(username, nameActivityBase,
-                clubName, clubPresident, clubAlias, clubContact, clubTeamCare, this);
+                clubName, clubPresident, clubAlias, clubContact, clubActive, clubTeamCare, this);
 
         // Acción del botón para ir a añadir nuevo equipo médico del club
         buttonNewTeamCare.setOnClickListener((v -> changeTo(v.getContext(), username)));
@@ -70,6 +72,14 @@ public class MainClub extends BaseActivity {
 
             tabla.addView(f);
         }
+    }
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
     }
 
     private static void changeTo(Context mContext, String username) {

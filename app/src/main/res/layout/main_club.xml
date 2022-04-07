@@ -32,7 +32,8 @@
                     android:id="@+id/TextViewClubName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/clubName_textView"
                     android:textStyle="bold" />
 
@@ -40,13 +41,15 @@
                     android:id="@+id/clubName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
                     android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewClubPresident"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/clubPresident_textView"
                     android:textStyle="bold" />
 
@@ -54,13 +57,15 @@
                         android:id="@+id/clubPresident"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewClubAlias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/clubAlias_textView"
                     android:textStyle="bold" />
 
@@ -68,13 +73,15 @@
                         android:id="@+id/clubAlias"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewClubContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/clubContact_textView"
                     android:textStyle="bold" />
 
@@ -82,13 +89,31 @@
                         android:id="@+id/clubContact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
+
+                <TextView
+                    android:id="@+id/TextViewClubActive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
+                    android:text="@string/clubActive_textView"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/clubActive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewClubTeamCare"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/clubTeamCare_textView"
                     android:textStyle="bold" />
 
@@ -96,6 +121,8 @@
                         android:id="@+id/clubTeamCare"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginBottom="3dp"
                         android:gravity="start" />
 
             </LinearLayout>

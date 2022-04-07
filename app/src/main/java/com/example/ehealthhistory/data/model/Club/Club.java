@@ -60,11 +60,11 @@ public class Club {
         this.name = name;
     }
 
-    public String getPresidente() {
+    public String getPresident() {
         return president;
     }
 
-    public void setPresidente(String president) {
+    public void setPresident(String president) {
         this.president = president;
     }
 
@@ -92,12 +92,11 @@ public class Club {
         this.clubCareTeam = clubCareTeam;
     }
 
-    public ArrayList<Footballer> getFootballers() {
-        return footballers;
-    }
-
     public void setFootballers(ArrayList<Footballer> footballers) {
         this.footballers = footballers;
     }
 
+    public ArrayList<Footballer> getFootballers() {
+        return footballers;
+    }
 }

@@ -85,6 +85,7 @@
             <string name="clubPresident_textView">Presidente:</string>
             <string name="clubAlias_textView">Alias:</string>
             <string name="clubContact_textView">Contacto:</string>
+            <string name="clubActive_textView">Activo:</string>
             <string name="clubTeamCare_textView">Equipo médico:</string>
             <string name="clubNewTeamCare_textView">Asignar nuevo Equipo médico</string>
                     <string name="actualCareTeam_textView">Equipo médico actual</string>

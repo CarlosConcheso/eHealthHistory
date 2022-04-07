@@ -1,10 +1,5 @@
 package com.example.ehealthhistory.data.model.CareTeam;
 
-import com.example.ehealthhistory.data.model.footballer.Footballer;
-import org.intellij.lang.annotations.Identifier;
-
-import java.util.ArrayList;
-
 /**
  * o	Alcance y Uso:
  *      	personas y organizaciones que planean participar en la coordinación y la prestación de atención a un paciente
@@ -30,15 +25,6 @@ public class CareTeam {
     public CareTeam()
     {
 
-    }
-
-    public CareTeam(String username, String status, String name,
-                    int telcom, String note) {
-        this.username=username;
-        this.status = status;
-        this.name = name;
-        this.telcom = telcom;
-        this.note = note;
     }
 
     public int getId() {
@@ -78,10 +64,6 @@ public class CareTeam {
     }
 
     public void setTelcom(int telcom) {
-        this.telcom = telcom;
-    }
-
-    public void setTelecom(int telcom) {
         this.telcom = telcom;
     }
 

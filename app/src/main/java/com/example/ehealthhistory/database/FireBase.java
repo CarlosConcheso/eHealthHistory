@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
+import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.database.dto.CareTeamDTO;
@@ -406,11 +407,11 @@ public class FireBase {
                 });
     }
 
+    @SuppressLint("SetTextI18n")
     public void representBasicDataAndClubsFootballer(String username, TextView nameActivityBase, TextView clubName,
                                                      TextView clubPresident, TextView clubAlias, TextView clubContact,
-                                                     TextView clubTeamCare, MainClub mainClub)
+                                                     TextView clubActive, TextView clubTeamCare, MainClub mainClub)
     {
-
         ArrayList<Footballer> footballers = new ArrayList<>();
 
         db.collection("club")
@@ -419,26 +420,45 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            ClubDTO clubDTO = document.toObject(ClubDTO.class);
+                            Club club = new Club();
 
-                            ClubDTO club = document.toObject(ClubDTO.class);
+                            club.setName(clubDTO.getName());
+                            club.setPresident(clubDTO.getPresident());
+                            club.setAlias(clubDTO.getAlias());
+                            club.setContactName(clubDTO.getContactname());
+                            club.setActive(clubDTO.isActive());
 
                             nameActivityBase.setText(club.getName());
+
                             clubName.setText(club.getName());
                             clubPresident.setText(club.getPresident());
                             clubAlias.setText(club.getAlias());
-                            clubContact.setText(club.getContactname());
+                            if(club.isActive())
+                                clubActive.setText("Si");
+                            else
+                                clubActive.setText("No");
+
+                            clubContact.setText(club.getContactName());
 
                             //Sacar nombre del equipo médico
                             db.collection("careteam")
-                                    .whereEqualTo("username", club.getUsername_careteam())
+                                    .whereEqualTo("username", clubDTO.getUsername_careteam())
                                     .get()
                                     .addOnCompleteListener(task2 -> {
                                         if (task2.isSuccessful()) {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
-
                                                 CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
 
-                                                clubTeamCare.setText(careTeamDTO.getName());
+                                                CareTeam careteam = new CareTeam();
+                                                careteam.setName(careTeamDTO.getName());
+                                                careteam.setUsername(careTeamDTO.getUsername());
+                                                careteam.setStatus(careTeamDTO.getStatus());
+                                                careteam.setNote(careTeamDTO.getNote());
+                                                careteam.setTelcom(careTeamDTO.getTelecom());
+
+                                                club.setClubCareTeam(careteam);
+                                                clubTeamCare.setText(club.getClubCareTeam().getName());
                                             }
                                         }
                                     });
@@ -459,7 +479,8 @@ public class FireBase {
                                                 footballers.add(fotballer);
                                             }
 
-                                            mainClub.addFootballersRows(footballers);
+                                            club.setFootballers(footballers);
+                                            mainClub.addFootballersRows(club.getFootballers());
 
                                         }
                                     });
