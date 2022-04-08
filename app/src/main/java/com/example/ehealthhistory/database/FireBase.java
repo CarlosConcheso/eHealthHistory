@@ -106,7 +106,8 @@ public class FireBase {
 
                             footballer.setName(footballerDTO.getName());
                             footballer.setBirthday(footballerDTO.getBirthday());
-                            footballer.setTelecom(Integer.parseInt(footballerDTO.getTelecom()));
+                            if(footballerDTO.getTelecom().length()>0)
+                                footballer.setTelecom(Integer.parseInt(footballerDTO.getTelecom()));
 
                             footballerName.setText(footballer.getName());
                             footballerBirthDay.setText(footballer.getBirthday());
@@ -134,7 +135,7 @@ public class FireBase {
 
                             healthcares.add(hc);
                         }
-
+                        mainFootballer.setHealthCaresServices(healthcares);
                         mainFootballer.addHealthCareRows(healthcares);
                     }
                 });
@@ -754,6 +755,7 @@ public class FireBase {
 
                                                 footballer.setName(footballerDTO.getName());
                                                 footballer.setActive(footballerDTO.isActive());
+                                                if(footballerDTO.getContact_telecom().length()>0)
                                                 fc.setTelecom(Integer.parseInt(footballerDTO.getContact_telecom()));
 
                                                 footballer.setFootballerContact(fc);

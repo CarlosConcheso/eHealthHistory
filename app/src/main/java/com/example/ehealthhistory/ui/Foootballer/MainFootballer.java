@@ -13,13 +13,17 @@ import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.database.FireBase;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainFootballer extends BaseActivity {
 
     FireBase fb = new FireBase();
     private String username;
+
+    private ArrayList<HealthCareService> healthCaresServices = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -47,7 +51,7 @@ public class MainFootballer extends BaseActivity {
         buttonfootballerContact.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerContact.class, username)));
 
         // Ver historial médico en profundidad
-        buttonfootballerHealthCareDetails.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerHealthCares.class, username)));
+        buttonfootballerHealthCareDetails.setOnClickListener((v -> changeToHealthCares(v.getContext(), username)));
 
         // Ver médicos de confianza del futbolista: personales y del club.
         buttonfootballerTeamCares.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerFavsCareTeams.class, username)));
@@ -79,10 +83,29 @@ public class MainFootballer extends BaseActivity {
         }
     }
 
+    public ArrayList<HealthCareService> getHealthCaresServices() {
+        return healthCaresServices;
+    }
+
+    public void setHealthCaresServices(ArrayList<HealthCareService> healthCaresServices) {
+        this.healthCaresServices = healthCaresServices;
+    }
+
     @SuppressWarnings("rawtypes")
-    private static void changeTo(Context mContext, Class clase, String footballer) {
+    private void changeTo(Context mContext, Class clase, String footballer) {
         Intent intent = new Intent(mContext, clase);
         intent.putExtra("username", footballer);
         mContext.startActivity(intent);
+    }
+
+    private void changeToHealthCares(Context mContext, String footballer) {
+        if(getHealthCaresServices().size()>0) {
+            Intent intent = new Intent(mContext, UIFootballerHealthCares.class);
+            intent.putExtra("username", footballer);
+            mContext.startActivity(intent);
+        }
+        else
+            Snackbar.make(findViewById(R.id.buttonfootballerHealthCareDetails),
+                    R.string.error_usuario_healthcares, Snackbar.LENGTH_SHORT).show();
     }
 }
