@@ -31,7 +31,8 @@
                     android:id="@+id/TextViewfootballerContactName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/footballerContactName_textView"
                     android:textStyle="bold" />
 
@@ -39,13 +40,15 @@
                         android:id="@+id/footballerContactName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewfootballerContactTelf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/TextViewfootballerContactTelf"
                     android:textStyle="bold" />
 
@@ -53,13 +56,15 @@
                         android:id="@+id/footballerContactTelf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewfootballerLenguaje"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/TextViewfootballerLenguaje"
                     android:textStyle="bold" />
 
@@ -67,13 +72,15 @@
                         android:id="@+id/footballerContactLenguaje"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewfootballerContactAdress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/TextViewfootballerContactAdress"
                     android:textStyle="bold" />
 
@@ -81,6 +88,7 @@
                         android:id="@+id/footballerContactAdress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
             </LinearLayout>
@@ -118,40 +126,43 @@
                     android:id="@+id/TextViewfootballerClubName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/footballerContactClubName_TextView"
                     android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="3dp"/>
+                        android:layout_marginStart="3dp"/>
 
                 <TextView
                     android:id="@+id/TextViewfootballerClubAlias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/footballerContactClubAlias_TextView"
                     android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubAlias"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="3dp" />
+                        android:layout_marginStart="3dp"/>
 
                 <TextView
                     android:id="@+id/TextViewfootballerClubContactName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/footballerContactClubContactName_TextView"
                     android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubContactName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="3dp" />
+                        android:layout_marginStart="3dp" />
             </LinearLayout>
 
             <TableLayout
@@ -189,40 +200,45 @@
                     android:id="@+id/TextViewfootballerClubTeamCareName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/footballerContactClubTeamCareName_TextView"
                     android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubTeamCareName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="3dp"/>
+                        android:layout_marginStart="3dp"/>
 
                 <TextView
                     android:id="@+id/TextViewfootballerClubTeamCareTelecom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/footballerContactClubTeamCareTelecom_TextView"
                     android:textStyle="bold" />
                     <TextView
                         android:id="@+id/footballerClubTeamCareTelecom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="3dp" />
+                        android:layout_marginStart="3dp" />
 
                 <TextView
                     android:id="@+id/TextViewfootballerClubTeamCareNote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/footballerContactClubContactTeamCareNote_TextView"
                     android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/footballerClubTeamCareNote"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="3dp" />
+
+                <TextView
+                    android:id="@+id/footballerClubTeamCareNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginStart="3dp" />
 
             </LinearLayout>
         </LinearLayout>

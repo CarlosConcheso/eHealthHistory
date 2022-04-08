@@ -53,7 +53,8 @@
                     android:id="@+id/TextViewCareTeamName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/careTeamName_textView"
                     android:textStyle="bold" />
 
@@ -61,13 +62,15 @@
                         android:id="@+id/careTeamName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewCareTeamStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/careTeamStatus_textView"
                     android:textStyle="bold" />
 
@@ -75,13 +78,15 @@
                         android:id="@+id/careTeamStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewCareTeamTelecom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/careTeamTelecom_textView"
                     android:textStyle="bold" />
 
@@ -89,13 +94,15 @@
                         android:id="@+id/careTeamTelecom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewCareTeamNote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/careTeamNote_textView"
                     android:textStyle="bold" />
 
@@ -103,6 +110,8 @@
                         android:id="@+id/careTeamNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginBottom="3dp"
                         android:gravity="start" />
             </LinearLayout>
 
@@ -154,7 +163,6 @@
                 </TableRow>
             </TableLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -166,7 +174,8 @@
                     android:id="@+id/TextViewNewCareTeamName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/careTeamName_textView"
                     android:textStyle="bold" />
 
@@ -174,13 +183,15 @@
                         android:id="@+id/newCareTeamName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewNewCareTeamStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/careTeamStatus_textView"
                     android:textStyle="bold" />
 
@@ -188,13 +199,15 @@
                         android:id="@+id/newCareTeamStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewNewCareTeamTelecom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/careTeamTelecom_textView"
                     android:textStyle="bold" />
 
@@ -202,13 +215,15 @@
                         android:id="@+id/newCareTeamTelecom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewNewCareTeamNote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/careTeamNote_textView"
                     android:textStyle="bold" />
 
@@ -216,6 +231,8 @@
                         android:id="@+id/newCareTeamNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginStart="3dp"
                         android:gravity="start" />
             </LinearLayout>
 

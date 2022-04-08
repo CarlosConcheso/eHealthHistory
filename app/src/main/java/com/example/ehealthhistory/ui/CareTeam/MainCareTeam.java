@@ -70,10 +70,13 @@ public class MainCareTeam extends BaseActivity {
             else
                 col2.setText("No");
             col2.setGravity(Gravity.CENTER);
+            col2.setPadding(25,1,1,1);
+
 
             TextView col3 = new TextView(this);
             col3.setText(String.valueOf(footballers.get(i).getFootballerContact().getTelecom()));
             col3.setGravity(Gravity.CENTER);
+            col3.setPadding(25,1,1,1);
 
             f.addView(col1);
             f.addView(col2);

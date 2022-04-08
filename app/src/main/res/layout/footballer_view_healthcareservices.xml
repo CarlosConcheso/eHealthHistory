@@ -80,19 +80,20 @@
                     android:id="@+id/TextViewHealthCareCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:text="@string/healthCareCategory_textView"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"                    android:text="@string/healthCareCategory_textView"
                     android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/healthCareCategory"
                         android:layout_width="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/TextViewHealthCareName"
-                        android:padding="3dp"
-                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:text="@string/healthCareName_textView" />
@@ -100,12 +101,13 @@
                     <TextView
                         android:id="@+id/healthCareName"
                         android:layout_width="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/TextViewHealthCareCommentary"
-                        android:padding="3dp"
-                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:text="@string/healthCareCommentary_textView" />
@@ -113,12 +115,13 @@
                     <TextView
                         android:id="@+id/healthCareCommentary"
                         android:layout_width="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/TextViewHealthCareAllDay"
-                        android:padding="3dp"
-                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:text="@string/healthCareAllDay_textView" />
@@ -126,13 +129,14 @@
                     <TextView
                         android:id="@+id/healthCareAllDay"
                         android:layout_width="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_height="wrap_content"/>
 
 
                 <TextView
                     android:id="@+id/TextViewHealthCareDays"
-                    android:padding="3dp"
-                    android:layout_width="match_parent"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:text="@string/healthCareDays_textView" />
@@ -140,12 +144,13 @@
                 <TextView
                     android:id="@+id/healthCareDays"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="3dp"
                     android:layout_height="wrap_content"/>
 
                     <TextView
                         android:id="@+id/TextViewHealthCareHoraInicio"
-                        android:padding="3dp"
-                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:text="@string/healthCareHoraInicio_textView" />
@@ -153,11 +158,13 @@
                     <TextView
                         android:id="@+id/healthCareHoraInicio"
                         android:layout_width="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/TextViewHealthCareHoraFin"
-                        android:padding="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -166,12 +173,13 @@
                     <TextView
                         android:id="@+id/healthCareHoraFin"
                         android:layout_width="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_height="wrap_content"/>
 
                     <TextView
                         android:id="@+id/TextViewHealthCareNote"
-                        android:padding="3dp"
-                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:text="@string/healthCareNote_textView" />
@@ -179,6 +187,8 @@
                     <TextView
                         android:id="@+id/healthCareNote"
                         android:layout_width="match_parent"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginBottom="3dp"
                         android:layout_height="wrap_content"/>
             </LinearLayout>
 

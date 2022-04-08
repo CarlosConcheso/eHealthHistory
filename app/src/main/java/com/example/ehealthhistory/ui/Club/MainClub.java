@@ -25,7 +25,6 @@ public class MainClub extends BaseActivity {
 
     String username;
 
-
     @Override
     protected void onResume() {
         super.onResume();

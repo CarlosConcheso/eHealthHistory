@@ -77,20 +77,20 @@
                     android:id="@+id/TextViewFavCareTeamName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    android:padding="3dp"
-                    android:text="@string/favCareTeamName_textView"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"                    android:text="@string/favCareTeamName_textView"
                     android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/favCareTeamName"
                         android:layout_height="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_width="match_parent" />
 
                     <TextView
                         android:id="@+id/TextViewFavCareTeamStatus"
-                        android:padding="3dp"
-                        android:text="@string/favCareTeamStatus_textView"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"                        android:text="@string/favCareTeamStatus_textView"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         android:textStyle="bold"/>
@@ -98,12 +98,13 @@
                     <TextView
                         android:id="@+id/favCareTeamStatus"
                         android:layout_height="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_width="match_parent" />
 
                     <TextView
                         android:id="@+id/TextViewFavCareTeamTelecom"
-                        android:padding="3dp"
-                        android:text="@string/favCareTeamTelecom_textView"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"                        android:text="@string/favCareTeamTelecom_textView"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         android:textStyle="bold"/>
@@ -111,12 +112,13 @@
                     <TextView
                         android:id="@+id/favCareTeamTelecom"
                         android:layout_height="match_parent"
+                        android:layout_marginStart="3dp"
                         android:layout_width="match_parent" />
 
                     <TextView
                         android:id="@+id/TextViewFavCareTeamNote"
-                        android:padding="3dp"
-                        android:text="@string/favCareTeamNote_textView"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"                        android:text="@string/favCareTeamNote_textView"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         android:textStyle="bold"/>
@@ -124,10 +126,10 @@
                     <TextView
                         android:id="@+id/favCareTeamNote"
                         android:layout_height="match_parent"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_width="match_parent" />
             </LinearLayout>
-
-
 
             <TableLayout
                 android:layout_marginTop="30dp"
@@ -188,20 +190,20 @@
                     android:id="@+id/TextViewNewFavCareTeamName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    android:padding="3dp"
-                    android:text="@string/careTeamName_textView"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"                    android:text="@string/careTeamName_textView"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/newFavCareTeamName"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="3dp"
                     android:layout_width="match_parent" />
 
                 <TextView
                     android:id="@+id/TextViewNewFavCareTeamStatus"
-                    android:padding="3dp"
-                    android:text="@string/newFavCareTeamStatus_textView"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"                    android:text="@string/newFavCareTeamStatus_textView"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:textStyle="bold"/>
@@ -209,12 +211,13 @@
                 <TextView
                     android:id="@+id/newFavCareTeamStatus"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="3dp"
                     android:layout_width="match_parent" />
 
                 <TextView
                     android:id="@+id/TextViewNewFavCareTeamTelecom"
-                    android:padding="3dp"
-                    android:text="@string/newFavCareTeamTelecom_textView"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"                    android:text="@string/newFavCareTeamTelecom_textView"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:textStyle="bold"/>
@@ -222,11 +225,13 @@
                 <TextView
                     android:id="@+id/newFavCareTeamTelecom"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="3dp"
                     android:layout_width="match_parent" />
 
                 <TextView
                     android:id="@+id/TextViewNewFavCareTeamNote"
-                    android:padding="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
                     android:text="@string/newFavCareTeamNote_textView"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
@@ -235,6 +240,8 @@
                 <TextView
                     android:id="@+id/newFavCareTeamNote"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginStart="3dp"
                     android:layout_width="match_parent" />
             </LinearLayout>
 
