@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FireBase {
 
@@ -364,7 +363,6 @@ public class FireBase {
                                                     id++;
                                                 }
 
-                                                if(careteams.size()>0) {
                                                     ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                                             uiFootballerFavsCareTeams,
                                                             android.R.layout.simple_spinner_dropdown_item,
@@ -376,16 +374,7 @@ public class FireBase {
                                                             newFavCareTeamNote);
 
                                                     uiFootballerFavsCareTeams.setFlagNoFavsCT(true);
-                                                }
-                                                else{
-                                                    String [] noHealthCares = {"No hay medicos"};
 
-                                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                                                            uiFootballerFavsCareTeams,
-                                                            android.R.layout.simple_spinner_dropdown_item,
-                                                            noHealthCares);
-                                                    spinnerNewFavCareTeam.setAdapter(adapter);
-                                                }
                                             }
                                         });
                         }
