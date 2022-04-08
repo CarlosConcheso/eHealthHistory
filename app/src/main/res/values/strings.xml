@@ -109,6 +109,7 @@
         <!-- Pantalla Add TeamCare desde Footballer -->
         <string name="error_usuario_newfavteamcare">Nuevo equipo médico ya existe</string>
 
-
+        <!-- Pantalla Add New TeamCare desde Club -->
+        <string name="success_adding_newcareteam">Añadido con éxito</string>
 
 </resources>

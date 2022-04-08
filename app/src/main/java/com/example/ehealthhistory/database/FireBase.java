@@ -100,11 +100,16 @@ public class FireBase {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                            FootballerDTO footballer = document.toObject(FootballerDTO.class);
+                            FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
+                            Footballer footballer = new Footballer();
+
+                            footballer.setName(footballerDTO.getName());
+                            footballer.setBirthday(footballerDTO.getBirthday());
+                            footballer.setTelecom(Integer.parseInt(footballerDTO.getTelecom()));
 
                             footballerName.setText(footballer.getName());
                             footballerBirthDay.setText(footballer.getBirthday());
-                            footballerTelcom.setText(footballer.getTelecom());
+                            footballerTelcom.setText(String.valueOf(footballer.getTelecom()));
                         }
                     }
                 });
@@ -489,6 +494,50 @@ public class FireBase {
                 });
     }
 
+    public void refreshClubCareTeam(String username, TextView careteamName)
+    {
+        db.collection("club")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            ClubDTO clubDTO = document.toObject(ClubDTO.class);
+                            Club club = new Club();
+
+                            club.setName(clubDTO.getName());
+                            club.setPresident(clubDTO.getPresident());
+                            club.setAlias(clubDTO.getAlias());
+                            club.setContactName(clubDTO.getContactname());
+                            club.setActive(clubDTO.isActive());
+
+                            //Sacar nombre del equipo médico
+                            db.collection("careteam")
+                                    .whereEqualTo("username", clubDTO.getUsername_careteam())
+                                    .get()
+                                    .addOnCompleteListener(task2 -> {
+                                        if (task2.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
+                                                CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
+
+                                                CareTeam careteam = new CareTeam();
+                                                careteam.setName(careTeamDTO.getName());
+                                                careteam.setUsername(careTeamDTO.getUsername());
+                                                careteam.setStatus(careTeamDTO.getStatus());
+                                                careteam.setNote(careTeamDTO.getNote());
+                                                careteam.setTelcom(careTeamDTO.getTelecom());
+
+                                                club.setClubCareTeam(careteam);
+                                                careteamName.setText(club.getClubCareTeam().getName());
+
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
 
     public void representClubCareTeamData(String username,
                                             TextView careTeamName, TextView careTeamStatus,
@@ -633,13 +682,6 @@ public class FireBase {
 
                                                                                         // Ahora modifico de forma local los valores y se los paso
                                                                                         Map<String, Object> newValues = new HashMap<>();
-
-                                                                                        System.out.println("----------------JUGADOR: " + footballerDTO.getName());
-
-                                                                                        System.out.println("CARETEAMS ANTES: ");
-                                                                                        for(int i=0; i<careteamsFootballer.size(); i++)
-                                                                                                System.out.println("CARETEAM: " + careteamsFootballer.get(i));
-
                                                                                         ArrayList<String> auxFinalCareTeams = new ArrayList<>();
 
                                                                                         for(int i=0; i<careteamsFootballer.size(); i++) {
@@ -654,11 +696,6 @@ public class FireBase {
 
 
                                                                                         }
-
-                                                                                        System.out.println("CARETEAMS DESPUÉS: ");
-                                                                                        for(int i=0; i<auxFinalCareTeams.size(); i++)
-                                                                                            System.out.println("CARETEAM: " + auxFinalCareTeams.get(i));
-
 
                                                                                         // Si no existe reemplaza el antiguo por el nuevo.
                                                                                         // Si existe, no hace nada mas que volver a pasarle los valores antiguos
@@ -834,7 +871,6 @@ public class FireBase {
                         healthCareService.put("avalibleTime_daysOfHealthCare", avalibleTime_daysOfHealthCare);
 
                         String idDocument = healthCareCategory.getSelectedItem().toString() + " " + footballer.getName() + " " + numHealhcare;
-                        System.out.println("ID DOCUMENTO: " + idDocument);
 
                         db.collection("healthcare").document(idDocument).set(healthCareService);
 

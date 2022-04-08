@@ -23,11 +23,22 @@ public class MainClub extends BaseActivity {
     private final FireBase fb = new FireBase();
     private Club club = new Club();
 
+    String username;
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final TextView clubTeamCare = findViewById(R.id.clubTeamCare);
+
+        fb.refreshClubCareTeam(username, clubTeamCare);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_club);
-        String username = getIntent().getStringExtra("username");
+        username = getIntent().getStringExtra("username");
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
 

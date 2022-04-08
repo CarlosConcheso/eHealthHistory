@@ -1,7 +1,9 @@
 package com.example.ehealthhistory.ui.Club;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,6 +14,8 @@ import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.database.FireBase;
+import com.example.ehealthhistory.ui.login.MainLogIn;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -64,7 +68,15 @@ public class UIAddNewCareTeam extends BaseActivity {
         //Añadir el nuevo equipo médico
         buttonAddNewCareTeam.setOnClickListener((v -> {
                 fb.addNewCareTeam2Club(username, careTeamName.getText().toString(),spinnerCareTeams.getSelectedItem().toString());
-                finish();
+            Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
+
+
+            new Handler().postDelayed(
+                    (Runnable) () -> {
+                        fb.representClubCareTeamData(username,careTeamName,careTeamStatus,careTeamTelecom,careTeamNote);
+                        fb.fillSpinnerNewClubCareTeam(username, spinnerCareTeams, newCareTeamName,
+                                newCareTeamStatus, newCareTeamTelecom, newCareTeamNote, this);
+                    }, 500);
         }));
     }
 
