@@ -101,6 +101,7 @@
         <string name="error_usuario_contra">Error inicio de sesión</string>
 
         <!-- Pantalla Add HealthCare -->
+        <string name="error_usuario_futbolista">No hay futbolistas</string>
         <string name="error_usuario_camposvacios">Rellene los campos</string>
         <string name="error_usuario_horas">Horas de tratamiento erroneas</string>
         <string name="error_usuario_sindias">Selecciones al menos 1 día</string>
@@ -109,7 +110,8 @@
         <!-- Pantalla Add TeamCare desde Footballer -->
         <string name="error_usuario_newfavteamcare">Nuevo equipo médico ya existe</string>
 
-        <!-- Pantalla Add New TeamCare desde Club -->
+
+        <!-- Pantalla Add New TeamCare desde Club y Footballer-->
         <string name="success_adding_newcareteam">Añadido con éxito</string>
 
 </resources>

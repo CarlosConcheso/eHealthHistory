@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -17,6 +16,7 @@ import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.FireBase;
 import com.example.ehealthhistory.ui.HealthCareService.MainHealthCareService;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,6 @@ public class MainCareTeam extends BaseActivity {
 
     private final FireBase fb = new FireBase();
     ArrayList<Footballer> footballers = new ArrayList<>();
-    public boolean consulta = false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -49,7 +48,8 @@ public class MainCareTeam extends BaseActivity {
                 careTeamName, careTeamStatus, careTeamTelcom, careTeamNote, this);
 
         // Ir a otra ventana donde añadir un cuidado personalizado al futbolista
-        addHealthCare2Footboller.setOnClickListener((v -> changeTo(v.getContext(), username)));
+        addHealthCare2Footboller.setOnClickListener((v ->
+                changeTo(v.getContext(), username)));
     }
 
     @SuppressLint("SetTextI18n")
@@ -99,17 +99,14 @@ public class MainCareTeam extends BaseActivity {
         getFootballers().add(footballer);
     }
 
-    public boolean isConsulta() {
-        return consulta;
-    }
-
-    public void setConsulta(boolean consulta) {
-        this.consulta = consulta;
-    }
-
-    private static void changeTo(Context mContext, String username) {
-        Intent intent = new Intent(mContext, MainHealthCareService.class);
-        intent.putExtra("username", username);
-        mContext.startActivity(intent);
+    private void changeTo(Context mContext, String username) {
+        if(getFootballers().size()>0) {
+            Intent intent = new Intent(mContext, MainHealthCareService.class);
+            intent.putExtra("username", username);
+            mContext.startActivity(intent);
+        }
+        else
+            Snackbar.make(findViewById(R.id.buttonAddHealthCareService),
+                    R.string.error_usuario_futbolista, Snackbar.LENGTH_SHORT).show();
     }
 }

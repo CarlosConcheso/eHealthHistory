@@ -33,9 +33,10 @@
 
                     <TextView
                         android:id="@+id/TextViewFavCareTeam"
-                        android:padding="3dp"
                         android:layout_gravity="center"
-                        android:text="@string/favCareTeam_textView" />
+                        android:padding="3dp"
+                        android:text="@string/favCareTeam_textView"
+                        android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinnerFavCareTeams"
@@ -144,9 +145,10 @@
 
                     <TextView
                         android:id="@+id/TextViewNewFavCareTeam"
-                        android:padding="3dp"
                         android:layout_gravity="center"
-                        android:text="@string/newFavCareTeam_textView" />
+                        android:padding="3dp"
+                        android:text="@string/newFavCareTeam_textView"
+                        android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinnerNewFavCareTeams"

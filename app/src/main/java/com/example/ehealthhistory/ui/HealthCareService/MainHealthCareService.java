@@ -80,6 +80,7 @@ public class MainHealthCareService extends BaseActivity {
 
         // Boton añadir
         botonAddHealthCare.setOnClickListener((v -> {
+
             if(checkCompleted(healthCareName,multiLineHealthCareCommentary))
                 if(!checkHours(checkBoxAllDay, healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin))
                     Snackbar.make(findViewById(R.id.buttonAddHealthCare),

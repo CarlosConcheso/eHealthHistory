@@ -76,6 +76,7 @@ public class MainClub extends BaseActivity {
             else
                 col2.setText("No");
             col2.setGravity(Gravity.CENTER);
+            col2.setPadding(25,1,1,1);
 
             f.addView(col1);
             f.addView(col2);

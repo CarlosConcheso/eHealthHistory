@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FireBase {
 
@@ -759,8 +760,9 @@ public class FireBase {
                                                 mainCareTeam.addFootballer(footballer);
 
                                                 footballers.add(footballer);
-                                                mainCareTeam.setConsulta(true);
                                             }
+
+                                            mainCareTeam.setFootballers(footballers);
                                             mainCareTeam.addFootballersRows(footballers);
                                         }
                                     });
@@ -795,15 +797,17 @@ public class FireBase {
 
                         mainHealthCareService.setFootballers(lista);
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                                mainHealthCareService,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                mainHealthCareService.convert2Array(lista));
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                    mainHealthCareService,
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    mainHealthCareService.convert2Array(lista));
+                            spinnerFootballers.setAdapter(adapter);
 
-                        spinnerFootballers.setAdapter(adapter);
+
                     }
                 });
     }
+
 
     public void addHealthCareToFootballer(Footballer footballer,
                                           CheckBox activo, CheckBox checkBoxAllDay, Spinner healthCareCategory,
