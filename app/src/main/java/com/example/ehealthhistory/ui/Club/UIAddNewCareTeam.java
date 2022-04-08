@@ -1,7 +1,6 @@
 package com.example.ehealthhistory.ui.Club;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -69,7 +68,6 @@ public class UIAddNewCareTeam extends BaseActivity {
         buttonAddNewCareTeam.setOnClickListener((v -> {
                 fb.addNewCareTeam2Club(username, careTeamName.getText().toString(),spinnerCareTeams.getSelectedItem().toString());
             Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
-
 
             new Handler().postDelayed(
                     (Runnable) () -> {

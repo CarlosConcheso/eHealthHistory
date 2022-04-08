@@ -2,6 +2,7 @@ package com.example.ehealthhistory.ui.Foootballer;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -83,7 +84,13 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         /* Comprobar que no coinciden, añadir e irse. */
         buttonAddNewFavCareTeam.setOnClickListener((v -> {
                 fb.addNewCareTeam2Footballer(username,findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams()));
-                finish();
+            new Handler().postDelayed(
+                    (Runnable) () -> {
+                        fb.getFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
+                                favCareTeamTelecom, favCareTeamNote, this);
+                        fb.getFootballerNoFavsCareTeams(username, spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
+                                newFavCareTeamTelecom, newFavCareTeamNote, this);
+                    }, 500);
         }));
     }
 
