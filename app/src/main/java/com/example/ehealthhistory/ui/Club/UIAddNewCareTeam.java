@@ -13,10 +13,10 @@ import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.database.FireBase;
-import com.example.ehealthhistory.ui.login.MainLogIn;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UIAddNewCareTeam extends BaseActivity {
 
@@ -51,53 +51,37 @@ public class UIAddNewCareTeam extends BaseActivity {
 
         // Establecer valores
         fb.representClubCareTeamData(username,careTeamName,careTeamStatus,careTeamTelecom,careTeamNote);
-        fb.fillSpinnerNewClubCareTeam(username, spinnerCareTeams, newCareTeamName,
+        fb.fillSpinnerNewCareTeams(username, spinnerCareTeams, newCareTeamName,
                 newCareTeamStatus, newCareTeamTelecom, newCareTeamNote, this);
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerCareTeams.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(isConsulta())
-                addNewTeamCareData(spinnerCareTeams.getSelectedItem().toString(), newCareTeamName, newCareTeamStatus,
+                addNewCareTeamData(spinnerCareTeams, newCareTeamName, newCareTeamStatus,
                         newCareTeamTelecom, newCareTeamNote);
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
             } });
 
         //Añadir el nuevo equipo médico
-        buttonAddNewCareTeam.setOnClickListener((v -> {
-                fb.addNewCareTeam2Club(username, careTeamName.getText().toString(),spinnerCareTeams.getSelectedItem().toString());
+        buttonAddNewCareTeam.setOnClickListener(v -> {
+                fb.addNewCareTeam2Club(username, careTeamName.getText().toString(), Objects.requireNonNull(findCareTeam(spinnerCareTeams)));
             Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
             new Handler().postDelayed(
-                    (Runnable) () -> {
-                        fb.representClubCareTeamData(username,careTeamName,careTeamStatus,careTeamTelecom,careTeamNote);
-                        fb.fillSpinnerNewClubCareTeam(username, spinnerCareTeams, newCareTeamName,
-                                newCareTeamStatus, newCareTeamTelecom, newCareTeamNote, this);
-                    }, 500);
-        }));
+                    this::finish, 1000);
+        });
     }
 
-    private void addNewTeamCareData(String nameSelectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
+    private void addNewCareTeamData(Spinner spinnerCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
                                     TextView newCareTeamTelecom, TextView newCareTeamNote)
     {
-        CareTeam careTeamSelected = findCareTeam(nameSelectedCareTeam);
-        newCareTeamName.setText(careTeamSelected.getName());
+        CareTeam careTeamSelected = findCareTeam(spinnerCareTeam);
+        newCareTeamName.setText(Objects.requireNonNull(careTeamSelected).getName());
         newCareTeamStatus.setText(careTeamSelected.getStatus());
         newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
         newCareTeamNote.setText(careTeamSelected.getNote());
-    }
-
-    private CareTeam findCareTeam(String name)
-    {
-        CareTeam careTeamSelected = null;
-        for(CareTeam c : restOfCareTeams) {
-            if (c.getName().equals(name)) {
-                careTeamSelected = c;
-            }
-        }
-        return careTeamSelected;
-
     }
 
     public ArrayList<CareTeam> getRestOfCareTeams() {
@@ -126,7 +110,7 @@ public class UIAddNewCareTeam extends BaseActivity {
         String[] mStringArray = new String[lista.size()];
 
         for (int i = 0; i < lista.size(); i++) {
-            mStringArray[i] = lista.get(i).getName();
+            mStringArray[i] = lista.get(i).getId() + ". " + lista.get(i).getName();
         }
 
         return mStringArray;
@@ -141,5 +125,14 @@ public class UIAddNewCareTeam extends BaseActivity {
         newCareTeamStatus.setText(ct.getStatus());
         newCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
         newCareTeamNote.setText(ct.getNote());
+    }
+
+    private CareTeam findCareTeam(Spinner spinnerCareTeam)
+    {
+        String idSelectedItem = spinnerCareTeam.getSelectedItem().toString().split(". ")[0];
+
+        for(CareTeam ct : getRestOfCareTeams())
+            if(idSelectedItem.equals(String.valueOf(ct.getId()))) return ct;
+        return null;
     }
 }

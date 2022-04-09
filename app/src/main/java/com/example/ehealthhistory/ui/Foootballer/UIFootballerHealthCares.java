@@ -63,7 +63,7 @@ public class UIFootballerHealthCares extends BaseActivity {
                                 TextView healthCareCommentary, TextView healthCareAllDay, TextView healthCareHoraInicio,
                                 TextView healthCareHoraFin, TextView healthCareDays ,TextView healthCareNote)
     {
-        HealthCareService healthCareSelected = buscarHealthCare(spinnerHealthCare);
+        HealthCareService healthCareSelected = findHealthCare(spinnerHealthCare);
 
         assert healthCareSelected != null;
         healthCareCategory.setText(healthCareSelected.getCategory());
@@ -84,7 +84,7 @@ public class UIFootballerHealthCares extends BaseActivity {
         healthCareNote.setText(healthCareSelected.getExtraDetails());
     }
 
-    private HealthCareService buscarHealthCare(Spinner spinnerHealthCare)
+    private HealthCareService findHealthCare(Spinner spinnerHealthCare)
     {
         String idSelectedItem = spinnerHealthCare.getSelectedItem().toString().split(". ")[0];
 

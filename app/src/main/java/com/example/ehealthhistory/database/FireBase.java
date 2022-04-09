@@ -564,10 +564,10 @@ public class FireBase {
                 });
     }
 
-    public void fillSpinnerNewClubCareTeam(String username, Spinner spinner, TextView newCareTeamName,
-                                           TextView newCareTeamStatus, TextView newCareTeamTelecom,
-                                           TextView newCareTeamNote,
-                                           UIAddNewCareTeam uiAddNewCareTeam) {
+    public void fillSpinnerNewCareTeams(String username, Spinner spinner, TextView newCareTeamName,
+                                        TextView newCareTeamStatus, TextView newCareTeamTelecom,
+                                        TextView newCareTeamNote,
+                                        UIAddNewCareTeam uiAddNewCareTeam) {
 
         ArrayList<CareTeam> lista = new ArrayList<>();
 
@@ -585,10 +585,12 @@ public class FireBase {
                                     .get()
                                     .addOnCompleteListener(task2 -> {
                                         if (task2.isSuccessful()) {
+                                            int i=1;
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                                 CareTeam ct = new CareTeam();
                                                 CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
 
+                                                ct.setId(i);
                                                 ct.setName(careTeamDTO.getName());
                                                 ct.setStatus(careTeamDTO.getStatus());
                                                 ct.setTelcom(careTeamDTO.getTelecom());
@@ -601,7 +603,7 @@ public class FireBase {
 
                                                 lista.add(ct);
                                                 uiAddNewCareTeam.addNewCareTeam(ct);
-
+                                                i++;
                                             }
 
                                             uiAddNewCareTeam.setRestOfCareTeams(lista);
@@ -626,7 +628,9 @@ public class FireBase {
                 });
     }
 
-    public void addNewCareTeam2Club(String usernameclub, String oldCareTeam, String newCareteam) {
+    public void addNewCareTeam2Club(String usernameclub, String oldCareTeam, CareTeam newCT) {
+
+        String newCareteam = newCT.getName();
 
         //buscar username por el nombre del club
         db.collection("careteam")
