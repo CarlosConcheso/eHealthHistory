@@ -54,10 +54,9 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         final Button buttonAddNewFavCareTeam = findViewById(R.id.buttonAddNewFavCareTeam);
 
         // Establecer valores
-        fb.getFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
-                favCareTeamTelecom, favCareTeamNote, this);
-        fb.getFootballerNoFavsCareTeams(username, spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
-                newFavCareTeamTelecom, newFavCareTeamNote, this);
+        getValuesOfCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
+                favCareTeamTelecom, favCareTeamNote,spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
+                newFavCareTeamTelecom, newFavCareTeamNote);
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -87,13 +86,23 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
             Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
             new Handler().postDelayed(
-                    (Runnable) () -> {
-                        fb.getFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
-                                favCareTeamTelecom, favCareTeamNote, this);
-                        fb.getFootballerNoFavsCareTeams(username, spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
-                                newFavCareTeamTelecom, newFavCareTeamNote, this);
-                    }, 500);
+                    this::finish, 1000);
         }));
+    }
+
+    private void getValuesOfCareTeams(String username,
+                                      Spinner spinnerFavCareTeam,
+                                      TextView favCareTeamName, TextView favCareTeamStatus,
+                                      TextView favCareTeamTelecom, TextView favCareTeamNote,
+                                      Spinner spinnerNewFavCareTeam,
+                                      TextView newFavCareTeamName, TextView newFavCareTeamStatus,
+                                      TextView newFavCareTeamTelecom, TextView newFavCareTeamNote)
+    {
+        fb.getFootballerFavsCareTeams(username, spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
+                favCareTeamTelecom, favCareTeamNote, this);
+
+        fb.getFootballerNoFavsCareTeams(username, spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
+                newFavCareTeamTelecom, newFavCareTeamNote, this);
     }
 
     private void representTeamCareData(Spinner selectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
@@ -101,6 +110,7 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
     {
         CareTeam careTeamSelected = findCareTeamInList(selectedCareTeam, careteams);
 
+        assert careTeamSelected != null;
         newCareTeamName.setText(careTeamSelected.getName());
         newCareTeamStatus.setText(careTeamSelected.getStatus());
         newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
