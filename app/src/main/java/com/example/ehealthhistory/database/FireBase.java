@@ -868,7 +868,6 @@ public class FireBase {
                         String idDocument = healthCareCategory.getSelectedItem().toString() + " " + footballer.getName() + " " + numHealhcare;
 
                         db.collection("healthcare").document(idDocument).set(healthCareService);
-
                     }
                 });
     }

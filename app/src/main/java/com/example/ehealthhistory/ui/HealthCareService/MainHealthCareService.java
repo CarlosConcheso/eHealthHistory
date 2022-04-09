@@ -2,6 +2,7 @@ package com.example.ehealthhistory.ui.HealthCareService;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -93,8 +94,12 @@ public class MainHealthCareService extends BaseActivity {
                                 healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin,
                                 checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD,
                                 multiLineHealthCareCommentary, multiLineHealthCareExtraDetails);
-                        finish();
 
+                        Snackbar.make(findViewById(R.id.buttonAddHealthCare),
+                                R.string.healthcare_ok, Snackbar.LENGTH_SHORT).show();
+
+                        new Handler().postDelayed(
+                                this::finish, 1000);
                     }
                     else
                         Snackbar.make(findViewById(R.id.buttonAddHealthCare),

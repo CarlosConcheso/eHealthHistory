@@ -3,9 +3,11 @@ package com.example.ehealthhistory.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,8 +46,11 @@ public class MainLogIn extends AppCompatActivity {
                             username.setText("");
                             password.setText("");
                             changeTo(v.getContext(), usuario);
-                        } else
-                            Snackbar.make(findViewById(R.id.app_image), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            Toast mError = Toast.makeText(this, R.string.error_usuario_contra, Toast.LENGTH_SHORT);
+                            mError.setGravity(Gravity.CENTER,0,0);
+                            mError.show();
+                        }
                     });
             else
                 Snackbar.make(findViewById(R.id.app_image), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
