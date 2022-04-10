@@ -23,7 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:layout_marginTop="30dp"
                 android:padding="5dp"
                 android:orientation="vertical" >
@@ -94,7 +94,7 @@
 
             <TableLayout
                 android:layout_marginTop="30dp"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:stretchColumns="*">
@@ -118,13 +118,13 @@
                 android:id="@+id/TableHealthCareService"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:stretchColumns="*">
 
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/border_footballer"
+                    android:background="@drawable/borders"
                     tools:ignore="UselessParent">
 
                     <TextView

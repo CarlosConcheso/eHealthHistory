@@ -50,7 +50,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:stretchColumns="*">
 
                 <TableRow
@@ -70,7 +70,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:padding="5dp"
                 android:orientation="vertical" >
 
@@ -162,7 +162,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:stretchColumns="*">
 
                 <TableRow
@@ -184,7 +184,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:padding="5dp"
                 android:orientation="vertical" >
 

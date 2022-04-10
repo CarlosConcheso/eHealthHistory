@@ -97,12 +97,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:stretchColumns="*">
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:background="@drawable/border_footballer"
+                    android:background="@drawable/borders"
                     android:layout_height="match_parent" >
 
                     <TextView
@@ -118,7 +118,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:padding="5dp"
                 android:orientation="vertical" >
 
@@ -169,12 +169,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:stretchColumns="*">
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:background="@drawable/border_footballer"
+                    android:background="@drawable/borders"
                     android:gravity="center"
                     android:layout_height="match_parent" >
 
@@ -191,7 +191,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_footballer"
+                android:background="@drawable/borders"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:orientation="vertical" >

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">eHealthHistory</string>
+    <string name="logo_app">Logo App</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Usuario</string>
     <string name="prompt_password">Contraseña</string>
@@ -118,6 +120,7 @@
 
         <!-- Pantalla Add New TeamCare desde Club y Footballer-->
         <string name="success_adding_newcareteam">Añadido con éxito</string>
+
 
 
 </resources>
