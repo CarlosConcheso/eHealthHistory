@@ -99,7 +99,8 @@
 
     <!-- MENSAJES DE ERROR -->
         <!-- Pantalla Login -->
-        <string name="error_usuario_contra">Error inicio de sesión</string>
+    <string name="ok_usuario_contra"> Inicio de sesión correcto</string>
+    <string name="error_usuario_contra">Error inicio de sesión</string>
 
         <!-- Pantalla Footballer -->
         <string name="error_usuario_healthcares">No hay cuidados que ver</string>
@@ -117,5 +118,6 @@
 
         <!-- Pantalla Add New TeamCare desde Club y Footballer-->
         <string name="success_adding_newcareteam">Añadido con éxito</string>
+
 
 </resources>

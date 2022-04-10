@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,7 +26,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="66dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@string/image_app"
                     app:srcCompat="@drawable/app_image_trans_small"/>
 
@@ -34,24 +35,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:text="@string/nameBaseActivity"
                     android:textColor="@color/white" />
+
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
-        <FrameLayout
-            android:id="@+id/activity_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-        </FrameLayout>
-
     </LinearLayout>
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"/>
 </androidx.drawerlayout.widget.DrawerLayout>

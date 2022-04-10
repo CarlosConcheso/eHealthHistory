@@ -3,6 +3,7 @@ package com.example.ehealthhistory.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,18 +44,22 @@ public class MainLogIn extends AppCompatActivity {
                     .signInWithEmailAndPassword(usuario, pass)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            username.setText("");
-                            password.setText("");
-                            changeTo(v.getContext(), usuario);
+                            Toast.makeText(this, R.string.ok_usuario_contra, Toast.LENGTH_SHORT).show();
+
+                            new Handler().postDelayed(() -> {
+                                changeTo(v.getContext(), usuario);
+                                username.setText("");
+                                password.setText("");
+                                }, 1000);
+
                         } else {
-                            Toast mError = Toast.makeText(this, R.string.error_usuario_contra, Toast.LENGTH_SHORT);
-                            mError.setGravity(Gravity.CENTER,0,0);
-                            mError.show();
+                            Toast.makeText(this, R.string.error_usuario_contra, Toast.LENGTH_SHORT).show();
                         }
                     });
-            else
+            else {
                 Snackbar.make(findViewById(R.id.app_image), R.string.error_usuario_contra, Snackbar.LENGTH_SHORT).show();
-            password.setText("");
+                password.setText("");
+            }
         }));
     }
 
