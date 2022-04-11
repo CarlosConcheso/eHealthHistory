@@ -85,6 +85,7 @@ public class MainHealthCareService extends BaseActivity {
 
         // EditText se cierran si se pulsa la tecla ENTER
         healthCareName.setOnKeyListener((v, keyCode, event) -> {
+
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 unShowVirtualKeyboard(healthCareName, v);
                 return true;
@@ -94,6 +95,7 @@ public class MainHealthCareService extends BaseActivity {
 
         multiLineHealthCareCommentary.setOnKeyListener((v, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
+
                 unShowVirtualKeyboard(multiLineHealthCareCommentary, v);
                 return true;
             }

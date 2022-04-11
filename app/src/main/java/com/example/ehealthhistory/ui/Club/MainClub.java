@@ -67,6 +67,7 @@ public class MainClub extends BaseActivity {
         });
 
         footballerName2Filter.setOnKeyListener((v, keyCode, event) -> {
+
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 filterTable(footballerName2Filter);
                 unShowVirtualKeyboard(footballerName2Filter, v);
