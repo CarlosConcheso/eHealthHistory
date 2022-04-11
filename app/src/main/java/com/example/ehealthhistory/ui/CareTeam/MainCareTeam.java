@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -43,9 +46,26 @@ public class MainCareTeam extends BaseActivity {
 
         final Button addHealthCare2Footboller = findViewById(R.id.buttonAddHealthCareService);
 
+        final EditText footballerName2Filter = findViewById(R.id.editTextNameFilter);
+        final Button buttonFilterByName = findViewById(R.id.buttonFilterByName);
+        final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
+
+
         // Establecer elementos en pantalla
         fb.representBasicDataAndCareTeamFootballer(username, nameActivityBase,
                 careTeamName, careTeamStatus, careTeamTelcom, careTeamNote, this);
+
+        buttonReestartFilter.setOnClickListener(v -> {
+            addFootballersRows(getFootballers());
+            footballerName2Filter.setText("");
+            unShowVirtualKeyboard(footballerName2Filter,v);
+        });
+
+        buttonFilterByName.setOnClickListener(v -> {
+            filterTable(footballerName2Filter);
+            footballerName2Filter.setText("");
+            unShowVirtualKeyboard(footballerName2Filter,v);
+        });
 
         // Ir a otra ventana donde añadir un cuidado personalizado al futbolista
         addHealthCare2Footboller.setOnClickListener((v ->
@@ -56,6 +76,8 @@ public class MainCareTeam extends BaseActivity {
     public void addFootballersRows(ArrayList<Footballer> footballers) {
         TableLayout tabla;
         tabla = findViewById(R.id.TableCareTeamsFootballers);
+
+        tabla.removeAllViews();
 
         for (int i = 0; i < footballers.size(); i++) {
             TableRow f = new TableRow(this);
@@ -86,6 +108,23 @@ public class MainCareTeam extends BaseActivity {
         }
     }
 
+    private void filterTable(EditText footballerName2Filter) {
+        ArrayList<Footballer> footballersaux = getFootballersByName(footballerName2Filter.getText().toString());
+
+        addFootballersRows(footballersaux);
+        }
+
+    private ArrayList<Footballer> getFootballersByName(String name)
+    {
+        ArrayList<Footballer> footballeraux = new ArrayList<>();
+
+        for(Footballer footballer : getFootballers())
+            if(footballer.getName().toUpperCase().contains(name.toUpperCase()))
+                footballeraux.add(footballer);
+
+            return footballeraux;
+    }
+
     public ArrayList<Footballer> getFootballers() {
         return footballers;
     }
@@ -108,5 +147,12 @@ public class MainCareTeam extends BaseActivity {
         else
             Snackbar.make(findViewById(R.id.buttonAddHealthCareService),
                     R.string.error_usuario_futbolista, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void unShowVirtualKeyboard(EditText editText, View view)
+    {
+        editText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

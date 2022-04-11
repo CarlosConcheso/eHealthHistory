@@ -139,9 +139,41 @@
                         android:text="@string/clubNewTeamCare_textView" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/buttonFilterByName"
+                    android:text="@string/buttonFilterByName"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"                        android:layout_marginEnd="5dp"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:id="@+id/buttonReestartFilter"
+                    android:text="@string/buttonFilterReset"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    tools:ignore="ButtonStyle" />
+
+                <EditText
+                    android:id="@+id/editTextNameFilter"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hintFootballerName"
+                    android:inputType="text"
+                    tools:ignore="LabelFor"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:autofillHints="" />
+            </LinearLayout>
+
 
             <TableLayout
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/borders"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -163,7 +195,7 @@
 
             <TableLayout
                 android:layout_marginTop="0dp"
-                android:id="@+id/TableClubFootballers"
+                android:id="@+id/TableHeaderClubFootballers"
                 android:background="@drawable/borders"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -188,6 +220,18 @@
                         android:textStyle="bold"
                         android:text="@string/clubFootballerActive_textView" />
                 </TableRow>
+            </TableLayout>
+
+
+            <TableLayout
+                android:layout_marginTop="0dp"
+                android:id="@+id/TableClubFootballers"
+                android:background="@drawable/borders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:stretchColumns="*">
+
             </TableLayout>
         </LinearLayout>
     </ScrollView>

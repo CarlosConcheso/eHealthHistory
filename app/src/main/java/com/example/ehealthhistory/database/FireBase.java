@@ -437,6 +437,8 @@ public class FireBase {
 
                             clubContact.setText(club.getContactName());
 
+                            mainClub.setClub(club);
+
                             //Sacar nombre del equipo médico
                             db.collection("careteam")
                                     .whereEqualTo("username", clubDTO.getUsername_careteam())
@@ -455,29 +457,28 @@ public class FireBase {
 
                                                 club.setClubCareTeam(careteam);
                                                 clubTeamCare.setText(club.getClubCareTeam().getName());
+
+                                                db.collection("footballer")
+                                                        .whereEqualTo("club", club.getName())
+                                                        .get()
+                                                        .addOnCompleteListener(task3 -> {
+                                                            if (task3.isSuccessful()) {
+                                                                for (QueryDocumentSnapshot document3 : Objects.requireNonNull(task3.getResult())) {
+
+                                                                    Footballer fotballer = new Footballer();
+                                                                    FootballerDTO footballerDTO = document3.toObject(FootballerDTO.class);
+
+                                                                    fotballer.setName(footballerDTO.getName());
+                                                                    fotballer.setActive(footballerDTO.isActive());
+
+                                                                    footballers.add(fotballer);
+                                                                }
+
+                                                                mainClub.getClub().setFootballers(footballers);
+                                                                mainClub.addFootballersRows(footballers);
+                                                            }
+                                                        });
                                             }
-                                        }
-                                    });
-
-                            db.collection("footballer")
-                                    .whereEqualTo("club", club.getName())
-                                    .get()
-                                    .addOnCompleteListener(task2 -> {
-                                        if (task2.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
-
-                                                Footballer fotballer = new Footballer();
-                                                FootballerDTO footballerDTO = document2.toObject(FootballerDTO.class);
-
-                                                fotballer.setName(footballerDTO.getName());
-                                                fotballer.setActive(footballerDTO.isActive());
-
-                                                footballers.add(fotballer);
-                                            }
-
-                                            club.setFootballers(footballers);
-                                            mainClub.addFootballersRows(club.getFootballers());
-
                                         }
                                     });
                         }
@@ -749,7 +750,7 @@ public class FireBase {
                                                 footballer.setName(footballerDTO.getName());
                                                 footballer.setActive(footballerDTO.isActive());
                                                 if(footballerDTO.getContact_telecom().length()>0)
-                                                fc.setTelecom(Integer.parseInt(footballerDTO.getContact_telecom()));
+                                                    fc.setTelecom(Integer.parseInt(footballerDTO.getContact_telecom()));
 
                                                 footballer.setFootballerContact(fc);
                                                 mainCareTeam.addFootballer(footballer);

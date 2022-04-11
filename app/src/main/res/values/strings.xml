@@ -60,6 +60,11 @@
             <string name="careTeamFootballers_textView">Futbolistas a cargo</string>
             <string name="careTeamFootballerTelecom_textView">Teléfono</string>
             <string name="buttonAddHealthCareService">Añadir cuidado a futbolista</string>
+            <string name="buttonFilterByName">Filtrar</string>
+            <string name="buttonFilterReset">Reset</string>
+            <string name="hintFootballerName">Nombre</string>
+
+
                     <string name="selectFootballer_textView">Seleccione futbolista:</string>
                     <string name="tratamientoActual">Tratamiento actual</string>
                     <string name="healthCareCategory_textView">Categoría:</string>

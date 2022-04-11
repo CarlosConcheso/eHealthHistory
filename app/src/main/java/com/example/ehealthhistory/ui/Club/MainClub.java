@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -50,8 +53,25 @@ public class MainClub extends BaseActivity {
         final TextView clubTeamCare = findViewById(R.id.clubTeamCare);
         final Button buttonNewTeamCare = findViewById(R.id.buttonNewTeamCare);
 
+        final EditText footballerName2Filter = findViewById(R.id.editTextNameFilter);
+        final Button buttonFilterByName = findViewById(R.id.buttonFilterByName);
+        final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
+
         fb.representBasicDataAndClubsFootballer(username, nameActivityBase,
                 clubName, clubPresident, clubAlias, clubContact, clubActive, clubTeamCare, this);
+
+        buttonReestartFilter.setOnClickListener(v -> {
+            addFootballersRows(club.getFootballers());
+            unShowVirtualKeyboard(footballerName2Filter,v);
+            footballerName2Filter.setFocusable(false);
+        });
+
+        buttonFilterByName.setOnClickListener(v -> {
+            filterTable(footballerName2Filter);
+            unShowVirtualKeyboard(footballerName2Filter,v);
+            footballerName2Filter.setFocusable(false);
+        });
+
 
         // Acción del botón para ir a añadir nuevo equipo médico del club
         buttonNewTeamCare.setOnClickListener((v -> changeTo(v.getContext(), username)));
@@ -63,7 +83,9 @@ public class MainClub extends BaseActivity {
         TableLayout tabla;
         tabla = findViewById(R.id.TableClubFootballers);
 
-        for (int i = 0; i < footballers.size(); i++) {
+        tabla.removeAllViews();
+        
+            for (int i = 0; i < footballers.size(); i++) {
             TableRow f = new TableRow(this);
 
             TextView col1 = new TextView(this);
@@ -85,6 +107,23 @@ public class MainClub extends BaseActivity {
         }
     }
 
+    private void filterTable(EditText footballerName2Filter) {
+        ArrayList<Footballer> footballersaux = getFootballersByName(footballerName2Filter.getText().toString());
+
+        addFootballersRows(footballersaux);
+    }
+
+    private ArrayList<Footballer> getFootballersByName(String name)
+    {
+        ArrayList<Footballer> footballeraux = new ArrayList<>();
+
+        for(Footballer footballer : club.getFootballers())
+            if(footballer.getName().toUpperCase().contains(name.toUpperCase()))
+                footballeraux.add(footballer);
+
+        return footballeraux;
+    }
+
     public Club getClub() {
         return club;
     }
@@ -93,9 +132,22 @@ public class MainClub extends BaseActivity {
         this.club = club;
     }
 
+    public void addFootballer(Footballer fut)
+    {
+        club.getFootballers().add(fut);
+    }
+
     private static void changeTo(Context mContext, String username) {
         Intent intent = new Intent(mContext, UIAddNewCareTeam.class);
         intent.putExtra("username", username);
         mContext.startActivity(intent);
+    }
+
+    private void unShowVirtualKeyboard(EditText editText, View view)
+    {
+        editText.requestFocus();
+        editText.setText("");
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

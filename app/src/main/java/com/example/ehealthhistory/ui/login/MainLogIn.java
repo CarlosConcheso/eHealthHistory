@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,6 +47,7 @@ public class MainLogIn extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(this, R.string.ok_usuario_contra, Toast.LENGTH_SHORT).show();
+                            unShowVirtualKeyboard(password,v);
 
                             new Handler().postDelayed(() -> {
                                 changeTo(v.getContext(), usuario);
@@ -54,6 +57,7 @@ public class MainLogIn extends AppCompatActivity {
 
                         } else {
                             Toast.makeText(this, R.string.error_usuario_contra, Toast.LENGTH_SHORT).show();
+                            password.setText("");
                         }
                     });
             else {
@@ -67,5 +71,12 @@ public class MainLogIn extends AppCompatActivity {
         Intent intent = new Intent(mContext, MainRoles.class);
         intent.putExtra("username", username);
         mContext.startActivity(intent);
+    }
+
+    private void unShowVirtualKeyboard(EditText editText, View view)
+    {
+        editText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
