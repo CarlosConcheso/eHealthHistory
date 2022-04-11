@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
@@ -83,6 +81,31 @@ public class MainHealthCareService extends BaseActivity {
             }
             else
                 activarSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
+        });
+
+        // EditText se cierran si se pulsa la tecla ENTER
+        healthCareName.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                unShowVirtualKeyboard(healthCareName, v);
+                return true;
+            }
+            return false;
+        });
+
+        multiLineHealthCareCommentary.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                unShowVirtualKeyboard(multiLineHealthCareCommentary, v);
+                return true;
+            }
+            return false;
+        });
+
+        multiLineHealthCareExtraDetails.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                unShowVirtualKeyboard(multiLineHealthCareExtraDetails, v);
+                return true;
+            }
+            return false;
         });
 
         // Boton añadir
@@ -205,4 +228,10 @@ public class MainHealthCareService extends BaseActivity {
             }
         return null;
     }
+
+        private void unShowVirtualKeyboard(EditText editText, View view) {
+            editText.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
 }

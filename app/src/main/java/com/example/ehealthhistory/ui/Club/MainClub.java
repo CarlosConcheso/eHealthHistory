@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -54,7 +55,6 @@ public class MainClub extends BaseActivity {
         final Button buttonNewTeamCare = findViewById(R.id.buttonNewTeamCare);
 
         final EditText footballerName2Filter = findViewById(R.id.editTextNameFilter);
-        final Button buttonFilterByName = findViewById(R.id.buttonFilterByName);
         final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
 
         fb.representBasicDataAndClubsFootballer(username, nameActivityBase,
@@ -66,10 +66,13 @@ public class MainClub extends BaseActivity {
             footballerName2Filter.setFocusable(false);
         });
 
-        buttonFilterByName.setOnClickListener(v -> {
-            filterTable(footballerName2Filter);
-            unShowVirtualKeyboard(footballerName2Filter,v);
-            footballerName2Filter.setFocusable(false);
+        footballerName2Filter.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                filterTable(footballerName2Filter);
+                unShowVirtualKeyboard(footballerName2Filter, v);
+                return true;
+            }
+            return false;
         });
 
 

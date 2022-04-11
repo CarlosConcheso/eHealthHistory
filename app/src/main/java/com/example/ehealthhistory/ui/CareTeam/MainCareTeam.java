@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -11,8 +12,6 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
@@ -47,7 +46,6 @@ public class MainCareTeam extends BaseActivity {
         final Button addHealthCare2Footboller = findViewById(R.id.buttonAddHealthCareService);
 
         final EditText footballerName2Filter = findViewById(R.id.editTextNameFilter);
-        final Button buttonFilterByName = findViewById(R.id.buttonFilterByName);
         final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
 
 
@@ -61,10 +59,13 @@ public class MainCareTeam extends BaseActivity {
             unShowVirtualKeyboard(footballerName2Filter,v);
         });
 
-        buttonFilterByName.setOnClickListener(v -> {
-            filterTable(footballerName2Filter);
-            footballerName2Filter.setText("");
-            unShowVirtualKeyboard(footballerName2Filter,v);
+        footballerName2Filter.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                filterTable(footballerName2Filter);
+                unShowVirtualKeyboard(footballerName2Filter, v);
+                return true;
+            }
+            return false;
         });
 
         // Ir a otra ventana donde añadir un cuidado personalizado al futbolista
