@@ -26,8 +26,8 @@ public class MainClub extends BaseActivity {
 
     private final FireBase fb = new FireBase();
     private Club club = new Club();
-
     String username;
+
 
     @Override
     protected void onResume() {
@@ -62,20 +62,19 @@ public class MainClub extends BaseActivity {
 
         buttonReestartFilter.setOnClickListener(v -> {
             addFootballersRows(club.getFootballers());
+            footballerName2Filter.setText("");
             unShowVirtualKeyboard(footballerName2Filter,v);
-            footballerName2Filter.setFocusable(false);
         });
 
         footballerName2Filter.setOnKeyListener((v, keyCode, event) -> {
 
-            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                filterTable(footballerName2Filter);
-                unShowVirtualKeyboard(footballerName2Filter, v);
-                return true;
-            }
-            return false;
-        });
-
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    filterTable(footballerName2Filter);
+                    unShowVirtualKeyboard(footballerName2Filter, v);
+                    return true;
+                }
+                return false;
+            });
 
         // Acción del botón para ir a añadir nuevo equipo médico del club
         buttonNewTeamCare.setOnClickListener((v -> changeTo(v.getContext(), username)));
@@ -121,11 +120,14 @@ public class MainClub extends BaseActivity {
     {
         ArrayList<Footballer> footballeraux = new ArrayList<>();
 
-        for(Footballer footballer : club.getFootballers())
-            if(footballer.getName().toUpperCase().contains(name.toUpperCase()))
+        for(Footballer footballer : club.getFootballers()) {
+            if (footballer.getName().toUpperCase().contains(name.toUpperCase()))
+            {
                 footballeraux.add(footballer);
+            }
+        }
 
-        return footballeraux;
+            return footballeraux;
     }
 
     public Club getClub() {
@@ -150,7 +152,6 @@ public class MainClub extends BaseActivity {
     private void unShowVirtualKeyboard(EditText editText, View view)
     {
         editText.requestFocus();
-        editText.setText("");
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }

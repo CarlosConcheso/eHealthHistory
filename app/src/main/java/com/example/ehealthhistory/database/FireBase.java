@@ -720,7 +720,6 @@ public class FireBase {
     {
         ArrayList<Footballer> footballers = new ArrayList<>();
 
-
         db.collection("careteam")
                 .whereEqualTo("username", username)
                 .get()
@@ -753,13 +752,11 @@ public class FireBase {
                                                     fc.setTelecom(Integer.parseInt(footballerDTO.getContact_telecom()));
 
                                                 footballer.setFootballerContact(fc);
-                                                mainCareTeam.addFootballer(footballer);
-
                                                 footballers.add(footballer);
                                             }
 
                                             mainCareTeam.setFootballers(footballers);
-                                            mainCareTeam.addFootballersRows(footballers);
+                                            mainCareTeam.addFootballersRows(mainCareTeam.getFootballers());
                                         }
                                     });
                         }
@@ -798,8 +795,6 @@ public class FireBase {
                                     android.R.layout.simple_spinner_dropdown_item,
                                     mainHealthCareService.convert2Array(lista));
                             spinnerFootballers.setAdapter(adapter);
-
-
                     }
                 });
     }

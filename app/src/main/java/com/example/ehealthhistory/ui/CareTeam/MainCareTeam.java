@@ -48,7 +48,6 @@ public class MainCareTeam extends BaseActivity {
         final EditText footballerName2Filter = findViewById(R.id.editTextNameFilter);
         final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
 
-
         // Establecer elementos en pantalla
         fb.representBasicDataAndCareTeamFootballer(username, nameActivityBase,
                 careTeamName, careTeamStatus, careTeamTelcom, careTeamNote, this);
@@ -61,13 +60,13 @@ public class MainCareTeam extends BaseActivity {
 
         footballerName2Filter.setOnKeyListener((v, keyCode, event) -> {
 
-            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                filterTable(footballerName2Filter);
-                unShowVirtualKeyboard(footballerName2Filter, v);
-                return true;
-            }
-            return false;
-        });
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    filterTable(footballerName2Filter);
+                    unShowVirtualKeyboard(footballerName2Filter, v);
+                    return true;
+                }
+                return false;
+            });
 
         // Ir a otra ventana donde añadir un cuidado personalizado al futbolista
         addHealthCare2Footboller.setOnClickListener((v ->
@@ -111,7 +110,10 @@ public class MainCareTeam extends BaseActivity {
     }
 
     private void filterTable(EditText footballerName2Filter) {
+
         ArrayList<Footballer> footballersaux = getFootballersByName(footballerName2Filter.getText().toString());
+
+        System.out.println("NOMBRE: " + footballerName2Filter.getText().toString());
 
         addFootballersRows(footballersaux);
         }
@@ -120,11 +122,12 @@ public class MainCareTeam extends BaseActivity {
     {
         ArrayList<Footballer> footballeraux = new ArrayList<>();
 
-        for(Footballer footballer : getFootballers())
-            if(footballer.getName().toUpperCase().contains(name.toUpperCase()))
+        for(Footballer footballer : getFootballers()) {
+            if (footballer.getName().toUpperCase().contains(name.toUpperCase())) {
                 footballeraux.add(footballer);
-
-            return footballeraux;
+            }
+        }
+        return footballeraux;
     }
 
     public ArrayList<Footballer> getFootballers() {
