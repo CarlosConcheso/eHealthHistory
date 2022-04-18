@@ -59,4 +59,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.firebaseui:firebase-ui-database:7.1.0'
     implementation 'com.google.firebase:firebase-firestore:22.0.1'
+
+    // IPFS Dependences
+    implementation 'com.github.jitpack:gradle-simple:2.0'
+    compile "com.github.ipfs:java-ipfs-http-client:v1.3.3"
 }
