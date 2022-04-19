@@ -10,6 +10,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
+import com.example.ehealthhistory.IPFS.IPFSController;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.database.FireBase;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class MainFootballer extends BaseActivity {
 
     FireBase fb = new FireBase();
+    IPFSController ipfsController = new IPFSController();
     private String username;
 
     private ArrayList<HealthCareService> healthCaresServices = new ArrayList<>();
@@ -31,6 +33,11 @@ public class MainFootballer extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_footballer);
         username = getIntent().getStringExtra("username");
+
+        ipfsController.addToLog("El usuario " + username + "ha entrado en la App");
+        ipfsController.addToLog("Ha utilizado el rol de futbolista");
+
+        ipfsController.saveText("Log " + username);
 
         // Informacion y campos de la pantalla
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);

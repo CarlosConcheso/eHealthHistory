@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ehealthhistory">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,7 +12,10 @@
         android:roundIcon="@drawable/app_image_trans_original"
         android:supportsRtl="true"
         android:theme="@style/Theme.EHealthHistory"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+
 
         <!-- Aqui ponemos la actividad principal -->
         <activity android:name=".ui.PantallaPrincipal">
@@ -33,7 +39,8 @@
 
             <activity android:name=".ui.Club.MainClub"/>
                 <activity android:name=".ui.Club.UIAddNewCareTeam"/>
-    </application>
 
+
+    </application>
 
 </manifest>

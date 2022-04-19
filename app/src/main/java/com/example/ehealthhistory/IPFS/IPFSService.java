@@ -9,11 +9,12 @@ public class IPFSService implements FileServiceImp {
 
     private IPFSConfig ipfsConfig;
     private StringBuilder textToSave;
-    IPFS ipfs = ipfsConfig.ipfs;
+    IPFS ipfs;
 
     public IPFSService()
     {
         ipfsConfig = new IPFSConfig();
+        ipfs = ipfsConfig.ipfs;
     }
 
     @Override
