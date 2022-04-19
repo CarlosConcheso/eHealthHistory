@@ -1,11 +1,5 @@
 package com.example.ehealthhistory.IPFS;
 
-import com.google.android.material.internal.NavigationMenu;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-
 import io.ipfs.api.IPFS;
 import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
@@ -16,6 +10,11 @@ public class IPFSService implements FileServiceImp {
     private IPFSConfig ipfsConfig;
     private StringBuilder textToSave;
     IPFS ipfs = ipfsConfig.ipfs;
+
+    public IPFSService()
+    {
+        ipfsConfig = new IPFSConfig();
+    }
 
     @Override
     public String saveText(String namefile) {
