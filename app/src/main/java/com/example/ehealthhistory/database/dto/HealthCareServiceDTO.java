@@ -9,8 +9,10 @@ public class HealthCareServiceDTO {
     private ArrayList<String> avalibleTime_daysOfHealthCare;
     private String avalibleTime_startTime;
     private String avalibleTime_endTime;
+    private String careteam_name;
     private String category;
     private String commentary;
+    private String healthcare_day;
     private String extraDetails;
     private String name;
     private String username;
@@ -58,6 +60,14 @@ public class HealthCareServiceDTO {
         this.avalibleTime_endTime = avalibleTime_endTime;
     }
 
+    public String getCareteam_name() {
+        return careteam_name;
+    }
+
+    public void setCareteam_name(String careteam_name) {
+        this.careteam_name = careteam_name;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -72,6 +82,14 @@ public class HealthCareServiceDTO {
 
     public void setCommentary(String commentary) {
         this.commentary = commentary;
+    }
+
+    public String getHealthcare_day() {
+        return healthcare_day;
+    }
+
+    public void setHealthcare_day(String healthcare_day) {
+        this.healthcare_day = healthcare_day;
     }
 
     public String getExtraDetails() {

@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.Club.Club;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
-import com.example.ehealthhistory.data.model.footballer.FootballerContact;
 import com.example.ehealthhistory.database.dto.CareTeamDTO;
 import com.example.ehealthhistory.database.dto.ClubDTO;
 import com.example.ehealthhistory.database.dto.FootballerDTO;
@@ -204,7 +203,8 @@ public class FireBase {
                                                 TextView healthCareCategory, TextView healthCareName,
                                                 TextView healthCareCommentary, TextView healthCareAllDay,
                                                 TextView healthCareHoraInicio, TextView healthCareHoraFin,
-                                                TextView healthCareDays, TextView healthCareNote) {
+                                                TextView healthCareDays, TextView healthCareNote,
+                                                TextView healthCareCareTeam, TextView healthCareDay) {
 
         ArrayList<HealthCareService> lista = new ArrayList<>();
 
@@ -229,6 +229,8 @@ public class FireBase {
                             hc.setActive(healthCareServiceDTO.isActive());
                             hc.setCommentary(healthCareServiceDTO.getCommentary());
                             hc.setExtraDetails(healthCareServiceDTO.getExtraDetails());
+                            hc.setCareTeam(healthCareServiceDTO.getCareteam_name());
+                            hc.setDay(healthCareServiceDTO.getHealthcare_day());
 
                             hcat.setAvalibleStartTime(healthCareServiceDTO.getAvalibleTime_startTime());
                             hcat.setAvalibleEndTime(healthCareServiceDTO.getAvalibleTime_endTime());
@@ -253,7 +255,8 @@ public class FireBase {
                                     healthCareCategory, healthCareName,
                                     healthCareCommentary, healthCareAllDay,
                                     healthCareHoraInicio, healthCareHoraFin,
-                                    healthCareDays, healthCareNote);
+                                    healthCareDays, healthCareNote,
+                                    healthCareCareTeam, healthCareDay);
 
                             uiFootballerHealthCares.setConsulta(true);
                         }
@@ -868,7 +871,7 @@ public class FireBase {
 
                         healthCareService.put("avalibleTime_daysOfHealthCare", avalibleTime_daysOfHealthCare);
                         healthCareService.put("careteam_name", careteamname);
-                        healthCareService.put("dayOfHealthCare", dayOfHealthCare);
+                        healthCareService.put("healthcare_day", dayOfHealthCare);
 
 
                         String idDocument = healthCareCategory.getSelectedItem().toString() + " " + footballer.getName() + " " + numHealhcare;

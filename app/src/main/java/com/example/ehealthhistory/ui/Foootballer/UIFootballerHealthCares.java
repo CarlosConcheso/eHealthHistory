@@ -32,6 +32,9 @@ public class UIFootballerHealthCares extends BaseActivity {
 
         final Spinner spinnerHealthCare = findViewById(R.id.spinnerHealthCare);
 
+        final TextView healthCareCareTeam = findViewById(R.id.healthCareCareTeam);
+        final TextView healthCareDay = findViewById(R.id.healthCareDay);
+
         final TextView healthCareCategory = findViewById(R.id.healthCareCategory);
         final TextView healthCareName = findViewById(R.id.healthCareName);
         final TextView healthCareCommentary = findViewById(R.id.healthCareCommentary);
@@ -44,14 +47,16 @@ public class UIFootballerHealthCares extends BaseActivity {
         // Rellena spinner con los HealthCares por FireBase
         fb.fillSpinnerHealthcareFootballer(username, spinnerHealthCare, this,
                 healthCareCategory, healthCareName, healthCareCommentary,
-                      healthCareAllDay, healthCareHoraInicio, healthCareHoraFin,healthCareDays, healthCareNote);
+                      healthCareAllDay, healthCareHoraInicio, healthCareHoraFin,healthCareDays, healthCareNote,
+                healthCareCareTeam, healthCareDay);
 
         // El spinner se actualiza cada vez que cambiamos el valor
         spinnerHealthCare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(isConsulta()) {
                     establecerDatos(spinnerHealthCare, healthCareCategory, healthCareName, healthCareCommentary,
-                            healthCareAllDay, healthCareHoraInicio, healthCareHoraFin, healthCareDays, healthCareNote);
+                            healthCareAllDay, healthCareHoraInicio, healthCareHoraFin, healthCareDays, healthCareNote,
+                            healthCareCareTeam, healthCareDay);
                 }
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -61,7 +66,8 @@ public class UIFootballerHealthCares extends BaseActivity {
     @SuppressLint("SetTextI18n")
     public void establecerDatos(Spinner spinnerHealthCare, TextView healthCareCategory, TextView healthCareName,
                                 TextView healthCareCommentary, TextView healthCareAllDay, TextView healthCareHoraInicio,
-                                TextView healthCareHoraFin, TextView healthCareDays ,TextView healthCareNote)
+                                TextView healthCareHoraFin, TextView healthCareDays ,TextView healthCareNote,
+                                TextView healthCareCareTeam, TextView healthCareDay)
     {
         HealthCareService healthCareSelected = findHealthCare(spinnerHealthCare);
 
@@ -82,6 +88,8 @@ public class UIFootballerHealthCares extends BaseActivity {
         }
         healthCareDays.setText(returnDaysOfHealthCare(healthCareSelected));
         healthCareNote.setText(healthCareSelected.getExtraDetails());
+        healthCareCareTeam.setText(healthCareSelected.getCareTeam());
+        healthCareDay.setText(healthCareSelected.getDay());
     }
 
     private HealthCareService findHealthCare(Spinner spinnerHealthCare)
@@ -116,7 +124,8 @@ public class UIFootballerHealthCares extends BaseActivity {
     public void representarValorSpinnerInicial(TextView healthCareCategory, TextView healthCareName,
                                                 TextView healthCareCommentary, TextView healthCareAllDay,
                                                 TextView healthCareHoraInicio, TextView healthCareHoraFin,
-                                                TextView healthCareDays, TextView healthCareNote)
+                                                TextView healthCareDays, TextView healthCareNote,
+                                               TextView healthCareCareTeam, TextView healthCareDay)
     {
             HealthCareService hc1 = getHealthCares().get(0);
 
@@ -134,6 +143,8 @@ public class UIFootballerHealthCares extends BaseActivity {
             }
         healthCareDays.setText(returnDaysOfHealthCare(hc1));
         healthCareNote.setText(hc1.getExtraDetails());
+        healthCareCareTeam.setText(hc1.getCareTeam());
+        healthCareDay.setText(hc1.getDay());
     }
 
     public boolean isConsulta() {
@@ -151,20 +162,29 @@ public class UIFootballerHealthCares extends BaseActivity {
         ArrayList<String> avalibleDays = hc.getAvalibleTime().getDaysOfHealthCare();
 
         for(int i=0; i<avalibleDays.size(); i++) {
-            if (avalibleDays.get(i).equals("MON"))
-                days.append("Lunes");
-            else if (avalibleDays.get(i).equals("TUE"))
-                days.append("Martes");
-            else if (avalibleDays.get(i).equals("WED"))
-                days.append("Miércoles");
-            else if (avalibleDays.get(i).equals("THU"))
-                days.append("Jueves");
-            else if (avalibleDays.get(i).equals("FRI"))
-                days.append("Viernes");
-            else if (avalibleDays.get(i).equals("SAT"))
-                days.append("Sábado");
-            else if (avalibleDays.get(i).equals("SUN"))
-                days.append("Domingo");
+            switch (avalibleDays.get(i)) {
+                case "MON":
+                    days.append("Lunes");
+                    break;
+                case "TUE":
+                    days.append("Martes");
+                    break;
+                case "WED":
+                    days.append("Miércoles");
+                    break;
+                case "THU":
+                    days.append("Jueves");
+                    break;
+                case "FRI":
+                    days.append("Viernes");
+                    break;
+                case "SAT":
+                    days.append("Sábado");
+                    break;
+                case "SUN":
+                    days.append("Domingo");
+                    break;
+            }
 
             if(i == avalibleDays.size()-2)
                 days.append(" y ");

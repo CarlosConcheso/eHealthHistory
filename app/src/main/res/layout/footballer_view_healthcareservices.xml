@@ -25,6 +25,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="15dp"
                 android:stretchColumns="*">
 
                 <TableRow
@@ -45,6 +46,44 @@
                         android:layout_height="wrap_content" />
                 </TableRow>
             </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/borders"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TextViewHealthCareCareTeam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="3dp"
+                android:text="@string/healthCareCareTeam_textView"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/healthCareCareTeam"
+                android:layout_width="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/TextViewHealthCareDay"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="3dp"                        android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/healthCareDay_textView" />
+
+            <TextView
+                android:id="@+id/healthCareDay"
+                android:layout_width="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
             <TableLayout
                 android:layout_marginTop="10dp"
@@ -74,6 +113,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/borders"
                 android:padding="5dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical" >
 
                 <TextView

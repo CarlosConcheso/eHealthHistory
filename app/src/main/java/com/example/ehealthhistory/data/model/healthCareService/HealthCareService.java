@@ -19,6 +19,8 @@ public class HealthCareService {
     private String name;
     private String commentary;
     private String extraDetails;
+    private String careTeam;
+    private String day;
     private HealthCareAvalibleTime avalibleTime;
 
     public HealthCareService(){}
@@ -98,5 +100,21 @@ public class HealthCareService {
 
     public void setAvalibleTime(HealthCareAvalibleTime avalibleTime) {
         this.avalibleTime = avalibleTime;
+    }
+
+    public String getCareTeam() {
+        return careTeam;
+    }
+
+    public void setCareTeam(String careTeam) {
+        this.careTeam = careTeam;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 }

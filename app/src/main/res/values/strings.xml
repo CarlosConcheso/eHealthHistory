@@ -67,6 +67,8 @@
 
                     <string name="selectFootballer_textView">Seleccione futbolista:</string>
                     <string name="tratamientoActual">Tratamiento actual</string>
+                    <string name="healthCareCareTeam_textView">Médico:</string>
+                    <string name="healthCareDay_textView">Día diagnóstico:</string>
                     <string name="healthCareCategory_textView">Categoría:</string>
                     <string name="healthCareName_textView">Nombre tratamiento:</string>
                     <string name="healthCareCommentary_textView">Comentarios sobre tratamiento:</string>
