@@ -12,7 +12,7 @@
 
     <!-- Pantalla: MainRoles-->
     <string name="futbolista">Futbolista</string>
-            <string name="footballerName_textView">Nombre:</string>
+            <string name="footballerDNI_textView">DNI:</string>
             <string name="footballerTelcom_textView">Teléfono personal:</string>
             <string name="footballerBirthday_textView">Cumpleaños: </string>
             <string name="ButtonfootballerVerDatos">Ver datos de contacto</string>

@@ -24,6 +24,7 @@ public class MainFootballer extends BaseActivity {
     FireBase fb = new FireBase();
     //IPFSController ipfsController = new IPFSController();
     private String username;
+    private String name;
 
     private ArrayList<HealthCareService> healthCaresServices = new ArrayList<>();
 
@@ -33,6 +34,10 @@ public class MainFootballer extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_footballer);
         username = getIntent().getStringExtra("username");
+        name = getIntent().getStringExtra("name");
+
+        final TextView nameActivityBase =findViewById(R.id.nameActivityBase);
+        nameActivityBase.setText(name);
 
         //ipfsController.addToLog("El usuario " + username + "ha entrado en la App");
         //ipfsController.addToLog("Ha utilizado el rol de futbolista");
@@ -40,8 +45,7 @@ public class MainFootballer extends BaseActivity {
         //ipfsController.saveText("Log " + username);
 
         // Informacion y campos de la pantalla
-        final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
-        final TextView footballerName = findViewById(R.id.footballerName);
+        final TextView footballerDNI = findViewById(R.id.footballerDNI);
         final TextView footballerBirthDay = findViewById(R.id.footballerBirthday);
         final TextView footballerTelcom = findViewById(R.id.footballerTelcom);
 
@@ -50,9 +54,8 @@ public class MainFootballer extends BaseActivity {
         final Button buttonfootballerTeamCares = findViewById(R.id.buttonfootballerTeamCares);
 
         // Datos representados con Firebase
-        nameActivityBase.setText("eHealthHistory");
         fb.representBasicFotballerHealthCares(username, this);
-        fb.representFootballerBasicData(username, footballerName, footballerBirthDay,footballerTelcom);
+        fb.representFootballerBasicData(username, footballerDNI, footballerBirthDay,footballerTelcom);
 
         // Ver datos de contacto en profundidad
         buttonfootballerContact.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerContact.class, username)));

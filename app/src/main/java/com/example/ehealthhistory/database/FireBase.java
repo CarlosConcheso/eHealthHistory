@@ -92,7 +92,7 @@ public class FireBase {
 
     // ---------- Meodos pantalla principal futbolista
     public void representFootballerBasicData(String username,
-                                             TextView footballerName, TextView footballerBirthDay,
+                                             TextView footballerDNI, TextView footballerBirthDay,
                                              TextView footballerTelcom) {
 
         db.collection("footballer")
@@ -104,12 +104,13 @@ public class FireBase {
                             FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
                             Footballer footballer = new Footballer();
 
+                            footballer.setDni(footballerDTO.getDni());
                             footballer.setName(footballerDTO.getName());
                             footballer.setBirthday(footballerDTO.getBirthday());
                             if(footballerDTO.getTelecom().length()>0)
                                 footballer.setTelecom(Integer.parseInt(footballerDTO.getTelecom()));
 
-                            footballerName.setText(footballer.getName());
+                            footballerDNI.setText(footballer.getDni());
                             footballerBirthDay.setText(footballer.getBirthday());
                             footballerTelcom.setText(String.valueOf(footballer.getTelecom()));
                         }

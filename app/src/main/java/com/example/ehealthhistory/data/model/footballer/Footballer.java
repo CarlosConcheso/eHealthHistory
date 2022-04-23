@@ -20,6 +20,7 @@ public class Footballer implements Serializable {
 
     private int id;
     private String username;
+    private String dni;
     private boolean active;
     private String name;
     private int telecom;
@@ -64,6 +65,14 @@ public class Footballer implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public boolean isActive() {

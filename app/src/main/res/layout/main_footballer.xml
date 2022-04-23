@@ -29,16 +29,16 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/TextViewfootballerName"
+                    android:id="@+id/TextViewfootballerDNI"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
-                    android:text="@string/footballerName_textView"
+                    android:text="@string/footballerDNI_textView"
                     android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/footballerName"
+                        android:id="@+id/footballerDNI"
                         android:layout_marginStart="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
