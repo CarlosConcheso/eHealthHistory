@@ -38,10 +38,10 @@ public class MainCareTeam extends BaseActivity {
         name = getIntent().getStringExtra("name");
 
         final TextView nameActivityBase =findViewById(R.id.nameActivityBase);
-        nameActivityBase.setText("Equipo Médico");
+        nameActivityBase.setText(name);
 
         //Encontrar todoslo elementos de pantalla
-        final TextView careTeamName = findViewById(R.id.careTeamName);
+        final TextView careTeamCIF = findViewById(R.id.careTeamCIF);
         final TextView careTeamStatus = findViewById(R.id.careTeamStatus);
         final TextView careTeamTelcom = findViewById(R.id.careTeamTelecom);
         final TextView careTeamNote = findViewById(R.id.careTeamNote);
@@ -52,8 +52,8 @@ public class MainCareTeam extends BaseActivity {
         final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
 
         // Establecer elementos en pantalla
-        fb.representBasicDataAndCareTeamFootballer(username, nameActivityBase,
-                careTeamName, careTeamStatus, careTeamTelcom, careTeamNote, this);
+        fb.representBasicDataAndCareTeamFootballer(username,
+                careTeamCIF, careTeamStatus, careTeamTelcom, careTeamNote, this);
 
         buttonReestartFilter.setOnClickListener(v -> {
             addFootballersRows(getFootballers());

@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
-                    android:text="@string/careTeamName_textView"
+                    android:text="@string/careTeamCIF_textView"
                     android:textStyle="bold" />
 
                     <TextView

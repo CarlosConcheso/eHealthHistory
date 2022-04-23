@@ -53,7 +53,7 @@
 
 
     <string name="medico">Médico</string>
-            <string name="careTeamName_textView">Nombre:</string>
+            <string name="careTeamCIF_textView">CIF:</string>
             <string name="careTeamStatus_textView">Estado:</string>
             <string name="careTeamTelecom_textView">Teléfono contacto:</string>
             <string name="careTeamNote_textView">Nota:</string>
@@ -92,6 +92,7 @@
 
         <string name="club">Club</string>
             <string name="clubCIF_textView">CIF:</string>
+            <string name="careTeamName_textView">Nombre:</string>
             <string name="clubPresident_textView">Presidente:</string>
             <string name="clubAlias_textView">Alias:</string>
             <string name="clubContact_textView">Contacto:</string>

@@ -719,8 +719,8 @@ public class FireBase {
                 });
     }
 
-    public void representBasicDataAndCareTeamFootballer(String username, TextView nameActivityBase,
-                                                        TextView careTeamName, TextView careTeamStatus,
+    public void representBasicDataAndCareTeamFootballer(String username,
+                                                        TextView careTeamCIF, TextView careTeamStatus,
                                                         TextView careTeamTelcom, TextView careTeamNote,
                                                         MainCareTeam mainCareTeam)
     {
@@ -735,8 +735,7 @@ public class FireBase {
 
                             CareTeamDTO careteamDTO = document.toObject(CareTeamDTO.class);
 
-                            nameActivityBase.setText(careteamDTO.getName());
-                            careTeamName.setText(careteamDTO.getName());
+                            careTeamCIF.setText(careteamDTO.getCif());
                             careTeamStatus.setText(careteamDTO.getStatus());
                             careTeamTelcom.setText(String.valueOf(careteamDTO.getTelecom()));
                             careTeamNote.setText(careteamDTO.getNote());
