@@ -58,7 +58,7 @@
             <string name="careTeamTelecom_textView">Teléfono contacto:</string>
             <string name="careTeamNote_textView">Nota:</string>
             <string name="careTeamFootballers_textView">Futbolistas a cargo</string>
-            <string name="careTeamFootballerTelecom_textView">Teléfono</string>
+            <string name="careTeamFootballerClub_textView">Club</string>
             <string name="buttonAddHealthCareService">Añadir cuidado a futbolista</string>
             <string name="buttonFilterByName">Filtrar</string>
             <string name="buttonFilterReset">Reset</string>

@@ -27,12 +27,15 @@ public class MainCareTeam extends BaseActivity {
     private final FireBase fb = new FireBase();
     ArrayList<Footballer> footballers = new ArrayList<>();
 
+    String name;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_careteam);
         String username = getIntent().getStringExtra("username");
+        name = getIntent().getStringExtra("name");
 
         final TextView nameActivityBase =findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Equipo Médico");
@@ -85,7 +88,7 @@ public class MainCareTeam extends BaseActivity {
 
             TextView col1 = new TextView(this);
             col1.setText(footballers.get(i).getName());
-            col1.setPadding(25,1,1,1);
+            col1.setPadding(25,0,0,0);
 
             TextView col2 = new TextView(this);
             if(footballers.get(i).isActive())
@@ -93,13 +96,10 @@ public class MainCareTeam extends BaseActivity {
             else
                 col2.setText("No");
             col2.setGravity(Gravity.CENTER);
-            col2.setPadding(25,1,1,1);
-
 
             TextView col3 = new TextView(this);
-            col3.setText(String.valueOf(footballers.get(i).getFootballerContact().getTelecom()));
+            col3.setText(String.valueOf(footballers.get(i).getClub().getName()));
             col3.setGravity(Gravity.CENTER);
-            col3.setPadding(25,1,1,1);
 
             f.addView(col1);
             f.addView(col2);
@@ -147,6 +147,7 @@ public class MainCareTeam extends BaseActivity {
         if(getFootballers().size()>0) {
             Intent intent = new Intent(mContext, MainHealthCareService.class);
             intent.putExtra("username", username);
+            intent.putExtra("name", name);
             mContext.startActivity(intent);
         }
         else

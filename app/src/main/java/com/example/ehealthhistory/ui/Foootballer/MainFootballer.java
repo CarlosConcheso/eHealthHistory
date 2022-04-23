@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class MainFootballer extends BaseActivity {
 
     FireBase fb = new FireBase();
-    IPFSController ipfsController = new IPFSController();
+    //IPFSController ipfsController = new IPFSController();
     private String username;
 
     private ArrayList<HealthCareService> healthCaresServices = new ArrayList<>();
@@ -34,10 +34,10 @@ public class MainFootballer extends BaseActivity {
         setContentView(R.layout.main_footballer);
         username = getIntent().getStringExtra("username");
 
-        ipfsController.addToLog("El usuario " + username + "ha entrado en la App");
-        ipfsController.addToLog("Ha utilizado el rol de futbolista");
+        //ipfsController.addToLog("El usuario " + username + "ha entrado en la App");
+        //ipfsController.addToLog("Ha utilizado el rol de futbolista");
 
-        ipfsController.saveText("Log " + username);
+        //ipfsController.saveText("Log " + username);
 
         // Informacion y campos de la pantalla
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);

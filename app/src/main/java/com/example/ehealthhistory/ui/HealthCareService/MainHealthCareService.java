@@ -2,6 +2,7 @@ package com.example.ehealthhistory.ui.HealthCareService;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -14,25 +15,32 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class MainHealthCareService extends BaseActivity {
 
     private final FireBase fb = new FireBase();
     private ArrayList<Footballer> footballers = new ArrayList<>();
+    String careteamname;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teamcare_add_healthcare);
         String username = getIntent().getStringExtra("username");
+        careteamname = getIntent().getStringExtra("name");
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Añadir cuidado");
@@ -120,11 +128,14 @@ public class MainHealthCareService extends BaseActivity {
                 else
                     if(checkDays(checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD)) {
 
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                        String dayOfHealthCare = dtf.format(LocalDateTime.now());
+
                         fb.addHealthCareToFootballer(getFotballerById(spinnerFootballers.getSelectedItem().toString()),
                                 activo, checkBoxAllDay, spinnerHealthCareCategory, healthCareName,
                                 healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin,
                                 checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD,
-                                multiLineHealthCareCommentary, multiLineHealthCareExtraDetails);
+                                multiLineHealthCareCommentary, multiLineHealthCareExtraDetails, careteamname, dayOfHealthCare);
 
                         Snackbar.make(findViewById(R.id.buttonAddHealthCare),
                                 R.string.healthcare_ok, Snackbar.LENGTH_SHORT).show();

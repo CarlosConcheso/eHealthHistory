@@ -28,6 +28,7 @@ import com.example.ehealthhistory.ui.Foootballer.MainFootballer;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerFavsCareTeams;
 import com.example.ehealthhistory.ui.Foootballer.UIFootballerHealthCares;
 import com.example.ehealthhistory.ui.HealthCareService.MainHealthCareService;
+import com.example.ehealthhistory.ui.MainRoles;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -48,7 +49,7 @@ public class FireBase {
 
     // ---------- Meodos pantalla inicial roles
     @SuppressLint("SetTextI18n")
-    public void getNameFromUser(String username, TextView tv) {
+    public void getNameFromUser(String username, TextView tv, MainRoles mainRoles) {
 
         db.collection("user")
                 .whereEqualTo("username", username)
@@ -57,6 +58,7 @@ public class FireBase {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             UserDTO userDTO = document.toObject(UserDTO.class);
+                            mainRoles.setName(userDTO.getName());
 
                             tv.setText("Bienvenido " + userDTO.getName());
                         }
@@ -743,15 +745,15 @@ public class FireBase {
                                         if (task2.isSuccessful()) {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                                 Footballer footballer = new Footballer();
-                                                FootballerContact fc = new FootballerContact();
+                                                Club clubF = new Club();
                                                 FootballerDTO footballerDTO = document2.toObject(FootballerDTO.class);
 
                                                 footballer.setName(footballerDTO.getName());
                                                 footballer.setActive(footballerDTO.isActive());
-                                                if(footballerDTO.getContact_telecom().length()>0)
-                                                    fc.setTelecom(Integer.parseInt(footballerDTO.getContact_telecom()));
+                                                clubF.setName(footballerDTO.getClub());
 
-                                                footballer.setFootballerContact(fc);
+                                                footballer.setClub(clubF);
+
                                                 footballers.add(footballer);
                                             }
 
@@ -807,7 +809,8 @@ public class FireBase {
                                           Spinner healthCareMinsInicio, Spinner healthCareMinsFin,
                                           CheckBox checkBoxL, CheckBox checkBoxM, CheckBox checkBoxX,
                                           CheckBox checkBoxJ, CheckBox checkBoxV, CheckBox checkBoxS, CheckBox checkBoxD,
-                                          EditText multiLineHealthCareCommentary, EditText multiLineHealthCareExtraDetails) {
+                                          EditText multiLineHealthCareCommentary, EditText multiLineHealthCareExtraDetails,
+                                          String careteamname, String dayOfHealthCare) {
 
         Map<String, Object> healthCareService = new HashMap<>();
 
@@ -831,8 +834,8 @@ public class FireBase {
                         // si no está activado, poner vacio.
                         if(healthCareHoraInicio.isEnabled() && healthCareHoraFin.isEnabled() &&
                                 healthCareMinsInicio.isEnabled() && healthCareMinsFin.isEnabled()) {
-                            healthCareService.put("avalibleTime_endTime", healthCareHoraInicio.getSelectedItem().toString() + ":" + healthCareMinsInicio.getSelectedItem().toString());
-                            healthCareService.put("avalibleTime_startTime", healthCareHoraFin.getSelectedItem().toString() + ":" + healthCareMinsFin.getSelectedItem().toString());
+                            healthCareService.put("avalibleTime_startTime", healthCareHoraInicio.getSelectedItem().toString() + ":" + healthCareMinsInicio.getSelectedItem().toString());
+                            healthCareService.put("avalibleTime_endTime", healthCareHoraFin.getSelectedItem().toString() + ":" + healthCareMinsFin.getSelectedItem().toString());
                         }
                         else
                         {
@@ -864,6 +867,9 @@ public class FireBase {
                             avalibleTime_daysOfHealthCare.add("SUN");
 
                         healthCareService.put("avalibleTime_daysOfHealthCare", avalibleTime_daysOfHealthCare);
+                        healthCareService.put("careteam_name", careteamname);
+                        healthCareService.put("dayOfHealthCare", dayOfHealthCare);
+
 
                         String idDocument = healthCareCategory.getSelectedItem().toString() + " " + footballer.getName() + " " + numHealhcare;
 
