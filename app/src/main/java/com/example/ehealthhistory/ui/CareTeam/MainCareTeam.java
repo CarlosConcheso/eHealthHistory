@@ -100,6 +100,8 @@ public class MainCareTeam extends BaseActivity {
             TextView col3 = new TextView(this);
             col3.setText(String.valueOf(footballers.get(i).getClub().getName()));
             col3.setGravity(Gravity.CENTER);
+            col3.setPadding(25,0,0,0);
+
 
             f.addView(col1);
             f.addView(col2);

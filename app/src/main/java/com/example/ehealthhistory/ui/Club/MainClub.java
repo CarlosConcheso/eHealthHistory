@@ -93,17 +93,16 @@ public class MainClub extends BaseActivity {
 
             TextView col1 = new TextView(this);
             col1.setText(footballers.get(i).getName());
-            col1.setPadding(25,1,1,1);
+            col1.setPadding(25,0,0,0);
 
             TextView col2 = new TextView(this);
             if(footballers.get(i).isActive())
                 col2.setText("Si");
             else
                 col2.setText("No");
-            col2.setGravity(Gravity.CENTER);
-            col2.setPadding(25,1,1,1);
+            col2.setPadding(210,0,0,0);
 
-            f.addView(col1);
+                f.addView(col1);
             f.addView(col2);
 
             tabla.addView(f);
