@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class FootballerDTO {
 
+    private String dni;
     private boolean active;
     private String birthday;
     private ArrayList<String> careteams;
@@ -19,6 +20,14 @@ public class FootballerDTO {
     private String username;
 
     public FootballerDTO() {
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public boolean isActive() {

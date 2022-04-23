@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Club {
 
     private String username;
+    private String CIF;
     private boolean active;
     private String name;
     private String president;
@@ -42,6 +43,14 @@ public class Club {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getCIF() {
+        return CIF;
+    }
+
+    public void setCIF(String CIF) {
+        this.CIF = CIF;
     }
 
     public boolean isActive() {

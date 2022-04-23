@@ -409,7 +409,7 @@ public class FireBase {
     }
 
     @SuppressLint("SetTextI18n")
-    public void representBasicDataAndClubsFootballer(String username, TextView nameActivityBase, TextView clubName,
+    public void representBasicDataAndClubsFootballer(String username, TextView nameActivityBase, TextView clubCIF,
                                                      TextView clubPresident, TextView clubAlias, TextView clubContact,
                                                      TextView clubActive, TextView clubTeamCare, MainClub mainClub)
     {
@@ -424,6 +424,7 @@ public class FireBase {
                             ClubDTO clubDTO = document.toObject(ClubDTO.class);
                             Club club = new Club();
 
+                            club.setCIF(clubDTO.getCif());
                             club.setName(clubDTO.getName());
                             club.setPresident(clubDTO.getPresident());
                             club.setAlias(clubDTO.getAlias());
@@ -432,7 +433,7 @@ public class FireBase {
 
                             nameActivityBase.setText(club.getName());
 
-                            clubName.setText(club.getName());
+                            clubCIF.setText(club.getCIF());
                             clubPresident.setText(club.getPresident());
                             clubAlias.setText(club.getAlias());
                             if(club.isActive())

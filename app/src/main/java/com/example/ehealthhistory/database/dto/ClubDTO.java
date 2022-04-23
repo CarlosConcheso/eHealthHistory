@@ -2,6 +2,7 @@ package com.example.ehealthhistory.database.dto;
 
 public class ClubDTO {
 
+    private String cif;
     private boolean active;
     private String alias;
     private String contactname;
@@ -11,6 +12,14 @@ public class ClubDTO {
     private String username_careteam;
 
     public ClubDTO() {
+    }
+
+    public String getCif() {
+        return cif;
+    }
+
+    public void setCif(String cif) {
+        this.cif = cif;
     }
 
     public boolean isActive() {

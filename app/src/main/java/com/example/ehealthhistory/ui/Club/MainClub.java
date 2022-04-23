@@ -46,7 +46,7 @@ public class MainClub extends BaseActivity {
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
 
         // Elementos de la pantalla EQUIPO
-        final TextView clubName = findViewById(R.id.clubName);
+        final TextView clubCIF = findViewById(R.id.clubCIF);
         final TextView clubPresident = findViewById(R.id.clubPresident);
         final TextView clubAlias = findViewById(R.id.clubAlias);
         final TextView clubContact = findViewById(R.id.clubContact);
@@ -58,7 +58,7 @@ public class MainClub extends BaseActivity {
         final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
 
         fb.representBasicDataAndClubsFootballer(username, nameActivityBase,
-                clubName, clubPresident, clubAlias, clubContact, clubActive, clubTeamCare, this);
+                clubCIF, clubPresident, clubAlias, clubContact, clubActive, clubTeamCare, this);
 
         buttonReestartFilter.setOnClickListener(v -> {
             addFootballersRows(club.getFootballers());

@@ -91,7 +91,7 @@
 
 
         <string name="club">Club</string>
-            <string name="clubName_textView">Nombre:</string>
+            <string name="clubCIF_textView">CIF:</string>
             <string name="clubPresident_textView">Presidente:</string>
             <string name="clubAlias_textView">Alias:</string>
             <string name="clubContact_textView">Contacto:</string>
