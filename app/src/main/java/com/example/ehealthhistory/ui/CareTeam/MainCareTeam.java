@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.BaseActivity;
 import com.example.ehealthhistory.R;
+import com.example.ehealthhistory.data.model.CareTeam.CareTeam;
 import com.example.ehealthhistory.data.model.footballer.Footballer;
 import com.example.ehealthhistory.database.FireBase;
 import com.example.ehealthhistory.ui.HealthCareService.MainHealthCareService;
@@ -27,6 +28,7 @@ public class MainCareTeam extends BaseActivity {
     private final FireBase fb = new FireBase();
     ArrayList<Footballer> footballers = new ArrayList<>();
 
+    private CareTeam careTeam = new CareTeam();
     String name;
 
     @SuppressLint("SetTextI18n")
@@ -147,14 +149,28 @@ public class MainCareTeam extends BaseActivity {
 
     private void changeTo(Context mContext, String username) {
         if(getFootballers().size()>0) {
-            Intent intent = new Intent(mContext, MainHealthCareService.class);
-            intent.putExtra("username", username);
-            intent.putExtra("name", name);
-            mContext.startActivity(intent);
+            if(careTeam.getStatus().equals("activo"))
+            {
+                Intent intent = new Intent(mContext, MainHealthCareService.class);
+                intent.putExtra("username", username);
+                intent.putExtra("name", name);
+                mContext.startActivity(intent);
+            }
+            else
+                Snackbar.make(findViewById(R.id.buttonAddHealthCareService),
+                        R.string.error_careteam_noactive, Snackbar.LENGTH_SHORT).show();
         }
         else
             Snackbar.make(findViewById(R.id.buttonAddHealthCareService),
                     R.string.error_usuario_futbolista, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public CareTeam getCareTeam() {
+        return careTeam;
+    }
+
+    public void setCareTeam(CareTeam careTeam) {
+        this.careTeam = careTeam;
     }
 
     private void unShowVirtualKeyboard(EditText editText, View view)

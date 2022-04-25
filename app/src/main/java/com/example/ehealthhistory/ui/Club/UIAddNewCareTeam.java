@@ -66,11 +66,16 @@ public class UIAddNewCareTeam extends BaseActivity {
 
         //Añadir el nuevo equipo médico
         buttonAddNewCareTeam.setOnClickListener(v -> {
-                fb.addNewCareTeam2Club(username, careTeamName.getText().toString(), Objects.requireNonNull(findCareTeam(spinnerCareTeams)));
-            Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
+                if(findCareTeam(spinnerCareTeams).getStatus().equals("activo"))
+                {
+                    fb.addNewCareTeam2Club(username, careTeamName.getText().toString(), Objects.requireNonNull(findCareTeam(spinnerCareTeams)));
+                    Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
-            new Handler().postDelayed(
-                    this::finish, 1000);
+                    new Handler().postDelayed(
+                            this::finish, 1000);
+                }
+                else
+                    Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.error_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
         });
     }
 

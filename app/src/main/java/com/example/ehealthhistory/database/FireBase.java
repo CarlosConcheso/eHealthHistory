@@ -735,11 +735,18 @@ public class FireBase {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
 
                             CareTeamDTO careteamDTO = document.toObject(CareTeamDTO.class);
+                            CareTeam ct = mainCareTeam.getCareTeam();
 
-                            careTeamCIF.setText(careteamDTO.getCif());
-                            careTeamStatus.setText(careteamDTO.getStatus());
-                            careTeamTelcom.setText(String.valueOf(careteamDTO.getTelecom()));
-                            careTeamNote.setText(careteamDTO.getNote());
+                            ct.setCIF(careteamDTO.getCif());
+                            ct.setName(careteamDTO.getName());
+                            ct.setTelcom(careteamDTO.getTelecom());
+                            ct.setNote(careteamDTO.getNote());
+                            ct.setStatus(careteamDTO.getStatus());
+
+                            careTeamCIF.setText(ct.getCIF());
+                            careTeamStatus.setText(ct.getStatus());
+                            careTeamTelcom.setText(String.valueOf(ct.getTelecom()));
+                            careTeamNote.setText(ct.getNote());
 
                             // Buscar futbolistas con ese careteam
                             db.collection("footballer")

@@ -16,6 +16,7 @@ public class CareTeam {
     //public enum CareTeamStatus { active , suspended, inactive, entered_in_error}
 
     private int id;
+    private String CIF;
     private String username;
     private String status;
     private String name;
@@ -33,6 +34,14 @@ public class CareTeam {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCIF() {
+        return CIF;
+    }
+
+    public void setCIF(String CIF) {
+        this.CIF = CIF;
     }
 
     public String getUsername() {

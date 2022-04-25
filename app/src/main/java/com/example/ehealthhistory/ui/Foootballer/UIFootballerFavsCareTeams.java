@@ -82,11 +82,16 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
 
         /* Comprobar que no coinciden, añadir e irse. */
         buttonAddNewFavCareTeam.setOnClickListener((v -> {
-                fb.addNewCareTeam2Footballer(username,findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams()));
-            Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
+            if(findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams()).getStatus().equals("activo")) {
+                fb.addNewCareTeam2Footballer(username, findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams()));
+                Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
-            new Handler().postDelayed(
-                    this::finish, 1000);
+                new Handler().postDelayed(
+                        this::finish, 1000);
+            }
+            else
+                Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.error_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
+
         }));
     }
 
