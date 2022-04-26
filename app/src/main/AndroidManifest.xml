@@ -18,7 +18,7 @@
 
 
         <!-- Aqui ponemos la actividad principal -->
-        <activity android:name=".ui.PantallaPrincipal">
+        <activity android:name=".UserInterface.PantallaPrincipal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,18 +27,18 @@
         </activity>
 
         <!-- Aqui las demas actividades -->
-        <activity android:name=".ui.login.MainLogIn"/>
-        <activity android:name=".ui.MainRoles"/>
-            <activity android:name=".ui.Foootballer.MainFootballer"/>
-                    <activity android:name=".ui.Foootballer.UIFootballerContact"/>
-                    <activity android:name=".ui.Foootballer.UIFootballerHealthCares"/>
-                    <activity android:name=".ui.Foootballer.UIFootballerFavsCareTeams"/>
+        <activity android:name=".UserInterface.login.MainLogIn"/>
+        <activity android:name=".UserInterface.MainRoles"/>
+            <activity android:name=".UserInterface.Foootballer.MainFootballer"/>
+                    <activity android:name=".UserInterface.Foootballer.UIFootballerContact"/>
+                    <activity android:name=".UserInterface.Foootballer.UIFootballerHealthCares"/>
+                    <activity android:name=".UserInterface.Foootballer.UIFootballerFavsCareTeams"/>
 
-            <activity android:name=".ui.CareTeam.MainCareTeam"/>
-                <activity android:name=".ui.HealthCareService.MainHealthCareService"/>
+            <activity android:name=".UserInterface.CareTeam.MainCareTeam"/>
+                <activity android:name=".UserInterface.HealthCareService.MainHealthCareService"/>
 
-            <activity android:name=".ui.Club.MainClub"/>
-                <activity android:name=".ui.Club.UIAddNewCareTeam"/>
+            <activity android:name=".UserInterface.Club.MainClub"/>
+                <activity android:name=".UserInterface.Club.UIAddNewCareTeam"/>
 
 
     </application>

@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.MainLogIn">
+    tools:context=".UserInterface.login.MainLogIn">
 
     <ImageView
         android:id="@+id/app_image"
