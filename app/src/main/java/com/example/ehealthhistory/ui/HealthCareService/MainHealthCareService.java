@@ -38,7 +38,7 @@ public class MainHealthCareService extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teamcare_add_healthcare);
+        setContentView(R.layout.careteam_add_healthcare);
         String username = getIntent().getStringExtra("username");
         careteamname = getIntent().getStringExtra("name");
 
