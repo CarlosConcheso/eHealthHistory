@@ -24,6 +24,8 @@ public class UIAddNewCareTeam extends BaseActivity {
     private ArrayList<CareTeam> restOfCareTeams = new ArrayList<>();
     private boolean consulta = false;
 
+    //IPFSController ipfsController = new IPFSController();
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,11 @@ public class UIAddNewCareTeam extends BaseActivity {
                 {
                     fb.addNewCareTeam2Club(username, careTeamName.getText().toString(), Objects.requireNonNull(findCareTeam(spinnerCareTeams)));
                     Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
+
+
+                    //ipfsController.addToLog("El club " + username + "ha sustituido el anterior equipo médico: " +
+                    // careTeamName.getText().toString() + ", por: " + findCareTeam(spinnerCareTeams).getName());
+
 
                     new Handler().postDelayed(
                             this::finish, 1000);

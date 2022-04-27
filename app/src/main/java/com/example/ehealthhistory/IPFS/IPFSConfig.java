@@ -11,16 +11,16 @@ public class IPFSConfig {
     IPFS ipfs;
 
     public IPFSConfig() {
-        //try {
-        //    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        //    StrictMode.setThreadPolicy(policy);
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
 
-            //ipfs = new IPFS("/ip4/192.168.1.125/tcp/5001");
-            //ipfs.refs.local();
-        //}
-        //catch (IOException e)
-        //{
-        //    System.out.println("Excepcion: " + e);
-        //}
+            ipfs = new IPFS("/ip4/192.168.1.125/tcp/5001");
+            ipfs.refs.local();
+        }
+        catch (IOException e)
+        {
+            System.out.println("Excepcion: " + e);
+        }
     }
 }

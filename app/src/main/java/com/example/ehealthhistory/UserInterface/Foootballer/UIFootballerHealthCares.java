@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class UIFootballerHealthCares extends BaseActivity {
 
     ArrayList<HealthCareService> healthCares = new ArrayList<>();
+
     FireBase fb = new FireBase();
     private boolean consulta=false;
 
@@ -121,11 +122,11 @@ public class UIFootballerHealthCares extends BaseActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void representarValorSpinnerInicial(TextView healthCareCategory, TextView healthCareName,
-                                                TextView healthCareCommentary, TextView healthCareAllDay,
-                                                TextView healthCareHoraInicio, TextView healthCareHoraFin,
-                                                TextView healthCareDays, TextView healthCareNote,
-                                               TextView healthCareCareTeam, TextView healthCareDay)
+    public void representInitialSpinnerData(TextView healthCareCategory, TextView healthCareName,
+                                            TextView healthCareCommentary, TextView healthCareAllDay,
+                                            TextView healthCareHoraInicio, TextView healthCareHoraFin,
+                                            TextView healthCareDays, TextView healthCareNote,
+                                            TextView healthCareCareTeam, TextView healthCareDay)
     {
             HealthCareService hc1 = getHealthCares().get(0);
 

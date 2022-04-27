@@ -24,7 +24,10 @@ import java.util.ArrayList;
 public class MainClub extends BaseActivity {
 
     private final FireBase fb = new FireBase();
+
     private Club club = new Club();
+    ArrayList<Footballer> footballers = new ArrayList<>();
+
     String username;
 
 
@@ -136,11 +139,6 @@ public class MainClub extends BaseActivity {
         this.club = club;
     }
 
-    public void addFootballer(Footballer fut)
-    {
-        club.getFootballers().add(fut);
-    }
-
     private static void changeTo(Context mContext, String username) {
         Intent intent = new Intent(mContext, UIAddNewCareTeam.class);
         intent.putExtra("username", username);
@@ -152,5 +150,9 @@ public class MainClub extends BaseActivity {
         editText.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void setFootballers(ArrayList<Footballer> footballers) {
+        this.footballers = footballers;
     }
 }

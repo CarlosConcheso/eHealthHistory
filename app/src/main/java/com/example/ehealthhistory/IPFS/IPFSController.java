@@ -14,10 +14,6 @@ public class IPFSController {
         return ipfsService.saveText(namefile);
     }
 
-    public byte[] loadFile(String hash) {
-        return ipfsService.loadFile(hash);
-    }
-
     public void addToLog(String text)
     {
         ipfsService.addToLog(text);

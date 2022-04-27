@@ -93,7 +93,7 @@ public class FireBase {
     // ---------- Meodos pantalla principal futbolista
     public void representFootballerBasicData(String username,
                                              TextView footballerDNI, TextView footballerBirthDay,
-                                             TextView footballerTelcom) {
+                                             TextView footballerTelcom, MainFootballer mainFootballer) {
 
         db.collection("footballer")
                 .whereEqualTo("username", username)
@@ -104,15 +104,17 @@ public class FireBase {
                             FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
                             Footballer footballer = new Footballer();
 
-                            footballer.setDni(footballerDTO.getDni());
+                            footballer.setDNI(footballerDTO.getDni());
                             footballer.setName(footballerDTO.getName());
                             footballer.setBirthday(footballerDTO.getBirthday());
                             if(footballerDTO.getTelecom().length()>0)
                                 footballer.setTelecom(Integer.parseInt(footballerDTO.getTelecom()));
 
-                            footballerDNI.setText(footballer.getDni());
+                            footballerDNI.setText(footballer.getDNI());
                             footballerBirthDay.setText(footballer.getBirthday());
                             footballerTelcom.setText(String.valueOf(footballer.getTelecom()));
+
+                            mainFootballer.setFootballer(footballer);
                         }
                     }
                 });
@@ -252,7 +254,7 @@ public class FireBase {
                             spinner.setAdapter(adapter);
                             uiFootballerHealthCares.setHealthCares(lista);
 
-                            uiFootballerHealthCares.representarValorSpinnerInicial(
+                            uiFootballerHealthCares.representInitialSpinnerData(
                                     healthCareCategory, healthCareName,
                                     healthCareCommentary, healthCareAllDay,
                                     healthCareHoraInicio, healthCareHoraFin,
@@ -479,6 +481,7 @@ public class FireBase {
                                                                     fotballer.setActive(footballerDTO.isActive());
 
                                                                     footballers.add(fotballer);
+                                                                    mainClub.setFootballers(footballers);
                                                                 }
 
                                                                 mainClub.getClub().setFootballers(footballers);

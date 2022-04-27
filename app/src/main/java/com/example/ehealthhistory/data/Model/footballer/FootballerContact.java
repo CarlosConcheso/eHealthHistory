@@ -9,13 +9,13 @@ public class FootballerContact {
 
     private String name;
     private int telecom;
-    private String adress;
+    private String address;
     private Club club;
 
-    public FootballerContact(String name, int telecom, String adress, Club club) {
+    public FootballerContact(String name, int telecom, String address, Club club) {
         this.name = name;
         this.telecom = telecom;
-        this.adress = adress;
+        this.address = address;
         this.club = club;
     }
 
@@ -38,12 +38,12 @@ public class FootballerContact {
         this.telecom = telecom;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Club getClub() {

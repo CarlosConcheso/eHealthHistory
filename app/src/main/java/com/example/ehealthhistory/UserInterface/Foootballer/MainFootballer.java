@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.ehealthhistory.UserInterface.BaseActivity;
 import com.example.ehealthhistory.R;
+import com.example.ehealthhistory.data.Model.footballer.Footballer;
 import com.example.ehealthhistory.data.Model.healthCareService.HealthCareService;
 import com.example.ehealthhistory.Database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class MainFootballer extends BaseActivity {
 
     FireBase fb = new FireBase();
-    //IPFSController ipfsController = new IPFSController();
+    private Footballer footballer = new Footballer();
     private String username;
     private String name;
 
@@ -37,11 +38,6 @@ public class MainFootballer extends BaseActivity {
         final TextView nameActivityBase =findViewById(R.id.nameActivityBase);
         nameActivityBase.setText(name);
 
-        //ipfsController.addToLog("El usuario " + username + "ha entrado en la App");
-        //ipfsController.addToLog("Ha utilizado el rol de futbolista");
-
-        //ipfsController.saveText("Log " + username);
-
         // Informacion y campos de la pantalla
         final TextView footballerDNI = findViewById(R.id.footballerDNI);
         final TextView footballerBirthDay = findViewById(R.id.footballerBirthday);
@@ -53,7 +49,7 @@ public class MainFootballer extends BaseActivity {
 
         // Datos representados con Firebase
         fb.representBasicFotballerHealthCares(username, this);
-        fb.representFootballerBasicData(username, footballerDNI, footballerBirthDay,footballerTelcom);
+        fb.representFootballerBasicData(username, footballerDNI, footballerBirthDay,footballerTelcom, this);
 
         // Ver datos de contacto en profundidad
         buttonfootballerContact.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerContact.class, username)));
@@ -115,5 +111,9 @@ public class MainFootballer extends BaseActivity {
         else
             Snackbar.make(findViewById(R.id.buttonfootballerHealthCareDetails),
                     R.string.error_usuario_healthcares, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public void setFootballer(Footballer footballer) {
+        this.footballer = footballer;
     }
 }

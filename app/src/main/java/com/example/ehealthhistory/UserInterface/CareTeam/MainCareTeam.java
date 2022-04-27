@@ -26,9 +26,10 @@ import java.util.ArrayList;
 public class MainCareTeam extends BaseActivity {
 
     private final FireBase fb = new FireBase();
-    ArrayList<Footballer> footballers = new ArrayList<>();
 
+    ArrayList<Footballer> footballers = new ArrayList<>();
     private CareTeam careTeam = new CareTeam();
+
     String name;
 
     @SuppressLint("SetTextI18n")
@@ -117,8 +118,6 @@ public class MainCareTeam extends BaseActivity {
 
         ArrayList<Footballer> footballersaux = getFootballersByName(footballerName2Filter.getText().toString());
 
-        System.out.println("NOMBRE: " + footballerName2Filter.getText().toString());
-
         addFootballersRows(footballersaux);
         }
 
@@ -142,11 +141,6 @@ public class MainCareTeam extends BaseActivity {
         this.footballers = footballers;
     }
 
-    public void addFootballer(Footballer footballer)
-    {
-        getFootballers().add(footballer);
-    }
-
     private void changeTo(Context mContext, String username) {
         if(getFootballers().size()>0) {
             if(careTeam.getStatus().equals("activo"))
@@ -167,10 +161,6 @@ public class MainCareTeam extends BaseActivity {
 
     public CareTeam getCareTeam() {
         return careTeam;
-    }
-
-    public void setCareTeam(CareTeam careTeam) {
-        this.careTeam = careTeam;
     }
 
     private void unShowVirtualKeyboard(EditText editText, View view)

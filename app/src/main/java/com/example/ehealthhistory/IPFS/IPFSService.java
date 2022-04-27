@@ -7,13 +7,12 @@ import io.ipfs.multihash.Multihash;
 
 public class IPFSService implements FileServiceImp {
 
-    private IPFSConfig ipfsConfig;
     private StringBuilder textToSave;
     IPFS ipfs;
 
     public IPFSService()
     {
-        ipfsConfig = new IPFSConfig();
+        IPFSConfig ipfsConfig = new IPFSConfig();
         ipfs = ipfsConfig.ipfs;
     }
 
@@ -33,16 +32,12 @@ public class IPFSService implements FileServiceImp {
         }
     }
 
-    @Override
-    public byte[] loadFile(String hash) {
+    public StringBuilder getTextToSave() {
+        return textToSave;
+    }
 
-        try {
-            Multihash filePointer = Multihash.fromBase58(hash);
-            return ipfs.cat(filePointer);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Error while loading file on IPFS: " + e);
-        }
+    public void setTextToSave(StringBuilder textToSave) {
+        this.textToSave = textToSave;
     }
 
     public void addToLog(String text)

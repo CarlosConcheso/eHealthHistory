@@ -10,7 +10,7 @@ import com.example.ehealthhistory.Database.FireBase;
 
 public class UIFootballerContact extends BaseActivity {
 
-    FireBase fb;
+    FireBase fb =new FireBase();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -18,7 +18,6 @@ public class UIFootballerContact extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.footballer_contact);
         
-        fb = new FireBase();
         String username = getIntent().getStringExtra("username");
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);

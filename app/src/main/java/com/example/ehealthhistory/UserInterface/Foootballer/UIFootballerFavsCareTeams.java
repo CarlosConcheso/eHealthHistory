@@ -27,6 +27,8 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
     private final ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
     private boolean flagNoFavsCT = false;
 
+    //IPFSController ipfsController = new IPFSController();
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         spinnerFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(isFlagFavsCT()) {
-                    representTeamCareData(spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
+                    representCareTeamData(spinnerFavCareTeam, favCareTeamName, favCareTeamStatus,
                              favCareTeamTelecom, favCareTeamNote, getFavsCareTeams());
                 }
             }
@@ -74,7 +76,7 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
         spinnerNewFavCareTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(isFlagNoFavsCT()) {
-                    representTeamCareData(spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
+                    representCareTeamData(spinnerNewFavCareTeam, newFavCareTeamName, newFavCareTeamStatus,
                              newFavCareTeamTelecom, newFavCareTeamNote, getNoFavsCareTeams());
                 }
             }
@@ -86,6 +88,11 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
             if(Objects.requireNonNull(findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams())).getStatus().equals("activo")) {
                 fb.addNewCareTeam2Footballer(username, findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams()));
                 Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
+
+                //ipfsController.addToLog("El futblista " + username + "ha añadido el equipo médico de confianza: " +
+                // findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams())).getName());
+
+                //ipfsController.saveText("Equipo médico confianza " + username);
 
                 new Handler().postDelayed(
                         this::finish, 1000);
@@ -111,7 +118,7 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
                 newFavCareTeamTelecom, newFavCareTeamNote, this);
     }
 
-    private void representTeamCareData(Spinner selectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
+    private void representCareTeamData(Spinner selectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
                                        TextView newCareTeamTelecom, TextView newCareTeamNote, ArrayList<CareTeam> careteams)
     {
         CareTeam careTeamSelected = findCareTeamInList(selectedCareTeam, careteams);
