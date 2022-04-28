@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.ehealthhistory.IPFS.IPFSController;
 import com.example.ehealthhistory.UserInterface.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.Model.footballer.Footballer;
@@ -33,7 +34,7 @@ public class MainHealthCareService extends BaseActivity {
     private ArrayList<Footballer> footballers = new ArrayList<>();
     String careteamname;
 
-    //IPFSController ipfsController = new IPFSController();
+    IPFSController ipfsController = new IPFSController();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
@@ -133,7 +134,7 @@ public class MainHealthCareService extends BaseActivity {
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                         String dayOfHealthCare = dtf.format(LocalDateTime.now());
 
-                        fb.addHealthCareToFootballer(getFotballerById(spinnerFootballers.getSelectedItem().toString()),
+                        fb.addHealthCare2Footballer(getFotballerById(spinnerFootballers.getSelectedItem().toString()),
                                 activo, checkBoxAllDay, spinnerHealthCareCategory, healthCareName,
                                 healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin,
                                 checkBoxL, checkBoxM, checkBoxX, checkBoxJ, checkBoxV, checkBoxS, checkBoxD,
@@ -142,8 +143,10 @@ public class MainHealthCareService extends BaseActivity {
                         Snackbar.make(findViewById(R.id.buttonAddHealthCare),
                                 R.string.healthcare_ok, Snackbar.LENGTH_SHORT).show();
 
-                        //ipfsController.addToLog("El médico " + username + "ha añadido un nuevo cuidado médico al futbolista: " +
-                        // getFotballerById(spinnerFootballers.getSelectedItem().toString() + ", con fecha: " + dayOfHealthCare);
+                        ipfsController.addToLog("El médico " + username + "ha añadido un nuevo cuidado médico al futbolista: " +
+                        getFotballerById(spinnerFootballers.getSelectedItem().toString() + ", con fecha: " + dayOfHealthCare));
+
+                        ipfsController.saveText(username + ": AddNewHealthCareService");
 
                         new Handler().postDelayed(
                                 this::finish, 1000);

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.ehealthhistory.IPFS.IPFSController;
 import com.example.ehealthhistory.UserInterface.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.Model.CareTeam.CareTeam;
@@ -16,7 +17,6 @@ import com.example.ehealthhistory.Database.FireBase;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class UIFootballerFavsCareTeams extends BaseActivity {
 
@@ -27,7 +27,7 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
     private final ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
     private boolean flagNoFavsCT = false;
 
-    //IPFSController ipfsController = new IPFSController();
+    IPFSController ipfsController = new IPFSController();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -85,14 +85,18 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
 
         /* Comprobar que no coinciden, añadir e irse. */
         buttonAddNewFavCareTeam.setOnClickListener((v -> {
-            if(Objects.requireNonNull(findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams())).getStatus().equals("activo")) {
-                fb.addNewCareTeam2Footballer(username, findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams()));
+
+            CareTeam newCT = findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams());
+
+            assert newCT != null;
+            if(newCT.getStatus().equals("activo")) {
+                fb.addNewCareTeam2Footballer(username, newCT);
                 Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
-                //ipfsController.addToLog("El futblista " + username + "ha añadido el equipo médico de confianza: " +
-                // findCareTeamInList(spinnerNewFavCareTeam, getNoFavsCareTeams())).getName());
+                ipfsController.addToLog("El futblista " + username + "ha añadido el equipo médico de confianza: " +
+                        newCT.getName());
 
-                //ipfsController.saveText("Equipo médico confianza " + username);
+                ipfsController.saveText(username + ": AddNewFavCareTeam");
 
                 new Handler().postDelayed(
                         this::finish, 1000);

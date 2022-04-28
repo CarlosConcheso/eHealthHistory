@@ -7,13 +7,14 @@ import io.ipfs.multihash.Multihash;
 
 public class IPFSService implements FileServiceImp {
 
-    private StringBuilder textToSave;
+    private String textToSave;
     IPFS ipfs;
 
     public IPFSService()
     {
         IPFSConfig ipfsConfig = new IPFSConfig();
         ipfs = ipfsConfig.ipfs;
+        textToSave = "";
     }
 
     @Override
@@ -32,16 +33,8 @@ public class IPFSService implements FileServiceImp {
         }
     }
 
-    public StringBuilder getTextToSave() {
-        return textToSave;
-    }
-
-    public void setTextToSave(StringBuilder textToSave) {
-        this.textToSave = textToSave;
-    }
-
     public void addToLog(String text)
     {
-        textToSave.append(text).append("\n");
+        textToSave = text;
     }
 }

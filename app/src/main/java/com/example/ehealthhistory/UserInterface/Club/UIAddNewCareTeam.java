@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.ehealthhistory.IPFS.IPFSController;
 import com.example.ehealthhistory.UserInterface.BaseActivity;
 import com.example.ehealthhistory.R;
 import com.example.ehealthhistory.data.Model.CareTeam.CareTeam;
@@ -24,7 +25,7 @@ public class UIAddNewCareTeam extends BaseActivity {
     private ArrayList<CareTeam> restOfCareTeams = new ArrayList<>();
     private boolean consulta = false;
 
-    //IPFSController ipfsController = new IPFSController();
+    IPFSController ipfsController;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -32,6 +33,8 @@ public class UIAddNewCareTeam extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.club_add_newcareteam);
         String username = getIntent().getStringExtra("username");
+
+        ipfsController = new IPFSController();
 
         final TextView nameActivityBase = findViewById(R.id.nameActivityBase);
         nameActivityBase.setText("Establecer nuevo Médico");
@@ -68,14 +71,19 @@ public class UIAddNewCareTeam extends BaseActivity {
 
         //Añadir el nuevo equipo médico
         buttonAddNewCareTeam.setOnClickListener(v -> {
-                if(Objects.requireNonNull(findCareTeam(spinnerCareTeams)).getStatus().equals("activo"))
+
+            CareTeam ct = findCareTeam(spinnerCareTeams);
+
+            assert ct != null;
+            if(ct.getStatus().equals("activo"))
                 {
-                    fb.addNewCareTeam2Club(username, careTeamName.getText().toString(), Objects.requireNonNull(findCareTeam(spinnerCareTeams)));
+                    fb.addNewCareTeam2Club(username, careTeamName.getText().toString(), ct);
                     Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
+                    ipfsController.addToLog("El club " + username + "ha sustituido el anterior equipo médico: " +
+                     careTeamName.getText().toString() + ", por: " + ct.getName());
 
-                    //ipfsController.addToLog("El club " + username + "ha sustituido el anterior equipo médico: " +
-                    // careTeamName.getText().toString() + ", por: " + findCareTeam(spinnerCareTeams).getName());
+                    ipfsController.saveText(username + ": AddNewCareTeam");
 
 
                     new Handler().postDelayed(

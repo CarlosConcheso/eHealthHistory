@@ -55,7 +55,7 @@ public class MainCareTeam extends BaseActivity {
         final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
 
         // Establecer elementos en pantalla
-        fb.representBasicDataAndCareTeamFootballer(username,
+        fb.representCareTeamBasicDataAndFootballers(username,
                 careTeamCIF, careTeamStatus, careTeamTelcom, careTeamNote, this);
 
         buttonReestartFilter.setOnClickListener(v -> {

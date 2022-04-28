@@ -59,7 +59,7 @@ public class MainClub extends BaseActivity {
         final EditText footballerName2Filter = findViewById(R.id.editTextNameFilter);
         final Button buttonReestartFilter = findViewById(R.id.buttonReestartFilter);
 
-        fb.representBasicDataAndClubsFootballer(username, nameActivityBase,
+        fb.representBasicClubDataAndFootballer(username, nameActivityBase,
                 clubCIF, clubPresident, clubAlias, clubContact, clubActive, clubTeamCare, this);
 
         buttonReestartFilter.setOnClickListener(v -> {

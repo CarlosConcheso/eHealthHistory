@@ -48,7 +48,7 @@ public class MainFootballer extends BaseActivity {
         final Button buttonfootballerTeamCares = findViewById(R.id.buttonfootballerTeamCares);
 
         // Datos representados con Firebase
-        fb.representBasicFotballerHealthCares(username, this);
+        fb.representBasicFootballerHealthCares(username, this);
         fb.representFootballerBasicData(username, footballerDNI, footballerBirthDay,footballerTelcom, this);
 
         // Ver datos de contacto en profundidad

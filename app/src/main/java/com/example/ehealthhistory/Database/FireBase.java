@@ -120,7 +120,7 @@ public class FireBase {
                 });
     }
 
-    public void representBasicFotballerHealthCares(String username, MainFootballer mainFootballer)
+    public void representBasicFootballerHealthCares(String username, MainFootballer mainFootballer)
     {
         ArrayList<HealthCareService> healthcares = new ArrayList<>();
 
@@ -201,7 +201,7 @@ public class FireBase {
                 });
     }
 
-    public void fillSpinnerHealthcareFootballer(String username, Spinner spinner,
+    public void fillSpinnerHealthCareFootballer(String username, Spinner spinner,
                                                 UIFootballerHealthCares uiFootballerHealthCares,
                                                 TextView healthCareCategory, TextView healthCareName,
                                                 TextView healthCareCommentary, TextView healthCareAllDay,
@@ -412,9 +412,9 @@ public class FireBase {
     }
 
     @SuppressLint("SetTextI18n")
-    public void representBasicDataAndClubsFootballer(String username, TextView nameActivityBase, TextView clubCIF,
-                                                     TextView clubPresident, TextView clubAlias, TextView clubContact,
-                                                     TextView clubActive, TextView clubTeamCare, MainClub mainClub)
+    public void representBasicClubDataAndFootballer(String username, TextView nameActivityBase, TextView clubCIF,
+                                                    TextView clubPresident, TextView clubAlias, TextView clubContact,
+                                                    TextView clubActive, TextView clubTeamCare, MainClub mainClub)
     {
         ArrayList<Footballer> footballers = new ArrayList<>();
 
@@ -723,10 +723,10 @@ public class FireBase {
                 });
     }
 
-    public void representBasicDataAndCareTeamFootballer(String username,
-                                                        TextView careTeamCIF, TextView careTeamStatus,
-                                                        TextView careTeamTelcom, TextView careTeamNote,
-                                                        MainCareTeam mainCareTeam)
+    public void representCareTeamBasicDataAndFootballers(String username,
+                                                         TextView careTeamCIF, TextView careTeamStatus,
+                                                         TextView careTeamTelcom, TextView careTeamNote,
+                                                         MainCareTeam mainCareTeam)
     {
         ArrayList<Footballer> footballers = new ArrayList<>();
 
@@ -816,15 +816,15 @@ public class FireBase {
     }
 
 
-    public void addHealthCareToFootballer(Footballer footballer,
-                                          CheckBox activo, CheckBox checkBoxAllDay, Spinner healthCareCategory,
-                                          EditText healthCareName,
-                                          Spinner healthCareHoraInicio, Spinner healthCareHoraFin,
-                                          Spinner healthCareMinsInicio, Spinner healthCareMinsFin,
-                                          CheckBox checkBoxL, CheckBox checkBoxM, CheckBox checkBoxX,
-                                          CheckBox checkBoxJ, CheckBox checkBoxV, CheckBox checkBoxS, CheckBox checkBoxD,
-                                          EditText multiLineHealthCareCommentary, EditText multiLineHealthCareExtraDetails,
-                                          String careteamname, String dayOfHealthCare) {
+    public void addHealthCare2Footballer(Footballer footballer,
+                                         CheckBox activo, CheckBox checkBoxAllDay, Spinner healthCareCategory,
+                                         EditText healthCareName,
+                                         Spinner healthCareHoraInicio, Spinner healthCareHoraFin,
+                                         Spinner healthCareMinsInicio, Spinner healthCareMinsFin,
+                                         CheckBox checkBoxL, CheckBox checkBoxM, CheckBox checkBoxX,
+                                         CheckBox checkBoxJ, CheckBox checkBoxV, CheckBox checkBoxS, CheckBox checkBoxD,
+                                         EditText multiLineHealthCareCommentary, EditText multiLineHealthCareExtraDetails,
+                                         String careteamname, String dayOfHealthCare) {
 
         Map<String, Object> healthCareService = new HashMap<>();
 
