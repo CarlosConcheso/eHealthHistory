@@ -98,11 +98,21 @@ public class UIAddNewCareTeam extends BaseActivity {
     private void addNewCareTeamData(Spinner spinnerCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
                                     TextView newCareTeamTelecom, TextView newCareTeamNote)
     {
+        String nodata = "-";
+
         CareTeam careTeamSelected = findCareTeam(spinnerCareTeam);
         newCareTeamName.setText(Objects.requireNonNull(careTeamSelected).getName());
         newCareTeamStatus.setText(careTeamSelected.getStatus());
-        newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
-        newCareTeamNote.setText(careTeamSelected.getNote());
+
+        if(careTeamSelected.getTelecom() != 0)
+            newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
+        else
+            newCareTeamTelecom.setText(nodata);
+
+        if(careTeamSelected.getNote() != null)
+            newCareTeamNote.setText(careTeamSelected.getNote());
+        else
+            newCareTeamNote.setText(nodata);
     }
 
     public ArrayList<CareTeam> getRestOfCareTeams() {
@@ -140,12 +150,23 @@ public class UIAddNewCareTeam extends BaseActivity {
     public void representInitialSpinnerData(TextView newCareTeamName,
                                             TextView newCareTeamStatus, TextView newCareTeamTelecom,
                                             TextView newCareTeamNote) {
-        CareTeam ct = getRestOfCareTeams().get(0);
 
-        newCareTeamName.setText(ct.getName());
-        newCareTeamStatus.setText(ct.getStatus());
-        newCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
-        newCareTeamNote.setText(ct.getNote());
+        String nodata="-";
+
+        CareTeam careTeamSelected = getRestOfCareTeams().get(0);
+
+        newCareTeamName.setText(careTeamSelected.getName());
+        newCareTeamStatus.setText(careTeamSelected.getStatus());
+
+        if(careTeamSelected.getTelecom() != 0)
+            newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
+        else
+            newCareTeamTelecom.setText(nodata);
+
+        if(careTeamSelected.getNote() != null)
+            newCareTeamNote.setText(careTeamSelected.getNote());
+        else
+            newCareTeamNote.setText(nodata);
     }
 
     private CareTeam findCareTeam(Spinner spinnerCareTeam)

@@ -530,7 +530,9 @@ public class FireBase {
                                                 careteam.setUsername(careTeamDTO.getUsername());
                                                 careteam.setStatus(careTeamDTO.getStatus());
                                                 careteam.setNote(careTeamDTO.getNote());
-                                                careteam.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
+
+                                                if(careTeamDTO.getTelecom() != null)
+                                                    careteam.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
 
                                                 club.setClubCareTeam(careteam);
                                                 clubTeamCare.setText(club.getClubCareTeam().getName());
@@ -595,7 +597,9 @@ public class FireBase {
                                                 careteam.setUsername(careTeamDTO.getUsername());
                                                 careteam.setStatus(careTeamDTO.getStatus());
                                                 careteam.setNote(careTeamDTO.getNote());
-                                                careteam.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
+
+                                                if(careTeamDTO.getTelecom() != null)
+                                                    careteam.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
 
                                                 club.setClubCareTeam(careteam);
                                                 careteamName.setText(club.getClubCareTeam().getName());
@@ -613,6 +617,9 @@ public class FireBase {
                                             TextView careTeamName, TextView careTeamStatus,
                                             TextView careTeamTelecom, TextView careTeamNote)
     {
+
+        String nodata = "-";
+
         db.collection("club")
                 .whereEqualTo("username", username)
                 .get()
@@ -630,12 +637,30 @@ public class FireBase {
                                         if (task2.isSuccessful()) {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                                 CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
+                                                CareTeam ct = new CareTeam();
 
-                                                careTeamCIF.setText(careTeamDTO.getCif());
-                                                careTeamName.setText(careTeamDTO.getName());
+                                                ct.setCIF(careTeamDTO.getCif());
+                                                ct.setName(careTeamDTO.getName());
+                                                ct.setStatus(careTeamDTO.getStatus());
+
+                                                if(careTeamDTO.getTelecom() != null)
+                                                    ct.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
+
+                                                ct.setNote(careTeamDTO.getNote());
+
+                                                careTeamCIF.setText(ct.getCIF());
+                                                careTeamName.setText(ct.getName());
                                                 careTeamStatus.setText(careTeamDTO.getStatus());
-                                                careTeamTelecom.setText(String.valueOf(careTeamDTO.getTelecom()));
-                                                careTeamNote.setText(careTeamDTO.getNote());
+
+                                                if(ct.getTelecom() != 0)
+                                                    careTeamTelecom.setText(String.valueOf(ct.getTelecom()));
+                                                else
+                                                    careTeamTelecom.setText(nodata);
+
+                                                if(!ct.getNote().equals(""))
+                                                    careTeamNote.setText(ct.getNote());
+                                                else
+                                                    careTeamNote.setText(nodata);
                                             }
                                         }
                                     });
@@ -649,7 +674,7 @@ public class FireBase {
                                         TextView newCareTeamNote,
                                         UIAddNewCareTeam uiAddNewCareTeam) {
 
-        String nodata = "";
+        String nodata = "-";
 
         ArrayList<CareTeam> lista = new ArrayList<>();
 
