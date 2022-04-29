@@ -95,6 +95,8 @@ public class FireBase {
                                              TextView footballerDNI, TextView footballerBirthDay,
                                              TextView footballerTelcom, MainFootballer mainFootballer) {
 
+        String nodata = "-";
+
         db.collection("footballer")
                 .whereEqualTo("username", username)
                 .get()
@@ -107,12 +109,20 @@ public class FireBase {
                             footballer.setDNI(footballerDTO.getDni());
                             footballer.setName(footballerDTO.getName());
                             footballer.setBirthday(footballerDTO.getBirthday());
-                            if(footballerDTO.getTelecom().length()>0)
+
+                            if(footballerDTO.getTelecom() != null) {
                                 footballer.setTelecom(Integer.parseInt(footballerDTO.getTelecom()));
+                                footballerTelcom.setText(String.valueOf(footballer.getTelecom()));
+                            }
+                            else
+                                footballerTelcom.setText(nodata);
 
                             footballerDNI.setText(footballer.getDNI());
-                            footballerBirthDay.setText(footballer.getBirthday());
-                            footballerTelcom.setText(String.valueOf(footballer.getTelecom()));
+
+                            if(footballer.getBirthday()!= null)
+                                footballerBirthDay.setText(footballer.getBirthday());
+                            else
+                                footballerBirthDay.setText(nodata);
 
                             mainFootballer.setFootballer(footballer);
                         }
