@@ -206,8 +206,16 @@ public class FireBase {
                                                 ClubDTO clubDTO = document2.toObject(ClubDTO.class);
 
                                                 footballerClubName.setText(clubDTO.getName());
-                                                footballerClubAlias.setText(clubDTO.getAlias());
-                                                footballerClubContactName.setText(clubDTO.getContactname());
+
+                                                if(clubDTO.getAlias() != null)
+                                                    footballerClubAlias.setText(clubDTO.getAlias());
+                                                else
+                                                    footballerClubAlias.setText(nodata);
+
+                                                if(clubDTO.getContactname() != null)
+                                                    footballerClubContactName.setText(clubDTO.getContactname());
+                                                else
+                                                    footballerClubContactName.setText(nodata);
 
                                                 db.collection("careteam")
                                                         .whereEqualTo("username", clubDTO.getUsername_careteam())
@@ -219,8 +227,16 @@ public class FireBase {
                                                                     CareTeamDTO careteamDTO = document3.toObject(CareTeamDTO.class);
 
                                                                     footballerClubTeamCareName.setText(careteamDTO.getName());
-                                                                    footballerClubTeamCareTelecom.setText(String.valueOf(careteamDTO.getTelecom()));
-                                                                    footballerClubTeamCareNote.setText(careteamDTO.getNote());
+
+                                                                    if(careteamDTO.getTelecom() != null)
+                                                                        footballerClubTeamCareTelecom.setText(String.valueOf(careteamDTO.getTelecom()));
+                                                                    else
+                                                                        footballerClubTeamCareTelecom.setText(nodata);
+
+                                                                    if(careteamDTO.getNote() != null)
+                                                                        footballerClubTeamCareNote.setText(careteamDTO.getNote());
+                                                                    else
+                                                                        footballerClubTeamCareNote.setText(nodata);
                                                                 }
                                                             }
                                                         });
