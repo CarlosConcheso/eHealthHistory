@@ -161,6 +161,8 @@ public class FireBase {
                                               TextView footballerClubTeamCareName, TextView footballerClubTeamCareTelecom,
                                               TextView footballerClubTeamCareNote) {
 
+        String nodata = "-";
+
         db.collection("footballer")
                 .whereEqualTo("username", username)
                 .get()
@@ -170,10 +172,29 @@ public class FireBase {
 
                             FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
 
-                            footballerContactName.setText(footballerDTO.getContact_name());
-                            footballerContactTelf.setText(footballerDTO.getTelecom());
-                            footballerContactLenguaje.setText(footballerDTO.getComunication_lenguage());
-                            footballerContactAdress.setText(footballerDTO.getContact_address());
+                            if(footballerDTO.getContact_name() != null) {
+                                footballerContactName.setText(footballerDTO.getContact_name());
+                            }
+                            else
+                                footballerContactName.setText(nodata);
+
+                            if(footballerDTO.getTelecom() != null) {
+                                footballerContactTelf.setText(footballerDTO.getTelecom());
+                            }
+                            else
+                                footballerContactTelf.setText(nodata);
+
+                            if(footballerDTO.getComunication_lenguage() != null) {
+                                footballerContactLenguaje.setText(footballerDTO.getComunication_lenguage());
+                            }
+                            else
+                                footballerContactLenguaje.setText(nodata);
+
+                            if(footballerDTO.getComunication_lenguage() != null) {
+                                footballerContactAdress.setText(footballerDTO.getContact_address());
+                            }
+                            else
+                                footballerContactAdress.setText(nodata);
 
                             db.collection("club")
                                     .whereEqualTo("name", footballerDTO.getClub())
