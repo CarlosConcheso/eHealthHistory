@@ -178,8 +178,8 @@ public class FireBase {
                             else
                                 footballerContactName.setText(nodata);
 
-                            if(footballerDTO.getTelecom() != null) {
-                                footballerContactTelf.setText(footballerDTO.getTelecom());
+                            if(footballerDTO.getContact_telecom() != null) {
+                                footballerContactTelf.setText(footballerDTO.getContact_telecom());
                             }
                             else
                                 footballerContactTelf.setText(nodata);
