@@ -836,7 +836,7 @@ public class FireBase {
                                                          MainCareTeam mainCareTeam)
     {
 
-        String nodata ="";
+        String nodata ="-";
 
         ArrayList<Footballer> footballers = new ArrayList<>();
 
@@ -852,7 +852,10 @@ public class FireBase {
 
                             ct.setCIF(careteamDTO.getCif());
                             ct.setName(careteamDTO.getName());
-                            ct.setTelcom(Integer.parseInt(careteamDTO.getTelecom()));
+
+                            if(careteamDTO.getTelecom() != null)
+                                ct.setTelcom(Integer.parseInt(careteamDTO.getTelecom()));
+
                             ct.setNote(careteamDTO.getNote());
                             ct.setStatus(careteamDTO.getStatus());
 
