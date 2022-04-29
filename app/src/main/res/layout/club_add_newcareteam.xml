@@ -50,7 +50,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/TextViewCareTeamName"
+                    android:id="@+id/TextViewCareTeamCIF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
@@ -59,11 +59,27 @@
                     android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/careTeamName"
+                        android:id="@+id/careTeamCIF"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:gravity="start" />
+
+                <TextView
+                    android:id="@+id/TextViewCareTeamName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
+                    android:text="@string/careTeamName_textView"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/careTeamName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:gravity="start" />
 
                 <TextView
                     android:id="@+id/TextViewCareTeamStatus"

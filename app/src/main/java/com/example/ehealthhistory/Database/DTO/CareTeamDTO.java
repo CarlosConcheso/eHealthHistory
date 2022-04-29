@@ -6,7 +6,7 @@ public class CareTeamDTO {
     private String name;
     private String note;
     private String status;
-    private int telecom;
+    private String telecom;
     private String username;
 
     public CareTeamDTO() {
@@ -44,11 +44,11 @@ public class CareTeamDTO {
         this.status = status;
     }
 
-    public int getTelecom() {
+    public String getTelecom() {
         return telecom;
     }
 
-    public void setTelecom(int telecom) {
+    public void setTelecom(String telecom) {
         this.telecom = telecom;
     }
 

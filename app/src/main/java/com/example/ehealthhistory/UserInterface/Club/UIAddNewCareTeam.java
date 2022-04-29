@@ -40,6 +40,7 @@ public class UIAddNewCareTeam extends BaseActivity {
         nameActivityBase.setText("Establecer nuevo Médico");
 
         // Encontramos todos los valores de la pantalla
+        final TextView careTeamCIF = findViewById(R.id.careTeamCIF);
         final TextView careTeamName = findViewById(R.id.careTeamName);
         final TextView careTeamStatus = findViewById(R.id.careTeamStatus);
         final TextView careTeamTelecom = findViewById(R.id.careTeamTelecom);
@@ -55,7 +56,7 @@ public class UIAddNewCareTeam extends BaseActivity {
         final Button buttonAddNewCareTeam = findViewById(R.id.buttonAddNewCareTeam);
 
         // Establecer valores
-        fb.representClubCareTeamData(username,careTeamName,careTeamStatus,careTeamTelecom,careTeamNote);
+        fb.representClubCareTeamData(username,careTeamCIF,careTeamName,careTeamStatus,careTeamTelecom,careTeamNote);
         fb.fillSpinnerNewCareTeams(username, spinnerCareTeams, newCareTeamName,
                 newCareTeamStatus, newCareTeamTelecom, newCareTeamNote, this);
 

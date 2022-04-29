@@ -28,7 +28,7 @@ public class MainCareTeam extends BaseActivity {
     private final FireBase fb = new FireBase();
 
     ArrayList<Footballer> footballers = new ArrayList<>();
-    private CareTeam careTeam = new CareTeam();
+    private final CareTeam careTeam = new CareTeam();
 
     String name;
 

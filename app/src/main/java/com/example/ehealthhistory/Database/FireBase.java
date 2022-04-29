@@ -301,6 +301,9 @@ public class FireBase {
                                            TextView favCareTeamStatus, TextView favCareTeamTelecom,
                                            TextView favCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
+
+        String nodata = "";
+
         ArrayList<CareTeam> careteams = new ArrayList<>();
 
         db.collection("footballer")
@@ -326,14 +329,22 @@ public class FireBase {
                                                     ct.setId(id);
                                                     ct.setUsername(careTeamDTO.getUsername());
                                                     ct.setName(careTeamDTO.getName());
-                                                    ct.setTelcom(careTeamDTO.getTelecom());
+                                                    ct.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
                                                     ct.setStatus(careTeamDTO.getStatus());
                                                     ct.setNote(careTeamDTO.getNote());
 
                                                     favCareTeamName.setText(ct.getName());
                                                     favCareTeamStatus.setText(ct.getStatus());
-                                                    favCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
-                                                    favCareTeamNote.setText(ct.getNote());
+
+                                                    if(careTeamDTO.getTelecom() != null)
+                                                        favCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
+                                                    else
+                                                        favCareTeamTelecom.setText(nodata);
+
+                                                    if(careTeamDTO.getNote() != null)
+                                                        favCareTeamNote.setText(ct.getNote());
+                                                    else
+                                                        favCareTeamNote.setText(nodata);
 
                                                     uiFootballerFavsCareTeams.addToFavCareTeam(ct);
                                                     careteams.add(ct);
@@ -363,6 +374,9 @@ public class FireBase {
                                              TextView newFavCareTeamStatus, TextView newFavCareTeamTelecom,
                                              TextView newFavCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
+
+        String nodata = "";
+
         ArrayList<CareTeam> careteams = new ArrayList<>();
 
         db.collection("footballer")
@@ -388,14 +402,21 @@ public class FireBase {
                                                     ct.setId(id);
                                                     ct.setUsername(careTeamDTO.getUsername());
                                                     ct.setName(careTeamDTO.getName());
-                                                    ct.setTelcom(careTeamDTO.getTelecom());
+                                                    ct.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
                                                     ct.setStatus(careTeamDTO.getStatus());
                                                     ct.setNote(careTeamDTO.getNote());
 
                                                     newFavCareTeamName.setText(ct.getName());
                                                     newFavCareTeamStatus.setText(ct.getStatus());
-                                                    newFavCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
-                                                    newFavCareTeamNote.setText(ct.getNote());
+                                                    if(careTeamDTO.getTelecom() != null)
+                                                        newFavCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
+                                                    else
+                                                        newFavCareTeamTelecom.setText(nodata);
+
+                                                    if(careTeamDTO.getNote() != null)
+                                                        newFavCareTeamNote.setText(ct.getNote());
+                                                    else
+                                                        newFavCareTeamNote.setText(nodata);
 
                                                     uiFootballerFavsCareTeams.addNoFavsCareTeams(ct);
                                                     careteams.add(ct);
@@ -447,6 +468,9 @@ public class FireBase {
                                                     TextView clubPresident, TextView clubAlias, TextView clubContact,
                                                     TextView clubActive, TextView clubTeamCare, MainClub mainClub)
     {
+
+        String nodata = "-";
+
         ArrayList<Footballer> footballers = new ArrayList<>();
 
         db.collection("club")
@@ -459,6 +483,7 @@ public class FireBase {
                             Club club = new Club();
 
                             club.setCIF(clubDTO.getCif());
+
                             club.setName(clubDTO.getName());
                             club.setPresident(clubDTO.getPresident());
                             club.setAlias(clubDTO.getAlias());
@@ -468,14 +493,26 @@ public class FireBase {
                             nameActivityBase.setText(club.getName());
 
                             clubCIF.setText(club.getCIF());
-                            clubPresident.setText(club.getPresident());
-                            clubAlias.setText(club.getAlias());
-                            if(club.isActive())
+
+                            if(clubDTO.getPresident()!=null)
+                                clubPresident.setText(club.getPresident());
+                            else
+                                clubPresident.setText(nodata);
+
+                            if(clubDTO.getAlias()!=null)
+                                clubAlias.setText(club.getAlias());
+                            else
+                                clubAlias.setText(nodata);
+
+                            if (club.isActive())
                                 clubActive.setText("Si");
                             else
                                 clubActive.setText("No");
 
-                            clubContact.setText(club.getContactName());
+                            if(club.getContactName()!=null)
+                                clubContact.setText(club.getContactName());
+                            else
+                                clubContact.setText(nodata);
 
                             mainClub.setClub(club);
 
@@ -493,7 +530,7 @@ public class FireBase {
                                                 careteam.setUsername(careTeamDTO.getUsername());
                                                 careteam.setStatus(careTeamDTO.getStatus());
                                                 careteam.setNote(careTeamDTO.getNote());
-                                                careteam.setTelcom(careTeamDTO.getTelecom());
+                                                careteam.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
 
                                                 club.setClubCareTeam(careteam);
                                                 clubTeamCare.setText(club.getClubCareTeam().getName());
@@ -558,7 +595,7 @@ public class FireBase {
                                                 careteam.setUsername(careTeamDTO.getUsername());
                                                 careteam.setStatus(careTeamDTO.getStatus());
                                                 careteam.setNote(careTeamDTO.getNote());
-                                                careteam.setTelcom(careTeamDTO.getTelecom());
+                                                careteam.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
 
                                                 club.setClubCareTeam(careteam);
                                                 careteamName.setText(club.getClubCareTeam().getName());
@@ -572,7 +609,7 @@ public class FireBase {
     }
 
 
-    public void representClubCareTeamData(String username,
+    public void representClubCareTeamData(String username,TextView careTeamCIF,
                                             TextView careTeamName, TextView careTeamStatus,
                                             TextView careTeamTelecom, TextView careTeamNote)
     {
@@ -594,6 +631,7 @@ public class FireBase {
                                             for (QueryDocumentSnapshot document2 : Objects.requireNonNull(task2.getResult())) {
                                                 CareTeamDTO careTeamDTO = document2.toObject(CareTeamDTO.class);
 
+                                                careTeamCIF.setText(careTeamDTO.getCif());
                                                 careTeamName.setText(careTeamDTO.getName());
                                                 careTeamStatus.setText(careTeamDTO.getStatus());
                                                 careTeamTelecom.setText(String.valueOf(careTeamDTO.getTelecom()));
@@ -610,6 +648,8 @@ public class FireBase {
                                         TextView newCareTeamStatus, TextView newCareTeamTelecom,
                                         TextView newCareTeamNote,
                                         UIAddNewCareTeam uiAddNewCareTeam) {
+
+        String nodata = "";
 
         ArrayList<CareTeam> lista = new ArrayList<>();
 
@@ -635,13 +675,24 @@ public class FireBase {
                                                 ct.setId(i);
                                                 ct.setName(careTeamDTO.getName());
                                                 ct.setStatus(careTeamDTO.getStatus());
-                                                ct.setTelcom(careTeamDTO.getTelecom());
+
+                                                if(careTeamDTO.getTelecom() != null)
+                                                    ct.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
+
                                                 ct.setNote(careTeamDTO.getNote());
 
                                                 newCareTeamName.setText(careTeamDTO.getName());
                                                 newCareTeamStatus.setText(careTeamDTO.getStatus());
-                                                newCareTeamTelecom.setText(String.valueOf(careTeamDTO.getTelecom()));
-                                                newCareTeamNote.setText(careTeamDTO.getNote());
+
+                                                if(careTeamDTO.getTelecom() != null)
+                                                    newCareTeamTelecom.setText(String.valueOf(careTeamDTO.getTelecom()));
+                                                else
+                                                    newCareTeamTelecom.setText(nodata);
+
+                                                if(careTeamDTO.getNote() != null)
+                                                    newCareTeamNote.setText(careTeamDTO.getNote());
+                                                else
+                                                    newCareTeamNote.setText(nodata);
 
                                                 lista.add(ct);
                                                 uiAddNewCareTeam.addNewCareTeam(ct);
@@ -759,6 +810,9 @@ public class FireBase {
                                                          TextView careTeamTelcom, TextView careTeamNote,
                                                          MainCareTeam mainCareTeam)
     {
+
+        String nodata ="";
+
         ArrayList<Footballer> footballers = new ArrayList<>();
 
         db.collection("careteam")
@@ -773,14 +827,22 @@ public class FireBase {
 
                             ct.setCIF(careteamDTO.getCif());
                             ct.setName(careteamDTO.getName());
-                            ct.setTelcom(careteamDTO.getTelecom());
+                            ct.setTelcom(Integer.parseInt(careteamDTO.getTelecom()));
                             ct.setNote(careteamDTO.getNote());
                             ct.setStatus(careteamDTO.getStatus());
 
                             careTeamCIF.setText(ct.getCIF());
                             careTeamStatus.setText(ct.getStatus());
-                            careTeamTelcom.setText(String.valueOf(ct.getTelecom()));
-                            careTeamNote.setText(ct.getNote());
+
+                            if(careteamDTO.getTelecom() != null)
+                                careTeamTelcom.setText(String.valueOf(ct.getTelecom()));
+                            else
+                                careTeamTelcom.setText(nodata);
+
+                            if(ct.getNote() != null)
+                                careTeamNote.setText(ct.getNote());
+                            else
+                                careTeamNote.setText(nodata);
 
                             // Buscar futbolistas con ese careteam
                             db.collection("footballer")
