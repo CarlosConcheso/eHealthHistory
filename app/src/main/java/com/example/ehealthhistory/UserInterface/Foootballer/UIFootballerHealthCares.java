@@ -70,6 +70,9 @@ public class UIFootballerHealthCares extends BaseActivity {
                                 TextView healthCareHoraFin, TextView healthCareDays ,TextView healthCareNote,
                                 TextView healthCareCareTeam, TextView healthCareDay)
     {
+
+        String nodata = "-";
+
         HealthCareService healthCareSelected = findHealthCare(spinnerHealthCare);
 
         assert healthCareSelected != null;
@@ -79,8 +82,8 @@ public class UIFootballerHealthCares extends BaseActivity {
         if(healthCareSelected.getAvalibleTime().isAllDay())
         {
             healthCareAllDay.setText("Si");
-            healthCareHoraInicio.setText("");
-            healthCareHoraFin.setText("");
+            healthCareHoraInicio.setText(nodata);
+            healthCareHoraFin.setText(nodata);
         }
         else {
             healthCareAllDay.setText("No");
@@ -88,7 +91,12 @@ public class UIFootballerHealthCares extends BaseActivity {
             healthCareHoraFin.setText(healthCareSelected.getAvalibleTime().getAvalibleEndTime());
         }
         healthCareDays.setText(returnDaysOfHealthCare(healthCareSelected));
-        healthCareNote.setText(healthCareSelected.getExtraDetails());
+
+        if(!healthCareSelected.getExtraDetails().equals(""))
+            healthCareNote.setText(healthCareSelected.getExtraDetails());
+        else
+            healthCareNote.setText(nodata);
+
         healthCareCareTeam.setText(healthCareSelected.getCareTeam());
         healthCareDay.setText(healthCareSelected.getDay());
     }
@@ -128,22 +136,34 @@ public class UIFootballerHealthCares extends BaseActivity {
                                             TextView healthCareDays, TextView healthCareNote,
                                             TextView healthCareCareTeam, TextView healthCareDay)
     {
-            HealthCareService hc1 = getHealthCares().get(0);
 
-            healthCareCategory.setText(hc1.getCategory());
-            healthCareName.setText(hc1.getName());
-            healthCareCommentary.setText(hc1.getCommentary());
-            if (hc1.getAvalibleTime().isAllDay()) {
-                healthCareAllDay.setText("Si");
-                healthCareHoraInicio.setText("");
-                healthCareHoraFin.setText("");
-            } else {
+        String nodata = "-";
+
+        HealthCareService hc1 = getHealthCares().get(0);
+
+        healthCareCategory.setText(hc1.getCategory());
+        healthCareName.setText(hc1.getName());
+        healthCareCommentary.setText(hc1.getCommentary());
+
+        if (hc1.getAvalibleTime().isAllDay()) {
+            healthCareAllDay.setText("Si");
+            healthCareHoraInicio.setText(nodata);
+            healthCareHoraFin.setText(nodata);
+        }
+        else
+            {
                 healthCareAllDay.setText("No");
                 healthCareHoraInicio.setText(hc1.getAvalibleTime().getAvalibleStartTime());
                 healthCareHoraFin.setText(hc1.getAvalibleTime().getAvalibleEndTime());
             }
         healthCareDays.setText(returnDaysOfHealthCare(hc1));
-        healthCareNote.setText(hc1.getExtraDetails());
+
+        if(!hc1.getExtraDetails().equals("")) {
+            healthCareNote.setText(hc1.getExtraDetails());
+        }
+        else
+            healthCareNote.setText(nodata);
+
         healthCareCareTeam.setText(hc1.getCareTeam());
         healthCareDay.setText(hc1.getDay());
     }
