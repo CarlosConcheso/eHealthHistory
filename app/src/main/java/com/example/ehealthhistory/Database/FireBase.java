@@ -318,7 +318,7 @@ public class FireBase {
                                            TextView favCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
 
-        String nodata = "";
+        String nodata = "-";
 
         ArrayList<CareTeam> careteams = new ArrayList<>();
 
@@ -345,8 +345,17 @@ public class FireBase {
                                                     ct.setId(id);
                                                     ct.setUsername(careTeamDTO.getUsername());
                                                     ct.setName(careTeamDTO.getName());
-                                                    ct.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
                                                     ct.setStatus(careTeamDTO.getStatus());
+                                                    if(careTeamDTO.getTelecom() != null)
+                                                        ct.setTelcom(ct.getTelecom());
+                                                    else
+                                                        ct.setTelcom(-1);
+                                                    ct.setNote(careTeamDTO.getNote());
+
+                                                    if(careTeamDTO.getStatus() != null)
+                                                        ct.setStatus(careTeamDTO.getStatus());
+                                                    else
+                                                        ct.setStatus(nodata);
                                                     ct.setNote(careTeamDTO.getNote());
 
                                                     favCareTeamName.setText(ct.getName());
@@ -418,8 +427,12 @@ public class FireBase {
                                                     ct.setId(id);
                                                     ct.setUsername(careTeamDTO.getUsername());
                                                     ct.setName(careTeamDTO.getName());
-                                                    ct.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
-                                                    ct.setStatus(careTeamDTO.getStatus());
+                                                    if(careTeamDTO.getTelecom() != null)
+                                                        ct.setTelcom(ct.getTelecom());
+                                                    else
+                                                        ct.setTelcom(-1);
+                                                    if(careTeamDTO.getStatus()!=null)
+                                                        ct.setStatus(careTeamDTO.getStatus());
                                                     ct.setNote(careTeamDTO.getNote());
 
                                                     newFavCareTeamName.setText(ct.getName());

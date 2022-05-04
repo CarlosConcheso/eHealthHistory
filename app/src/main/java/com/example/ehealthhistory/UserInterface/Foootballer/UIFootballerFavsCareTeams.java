@@ -27,7 +27,7 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
     private final ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
     private boolean flagNoFavsCT = false;
 
-    IPFSController ipfsController = new IPFSController();
+    //IPFSController ipfsController = new IPFSController();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -93,10 +93,10 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
                 fb.addNewCareTeam2Footballer(username, newCT);
                 Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
-                ipfsController.addToLog("El futblista " + username + "ha añadido el equipo médico de confianza: " +
-                        newCT.getName());
+                //ipfsController.addToLog("El futblista " + username + "ha añadido el equipo médico de confianza: " +
+                //        newCT.getName());
 
-                ipfsController.saveText(username + ": AddNewFavCareTeam");
+                //ipfsController.saveText(username + ": AddNewFavCareTeam");
 
                 new Handler().postDelayed(
                         this::finish, 1000);
@@ -125,13 +125,24 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
     private void representCareTeamData(Spinner selectedCareTeam, TextView newCareTeamName, TextView newCareTeamStatus,
                                        TextView newCareTeamTelecom, TextView newCareTeamNote, ArrayList<CareTeam> careteams)
     {
+
+        String nodata = "-";
+
         CareTeam careTeamSelected = findCareTeamInList(selectedCareTeam, careteams);
 
         assert careTeamSelected != null;
         newCareTeamName.setText(careTeamSelected.getName());
         newCareTeamStatus.setText(careTeamSelected.getStatus());
-        newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
-        newCareTeamNote.setText(careTeamSelected.getNote());
+
+        if(careTeamSelected.getTelecom() != -1)
+            newCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
+        else
+            newCareTeamTelecom.setText(nodata);
+
+        if(careTeamSelected.getNote() != null)
+            newCareTeamNote.setText(careTeamSelected.getNote());
+        else
+            newCareTeamNote.setText(nodata);
     }
 
 
@@ -147,12 +158,23 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
 
     public void representInitialSpinnerData(TextView favCareTeamName,
                                             TextView favCareTeamStatus, TextView favCareTeamTelecom, TextView favCareTeamNote) {
+
+        String nodata ="-";
+
         CareTeam careTeamSelected = getFavsCareTeams().get(0);
 
         favCareTeamName.setText(careTeamSelected.getName());
         favCareTeamStatus.setText(careTeamSelected.getStatus());
-        favCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
-        favCareTeamNote.setText(careTeamSelected.getNote());
+
+        if(careTeamSelected.getTelecom() == -1)
+            favCareTeamTelecom.setText(String.valueOf(careTeamSelected.getTelecom()));
+        else
+            favCareTeamTelecom.setText(nodata);
+
+        if(careTeamSelected.getNote() != null)
+            favCareTeamNote.setText(careTeamSelected.getNote());
+        else
+            favCareTeamNote.setText(nodata);
     }
 
     public ArrayList<CareTeam> getFavsCareTeams() {
