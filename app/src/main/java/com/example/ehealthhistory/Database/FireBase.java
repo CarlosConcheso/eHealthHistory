@@ -400,7 +400,7 @@ public class FireBase {
                                              TextView newFavCareTeamNote, UIFootballerFavsCareTeams uiFootballerFavsCareTeams)
     {
 
-        String nodata = "";
+        String nodata = "-";
 
         ArrayList<CareTeam> careteams = new ArrayList<>();
 
@@ -428,7 +428,7 @@ public class FireBase {
                                                     ct.setUsername(careTeamDTO.getUsername());
                                                     ct.setName(careTeamDTO.getName());
                                                     if(careTeamDTO.getTelecom() != null)
-                                                        ct.setTelcom(ct.getTelecom());
+                                                        ct.setTelcom(Integer.parseInt(careTeamDTO.getTelecom()));
                                                     else
                                                         ct.setTelcom(-1);
                                                     if(careTeamDTO.getStatus()!=null)
@@ -437,7 +437,7 @@ public class FireBase {
 
                                                     newFavCareTeamName.setText(ct.getName());
                                                     newFavCareTeamStatus.setText(ct.getStatus());
-                                                    if(careTeamDTO.getTelecom() != null)
+                                                    if(ct.getTelecom() != -1)
                                                         newFavCareTeamTelecom.setText(String.valueOf(ct.getTelecom()));
                                                     else
                                                         newFavCareTeamTelecom.setText(nodata);

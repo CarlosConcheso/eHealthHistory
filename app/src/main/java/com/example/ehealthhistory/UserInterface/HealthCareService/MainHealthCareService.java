@@ -34,7 +34,7 @@ public class MainHealthCareService extends BaseActivity {
     private ArrayList<Footballer> footballers = new ArrayList<>();
     String careteamname;
 
-    IPFSController ipfsController = new IPFSController();
+    //IPFSController ipfsController = new IPFSController();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
@@ -143,10 +143,10 @@ public class MainHealthCareService extends BaseActivity {
                         Snackbar.make(findViewById(R.id.buttonAddHealthCare),
                                 R.string.healthcare_ok, Snackbar.LENGTH_SHORT).show();
 
-                        ipfsController.addToLog("El médico " + username + "ha añadido un nuevo cuidado médico al futbolista: " +
-                        getFotballerById(spinnerFootballers.getSelectedItem().toString() + ", con fecha: " + dayOfHealthCare));
+                        //ipfsController.addToLog("El médico " + username + "ha añadido un nuevo cuidado médico al futbolista: " +
+                        //getFotballerById(spinnerFootballers.getSelectedItem().toString() + ", con fecha: " + dayOfHealthCare));
 
-                        ipfsController.saveText(username + ": AddNewHealthCareService");
+                        //ipfsController.saveText(username + ": AddNewHealthCareService");
 
                         new Handler().postDelayed(
                                 this::finish, 1000);
