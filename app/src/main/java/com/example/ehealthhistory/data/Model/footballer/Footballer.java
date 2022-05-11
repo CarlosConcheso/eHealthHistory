@@ -14,9 +14,7 @@ import java.util.ArrayList;
  *              u otros servicios relacionados con la salud.
  *         	Información demográfica necesaria para apoyar los procedimientos administrativos, financieros y logísticos.
  */
-public class Footballer implements Serializable {
-
-    //public enum genders {MALE, FEMALE, OTHER, UNKNOW}
+public class Footballer {
 
     private int id;
     private String username;

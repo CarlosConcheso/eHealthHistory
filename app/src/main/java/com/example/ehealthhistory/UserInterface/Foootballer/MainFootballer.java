@@ -49,7 +49,7 @@ public class MainFootballer extends BaseActivity {
 
         // Datos representados con Firebase
         fb.representBasicFootballerHealthCares(username, this);
-        fb.representFootballerBasicData(username, footballerDNI, footballerBirthDay,footballerTelcom, this);
+        fb.representFootballerBasicData(username, footballer, footballerDNI, footballerBirthDay,footballerTelcom, this);
 
         // Ver datos de contacto en profundidad
         buttonfootballerContact.setOnClickListener((v -> changeTo(v.getContext(), UIFootballerContact.class, username)));

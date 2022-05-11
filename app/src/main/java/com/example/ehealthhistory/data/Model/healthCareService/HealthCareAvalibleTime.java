@@ -8,8 +8,6 @@ import java.util.ArrayList;
 public class HealthCareAvalibleTime {
 
 
-    //public enum daysOfWeek { MON, TUE, WED, THU, FRI, SAT, SUN}
-
     ArrayList<String> daysOfHealthCare;
     private boolean allDay;
     private String avalibleStartTime;

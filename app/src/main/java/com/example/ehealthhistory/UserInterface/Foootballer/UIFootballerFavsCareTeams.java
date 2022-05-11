@@ -27,7 +27,7 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
     private final ArrayList<CareTeam> noFavsCareTeams = new ArrayList<>();
     private boolean flagNoFavsCT = false;
 
-    //IPFSController ipfsController = new IPFSController();
+    IPFSController ipfsController = new IPFSController();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -93,8 +93,8 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
                 fb.addNewCareTeam2Footballer(username, newCT);
                 Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
-                //ipfsController.addToLog("El futblista " + username + "ha añadido el equipo médico de confianza: " +
-                //        newCT.getName());
+                ipfsController.addToLog("El futblista " + username + "ha añadido el equipo médico de confianza: " +
+                        newCT.getName());
 
                 //ipfsController.saveText(username + ": AddNewFavCareTeam");
 

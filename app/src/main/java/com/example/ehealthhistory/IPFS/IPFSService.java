@@ -26,6 +26,8 @@ public class IPFSService implements FileServiceImp {
             NamedStreamable.ByteArrayWrapper file = new NamedStreamable.ByteArrayWrapper(namefile, byteArray);
             MerkleNode addResult = ipfs.add(file).get(0);
 
+            System.out.println("SE AÑADE A IPFS: FICHERO" + namefile + ", con: " + textToSave);
+
             return addResult.hash.toBase58();
 
         } catch (Exception e){

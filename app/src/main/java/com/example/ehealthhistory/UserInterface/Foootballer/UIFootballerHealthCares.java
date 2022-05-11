@@ -110,17 +110,6 @@ public class UIFootballerHealthCares extends BaseActivity {
         return null;
     }
 
-    public String[] convert2ArrayHealthCares(ArrayList<HealthCareService> lista)
-    {
-        String[] mStringArray = new String[lista.size()];
-
-        for (int i = 0; i < lista.size(); i++) {
-            mStringArray[i] = lista.get(i).getId() + ". "+ lista.get(i).getName();
-        }
-
-        return mStringArray;
-    }
-
     public ArrayList<HealthCareService> getHealthCares() {
         return healthCares;
     }
@@ -214,5 +203,16 @@ public class UIFootballerHealthCares extends BaseActivity {
         }
 
         return days.toString();
+    }
+
+    public String[] convert2ArrayHealthCares(ArrayList<HealthCareService> lista)
+    {
+        String[] mStringArray = new String[lista.size()];
+
+        for (int i = 0; i < lista.size(); i++) {
+            mStringArray[i] = lista.get(i).getId() + ". "+ lista.get(i).getName();
+        }
+
+        return mStringArray;
     }
 }

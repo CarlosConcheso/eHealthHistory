@@ -45,7 +45,7 @@ public class MainLogIn extends AppCompatActivity {
                     .signInWithEmailAndPassword(usuario, pass)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(this, R.string.ok_usuario_contra, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(loginButton.getContext(), R.string.ok_usuario_contra, Toast.LENGTH_SHORT).show();
                             unShowVirtualKeyboard(password,v);
 
                             new Handler().postDelayed(() -> {
@@ -55,7 +55,7 @@ public class MainLogIn extends AppCompatActivity {
                                 }, 1000);
 
                         } else {
-                            Toast.makeText(this, R.string.error_usuario_contra, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(loginButton.getContext(), R.string.error_usuario_contra, Toast.LENGTH_SHORT).show();
                             password.setText("");
                         }
                     });
@@ -66,7 +66,7 @@ public class MainLogIn extends AppCompatActivity {
         }));
     }
 
-    private static void changeTo(Context mContext, String username) {
+    private void changeTo(Context mContext, String username) {
         Intent intent = new Intent(mContext, MainRoles.class);
         intent.putExtra("username", username);
         mContext.startActivity(intent);

@@ -15,7 +15,9 @@ public class IPFSConfig {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
-            ipfs = new IPFS("/ip4/192.168.1.150/tcp/5001");
+            String direccion = "/bdiez.duckdns.org:5001/webui";
+
+            ipfs = new IPFS(direccion);
             ipfs.refs.local();
         }
         catch (IOException e)

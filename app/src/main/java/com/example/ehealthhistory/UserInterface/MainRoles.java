@@ -55,7 +55,7 @@ public class MainRoles extends BaseActivity {
     }
 
     @SuppressWarnings("rawtypes")
-    private static void changeTo(Context mContext, Class clase, String username, String nameOfUser) {
+    private void changeTo(Context mContext, Class clase, String username, String nameOfUser) {
         Intent intent = new Intent(mContext, clase);
         intent.putExtra("username", username);
         intent.putExtra("name", nameOfUser);

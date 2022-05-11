@@ -13,11 +13,9 @@ package com.example.ehealthhistory.data.Model.CareTeam;
  */
 public class CareTeam {
 
-    //public enum CareTeamStatus { active , suspended, inactive, entered_in_error}
-
     private int id;
-    private String CIF;
     private String username;
+    private String CIF;
     private String status;
     private String name;
     private int telcom;

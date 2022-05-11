@@ -91,7 +91,7 @@ public class FireBase {
     }
 
     // ---------- Meodos pantalla principal futbolista
-    public void representFootballerBasicData(String username,
+    public void representFootballerBasicData(String username, Footballer footballer,
                                              TextView footballerDNI, TextView footballerBirthDay,
                                              TextView footballerTelcom, MainFootballer mainFootballer) {
 
@@ -104,7 +104,6 @@ public class FireBase {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             FootballerDTO footballerDTO = document.toObject(FootballerDTO.class);
-                            Footballer footballer = new Footballer();
 
                             footballer.setDNI(footballerDTO.getDni());
                             footballer.setName(footballerDTO.getName());
