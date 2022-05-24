@@ -22,11 +22,10 @@ public class IPFSService implements FileServiceImp {
 
         byte[] byteArray = String.valueOf(textToSave).getBytes();
 
+
         try {
             NamedStreamable.ByteArrayWrapper file = new NamedStreamable.ByteArrayWrapper(namefile, byteArray);
             MerkleNode addResult = ipfs.add(file).get(0);
-
-            System.out.println("SE AÑADE A IPFS: FICHERO" + namefile + ", con: " + textToSave);
 
             return addResult.hash.toBase58();
 

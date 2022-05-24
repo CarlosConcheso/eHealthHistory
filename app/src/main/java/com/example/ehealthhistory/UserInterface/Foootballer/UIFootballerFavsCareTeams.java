@@ -93,10 +93,11 @@ public class UIFootballerFavsCareTeams extends BaseActivity {
                 fb.addNewCareTeam2Footballer(username, newCT);
                 Snackbar.make(findViewById(R.id.buttonAddNewFavCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
+
                 ipfsController.addToLog("El futblista " + username + "ha añadido el equipo médico de confianza: " +
                         newCT.getName());
 
-                //ipfsController.saveText(username + ": AddNewFavCareTeam");
+                ipfsController.saveText(username + ": AddNewFavCareTeam");
 
                 new Handler().postDelayed(
                         this::finish, 1000);

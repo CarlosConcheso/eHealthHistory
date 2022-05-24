@@ -79,11 +79,10 @@ public class UIAddNewCareTeam extends BaseActivity {
                     fb.addNewCareTeam2Club(username, careTeamName.getText().toString(), ct);
                     Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
-                    ipfsController.addToLog("El club " + username + "ha sustituido el anterior equipo médico: " +
+                    ipfsController.addToLog("El club " + username + " ha sustituido el anterior equipo médico: " +
                     careTeamName.getText().toString() + ", por: " + ct.getName());
 
                     ipfsController.saveText(username + ": AddNewCareTeam");
-
 
                     new Handler().postDelayed(
                             this::finish, 1000);
