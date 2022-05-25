@@ -57,6 +57,9 @@ public class MainHealthCareService extends BaseActivity {
         final Spinner spinnerHealthCareCategory = findViewById(R.id.spinnerHealthCareCategory);
         final EditText healthCareName = findViewById(R.id.editTextHealthCareName);
 
+        final TextView TextViewHealthCareHoraInicio = findViewById(R.id.TextViewHealthCareHoraInicio);
+        final TextView TextViewHealthCareHoraFin = findViewById(R.id.TextViewHealthCareHoraFin);
+
         final Spinner healthCareHoraInicio = findViewById(R.id.spinnerTeamCareHoraInicio);
         final Spinner healthCareHoraFin = findViewById(R.id.spinnerTeamCareHoraFin);
         final Spinner healthCareMinsInicio = findViewById(R.id.spinnerTeamCareMinsInicio);
@@ -89,9 +92,14 @@ public class MainHealthCareService extends BaseActivity {
         checkBoxAllDay.setOnClickListener(v -> {
             if ( ((CheckBox)v).isChecked() ) {
                 anularSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
+                TextViewHealthCareHoraInicio.setVisibility(View.GONE);
+                TextViewHealthCareHoraFin.setVisibility(View.GONE);
             }
-            else
-                activarSpinnersHora(healthCareHoraInicio,healthCareHoraFin,healthCareMinsInicio, healthCareMinsFin);
+            else {
+                activarSpinnersHora(healthCareHoraInicio, healthCareHoraFin, healthCareMinsInicio, healthCareMinsFin);
+                TextViewHealthCareHoraInicio.setVisibility(View.VISIBLE);
+                TextViewHealthCareHoraFin.setVisibility(View.VISIBLE);
+            }
         });
 
         // EditText se cierran si se pulsa la tecla ENTER
@@ -219,6 +227,11 @@ public class MainHealthCareService extends BaseActivity {
         horaFin.setEnabled(false);
         minsInicio.setEnabled(false);
         minsFin.setEnabled(false);
+
+        horaInicio.setVisibility(View.GONE);
+        horaFin.setVisibility(View.GONE);
+        minsInicio.setVisibility(View.GONE);
+        minsFin.setVisibility(View.GONE);
     }
 
     private void activarSpinnersHora(Spinner horaInicio, Spinner horaFin, Spinner minsInicio, Spinner minsFin)
@@ -227,6 +240,11 @@ public class MainHealthCareService extends BaseActivity {
         horaFin.setEnabled(true);
         minsInicio.setEnabled(true);
         minsFin.setEnabled(true);
+
+        horaInicio.setVisibility(View.VISIBLE);
+        horaFin.setVisibility(View.VISIBLE);
+        minsInicio.setVisibility(View.VISIBLE);
+        minsFin.setVisibility(View.VISIBLE);
     }
 
     public String[] convert2Array(ArrayList<Footballer> lista)
