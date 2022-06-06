@@ -25,7 +25,7 @@ public class UIAddNewCareTeam extends BaseActivity {
     private ArrayList<CareTeam> restOfCareTeams = new ArrayList<>();
     private boolean consulta = false;
 
-    //IPFSController ipfsController = new IPFSController();
+    IPFSController ipfsController = new IPFSController();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -79,10 +79,10 @@ public class UIAddNewCareTeam extends BaseActivity {
                     fb.addNewCareTeam2Club(username, careTeamName.getText().toString(), ct);
                     Snackbar.make(findViewById(R.id.buttonAddNewCareTeam), R.string.success_adding_newcareteam, Snackbar.LENGTH_SHORT).show();
 
-                    //ipfsController.addToLog("El club " + username + " ha sustituido el anterior equipo médico: " +
-                    //careTeamName.getText().toString() + ", por: " + ct.getName());
+                    ipfsController.addToLog("El club " + username + " ha sustituido el anterior equipo médico: " +
+                    careTeamName.getText().toString() + ", por: " + ct.getName());
 
-                    //ipfsController.saveText(username + ": AddNewCareTeam");
+                    ipfsController.saveText(username + ": AddNewCareTeam");
 
                     new Handler().postDelayed(
                             this::finish, 1000);

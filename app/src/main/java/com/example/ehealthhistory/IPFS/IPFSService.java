@@ -1,5 +1,7 @@
 package com.example.ehealthhistory.IPFS;
 
+import com.google.api.SystemParameterOrBuilder;
+
 import io.ipfs.api.IPFS;
 import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
@@ -22,12 +24,16 @@ public class IPFSService implements FileServiceImp {
 
         byte[] byteArray = String.valueOf(textToSave).getBytes();
 
-
         try {
             NamedStreamable.ByteArrayWrapper file = new NamedStreamable.ByteArrayWrapper(namefile, byteArray);
             MerkleNode addResult = ipfs.add(file).get(0);
 
+            System.out.println("Fichero: " + namefile);
+            System.out.println("Contenido: " + textToSave);
+            System.out.println("HASH: " + addResult.hash.toBase58());
+
             return addResult.hash.toBase58();
+
 
         } catch (Exception e){
             throw new RuntimeException("Error while saving text on IPFS Node: " + e);

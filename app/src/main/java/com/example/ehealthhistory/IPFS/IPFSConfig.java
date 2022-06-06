@@ -16,18 +16,14 @@ public class IPFSConfig {
             StrictMode.setThreadPolicy(policy);
 
             String dns = "bdiez.duckdns.org";
-            //String ip = "192.168.1.150";
-
             String conexionDNS = "/dnsaddr/"+ dns +"/tcp/5001";
-            //String conexionip = "/ip4/"+ ip +"/tcp/5001";
-
 
             ipfs = new IPFS(conexionDNS);
             ipfs.refs.local();
         }
         catch (IOException e)
         {
-            System.out.println("Excepcion: " + e);
+            e.printStackTrace();
         }
     }
 }
